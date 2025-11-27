@@ -132,6 +132,21 @@ nav a.active {
   border: 1px solid rgba(255, 255, 255, 0.85);
 }
 
+/* Hero image */
+.hero-image {
+  background: #0c3257;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 14px 30px rgba(15, 23, 42, 0.35);
+}
+
+.hero-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
 /* Sections & cards */
 .section {
   padding: 2.5rem 1.5rem;
@@ -186,6 +201,47 @@ ul.checklist li::before {
   color: #1e88e5;
 }
 
+/* Doctors grid */
+.doctors-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 1.5rem;
+  margin-top: 1.5rem;
+}
+
+.doctor-card {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 8px 18px rgba(15, 23, 42, 0.06);
+  overflow: hidden;
+}
+
+.doctor-photo img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  display: block;
+}
+
+.doctor-body {
+  padding: 1rem 1.2rem 1.3rem;
+}
+
+.doctor-body h3 {
+  margin: 0 0 0.2rem;
+}
+
+.doctor-body p {
+  margin: 0.2rem 0;
+  font-size: 0.9rem;
+}
+
+/* Icons for departments (simple emoji style) */
+.dept-icon {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+}
+
 /* Contact block */
 .contact-block {
   display: grid;
@@ -195,6 +251,27 @@ ul.checklist li::before {
 
 .contact-details p {
   margin: 0.3rem 0;
+}
+
+/* Map placeholder */
+.map-placeholder {
+  width: 100%;
+  height: 260px;
+  border-radius: 12px;
+  background: repeating-linear-gradient(
+    135deg,
+    #e0e7ff,
+    #e0e7ff 10px,
+    #cbd5f5 10px,
+    #cbd5f5 20px
+  );
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #374151;
+  font-size: 0.95rem;
+  text-align: center;
+  padding: 1rem;
 }
 
 /* Footer */
@@ -210,6 +287,48 @@ footer .container {
   flex-wrap: wrap;
   justify-content: space-between;
   gap: 1rem;
+}
+
+/* Floating WhatsApp button */
+.floating-whatsapp {
+  position: fixed;
+  right: 18px;
+  bottom: 18px;
+  z-index: 999;
+}
+
+.floating-whatsapp a {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  background: #25d366;
+  color: #fff;
+  padding: 0.6rem 0.9rem;
+  border-radius: 999px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.25);
+  font-size: 0.9rem;
+}
+
+.floating-whatsapp span {
+  font-size: 1.2rem;
+}
+
+/* Arabic / RTL tweaks */
+body[dir="rtl"] {
+  direction: rtl;
+  text-align: right;
+}
+
+body[dir="rtl"] .header-inner {
+  flex-direction: row-reverse;
+}
+
+body[dir="rtl"] nav ul {
+  flex-direction: row-reverse;
+}
+
+body[dir="rtl"] .hero-inner {
+  grid-template-columns: 1fr;
 }
 
 /* Responsive */
