@@ -1,74 +1,87 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Education – Al Farabi Gastroenterology & Endoscopy Center</title>
-    <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8">
+  <title>Contact & Location | Al Farabi Center</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-
 <header>
-    <nav class="navbar">
-        <div class="logo">Al Farabi Center</div>
-        <ul class="nav-links">
-            <li><a href="index.html">Home</a></li>
-            <li><a href="about.html">About</a></li>
-            <li><a href="services.html">Services</a></li>
-            <li><a href="conditions.html">Conditions</a></li>
-            <li><a href="education.html" class="active">Education</a></li>
-            <li><a href="contact.html">Contact</a></li>
-        </ul>
+  <div class="header-inner">
+    <div class="logo-area">
+      <h1>Al Farabi Gastroenterology &amp; Endoscopy Center</h1>
+      <p>Multi-Specialty Digestive &amp; Pediatric Clinic – Diyala Health Ministry, Iraq</p>
+    </div>
+    <nav>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li><a href="doctors.html">Doctors</a></li>
+        <li><a href="conditions.html">Conditions</a></li>
+        <li><a href="education.html">Education</a></li>
+        <li><a href="contact.html" class="active">Contact</a></li>
+      </ul>
     </nav>
+  </div>
 </header>
 
-<section class="hero small-hero">
-    <h1>Parent & Patient Education</h1>
-    <p>Clear, simple information to help families understand common medical conditions.</p>
-</section>
-
 <section class="section">
-    <div class="container">
+  <div class="container">
+    <h2>Contact &amp; Location</h2>
+    <p class="lead">
+      For appointments and inquiries, please contact the center by phone or in person during clinic
+      hours. WhatsApp may be used for non-urgent appointment questions.
+    </p>
 
-        <h2>Pediatric GI Education</h2>
+    <div class="contact-block">
+      <div class="contact-details">
+        <h3>Al Farabi Gastroenterology &amp; Endoscopy Center</h3>
+        <p><strong>Affiliation:</strong> Diyala Health Ministry, Diyala, Iraq</p>
+        <p><strong>Telephone / WhatsApp:</strong> +964 772-173-8755</p>
+        <p><strong>Address:</strong> Diyala Governorate, Iraq (full address and landmarks to be added)</p>
+        <p><strong>Pediatric Gastroenterologist Consultant:</strong> Dr. Mohammad Hussein</p>
+
+        <h3 style="margin-top:1.5rem;">Clinic Hours</h3>
         <ul class="checklist">
-            <li>Understanding constipation</li>
-            <li>Celiac disease basics</li>
-            <li>Reflux & feeding issues</li>
-            <li>Preparing for endoscopy</li>
+          <li><strong>Dermatology, GP, General Surgery &amp; Pediatric GI:</strong> Sun–Thu, 09:00 – 15:00</li>
+          <li><strong>Laboratory &amp; Pharmacy:</strong> Sun–Thu, 08:00 – 21:00</li>
+          <li><strong>Other Specialists (Adult GI, Internal Medicine, etc.):</strong> Usually 16:00 – 21:00, Sun–Thu</li>
         </ul>
-
-        <h2>Adult GI Education</h2>
-        <ul class="checklist">
-            <li>How to prepare for colonoscopy</li>
-            <li>Managing acid reflux</li>
-            <li>Living with IBD</li>
-            <li>Fatty liver disease</li>
-        </ul>
-
-        <h2>General Pediatrics</h2>
-        <ul class="checklist">
-            <li>Fever management</li>
-            <li>When to seek medical care</li>
-            <li>Common infections</li>
-        </ul>
-
-        <h2>Dermatology</h2>
-        <ul class="checklist">
-            <li>Acne care basics</li>
-            <li>Eczema management</li>
-            <li>Skin hygiene tips</li>
-        </ul>
-
-        <p style="margin-top:1.5rem;">
-            More educational handouts and videos coming soon.
+        <p style="font-size:0.9rem;">
+          Clinic days and hours may change; please confirm by phone or WhatsApp when booking.
         </p>
+      </div>
+
+      <div>
+        <div class="card">
+          <h3>Map &amp; Directions</h3>
+          <div class="map-placeholder">
+            Google Maps embed will be placed here once the exact clinic address is finalized.
+            Until then, please ask our staff for detailed directions when you call.
+          </div>
+        </div>
+      </div>
     </div>
+  </div>
 </section>
 
 <footer>
-    <p>© 2025 Al Farabi Gastroenterology & Endoscopy Center – Diyala, Iraq</p>
+  <div class="container">
+    <div>© <span id="year"></span> Al Farabi Gastroenterology &amp; Endoscopy Center. All rights reserved.</div>
+    <div>For emergencies, please use local emergency services or the nearest hospital.</div>
+  </div>
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
 </footer>
+
+<div class="floating-whatsapp">
+  <a href="https://wa.me/9647721738755" target="_blank">
+    <span>💬</span> WhatsApp
+  </a>
+</div>
 
 </body>
 </html>
