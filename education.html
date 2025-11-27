@@ -1,74 +1,97 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Education – Al Farabi Gastroenterology & Endoscopy Center</title>
-    <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8">
+  <title>Patient Education | Al Farabi Center</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-
 <header>
-    <nav class="navbar">
-        <div class="logo">Al Farabi Center</div>
-        <ul class="nav-links">
-            <li><a href="index.html">Home</a></li>
-            <li><a href="about.html">About</a></li>
-            <li><a href="services.html">Services</a></li>
-            <li><a href="conditions.html">Conditions</a></li>
-            <li><a href="education.html" class="active">Education</a></li>
-            <li><a href="contact.html">Contact</a></li>
-        </ul>
+  <div class="header-inner">
+    <div class="logo-area">
+      <h1>Al Farabi Gastroenterology &amp; Endoscopy Center</h1>
+      <p>Multi-Specialty Digestive &amp; Pediatric Clinic – Diyala Health Ministry, Iraq</p>
+    </div>
+    <nav>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li><a href="doctors.html">Doctors</a></li>
+        <li><a href="conditions.html">Conditions</a></li>
+        <li><a href="education.html" class="active">Education</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
     </nav>
+  </div>
 </header>
 
-<section class="hero small-hero">
-    <h1>Parent & Patient Education</h1>
-    <p>Clear, simple information to help families understand common medical conditions.</p>
-</section>
-
 <section class="section">
-    <div class="container">
+  <div class="container">
+    <h2>Patient &amp; Parent Education</h2>
+    <p class="lead">
+      This section will gradually include simple explanations, handouts and videos in Arabic and
+      English to help families understand common digestive and liver conditions.
+    </p>
 
-        <h2>Pediatric GI Education</h2>
-        <ul class="checklist">
-            <li>Understanding constipation</li>
-            <li>Celiac disease basics</li>
-            <li>Reflux & feeding issues</li>
-            <li>Preparing for endoscopy</li>
-        </ul>
-
-        <h2>Adult GI Education</h2>
-        <ul class="checklist">
-            <li>How to prepare for colonoscopy</li>
-            <li>Managing acid reflux</li>
-            <li>Living with IBD</li>
-            <li>Fatty liver disease</li>
-        </ul>
-
-        <h2>General Pediatrics</h2>
-        <ul class="checklist">
-            <li>Fever management</li>
-            <li>When to seek medical care</li>
-            <li>Common infections</li>
-        </ul>
-
-        <h2>Dermatology</h2>
-        <ul class="checklist">
-            <li>Acne care basics</li>
-            <li>Eczema management</li>
-            <li>Skin hygiene tips</li>
-        </ul>
-
-        <p style="margin-top:1.5rem;">
-            More educational handouts and videos coming soon.
+    <div class="cards">
+      <div class="card">
+        <h3>Celiac Disease in Children</h3>
+        <p>
+          Overview of what celiac disease is, how it can present in children, how it is diagnosed,
+          and the basics of a gluten-free diet.
         </p>
+      </div>
+
+      <div class="card">
+        <h3>Constipation &amp; Toilet Training</h3>
+        <p>
+          How constipation and stool withholding develop, why laxatives may be needed, and practical
+          strategies for toilet training without punishment.
+        </p>
+      </div>
+
+      <div class="card">
+        <h3>Endoscopy &amp; Colonoscopy</h3>
+        <p>
+          What to expect before, during and after an endoscopy or colonoscopy, including fasting,
+          anesthesia and recovery at home.
+        </p>
+      </div>
+
+      <div class="card">
+        <h3>Nutrition &amp; Healthy Growth</h3>
+        <p>
+          Practical advice on balanced diets for children, dealing with picky eating, and when
+          additional nutrition support or supplements may be needed.
+        </p>
+      </div>
     </div>
+
+    <p style="margin-top:2rem; font-size:0.9rem;">
+      <strong>Important:</strong> Information on this website is for education only and does not
+      replace individualized medical advice. For specific questions about your or your child’s
+      health, please consult your physician or book a clinic appointment.
+    </p>
+  </div>
 </section>
 
 <footer>
-    <p>© 2025 Al Farabi Gastroenterology & Endoscopy Center – Diyala, Iraq</p>
+  <div class="container">
+    <div>© <span id="year"></span> Al Farabi Gastroenterology &amp; Endoscopy Center. All rights reserved.</div>
+    <div>For emergencies, please use local emergency services or the nearest hospital.</div>
+  </div>
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
 </footer>
+
+<div class="floating-whatsapp">
+  <a href="https://wa.me/9647721738755" target="_blank">
+    <span>💬</span> WhatsApp
+  </a>
+</div>
 
 </body>
 </html>
