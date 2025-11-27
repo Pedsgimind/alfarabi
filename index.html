@@ -1,126 +1,300 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Al Farabi Gastroenterology & Endoscopy Center – Diyala, Iraq</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="styles.css">
+
+  <!-- Your existing stylesheet -->
+  <link rel="stylesheet" href="styles.css" />
+
+  <!-- Small extra styles just for the hero image -->
+  <style>
+    .hero {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      padding: 3rem 1.5rem;
+      background: linear-gradient(135deg, #0056b8, #007fd9);
+      color: #ffffff;
+    }
+
+    .hero-content {
+      flex: 1 1 320px;
+      max-width: 560px;
+      padding-right: 1.5rem;
+    }
+
+    .hero h1 {
+      font-size: 2.4rem;
+      margin-bottom: 1rem;
+    }
+
+    .hero p {
+      font-size: 1.05rem;
+      line-height: 1.5;
+      margin-bottom: 1.5rem;
+    }
+
+    .hero-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .btn-primary,
+    .btn-secondary {
+      border-radius: 999px;
+      padding: 0.7rem 1.4rem;
+      border: none;
+      cursor: pointer;
+      font-weight: 600;
+      text-decoration: none;
+      text-align: center;
+    }
+
+    .btn-primary {
+      background: #ffb300;
+      color: #1b1b1b;
+    }
+
+    .btn-secondary {
+      background: transparent;
+      color: #ffffff;
+      border: 1px solid #ffffff;
+    }
+
+    .hero-badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-top: 0.5rem;
+    }
+
+    .pill {
+      padding: 0.3rem 0.8rem;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.15);
+      font-size: 0.85rem;
+      white-space: nowrap;
+    }
+
+    .hero-image {
+      flex: 1 1 320px;
+      max-width: 520px;
+      display: flex;
+      justify-content: center;
+      margin-top: 1.5rem;
+    }
+
+    .hero-image img {
+      width: 100%;
+      max-width: 520px;
+      border-radius: 18px;
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25);
+      object-fit: cover;
+    }
+
+    /* Simple section below hero */
+    .section {
+      padding: 3rem 1.5rem;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .section h2 {
+      font-size: 1.9rem;
+      margin-bottom: 1rem;
+    }
+
+    .section p {
+      margin-bottom: 1rem;
+      line-height: 1.6;
+    }
+
+    .section-image {
+      margin-top: 1.5rem;
+      text-align: center;
+    }
+
+    .section-image img {
+      max-width: 500px;
+      width: 100%;
+      border-radius: 16px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.18);
+      object-fit: cover;
+    }
+
+    header {
+      background: #ffffff;
+      border-bottom: 1px solid #e0e0e0;
+    }
+
+    .topbar {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0.7rem 1.5rem;
+      font-size: 0.9rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: #0056b8;
+    }
+
+    .logo-row {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0.8rem 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .logo-row .site-title {
+      font-weight: 700;
+      font-size: 1.1rem;
+      color: #004387;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin: 0;
+      padding: 0;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: #004387;
+      font-weight: 500;
+      font-size: 0.95rem;
+    }
+
+    nav a.active {
+      color: #007fd9;
+      border-bottom: 2px solid #007fd9;
+      padding-bottom: 0.2rem;
+    }
+
+    footer {
+      margin-top: 3rem;
+      padding: 1.5rem;
+      text-align: center;
+      font-size: 0.9rem;
+      color: #777;
+      border-top: 1px solid #e0e0e0;
+      background: #fafafa;
+    }
+
+    @media (max-width: 768px) {
+      .hero {
+        padding: 2rem 1.2rem;
+      }
+
+      .hero h1 {
+        font-size: 2rem;
+      }
+
+      .logo-row {
+        flex-direction: column;
+        gap: 0.75rem;
+        align-items: flex-start;
+      }
+    }
+  </style>
 </head>
 <body>
-<header>
-  <div class="header-inner">
-    <div class="logo-area">
-      <h1>Al Farabi Gastroenterology &amp; Endoscopy Center</h1>
-      <p>Multi-Specialty Digestive &amp; Pediatric Clinic – Diyala Health Ministry, Iraq</p>
-    </div>
-    <nav>
-      <ul>
-        <li><a href="index.html" class="active">Home</a></li>
-        <li><a href="about.html">About</a></li>
-        <li><a href="services.html">Services</a></li>
-        <li><a href="doctors.html">Doctors</a></li>
-        <li><a href="conditions.html">Conditions</a></li>
-        <li><a href="education.html">Education</a></li>
-        <li><a href="contact.html">Contact</a></li>
-      </ul>
-    </nav>
-  </div>
-</header>
 
-<section class="hero">
-  <div class="hero-inner">
-    <div>
-      <h2>Comprehensive Digestive &amp; Pediatric Care in Diyala</h2>
+  <!-- HEADER / NAVBAR -->
+  <header>
+    <div class="topbar">
+      <div>Multi-Specialty Digestive & Pediatric Clinic – Diyala Health Ministry, Iraq</div>
+      <div>WhatsApp / Call: +964 772-173-8755</div>
+    </div>
+
+    <div class="logo-row">
+      <div class="site-title">
+        Al Farabi Gastroenterology &amp; Endoscopy Center
+      </div>
+      <nav>
+        <ul>
+          <li><a href="index.html" class="active">Home</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="services.html">Services</a></li>
+          <li><a href="doctors.html">Doctors</a></li>
+          <li><a href="conditions.html">Conditions</a></li>
+          <li><a href="education.html">Education</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- HERO SECTION -->
+  <main>
+    <section class="hero">
+      <div class="hero-content">
+        <h1>Comprehensive Digestive &amp; Pediatric Care in Diyala</h1>
+        <p>
+          Al Farabi Gastroenterology &amp; Endoscopy Center is a multidisciplinary clinic in Baqubah
+          providing adult and pediatric gastroenterology, internal medicine, general pediatrics, general
+          surgery, dermatology and on-site endoscopy – all under one roof.
+        </p>
+
+        <div class="hero-buttons">
+          <a class="btn-primary" href="https://wa.me/9647721738755" target="_blank" rel="noopener">
+            WhatsApp / Call: +964 772-173-8755
+          </a>
+          <a class="btn-secondary" href="services.html">
+            View Clinic Services
+          </a>
+        </div>
+
+        <div class="hero-badges">
+          <span class="pill">Adult &amp; Pediatric Gastroenterology</span>
+          <span class="pill">Endoscopy &amp; Colonoscopy Suite</span>
+          <span class="pill">General Pediatrics &amp; Internal Medicine</span>
+          <span class="pill">Dermatology &amp; Surgery</span>
+        </div>
+      </div>
+
+      <div class="hero-image">
+        <!-- MAIN HOMEPAGE IMAGE: FRONT ENTRANCE -->
+        <img src="images/alfarabi-entrance-1.jpg" alt="Al Farabi Gastroenterology &amp; Endoscopy Center entrance" />
+      </div>
+    </section>
+
+    <!-- WHY PATIENTS CHOOSE SECTION -->
+    <section class="section">
+      <h2>Why Patients Choose Al Farabi Center</h2>
       <p>
-        Al Farabi Gastroenterology &amp; Endoscopy Center is a multidisciplinary clinic offering adult
-        and pediatric gastroenterology, general pediatrics, internal medicine, general surgery,
-        dermatology, on-site endoscopy, anesthesia support, laboratory and pharmacy services – all
-        under one roof.
+        Our team brings together multiple specialties to provide safe, coordinated and convenient care close to home –
+        from common digestive complaints to complex pediatric GI, liver, and nutrition problems.
+      </p>
+      <p>
+        We work closely with the Diyala Health Ministry and hospital partners to ensure timely diagnosis, advanced
+        endoscopic procedures, and family-centered follow-up for children and adults.
       </p>
 
-      <div class="hero-badges">
-        <span class="badge">Adult &amp; Pediatric Gastroenterology</span>
-        <span class="badge">Endoscopy &amp; Colonoscopy Suite</span>
-        <span class="badge">General Pediatrics &amp; Internal Medicine</span>
-        <span class="badge">Dermatology • Surgery • Pharmacy • Lab</span>
+      <div class="section-image">
+        <!-- SECOND ENTRANCE IMAGE BELOW TEXT -->
+        <img src="images/alfarabi-entrance-2.jpg" alt="Al Farabi Center exterior view" />
       </div>
+    </section>
+  </main>
 
-      <div class="hero-cta">
-        <a class="btn btn-primary" href="https://wa.me/9647721738755" target="_blank">
-          WhatsApp / Call: +964 772-173-8755
-        </a>
-        <a class="btn btn-outline" href="services.html">View Clinic Services</a>
-      </div>
-    </div>
+  <footer>
+    &copy; <span id="year"></span> Al Farabi Gastroenterology &amp; Endoscopy Center – Diyala, Iraq.
+    All rights reserved.
+  </footer>
 
-    <div class="hero-image">
-      <img src="https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=1000&q=80"
-           alt="Modern endoscopy and clinic environment">
-    </div>
-  </div>
-</section>
-
-<section class="section">
-  <div class="container">
-    <h2>Why Patients Choose Al Farabi Center</h2>
-    <p class="lead">
-      Our team brings together multiple specialties to provide safe, coordinated and convenient care
-      close to home – from common digestive complaints to complex pediatric GI and liver disease.
-    </p>
-
-    <div class="cards">
-      <div class="card">
-        <div class="dept-icon">🏥</div>
-        <h3>Integrated Multi-Specialty Care</h3>
-        <p>
-          Adult and pediatric gastroenterology, general pediatrics, internal medicine, general surgery,
-          dermatology, lab and pharmacy work together to simplify your care pathway.
-        </p>
-      </div>
-      <div class="card">
-        <div class="dept-icon">🧒</div>
-        <h3>Pediatric GI Expertise</h3>
-        <p>
-          Fellowship-trained Pediatric Gastroenterologist (Dr. Mohammad Hussein) providing subspecialty
-          evaluation and follow-up for infants, children and adolescents with GI, liver and nutrition
-          disorders.
-        </p>
-      </div>
-      <div class="card">
-        <div class="dept-icon">🔬</div>
-        <h3>Endoscopy Suite on Site</h3>
-        <p>
-          Modern endoscopy and colonoscopy unit with anesthesia support to diagnose and treat digestive
-          conditions safely and effectively.
-        </p>
-      </div>
-      <div class="card">
-        <div class="dept-icon">⏰</div>
-        <h3>Accessible Hours</h3>
-        <p>
-          Outpatient clinics during daytime, with extended access to the laboratory and pharmacy
-          from 08:00–21:00, Sunday to Thursday. Evening clinics for several physicians.
-        </p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<footer>
-  <div class="container">
-    <div>© <span id="year"></span> Al Farabi Gastroenterology &amp; Endoscopy Center. All rights reserved.</div>
-    <div>For emergencies, please use local emergency services or the nearest hospital.</div>
-  </div>
   <script>
-    document.getElementById("year").textContent = new Date().getFullYear();
+    // Simple footer year
+    document.getElementById('year').textContent = new Date().getFullYear();
   </script>
-</footer>
-
-<div class="floating-whatsapp">
-  <a href="https://wa.me/9647721738755" target="_blank">
-    <span>💬</span> WhatsApp
-  </a>
-</div>
-
 </body>
 </html>
