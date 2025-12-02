@@ -1,20 +1,163 @@
-<!-- DOCTORS SECTION START -->
+<!-- DOCTORS PAGE START -->
 
-<section class="doctors-section">
-  <div class="container">
-    <h1>Our Doctors</h1>
-    <p>
-      Al Farabi Gastroenterology &amp; Endoscopy Center hosts a growing team of specialists.
-      Select a doctor from the list below to view their profile, services, and contact options.
-    </p>
+<style>
+  /* Page-specific styling for doctors page */
+  .doctors-page {
+    padding: 3rem 1.5rem 4rem;
+    background: #f5f7fb;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  }
 
-    <!-- Doctor dropdown selector -->
-    <div class="card" style="margin-bottom: 2rem;">
-      <div class="card-body">
-        <label for="doctorSelect" style="font-weight: 600; margin-right: 0.5rem;">
-          Choose a doctor:
-        </label>
-        <select id="doctorSelect" class="form-select" style="max-width: 380px; display: inline-block;">
+  .doctors-layout {
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .doctors-header h1 {
+    font-size: 2.4rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .doctors-header p {
+    max-width: 720px;
+    color: #555;
+    line-height: 1.6;
+  }
+
+  .doctor-filter {
+    margin-top: 1.5rem;
+    margin-bottom: 2rem;
+  }
+
+  .doctor-filter label {
+    font-weight: 600;
+    margin-right: 0.5rem;
+  }
+
+  .doctor-filter select {
+    padding: 0.6rem 0.75rem;
+    border-radius: 999px;
+    border: 1px solid #cbd5e1;
+    min-width: 260px;
+    font-size: 0.95rem;
+    background: #fff;
+  }
+
+  .doctors-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.75rem;
+  }
+
+  .doctor-card {
+    background: #ffffff;
+    border-radius: 18px;
+    padding: 1.6rem 1.8rem;
+    box-shadow: 0 10px 25px rgba(15, 23, 42, 0.08);
+    border: 1px solid #e2e8f0;
+    transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .doctor-card::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at top left, rgba(56, 189, 248, 0.12), transparent 55%);
+    opacity: 0;
+    transition: opacity 0.25s ease;
+    pointer-events: none;
+  }
+
+  .doctor-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 16px 35px rgba(15, 23, 42, 0.14);
+    border-color: #bfdbfe;
+  }
+
+  .doctor-card:hover::before {
+    opacity: 1;
+  }
+
+  .doctor-name {
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin-bottom: 0.25rem;
+    display: flex;
+    align-items: center;
+    gap: 0.45rem;
+  }
+
+  .doctor-name span.emoji {
+    font-size: 1.2rem;
+  }
+
+  .doctor-specialty {
+    font-size: 0.98rem;
+    font-weight: 600;
+    color: #0369a1;
+    margin-bottom: 0.75rem;
+  }
+
+  .doctor-description {
+    font-size: 0.95rem;
+    color: #374151;
+    line-height: 1.6;
+    margin-bottom: 0.75rem;
+  }
+
+  .doctor-services {
+    padding-left: 1.1rem;
+    margin: 0 0 0.9rem 0;
+    font-size: 0.93rem;
+    color: #374151;
+  }
+
+  .doctor-services li {
+    margin-bottom: 0.25rem;
+  }
+
+  .doctor-contact {
+    font-size: 0.92rem;
+    color: #111827;
+    margin-top: 0.5rem;
+    border-top: 1px solid #e5e7eb;
+    padding-top: 0.6rem;
+  }
+
+  .doctor-contact a {
+    color: #0369a1;
+    text-decoration: none;
+  }
+
+  .doctor-contact a:hover {
+    text-decoration: underline;
+  }
+
+  @media (max-width: 640px) {
+    .doctors-page {
+      padding: 2.25rem 1rem 3rem;
+    }
+    .doctors-header h1 {
+      font-size: 1.9rem;
+    }
+  }
+</style>
+
+<section class="doctors-page">
+  <div class="doctors-layout">
+    <header class="doctors-header">
+      <h1>Our Doctors</h1>
+      <p>
+        Al Farabi Gastroenterology &amp; Endoscopy Center hosts a growing team of specialists.
+        Select a doctor below to quickly jump to their profile, or scroll to read about each
+        consultant, the services they provide, and how to contact the clinic.
+      </p>
+
+      <div class="doctor-filter">
+        <label for="doctorSelect">Choose a doctor:</label>
+        <select id="doctorSelect">
           <option value="">-- Select a doctor --</option>
           <option value="dr-mohammad-hussein">Dr. Mohammad Hussein – Pediatric Gastroenterology</option>
           <option value="dr-a-khazraji">Dr. A. Khazraji – Adult Gastroenterology</option>
@@ -24,178 +167,180 @@
           <option value="dr-sarmed-qaysim">Dr. Sarmed Qaysim – General Surgery</option>
         </select>
       </div>
-    </div>
+    </header>
 
-    <!-- Doctor profiles -->
-    <div class="row g-4">
+    <div class="doctors-grid">
       <!-- Dr. Mohammad Hussein -->
-      <section id="dr-mohammad-hussein" class="col-md-6">
-        <div class="card doctor-card h-100">
-          <div class="card-body">
-            <h2 class="card-title">Dr. Mohammad Hussein</h2>
-            <p class="text-muted">
-              <strong>Specialty:</strong> Pediatric Gastroenterology, Hepatology &amp; Nutrition
-            </p>
-            <p>
-              Dr. Hussein provides comprehensive evaluation and management of infants, children,
-              and adolescents with digestive, liver, feeding, and nutrition disorders. His scope
-              of practice includes:
-            </p>
-            <ul>
-              <li>Celiac disease and other malabsorption disorders</li>
-              <li>Inflammatory bowel disease (Crohn’s disease and ulcerative colitis)</li>
-              <li>Chronic abdominal pain, constipation, reflux, and functional bowel disorders</li>
-              <li>Feeding difficulties, growth concerns, and complex nutrition issues</li>
-              <li>Diagnostic and therapeutic endoscopy (upper endoscopy, colonoscopy, polypectomy, foreign body removal)</li>
-            </ul>
-            <p>
-              <strong>Contact:</strong><br>
-              Email: <a href="mailto:info@pedsgimind.ca">info@pedsgimind.ca</a><br>
-              WhatsApp: <a href="https://wa.me/XXXXXXXXXXX">+XXX-XXX-XXXX</a>
-              <!-- Replace XXXXXXXXXXX and number text with your actual WhatsApp number -->
-            </p>
-          </div>
+      <article id="dr-mohammad-hussein" class="doctor-card">
+        <h2 class="doctor-name">
+          <span class="emoji">🧒🏻</span>
+          <span>Dr. Mohammad Hussein</span>
+        </h2>
+        <div class="doctor-specialty">
+          Pediatric Gastroenterology, Hepatology &amp; Nutrition
         </div>
-      </section>
+        <p class="doctor-description">
+          Dr. Hussein provides comprehensive evaluation and management of infants, children,
+          and adolescents with digestive, liver, feeding, and nutrition disorders.
+        </p>
+        <ul class="doctor-services">
+          <li>Celiac disease and other malabsorption disorders</li>
+          <li>Inflammatory bowel disease (Crohn’s disease and ulcerative colitis)</li>
+          <li>Chronic abdominal pain, constipation, reflux, and functional bowel disorders</li>
+          <li>Feeding difficulties, growth concerns, and complex nutrition issues</li>
+          <li>Diagnostic and therapeutic endoscopy (upper endoscopy, colonoscopy, polypectomy, foreign body removal)</li>
+        </ul>
+        <div class="doctor-contact">
+          <strong>Contact for all doctors:</strong><br>
+          Email:
+          <a href="mailto:info@pedsgimind.ca">info@pedsgimind.ca</a><br>
+          WhatsApp:
+          <a href="https://wa.me/9647721738755">+964 772-173-8755</a>
+        </div>
+      </article>
 
       <!-- Dr. A. Khazraji -->
-      <section id="dr-a-khazraji" class="col-md-6">
-        <div class="card doctor-card h-100">
-          <div class="card-body">
-            <h2 class="card-title">Dr. A. Khazraji</h2>
-            <p class="text-muted">
-              <strong>Specialty:</strong> Adult Gastroenterology &amp; Endoscopy
-            </p>
-            <p>
-              Dr. Khazraji provides care for adults with gastrointestinal and liver disorders,
-              offering:
-            </p>
-            <ul>
-              <li>Assessment and management of acid reflux, peptic ulcer disease, and dyspepsia</li>
-              <li>Evaluation of gastrointestinal bleeding, anemia, and chronic abdominal pain</li>
-              <li>Screening and surveillance colonoscopy for polyps and colorectal cancer</li>
-              <li>Diagnosis and management of liver disease, including fatty liver and viral hepatitis</li>
-              <li>Diagnostic and therapeutic endoscopy (upper endoscopy and colonoscopy)</li>
-            </ul>
-            <p>
-              <strong>Contact:</strong><br>
-              Email: <a href="mailto:info@pedsgimind.ca">info@pedsgimind.ca</a><br>
-              WhatsApp: <a href="https://wa.me/XXXXXXXXXXX">+XXX-XXX-XXXX</a>
-            </p>
-          </div>
+      <article id="dr-a-khazraji" class="doctor-card">
+        <h2 class="doctor-name">
+          <span class="emoji">🩺</span>
+          <span>Dr. A. Khazraji</span>
+        </h2>
+        <div class="doctor-specialty">
+          Adult Gastroenterology &amp; Endoscopy
         </div>
-      </section>
+        <p class="doctor-description">
+          Dr. Khazraji provides care for adults with gastrointestinal and liver disorders.
+        </p>
+        <ul class="doctor-services">
+          <li>Assessment and management of acid reflux, peptic ulcer disease, and dyspepsia</li>
+          <li>Evaluation of gastrointestinal bleeding, anemia, and chronic abdominal pain</li>
+          <li>Screening and surveillance colonoscopy for polyps and colorectal cancer</li>
+          <li>Diagnosis and management of liver disease, including fatty liver and viral hepatitis</li>
+          <li>Diagnostic and therapeutic endoscopy (upper endoscopy and colonoscopy)</li>
+        </ul>
+        <div class="doctor-contact">
+          <strong>Contact for all doctors:</strong><br>
+          Email:
+          <a href="mailto:info@pedsgimind.ca">info@pedsgimind.ca</a><br>
+          WhatsApp:
+          <a href="https://wa.me/9647721738755">+964 772-173-8755</a>
+        </div>
+      </article>
 
       <!-- Dr. Nadine Ahmed -->
-      <section id="dr-nadine-ahmed" class="col-md-6">
-        <div class="card doctor-card h-100">
-          <div class="card-body">
-            <h2 class="card-title">Dr. Nadine Ahmed</h2>
-            <p class="text-muted">
-              <strong>Specialty:</strong> General Pediatrics
-            </p>
-            <p>
-              Dr. Ahmed provides full-scope general pediatric care for infants, children, and adolescents, including:
-            </p>
-            <ul>
-              <li>Well-child visits, growth and development monitoring, and vaccinations</li>
-              <li>Assessment and management of common childhood illnesses and infections</li>
-              <li>Chronic disease follow-up (such as asthma and allergies)</li>
-              <li>School, behavior, and learning-related concerns</li>
-              <li>Preventive care and family-centered counseling</li>
-            </ul>
-            <p>
-              <strong>Contact:</strong><br>
-              Email: <a href="mailto:info@pedsgimind.ca">info@pedsgimind.ca</a><br>
-              WhatsApp: <a href="https://wa.me/XXXXXXXXXXX">+XXX-XXX-XXXX</a>
-            </p>
-          </div>
+      <article id="dr-nadine-ahmed" class="doctor-card">
+        <h2 class="doctor-name">
+          <span class="emoji">👶🏼</span>
+          <span>Dr. Nadine Ahmed</span>
+        </h2>
+        <div class="doctor-specialty">
+          General Pediatrics
         </div>
-      </section>
+        <p class="doctor-description">
+          Dr. Ahmed provides full-scope general pediatric care for infants, children, and adolescents.
+        </p>
+        <ul class="doctor-services">
+          <li>Well-child visits, growth and development monitoring, and vaccinations</li>
+          <li>Assessment and management of common childhood illnesses and infections</li>
+          <li>Chronic disease follow-up (such as asthma and allergies)</li>
+          <li>School, behavior, and learning-related concerns</li>
+          <li>Preventive care and family-centered counseling</li>
+        </ul>
+        <div class="doctor-contact">
+          <strong>Contact for all doctors:</strong><br>
+          Email:
+          <a href="mailto:info@pedsgimind.ca">info@pedsgimind.ca</a><br>
+          WhatsApp:
+          <a href="https://wa.me/9647721738755">+964 772-173-8755</a>
+        </div>
+      </article>
 
       <!-- Dr. Sardar Saman -->
-      <section id="dr-sardar-saman" class="col-md-6">
-        <div class="card doctor-card h-100">
-          <div class="card-body">
-            <h2 class="card-title">Dr. Sardar Saman</h2>
-            <p class="text-muted">
-              <strong>Specialty:</strong> Internal Medicine
-            </p>
-            <p>
-              Dr. Saman focuses on adult internal medicine, providing:
-            </p>
-            <ul>
-              <li>Diagnosis and long-term management of chronic diseases (such as diabetes, hypertension, and heart disease)</li>
-              <li>Comprehensive medical assessment for complex and multi-system conditions</li>
-              <li>Preventive health screening and risk-factor modification</li>
-              <li>Coordination of care with subspecialists as needed</li>
-            </ul>
-            <p>
-              <strong>Contact:</strong><br>
-              Email: <a href="mailto:info@pedsgimind.ca">info@pedsgimind.ca</a><br>
-              WhatsApp: <a href="https://wa.me/XXXXXXXXXXX">+XXX-XXX-XXXX</a>
-            </p>
-          </div>
+      <article id="dr-sardar-saman" class="doctor-card">
+        <h2 class="doctor-name">
+          <span class="emoji">🫀</span>
+          <span>Dr. Sardar Saman</span>
+        </h2>
+        <div class="doctor-specialty">
+          Internal Medicine
         </div>
-      </section>
+        <p class="doctor-description">
+          Dr. Saman focuses on adult internal medicine and chronic disease management.
+        </p>
+        <ul class="doctor-services">
+          <li>Diagnosis and long-term management of diabetes, hypertension, and heart disease</li>
+          <li>Comprehensive medical assessment for complex, multi-system conditions</li>
+          <li>Preventive health screening and risk-factor modification</li>
+          <li>Coordination of care with subspecialists as needed</li>
+        </ul>
+        <div class="doctor-contact">
+          <strong>Contact for all doctors:</strong><br>
+          Email:
+          <a href="mailto:info@pedsgimind.ca">info@pedsgimind.ca</a><br>
+          WhatsApp:
+          <a href="https://wa.me/9647721738755">+964 772-173-8755</a>
+        </div>
+      </article>
 
       <!-- Dr. Wasd Ali -->
-      <section id="dr-wasd-ali" class="col-md-6">
-        <div class="card doctor-card h-100">
-          <div class="card-body">
-            <h2 class="card-title">Dr. Wasd Ali</h2>
-            <p class="text-muted">
-              <strong>Specialty:</strong> Dermatology
-            </p>
-            <p>
-              Dr. Ali evaluates and treats a wide range of skin, hair, and nail conditions, including:
-            </p>
-            <ul>
-              <li>Eczema, psoriasis, acne, and chronic rashes</li>
-              <li>Skin infections and allergic skin diseases</li>
-              <li>Screening and monitoring of moles and skin lesions</li>
-              <li>Advice on skin care, sun protection, and preventive dermatology</li>
-            </ul>
-            <p>
-              <strong>Contact:</strong><br>
-              Email: <a href="mailto:info@pedsgimind.ca">info@pedsgimind.ca</a><br>
-              WhatsApp: <a href="https://wa.me/XXXXXXXXXXX">+XXX-XXX-XXXX</a>
-            </p>
-          </div>
+      <article id="dr-wasd-ali" class="doctor-card">
+        <h2 class="doctor-name">
+          <span class="emoji">🌤️</span>
+          <span>Dr. Wasd Ali</span>
+        </h2>
+        <div class="doctor-specialty">
+          Dermatology
         </div>
-      </section>
+        <p class="doctor-description">
+          Dr. Ali evaluates and treats a wide range of skin, hair, and nail conditions.
+        </p>
+        <ul class="doctor-services">
+          <li>Eczema, psoriasis, acne, and chronic rashes</li>
+          <li>Skin infections and allergic skin disease</li>
+          <li>Screening and monitoring of moles and skin lesions</li>
+          <li>Advice on skin care, sun protection, and preventive dermatology</li>
+        </ul>
+        <div class="doctor-contact">
+          <strong>Contact for all doctors:</strong><br>
+          Email:
+          <a href="mailto:info@pedsgimind.ca">info@pedsgimind.ca</a><br>
+          WhatsApp:
+          <a href="https://wa.me/9647721738755">+964 772-173-8755</a>
+        </div>
+      </article>
 
       <!-- Dr. Sarmed Qaysim -->
-      <section id="dr-sarmed-qaysim" class="col-md-6">
-        <div class="card doctor-card h-100">
-          <div class="card-body">
-            <h2 class="card-title">Dr. Sarmed Qaysim</h2>
-            <p class="text-muted">
-              <strong>Specialty:</strong> General Surgery
-            </p>
-            <p>
-              Dr. Qaysim provides surgical assessment and management for common general surgical conditions, including:
-            </p>
-            <ul>
-              <li>Gallbladder, hernia, and abdominal wall surgery</li>
-              <li>Management of acute surgical emergencies</li>
-              <li>Pre-operative evaluation and post-operative follow-up</li>
-              <li>Coordinated care with gastroenterology and other specialties when needed</li>
-            </ul>
-            <p>
-              <strong>Contact:</strong><br>
-              Email: <a href="mailto:info@pedsgimind.ca">info@pedsgimind.ca</a><br>
-              WhatsApp: <a href="https://wa.me/XXXXXXXXXXX">+XXX-XXX-XXXX</a>
-            </p>
-          </div>
+      <article id="dr-sarmed-qaysim" class="doctor-card">
+        <h2 class="doctor-name">
+          <span class="emoji">🧵</span>
+          <span>Dr. Sarmed Qaysim</span>
+        </h2>
+        <div class="doctor-specialty">
+          General Surgery
         </div>
-      </section>
+        <p class="doctor-description">
+          Dr. Qaysim provides surgical assessment and management for common general surgical conditions.
+        </p>
+        <ul class="doctor-services">
+          <li>Gallbladder, hernia, and abdominal wall surgery</li>
+          <li>Management of acute surgical emergencies</li>
+          <li>Pre-operative evaluation and post-operative follow-up</li>
+          <li>Coordinated care with gastroenterology and other specialties</li>
+        </ul>
+        <div class="doctor-contact">
+          <strong>Contact for all doctors:</strong><br>
+          Email:
+          <a href="mailto:info@pedsgimind.ca">info@pedsgimind.ca</a><br>
+          WhatsApp:
+          <a href="https://wa.me/9647721738755">+964 772-173-8755</a>
+        </div>
+      </article>
     </div>
 
-    <p style="margin-top: 2rem;">
-      As the Al Farabi Center service expands, additional consultants and detailed profiles
-      will be added. For the most up-to-date information on available doctors and clinic times,
-      please contact the center directly.
+    <p style="margin-top: 2rem; font-size: 0.95rem; color:#4b5563;">
+      As the Al Farabi Center service expands, additional consultants and detailed profiles will be
+      added. For the most up-to-date information on available doctors and clinic times, please
+      contact the center directly.
     </p>
   </div>
 </section>
@@ -205,11 +350,9 @@
   (function () {
     var select = document.getElementById('doctorSelect');
     if (!select) return;
-
     select.addEventListener('change', function () {
       var targetId = this.value;
       if (!targetId) return;
-
       var el = document.getElementById(targetId);
       if (el) {
         el.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -218,4 +361,4 @@
   })();
 </script>
 
-<!-- DOCTORS SECTION END -->
+<!-- DOCTORS PAGE END -->
