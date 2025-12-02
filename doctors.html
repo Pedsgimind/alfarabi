@@ -1,96 +1,221 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Doctors | Al Farabi Gastroenterology & Endoscopy Center</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="styles.css">
-</head>
-<body>
-<header>
-  <div class="header-inner">
-    <div class="logo-area">
-      <h1>Al Farabi Gastroenterology &amp; Endoscopy Center</h1>
-      <p>Multi-Specialty Digestive &amp; Pediatric Clinic – Diyala Health Ministry, Iraq</p>
-    </div>
-    <nav>
-      <ul>
-        <li><a href="index.html">Home</a></li>
-        <li><a href="about.html">About</a></li>
-        <li><a href="services.html">Services</a></li>
-        <li><a href="doctors.html" class="active">Doctors</a></li>
-        <li><a href="conditions.html">Conditions</a></li>
-        <li><a href="education.html">Education</a></li>
-        <li><a href="contact.html">Contact</a></li>
-      </ul>
-    </nav>
-  </div>
-</header>
+<!-- DOCTORS SECTION START -->
 
-<section class="section">
+<section class="doctors-section">
   <div class="container">
-    <h2>Our Doctors</h2>
-    <p class="lead">
-      Al Farabi Center hosts a growing team of specialists. Individual physician names for general
-      pediatrics, internal medicine, dermatology and surgery will be added over time. Below is an
-      initial profile for Pediatric Gastroenterology.
+    <h1>Our Doctors</h1>
+    <p>
+      Al Farabi Gastroenterology &amp; Endoscopy Center hosts a growing team of specialists.
+      Select a doctor from the list below to view their profile, services, and contact options.
     </p>
 
-    <div class="doctors-grid">
-      <div class="doctor-card">
-        <div class="doctor-photo">
-          <img src="https://images.unsplash.com/photo-1535916707207-35f97e715e1b?auto=format&fit=crop&w=900&q=80"
-               alt="Pediatric gastroenterology consultation">
-        </div>
-        <div class="doctor-body">
-          <h3>Dr. Mohammad Hussein</h3>
-          <p><strong>Specialty:</strong> Pediatric Gastroenterology</p>
-          <p><strong>Role:</strong> Pediatric Gastroenterologist Consultant</p>
-          <p>
-            Evaluation and management of infants, children and adolescents with digestive, liver and
-            nutrition disorders, including celiac disease, inflammatory bowel disease, chronic abdominal
-            pain, constipation, reflux, feeding difficulties and growth concerns.
-          </p>
-        </div>
-      </div>
-
-      <div class="doctor-card">
-        <div class="doctor-photo">
-          <img src="https://images.unsplash.com/photo-1550831107-1553da8c8464?auto=format&fit=crop&w=900&q=80"
-               alt="Multi-specialty medical team">
-        </div>
-        <div class="doctor-body">
-          <h3>Other Consultants</h3>
-          <p>
-            Adult gastroenterology, general pediatrics, internal medicine, dermatology and general
-            surgery consultants are part of the Al Farabi team. Their names and profiles will be added
-            as the service expands.
-          </p>
-          <p>
-            For up-to-date information on available doctors and clinic times, please contact the center
-            directly.
-          </p>
-        </div>
+    <!-- Doctor dropdown selector -->
+    <div class="card" style="margin-bottom: 2rem;">
+      <div class="card-body">
+        <label for="doctorSelect" style="font-weight: 600; margin-right: 0.5rem;">
+          Choose a doctor:
+        </label>
+        <select id="doctorSelect" class="form-select" style="max-width: 380px; display: inline-block;">
+          <option value="">-- Select a doctor --</option>
+          <option value="dr-mohammad-hussein">Dr. Mohammad Hussein – Pediatric Gastroenterology</option>
+          <option value="dr-a-khazraji">Dr. A. Khazraji – Adult Gastroenterology</option>
+          <option value="dr-nadine-ahmed">Dr. Nadine Ahmed – General Pediatrics</option>
+          <option value="dr-sardar-saman">Dr. Sardar Saman – Internal Medicine</option>
+          <option value="dr-wasd-ali">Dr. Wasd Ali – Dermatology</option>
+          <option value="dr-sarmed-qaysim">Dr. Sarmed Qaysim – General Surgery</option>
+        </select>
       </div>
     </div>
+
+    <!-- Doctor profiles -->
+    <div class="row g-4">
+      <!-- Dr. Mohammad Hussein -->
+      <section id="dr-mohammad-hussein" class="col-md-6">
+        <div class="card doctor-card h-100">
+          <div class="card-body">
+            <h2 class="card-title">Dr. Mohammad Hussein</h2>
+            <p class="text-muted">
+              <strong>Specialty:</strong> Pediatric Gastroenterology, Hepatology &amp; Nutrition
+            </p>
+            <p>
+              Dr. Hussein provides comprehensive evaluation and management of infants, children,
+              and adolescents with digestive, liver, feeding, and nutrition disorders. His scope
+              of practice includes:
+            </p>
+            <ul>
+              <li>Celiac disease and other malabsorption disorders</li>
+              <li>Inflammatory bowel disease (Crohn’s disease and ulcerative colitis)</li>
+              <li>Chronic abdominal pain, constipation, reflux, and functional bowel disorders</li>
+              <li>Feeding difficulties, growth concerns, and complex nutrition issues</li>
+              <li>Diagnostic and therapeutic endoscopy (upper endoscopy, colonoscopy, polypectomy, foreign body removal)</li>
+            </ul>
+            <p>
+              <strong>Contact:</strong><br>
+              Email: <a href="mailto:info@pedsgimind.ca">info@pedsgimind.ca</a><br>
+              WhatsApp: <a href="https://wa.me/XXXXXXXXXXX">+XXX-XXX-XXXX</a>
+              <!-- Replace XXXXXXXXXXX and number text with your actual WhatsApp number -->
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Dr. A. Khazraji -->
+      <section id="dr-a-khazraji" class="col-md-6">
+        <div class="card doctor-card h-100">
+          <div class="card-body">
+            <h2 class="card-title">Dr. A. Khazraji</h2>
+            <p class="text-muted">
+              <strong>Specialty:</strong> Adult Gastroenterology &amp; Endoscopy
+            </p>
+            <p>
+              Dr. Khazraji provides care for adults with gastrointestinal and liver disorders,
+              offering:
+            </p>
+            <ul>
+              <li>Assessment and management of acid reflux, peptic ulcer disease, and dyspepsia</li>
+              <li>Evaluation of gastrointestinal bleeding, anemia, and chronic abdominal pain</li>
+              <li>Screening and surveillance colonoscopy for polyps and colorectal cancer</li>
+              <li>Diagnosis and management of liver disease, including fatty liver and viral hepatitis</li>
+              <li>Diagnostic and therapeutic endoscopy (upper endoscopy and colonoscopy)</li>
+            </ul>
+            <p>
+              <strong>Contact:</strong><br>
+              Email: <a href="mailto:info@pedsgimind.ca">info@pedsgimind.ca</a><br>
+              WhatsApp: <a href="https://wa.me/XXXXXXXXXXX">+XXX-XXX-XXXX</a>
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Dr. Nadine Ahmed -->
+      <section id="dr-nadine-ahmed" class="col-md-6">
+        <div class="card doctor-card h-100">
+          <div class="card-body">
+            <h2 class="card-title">Dr. Nadine Ahmed</h2>
+            <p class="text-muted">
+              <strong>Specialty:</strong> General Pediatrics
+            </p>
+            <p>
+              Dr. Ahmed provides full-scope general pediatric care for infants, children, and adolescents, including:
+            </p>
+            <ul>
+              <li>Well-child visits, growth and development monitoring, and vaccinations</li>
+              <li>Assessment and management of common childhood illnesses and infections</li>
+              <li>Chronic disease follow-up (such as asthma and allergies)</li>
+              <li>School, behavior, and learning-related concerns</li>
+              <li>Preventive care and family-centered counseling</li>
+            </ul>
+            <p>
+              <strong>Contact:</strong><br>
+              Email: <a href="mailto:info@pedsgimind.ca">info@pedsgimind.ca</a><br>
+              WhatsApp: <a href="https://wa.me/XXXXXXXXXXX">+XXX-XXX-XXXX</a>
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Dr. Sardar Saman -->
+      <section id="dr-sardar-saman" class="col-md-6">
+        <div class="card doctor-card h-100">
+          <div class="card-body">
+            <h2 class="card-title">Dr. Sardar Saman</h2>
+            <p class="text-muted">
+              <strong>Specialty:</strong> Internal Medicine
+            </p>
+            <p>
+              Dr. Saman focuses on adult internal medicine, providing:
+            </p>
+            <ul>
+              <li>Diagnosis and long-term management of chronic diseases (such as diabetes, hypertension, and heart disease)</li>
+              <li>Comprehensive medical assessment for complex and multi-system conditions</li>
+              <li>Preventive health screening and risk-factor modification</li>
+              <li>Coordination of care with subspecialists as needed</li>
+            </ul>
+            <p>
+              <strong>Contact:</strong><br>
+              Email: <a href="mailto:info@pedsgimind.ca">info@pedsgimind.ca</a><br>
+              WhatsApp: <a href="https://wa.me/XXXXXXXXXXX">+XXX-XXX-XXXX</a>
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Dr. Wasd Ali -->
+      <section id="dr-wasd-ali" class="col-md-6">
+        <div class="card doctor-card h-100">
+          <div class="card-body">
+            <h2 class="card-title">Dr. Wasd Ali</h2>
+            <p class="text-muted">
+              <strong>Specialty:</strong> Dermatology
+            </p>
+            <p>
+              Dr. Ali evaluates and treats a wide range of skin, hair, and nail conditions, including:
+            </p>
+            <ul>
+              <li>Eczema, psoriasis, acne, and chronic rashes</li>
+              <li>Skin infections and allergic skin diseases</li>
+              <li>Screening and monitoring of moles and skin lesions</li>
+              <li>Advice on skin care, sun protection, and preventive dermatology</li>
+            </ul>
+            <p>
+              <strong>Contact:</strong><br>
+              Email: <a href="mailto:info@pedsgimind.ca">info@pedsgimind.ca</a><br>
+              WhatsApp: <a href="https://wa.me/XXXXXXXXXXX">+XXX-XXX-XXXX</a>
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Dr. Sarmed Qaysim -->
+      <section id="dr-sarmed-qaysim" class="col-md-6">
+        <div class="card doctor-card h-100">
+          <div class="card-body">
+            <h2 class="card-title">Dr. Sarmed Qaysim</h2>
+            <p class="text-muted">
+              <strong>Specialty:</strong> General Surgery
+            </p>
+            <p>
+              Dr. Qaysim provides surgical assessment and management for common general surgical conditions, including:
+            </p>
+            <ul>
+              <li>Gallbladder, hernia, and abdominal wall surgery</li>
+              <li>Management of acute surgical emergencies</li>
+              <li>Pre-operative evaluation and post-operative follow-up</li>
+              <li>Coordinated care with gastroenterology and other specialties when needed</li>
+            </ul>
+            <p>
+              <strong>Contact:</strong><br>
+              Email: <a href="mailto:info@pedsgimind.ca">info@pedsgimind.ca</a><br>
+              WhatsApp: <a href="https://wa.me/XXXXXXXXXXX">+XXX-XXX-XXXX</a>
+            </p>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <p style="margin-top: 2rem;">
+      As the Al Farabi Center service expands, additional consultants and detailed profiles
+      will be added. For the most up-to-date information on available doctors and clinic times,
+      please contact the center directly.
+    </p>
   </div>
 </section>
 
-<footer>
-  <div class="container">
-    <div>© <span id="year"></span> Al Farabi Gastroenterology &amp; Endoscopy Center. All rights reserved.</div>
-    <div>For emergencies, please use local emergency services or the nearest hospital.</div>
-  </div>
-  <script>
-    document.getElementById("year").textContent = new Date().getFullYear();
-  </script>
-</footer>
+<script>
+  // Scroll to doctor profile when selected from dropdown
+  (function () {
+    var select = document.getElementById('doctorSelect');
+    if (!select) return;
 
-<div class="floating-whatsapp">
-  <a href="https://wa.me/9647721738755" target="_blank">
-    <span>💬</span> WhatsApp
-  </a>
-</div>
+    select.addEventListener('change', function () {
+      var targetId = this.value;
+      if (!targetId) return;
 
-</body>
-</html>
+      var el = document.getElementById(targetId);
+      if (el) {
+        el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    });
+  })();
+</script>
+
+<!-- DOCTORS SECTION END -->
