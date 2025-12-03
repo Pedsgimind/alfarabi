@@ -1,0 +1,847 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Al Farabi Pediatric GI EMR / Registry</title>
+  <!-- Simple styling via Bootstrap CDN -->
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+  />
+  <style>
+    body {
+      background-color: #f7f7fb;
+    }
+    .sidebar {
+      max-height: 90vh;
+      overflow-y: auto;
+      border-right: 1px solid #ddd;
+    }
+    .patient-item {
+      cursor: pointer;
+    }
+    .patient-item.active {
+      background-color: #e0f3ff;
+    }
+    textarea {
+      font-size: 0.9rem;
+    }
+    .small-label {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      color: #666;
+    }
+    .visit-card {
+      border-left: 4px solid #0d6efd;
+    }
+    .required::after {
+      content: " *";
+      color: red;
+    }
+    .badge-visit {
+      font-size: 0.7rem;
+    }
+  </style>
+</head>
+<body>
+  <nav class="navbar navbar-light bg-white border-bottom mb-2">
+    <div class="container-fluid">
+      <span class="navbar-brand mb-0 h5">
+        Al Farabi Pediatric GI – Mini EMR / Registry
+      </span>
+      <div class="d-flex gap-2">
+        <button class="btn btn-outline-secondary btn-sm" id="btnExport">
+          Backup (Export JSON)
+        </button>
+        <label class="btn btn-outline-secondary btn-sm mb-0">
+          Restore
+          <input type="file" id="importFile" hidden />
+        </label>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container-fluid">
+    <div class="row">
+      <!-- LEFT: patients -->
+      <div class="col-12 col-md-3 sidebar bg-white p-2">
+        <div class="d-flex justify-content-between align-items-center mb-2">
+          <h6 class="mb-0">Patients</h6>
+          <button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#patientModal">
+            + New
+          </button>
+        </div>
+        <input
+          type="text"
+          id="patientSearch"
+          class="form-control form-control-sm mb-2"
+          placeholder="Search name / phone..."
+        />
+        <ul class="list-group" id="patientList"></ul>
+      </div>
+
+      <!-- RIGHT: details -->
+      <div class="col-12 col-md-9">
+        <div id="noPatientSelected" class="text-muted p-4">
+          Select a patient or create a new one.
+        </div>
+
+        <div id="patientDetail" class="d-none p-2">
+          <!-- Patient header -->
+          <div class="d-flex justify-content-between align-items-start mb-2">
+            <div>
+              <h5 id="detailName"></h5>
+              <div class="small-label" id="detailId"></div>
+              <div class="small text-muted" id="detailDemographics"></div>
+            </div>
+            <button
+              class="btn btn-outline-secondary btn-sm"
+              id="btnEditPatient"
+            >
+              Edit Patient
+            </button>
+          </div>
+
+          <!-- Visit creation -->
+          <div class="card mb-3">
+            <div class="card-header d-flex justify-content-between align-items-center">
+              <span>New Visit</span>
+              <span class="badge bg-info text-dark badge-visit">Enter note in English, summaries will be EN/AR/KU via ChatGPT</span>
+            </div>
+            <div class="card-body">
+              <form id="visitForm">
+                <div class="row g-2">
+                  <div class="col-md-3">
+                    <label class="form-label required">Date</label>
+                    <input
+                      type="date"
+                      class="form-control form-control-sm"
+                      id="visitDate"
+                      required
+                    />
+                  </div>
+                  <div class="col-md-3">
+                    <label class="form-label required">Visit type</label>
+                    <select
+                      class="form-select form-select-sm"
+                      id="visitType"
+                      required
+                    >
+                      <option value="New consultation">New consultation</option>
+                      <option value="Follow-up">Follow-up</option>
+                      <option value="Urgent">Urgent</option>
+                    </select>
+                  </div>
+                  <div class="col-md-6">
+                    <label class="form-label required">Chief complaint</label>
+                    <input
+                      type="text"
+                      class="form-control form-control-sm"
+                      id="visitCC"
+                      required
+                    />
+                  </div>
+                </div>
+
+                <div class="row g-2 mt-1">
+                  <div class="col-md-6">
+                    <label class="form-label">HPI (History of Present Illness)</label>
+                    <textarea
+                      class="form-control form-control-sm"
+                      rows="3"
+                      id="visitHPI"
+                    ></textarea>
+                  </div>
+                  <div class="col-md-6">
+                    <label class="form-label">Past history / Meds / Allergies</label>
+                    <textarea
+                      class="form-control form-control-sm"
+                      rows="3"
+                      id="visitPMH"
+                    ></textarea>
+                  </div>
+                </div>
+
+                <div class="row g-2 mt-1">
+                  <div class="col-md-4">
+                    <label class="form-label">Vitals</label>
+                    <textarea
+                      class="form-control form-control-sm"
+                      rows="2"
+                      id="visitVitals"
+                      placeholder="HR, RR, BP, Temp, Wt, Ht, BMI, centiles..."
+                    ></textarea>
+                  </div>
+                  <div class="col-md-4">
+                    <label class="form-label">Exam – General / Abdomen</label>
+                    <textarea
+                      class="form-control form-control-sm"
+                      rows="2"
+                      id="visitExam"
+                    ></textarea>
+                  </div>
+                  <div class="col-md-4">
+                    <label class="form-label">Other exam findings</label>
+                    <textarea
+                      class="form-control form-control-sm"
+                      rows="2"
+                      id="visitOtherExam"
+                    ></textarea>
+                  </div>
+                </div>
+
+                <div class="row g-2 mt-1">
+                  <div class="col-md-6">
+                    <label class="form-label required">Impression / Diagnosis</label>
+                    <textarea
+                      class="form-control form-control-sm"
+                      rows="2"
+                      id="visitImpression"
+                      required
+                    ></textarea>
+                  </div>
+                  <div class="col-md-6">
+                    <label class="form-label">Plan – Investigations (labs, imaging, scopes)</label>
+                    <textarea
+                      class="form-control form-control-sm"
+                      rows="2"
+                      id="visitPlanInvestigations"
+                    ></textarea>
+                  </div>
+                </div>
+
+                <div class="row g-2 mt-1">
+                  <div class="col-md-6">
+                    <label class="form-label">Plan – Medications</label>
+                    <textarea
+                      class="form-control form-control-sm"
+                      rows="2"
+                      id="visitPlanMeds"
+                    ></textarea>
+                  </div>
+                  <div class="col-md-6">
+                    <label class="form-label">Plan – Diet / Counseling / Follow-up</label>
+                    <textarea
+                      class="form-control form-control-sm"
+                      rows="2"
+                      id="visitPlanCounsel"
+                    ></textarea>
+                  </div>
+                </div>
+
+                <div class="row g-2 mt-1">
+                  <div class="col-md-4">
+                    <label class="form-label">Follow-up interval</label>
+                    <select
+                      class="form-select form-select-sm"
+                      id="visitFollowInterval"
+                    >
+                      <option value="">PRN</option>
+                      <option value="1 week">1 week</option>
+                      <option value="2 weeks">2 weeks</option>
+                      <option value="1 month">1 month</option>
+                      <option value="3 months">3 months</option>
+                      <option value="6 months">6 months</option>
+                    </select>
+                  </div>
+                  <div class="col-md-4">
+                    <label class="form-label">Next follow-up date</label>
+                    <input
+                      type="date"
+                      class="form-control form-control-sm"
+                      id="visitNextDate"
+                    />
+                  </div>
+                  <div class="col-md-4 d-flex align-items-end justify-content-end">
+                    <button type="submit" class="btn btn-success btn-sm w-100">
+                      Save visit
+                    </button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+
+          <!-- Visit list & ChatGPT helper -->
+          <div class="row g-3">
+            <div class="col-md-7">
+              <h6>Previous Visits</h6>
+              <div id="visitList" class="d-flex flex-column gap-2"></div>
+            </div>
+            <div class="col-md-5">
+              <h6>ChatGPT Summary Helper</h6>
+              <p class="small text-muted">
+                Select a visit below, then click "Copy prompt" to generate parent-friendly summaries
+                in <strong>English, Arabic and Kurdish</strong> using ChatGPT.
+              </p>
+              <textarea
+                id="chatgptPrompt"
+                class="form-control form-control-sm mb-2"
+                rows="10"
+                readonly
+              ></textarea>
+              <button class="btn btn-outline-primary btn-sm" id="btnCopyPrompt">
+                Copy prompt text
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Patient modal -->
+  <div
+    class="modal fade"
+    id="patientModal"
+    tabindex="-1"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog modal-lg modal-dialog-scrollable">
+      <div class="modal-content">
+        <form id="patientForm">
+          <div class="modal-header">
+            <h5 class="modal-title" id="patientModalTitle">New Patient</h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <div class="row g-2">
+              <div class="col-md-4">
+                <label class="form-label required">Patient ID</label>
+                <input
+                  type="text"
+                  class="form-control form-control-sm"
+                  id="patId"
+                  required
+                  placeholder="e.g. AF-0001"
+                />
+              </div>
+              <div class="col-md-8">
+                <label class="form-label required">Full Name (English)</label>
+                <input
+                  type="text"
+                  class="form-control form-control-sm"
+                  id="patNameEn"
+                  required
+                />
+              </div>
+            </div>
+
+            <div class="row g-2 mt-1">
+              <div class="col-md-6">
+                <label class="form-label">Full Name (Arabic)</label>
+                <input
+                  type="text"
+                  class="form-control form-control-sm"
+                  id="patNameAr"
+                />
+              </div>
+              <div class="col-md-6">
+                <label class="form-label">Full Name (Kurdish)</label>
+                <input
+                  type="text"
+                  class="form-control form-control-sm"
+                  id="patNameKu"
+                />
+              </div>
+            </div>
+
+            <div class="row g-2 mt-1">
+              <div class="col-md-4">
+                <label class="form-label">Date of Birth</label>
+                <input
+                  type="date"
+                  class="form-control form-control-sm"
+                  id="patDob"
+                />
+              </div>
+              <div class="col-md-4">
+                <label class="form-label">Sex</label>
+                <select
+                  class="form-select form-select-sm"
+                  id="patSex"
+                >
+                  <option value=""></option>
+                  <option>Male</option>
+                  <option>Female</option>
+                  <option>Other</option>
+                </select>
+              </div>
+              <div class="col-md-4">
+                <label class="form-label">Phone / WhatsApp</label>
+                <input
+                  type="text"
+                  class="form-control form-control-sm"
+                  id="patPhone"
+                />
+              </div>
+            </div>
+
+            <div class="row g-2 mt-1">
+              <div class="col-md-6">
+                <label class="form-label">City / Area</label>
+                <input
+                  type="text"
+                  class="form-control form-control-sm"
+                  id="patCity"
+                />
+              </div>
+              <div class="col-md-6">
+                <label class="form-label">Referral Source</label>
+                <input
+                  type="text"
+                  class="form-control form-control-sm"
+                  id="patReferral"
+                  placeholder="Self, pediatrician, hospital, social media..."
+                />
+              </div>
+            </div>
+
+            <div class="row g-2 mt-1">
+              <div class="col-md-6">
+                <label class="form-label">Primary caregiver name</label>
+                <input
+                  type="text"
+                  class="form-control form-control-sm"
+                  id="patCaregiver"
+                />
+              </div>
+              <div class="col-md-6">
+                <label class="form-label">Relationship</label>
+                <input
+                  type="text"
+                  class="form-control form-control-sm"
+                  id="patCaregiverRel"
+                  placeholder="Mother, father, grandparent..."
+                />
+              </div>
+            </div>
+
+            <div class="mt-2">
+              <label class="form-label">Notes / Flags (IBD, Celiac, complex etc.)</label>
+              <textarea
+                class="form-control form-control-sm"
+                rows="2"
+                id="patNotes"
+              ></textarea>
+            </div>
+
+            <input type="hidden" id="patEditIndex" />
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary btn-sm"
+              data-bs-dismiss="modal"
+            >
+              Cancel
+            </button>
+            <button type="submit" class="btn btn-primary btn-sm">
+              Save patient
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    // ----- DATA STRUCTURES -----
+    let patients = [];
+    let visits = [];
+    let selectedPatientId = null;
+
+    const LS_PATIENTS_KEY = "af_emr_patients";
+    const LS_VISITS_KEY = "af_emr_visits";
+
+    function loadData() {
+      try {
+        const p = localStorage.getItem(LS_PATIENTS_KEY);
+        const v = localStorage.getItem(LS_VISITS_KEY);
+        patients = p ? JSON.parse(p) : [];
+        visits = v ? JSON.parse(v) : [];
+      } catch (e) {
+        console.error("Error loading data", e);
+        patients = [];
+        visits = [];
+      }
+    }
+
+    function saveData() {
+      localStorage.setItem(LS_PATIENTS_KEY, JSON.stringify(patients));
+      localStorage.setItem(LS_VISITS_KEY, JSON.stringify(visits));
+    }
+
+    // ----- PATIENTS -----
+    function renderPatients(filter = "") {
+      const list = document.getElementById("patientList");
+      list.innerHTML = "";
+      const q = filter.toLowerCase();
+      patients
+        .slice()
+        .sort((a, b) => a.nameEn.localeCompare(b.nameEn))
+        .forEach((p) => {
+          if (
+            q &&
+            !(
+              p.nameEn.toLowerCase().includes(q) ||
+              (p.phone || "").toLowerCase().includes(q) ||
+              (p.id || "").toLowerCase().includes(q)
+            )
+          ) {
+            return;
+          }
+          const li = document.createElement("li");
+          li.className =
+            "list-group-item list-group-item-action patient-item py-1";
+          if (p.id === selectedPatientId) li.classList.add("active");
+          li.innerHTML = `
+            <div class="fw-semibold">${p.nameEn}</div>
+            <div class="small text-muted">${p.id || ""} ${
+            p.phone ? " · " + p.phone : ""
+          }</div>
+          `;
+          li.onclick = () => {
+            selectedPatientId = p.id;
+            renderPatients(document.getElementById("patientSearch").value);
+            showPatientDetail();
+          };
+          list.appendChild(li);
+        });
+    }
+
+    function getPatientById(id) {
+      return patients.find((p) => p.id === id);
+    }
+
+    function showPatientDetail() {
+      const detail = document.getElementById("patientDetail");
+      const none = document.getElementById("noPatientSelected");
+      const patient = getPatientById(selectedPatientId);
+      if (!patient) {
+        detail.classList.add("d-none");
+        none.classList.remove("d-none");
+        return;
+      }
+      none.classList.add("d-none");
+      detail.classList.remove("d-none");
+
+      document.getElementById("detailName").textContent = patient.nameEn;
+      document.getElementById(
+        "detailId"
+      ).textContent = `${patient.id || ""} · ${
+        patient.phone || ""
+      }`.trim();
+
+      const dob = patient.dob ? `DOB: ${patient.dob}` : "";
+      const sex = patient.sex ? `Sex: ${patient.sex}` : "";
+      const city = patient.city ? `City: ${patient.city}` : "";
+      document.getElementById(
+        "detailDemographics"
+      ).textContent = [dob, sex, city].filter(Boolean).join(" · ");
+
+      document.getElementById("chatgptPrompt").value = "";
+      renderVisitsForPatient();
+    }
+
+    // ----- VISITS -----
+    function renderVisitsForPatient() {
+      const container = document.getElementById("visitList");
+      container.innerHTML = "";
+      if (!selectedPatientId) return;
+      const patientVisits = visits
+        .filter((v) => v.patientId === selectedPatientId)
+        .sort((a, b) => (a.date || "").localeCompare(b.date));
+
+      if (!patientVisits.length) {
+        container.innerHTML =
+          '<div class="text-muted small">No visits recorded yet.</div>';
+        return;
+      }
+
+      patientVisits.forEach((v, idx) => {
+        const card = document.createElement("div");
+        card.className = "card visit-card";
+        card.innerHTML = `
+          <div class="card-body py-2">
+            <div class="d-flex justify-content-between">
+              <div>
+                <div class="fw-semibold">${v.date || ""} – ${
+          v.type || ""
+        }</div>
+                <div class="small text-muted">${v.cc || ""}</div>
+              </div>
+              <button class="btn btn-outline-secondary btn-sm">Details</button>
+            </div>
+          </div>
+        `;
+        card
+          .querySelector("button")
+          .addEventListener("click", () => showVisitPrompt(v));
+        container.prepend(card); // newest on top
+      });
+    }
+
+    function showVisitPrompt(v) {
+      const patient = getPatientById(v.patientId);
+      const text = `
+You are a pediatric gastroenterologist helping a parent understand their child’s clinic visit.
+
+Using the clinical note below, write THREE separate, parent-friendly summaries of this visit:
+
+1) In ENGLISH.
+2) In MODERN STANDARD ARABIC.
+3) In KURDISH (clear, polite language understood by most patients in Iraqi Kurdistan).
+
+For each language, use these headings (translate the headings appropriately in Arabic and Kurdish):
+- Diagnosis
+- What we think is going on
+- Treatment / Medications
+- Tests and follow-up
+- Red flags (when to go to ER or contact doctor)
+
+Please avoid medical jargon where possible and keep the style reassuring and clear.
+
+PATIENT (for context only):
+- Name: ${patient ? patient.nameEn : ""}
+- ID: ${patient ? patient.id : ""}
+
+CLINICAL NOTE:
+- Date: ${v.date}
+- Visit type: ${v.type}
+- Chief complaint: ${v.cc}
+
+HPI:
+${v.hpi}
+
+Past history / meds / allergies:
+${v.pmh}
+
+Vitals:
+${v.vitals}
+
+Exam (GI and other):
+${v.exam}
+${v.otherExam}
+
+Impression / diagnosis:
+${v.impression}
+
+Plan – Investigations:
+${v.planInvestigations}
+
+Plan – Medications:
+${v.planMeds}
+
+Plan – Diet / counseling / follow-up:
+${v.planCounsel}
+`;
+      document.getElementById("chatgptPrompt").value = text.trim();
+    }
+
+    // ----- EVENT HANDLERS -----
+    document.addEventListener("DOMContentLoaded", () => {
+      loadData();
+      renderPatients();
+
+      // patient search
+      document
+        .getElementById("patientSearch")
+        .addEventListener("input", (e) => {
+          renderPatients(e.target.value);
+        });
+
+      // new patient button
+      document
+        .getElementById("patientModal")
+        .addEventListener("show.bs.modal", (event) => {
+          const editIndexInput = document.getElementById("patEditIndex");
+          if (editIndexInput.value) {
+            // editing existing
+            document.getElementById("patientModalTitle").textContent =
+              "Edit Patient";
+          } else {
+            document.getElementById("patientModalTitle").textContent =
+              "New Patient";
+            document.getElementById("patientForm").reset();
+          }
+        });
+
+      // edit patient
+      document.getElementById("btnEditPatient").addEventListener("click", () => {
+        const patient = getPatientById(selectedPatientId);
+        if (!patient) return;
+        document.getElementById("patId").value = patient.id || "";
+        document.getElementById("patNameEn").value = patient.nameEn || "";
+        document.getElementById("patNameAr").value = patient.nameAr || "";
+        document.getElementById("patNameKu").value = patient.nameKu || "";
+        document.getElementById("patDob").value = patient.dob || "";
+        document.getElementById("patSex").value = patient.sex || "";
+        document.getElementById("patPhone").value = patient.phone || "";
+        document.getElementById("patCity").value = patient.city || "";
+        document.getElementById("patReferral").value = patient.referral || "";
+        document.getElementById("patCaregiver").value = patient.caregiver || "";
+        document.getElementById("patCaregiverRel").value =
+          patient.caregiverRel || "";
+        document.getElementById("patNotes").value = patient.notes || "";
+        document.getElementById("patEditIndex").value = patients.findIndex(
+          (p) => p.id === selectedPatientId
+        );
+        const modal = new bootstrap.Modal(
+          document.getElementById("patientModal")
+        );
+        modal.show();
+      });
+
+      // patient form submit
+      document
+        .getElementById("patientForm")
+        .addEventListener("submit", (e) => {
+          e.preventDefault();
+          const id = document.getElementById("patId").value.trim();
+          const nameEn = document.getElementById("patNameEn").value.trim();
+          if (!id || !nameEn) return;
+
+          const patientData = {
+            id,
+            nameEn,
+            nameAr: document.getElementById("patNameAr").value.trim(),
+            nameKu: document.getElementById("patNameKu").value.trim(),
+            dob: document.getElementById("patDob").value,
+            sex: document.getElementById("patSex").value,
+            phone: document.getElementById("patPhone").value.trim(),
+            city: document.getElementById("patCity").value.trim(),
+            referral: document.getElementById("patReferral").value.trim(),
+            caregiver: document.getElementById("patCaregiver").value.trim(),
+            caregiverRel: document
+              .getElementById("patCaregiverRel")
+              .value.trim(),
+            notes: document.getElementById("patNotes").value.trim(),
+          };
+
+          const editIndex = document.getElementById("patEditIndex").value;
+          if (editIndex !== "") {
+            patients[parseInt(editIndex, 10)] = patientData;
+          } else {
+            patients.push(patientData);
+          }
+          saveData();
+          document.getElementById("patEditIndex").value = "";
+          renderPatients(document.getElementById("patientSearch").value);
+          selectedPatientId = id;
+          showPatientDetail();
+          bootstrap.Modal.getInstance(
+            document.getElementById("patientModal")
+          ).hide();
+        });
+
+      // visit form submit
+      document
+        .getElementById("visitForm")
+        .addEventListener("submit", (e) => {
+          e.preventDefault();
+          if (!selectedPatientId) return;
+
+          const v = {
+            id:
+              "V-" +
+              Date.now().toString(36) +
+              "-" +
+              Math.random().toString(36).slice(2, 6),
+            patientId: selectedPatientId,
+            date: document.getElementById("visitDate").value,
+            type: document.getElementById("visitType").value,
+            cc: document.getElementById("visitCC").value.trim(),
+            hpi: document.getElementById("visitHPI").value.trim(),
+            pmh: document.getElementById("visitPMH").value.trim(),
+            vitals: document.getElementById("visitVitals").value.trim(),
+            exam: document.getElementById("visitExam").value.trim(),
+            otherExam: document.getElementById("visitOtherExam").value.trim(),
+            impression: document.getElementById("visitImpression").value.trim(),
+            planInvestigations: document
+              .getElementById("visitPlanInvestigations")
+              .value.trim(),
+            planMeds: document
+              .getElementById("visitPlanMeds")
+              .value.trim(),
+            planCounsel: document
+              .getElementById("visitPlanCounsel")
+              .value.trim(),
+            followInterval: document.getElementById("visitFollowInterval").value,
+            nextDate: document.getElementById("visitNextDate").value,
+          };
+
+          visits.push(v);
+          saveData();
+          document.getElementById("visitForm").reset();
+          renderVisitsForPatient();
+          showVisitPrompt(v); // auto prepare prompt for last visit
+        });
+
+      // export backup
+      document.getElementById("btnExport").addEventListener("click", () => {
+        const data = {
+          patients,
+          visits,
+          exportedAt: new Date().toISOString(),
+        };
+        const blob = new Blob([JSON.stringify(data, null, 2)], {
+          type: "application/json",
+        });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = "al_farabi_emr_backup.json";
+        a.click();
+        URL.revokeObjectURL(url);
+      });
+
+      // import backup
+      document
+        .getElementById("importFile")
+        .addEventListener("change", (e) => {
+          const file = e.target.files[0];
+          if (!file) return;
+          const reader = new FileReader();
+          reader.onload = (ev) => {
+            try {
+              const obj = JSON.parse(ev.target.result);
+              if (obj.patients && obj.visits) {
+                patients = obj.patients;
+                visits = obj.visits;
+                saveData();
+                renderPatients();
+                selectedPatientId = null;
+                showPatientDetail();
+                alert("Backup restored successfully.");
+              } else {
+                alert("Invalid backup file.");
+              }
+            } catch (err) {
+              alert("Error reading backup file.");
+            }
+          };
+          reader.readAsText(file);
+          e.target.value = "";
+        });
+
+      // copy prompt
+      document.getElementById("btnCopyPrompt").addEventListener("click", () => {
+        const txt = document.getElementById("chatgptPrompt").value;
+        if (!txt) return;
+        navigator.clipboard
+          .writeText(txt)
+          .then(() => alert("Prompt copied. Paste into ChatGPT to generate EN/AR/KU summaries."))
+          .catch(() => alert("Unable to copy. Select the text manually and copy."));
+      });
+    });
+  </script>
+</body>
+</html>
