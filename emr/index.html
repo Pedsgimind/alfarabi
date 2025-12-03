@@ -3,7 +3,6 @@
 <head>
   <meta charset="UTF-8" />
   <title>Al Farabi Pediatric GI EMR / Registry</title>
-  <!-- Simple styling via Bootstrap CDN -->
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <link
     rel="stylesheet"
@@ -95,7 +94,7 @@
     </div>
   </div>
 
-  <!-- MAIN APP (hidden until unlocked) -->
+  <!-- MAIN APP -->
   <div id="appMain" class="d-none">
     <nav class="navbar navbar-light bg-white border-bottom mb-2">
       <div class="container-fluid">
@@ -147,12 +146,20 @@
                 <div class="small-label" id="detailId"></div>
                 <div class="small text-muted" id="detailDemographics"></div>
               </div>
-              <button
-                class="btn btn-outline-secondary btn-sm"
-                id="btnEditPatient"
-              >
-                Edit Patient
-              </button>
+              <div class="d-flex gap-2">
+                <button
+                  class="btn btn-outline-secondary btn-sm"
+                  id="btnEditPatient"
+                >
+                  Edit Patient
+                </button>
+                <button
+                  class="btn btn-outline-primary btn-sm"
+                  id="btnExportPatient"
+                >
+                  Export history
+                </button>
+              </div>
             </div>
 
             <!-- Visit creation -->
@@ -160,7 +167,7 @@
               <div class="card-header d-flex justify-content-between align-items-center">
                 <span>New Visit</span>
                 <span class="badge bg-info text-dark badge-visit">
-                  Enter note in English, summaries will be EN/AR/KU via ChatGPT
+                  Enter note in English, summaries will be EN/AR/KU via ChatGPT or AI button
                 </span>
               </div>
               <div class="card-body">
@@ -317,27 +324,52 @@
               </div>
             </div>
 
-            <!-- Visit list + ChatGPT + Orders -->
+            <!-- Visit list + ChatGPT + Orders + AI -->
             <div class="row g-3">
               <div class="col-md-7">
                 <h6>Previous Visits</h6>
                 <div id="visitList" class="d-flex flex-column gap-2"></div>
               </div>
               <div class="col-md-5">
-                <h6>ChatGPT Summary Helper</h6>
+                <h6>ChatGPT Summary Helper (manual)</h6>
                 <p class="small text-muted">
                   Select a visit below, then click "Copy prompt" to generate parent-friendly summaries
-                  in <strong>English, Arabic and Kurdish</strong> using ChatGPT. Paste the answers into
-                  your clinic letter or discharge sheet.
+                  in <strong>English, Arabic and Kurdish</strong> using ChatGPT.
                 </p>
                 <textarea
                   id="chatgptPrompt"
                   class="form-control form-control-sm mb-2"
-                  rows="8"
+                  rows="6"
                   readonly
                 ></textarea>
                 <button class="btn btn-outline-primary btn-sm mb-3" id="btnCopyPrompt">
                   Copy prompt text
+                </button>
+
+                <hr class="my-2" />
+                <h6>AI Summary (via Cloudflare Worker)</h6>
+                <p class="small text-muted">
+                  After you configure your backend URL, click the button to automatically generate EN / AR / KU summaries
+                  for the selected visit.
+                </p>
+                <button class="btn btn-primary btn-sm mb-2" id="btnGenerateAiSummary">
+                  Generate AI summaries for selected visit
+                </button>
+                <div class="small text-danger mb-1" id="aiError"></div>
+                <label class="form-label small mb-0 mt-1">English summary</label>
+                <textarea id="aiSummaryEn" class="form-control form-control-sm mb-1" rows="3"></textarea>
+                <button class="btn btn-outline-secondary btn-sm mb-2" id="btnCopyAiEn">
+                  Copy English
+                </button>
+                <label class="form-label small mb-0">Arabic summary</label>
+                <textarea id="aiSummaryAr" class="form-control form-control-sm mb-1" rows="3"></textarea>
+                <button class="btn btn-outline-secondary btn-sm mb-2" id="btnCopyAiAr">
+                  Copy Arabic
+                </button>
+                <label class="form-label small mb-0">Kurdish summary</label>
+                <textarea id="aiSummaryKu" class="form-control form-control-sm mb-1" rows="3"></textarea>
+                <button class="btn btn-outline-secondary btn-sm mb-2" id="btnCopyAiKu">
+                  Copy Kurdish
                 </button>
 
                 <hr class="my-2" />
@@ -562,14 +594,42 @@
     </div>
   </div>
 
+  <!-- Patient export modal -->
+  <div class="modal fade" id="patientExportModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-scrollable">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Export patient history</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <p class="small text-muted">
+            This text includes demographics, all visits, and orders. Copy and paste into a referral letter or report.
+          </p>
+          <textarea id="patientExportText" class="form-control form-control-sm" rows="20"></textarea>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-outline-secondary btn-sm" id="btnCopyPatientExport">Copy text</button>
+          <button class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
   <script>
-    // ----- DATA STRUCTURES -----
+    // ====== CONFIG ======
+    // Replace this with your Cloudflare Worker URL when ready, e.g.:
+    // const AI_SUMMARY_ENDPOINT = "https://your-worker-name.your-subdomain.workers.dev/summary";
+    const AI_SUMMARY_ENDPOINT = ""; // empty = disabled, will show error
+
+    // ====== DATA STRUCTURES ======
     let patients = [];
     let visits = [];
     let orders = [];
     let selectedPatientId = null;
     let currentVisitIdForOrders = null;
+    let lastSelectedVisit = null;
 
     const LS_PATIENTS_KEY = "af_emr_patients";
     const LS_VISITS_KEY = "af_emr_visits";
@@ -598,7 +658,7 @@
       localStorage.setItem(LS_ORDERS_KEY, JSON.stringify(orders));
     }
 
-    // ----- PATIENTS -----
+    // ====== PATIENTS ======
     function renderPatients(filter = "") {
       const list = document.getElementById("patientList");
       list.innerHTML = "";
@@ -667,12 +727,17 @@
       ).textContent = [dob, sex, city].filter(Boolean).join(" · ");
 
       document.getElementById("chatgptPrompt").value = "";
+      document.getElementById("aiSummaryEn").value = "";
+      document.getElementById("aiSummaryAr").value = "";
+      document.getElementById("aiSummaryKu").value = "";
+      document.getElementById("aiError").textContent = "";
       currentVisitIdForOrders = null;
+      lastSelectedVisit = null;
       renderVisitsForPatient();
       renderOrdersForVisit();
     }
 
-    // ----- VISITS -----
+    // ====== VISITS ======
     function renderVisitsForPatient() {
       const container = document.getElementById("visitList");
       container.innerHTML = "";
@@ -708,30 +773,9 @@
       });
     }
 
-    function showVisitPrompt(v) {
-      const patient = getPatientById(v.patientId);
-      currentVisitIdForOrders = v.id;
-      renderOrdersForVisit();
-
-      const text = `
-You are a pediatric gastroenterologist helping a parent understand their child’s clinic visit.
-
-Using the clinical note below, write THREE separate, parent-friendly summaries of this visit:
-
-1) In ENGLISH.
-2) In MODERN STANDARD ARABIC.
-3) In KURDISH (clear, polite language understood by most patients in Iraqi Kurdistan).
-
-For each language, use these headings (translate the headings appropriately in Arabic and Kurdish):
-- Diagnosis
-- What we think is going on
-- Treatment / Medications
-- Tests and follow-up
-- Red flags (when to go to ER or contact doctor)
-
-Please avoid medical jargon where possible and keep the style reassuring and clear.
-
-PATIENT (for context only):
+    function makeClinicalNoteText(patient, v) {
+      return `
+PATIENT:
 - Name: ${patient ? patient.nameEn : ""}
 - ID: ${patient ? patient.id : ""}
 
@@ -765,10 +809,38 @@ ${v.planMeds}
 Plan – Diet / counseling / follow-up:
 ${v.planCounsel}
 `;
+    }
+
+    function showVisitPrompt(v) {
+      const patient = getPatientById(v.patientId);
+      currentVisitIdForOrders = v.id;
+      lastSelectedVisit = v;
+      renderOrdersForVisit();
+
+      const text = `
+You are a pediatric gastroenterologist helping a parent understand their child’s clinic visit.
+
+Using the clinical note below, write THREE separate, parent-friendly summaries of this visit:
+
+1) In ENGLISH.
+2) In MODERN STANDARD ARABIC.
+3) In KURDISH (clear, polite language understood by most patients in Iraqi Kurdistan).
+
+For each language, use these headings (translate the headings appropriately in Arabic and Kurdish):
+- Diagnosis
+- What we think is going on
+- Treatment / Medications
+- Tests and follow-up
+- Red flags (when to go to ER or contact doctor)
+
+Please avoid medical jargon where possible and keep the style reassuring and clear.
+
+${makeClinicalNoteText(patient, v)}
+`;
       document.getElementById("chatgptPrompt").value = text.trim();
     }
 
-    // ----- ORDERS -----
+    // ====== ORDERS ======
     function renderOrdersForVisit() {
       const listEl = document.getElementById("orderList");
       if (!listEl) return;
@@ -809,7 +881,89 @@ ${v.planCounsel}
         });
     }
 
-    // ----- INIT EMR APP (runs after PIN unlock) -----
+    // ====== EXPORT PATIENT HISTORY ======
+    function buildPatientHistoryText(patientId) {
+      const p = getPatientById(patientId);
+      if (!p) return "";
+      const lines = [];
+      lines.push(`PATIENT DEMOGRAPHICS`);
+      lines.push(`Name (English): ${p.nameEn || ""}`);
+      if (p.nameAr) lines.push(`Name (Arabic): ${p.nameAr}`);
+      if (p.nameKu) lines.push(`Name (Kurdish): ${p.nameKu}`);
+      lines.push(`Patient ID: ${p.id || ""}`);
+      lines.push(
+        `DOB: ${p.dob || "N/A"}    Sex: ${p.sex || ""}    City: ${
+          p.city || ""
+        }`
+      );
+      if (p.phone) lines.push(`Phone / WhatsApp: ${p.phone}`);
+      if (p.referral) lines.push(`Referral source: ${p.referral}`);
+      if (p.caregiver || p.caregiverRel)
+        lines.push(
+          `Primary caregiver: ${p.caregiver || ""} (${p.caregiverRel || ""})`
+        );
+      if (p.notes) lines.push(`Notes / Flags: ${p.notes}`);
+      lines.push("");
+      lines.push("CLINIC VISITS");
+      const pVisits = visits
+        .filter((v) => v.patientId === patientId)
+        .sort((a, b) => (a.date || "").localeCompare(b.date));
+      if (!pVisits.length) {
+        lines.push("No visits recorded.");
+      } else {
+        pVisits.forEach((v, idx) => {
+          lines.push("");
+          lines.push(
+            `Visit ${idx + 1}: ${v.date || ""} – ${v.type || ""} – ${
+              v.cc || ""
+            }`
+          );
+          if (v.hpi) lines.push(`HPI: ${v.hpi}`);
+          if (v.pmh) lines.push(`Past history / Meds / Allergies: ${v.pmh}`);
+          if (v.vitals) lines.push(`Vitals: ${v.vitals}`);
+          if (v.exam || v.otherExam)
+            lines.push(
+              `Exam: ${v.exam || ""}${
+                v.otherExam ? " | Other: " + v.otherExam : ""
+              }`
+            );
+          if (v.impression) lines.push(`Impression / Diagnosis: ${v.impression}`);
+          if (v.planInvestigations)
+            lines.push(`Plan – Investigations: ${v.planInvestigations}`);
+          if (v.planMeds) lines.push(`Plan – Medications: ${v.planMeds}`);
+          if (v.planCounsel)
+            lines.push(`Plan – Diet / Counseling / Follow-up: ${v.planCounsel}`);
+          if (v.followInterval || v.nextDate)
+            lines.push(
+              `Follow-up: ${v.followInterval || ""}  Next appointment: ${
+                v.nextDate || ""
+              }`
+            );
+
+          // orders for this visit
+          const vOrders = orders.filter((o) => o.visitId === v.id);
+          if (vOrders.length) {
+            lines.push("Orders for this visit:");
+            vOrders.forEach((o) => {
+              lines.push(
+                `  - ${o.type}: ${o.name || ""} | Ordered: ${
+                  o.orderedDate || ""
+                } | Status: ${o.status || ""}${
+                  o.resultDate || o.resultText
+                    ? ` | Result: ${o.resultDate || ""}${
+                        o.resultText ? " – " + o.resultText : ""
+                      }`
+                    : ""
+                }`
+              );
+            });
+          }
+        });
+      }
+      return lines.join("\n");
+    }
+
+    // ====== INIT EMR APP (after PIN) ======
     let emrInitialized = false;
     function initEmrApp() {
       if (emrInitialized) return;
@@ -865,6 +1019,39 @@ ${v.planCounsel}
         );
         modal.show();
       });
+
+      // export patient history
+      document
+        .getElementById("btnExportPatient")
+        .addEventListener("click", () => {
+          if (!selectedPatientId) {
+            alert("Select a patient first.");
+            return;
+          }
+          const text = buildPatientHistoryText(selectedPatientId);
+          document.getElementById("patientExportText").value = text;
+          const modal = new bootstrap.Modal(
+            document.getElementById("patientExportModal")
+          );
+          modal.show();
+        });
+
+      document
+        .getElementById("btnCopyPatientExport")
+        .addEventListener("click", () => {
+          const txt = document.getElementById("patientExportText").value;
+          if (!txt) return;
+          if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard
+              .writeText(txt)
+              .then(() => alert("History copied to clipboard."))
+              .catch(() =>
+                alert("Unable to copy automatically. Select and copy manually.")
+              );
+          } else {
+            alert("Select the text manually and copy.");
+          }
+        });
 
       // patient form submit
       document
@@ -948,7 +1135,7 @@ ${v.planCounsel}
           saveData();
           document.getElementById("visitForm").reset();
           renderVisitsForPatient();
-          showVisitPrompt(v); // auto prepare prompt + orders panel for last visit
+          showVisitPrompt(v); // prepare prompt + orders panel
         });
 
       // order form submit
@@ -1033,7 +1220,7 @@ ${v.planCounsel}
           e.target.value = "";
         });
 
-      // copy prompt
+      // copy manual ChatGPT prompt
       document.getElementById("btnCopyPrompt").addEventListener("click", () => {
         const txt = document.getElementById("chatgptPrompt").value;
         if (!txt) return;
@@ -1052,9 +1239,77 @@ ${v.planCounsel}
           alert("Select the text manually and copy.");
         }
       });
+
+      // AI SUMMARY BUTTON
+      document
+        .getElementById("btnGenerateAiSummary")
+        .addEventListener("click", async () => {
+          const errorEl = document.getElementById("aiError");
+          errorEl.textContent = "";
+          if (!AI_SUMMARY_ENDPOINT) {
+            errorEl.textContent =
+              "AI endpoint not configured yet. Set AI_SUMMARY_ENDPOINT in the HTML after you deploy the Cloudflare Worker.";
+            return;
+          }
+          if (!lastSelectedVisit) {
+            errorEl.textContent =
+              "Select a visit first (click 'Details' on the visit).";
+            return;
+          }
+          const patient = getPatientById(lastSelectedVisit.patientId);
+          const note = makeClinicalNoteText(patient, lastSelectedVisit);
+          try {
+            errorEl.textContent = "Contacting AI backend...";
+            const res = await fetch(AI_SUMMARY_ENDPOINT, {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({ note }),
+            });
+            if (!res.ok) {
+              throw new Error("HTTP " + res.status);
+            }
+            const data = await res.json();
+            document.getElementById("aiSummaryEn").value =
+              data.english || data.en || "";
+            document.getElementById("aiSummaryAr").value =
+              data.arabic || data.ar || "";
+            document.getElementById("aiSummaryKu").value =
+              data.kurdish || data.ku || "";
+            errorEl.textContent = "";
+          } catch (err) {
+            console.error(err);
+            errorEl.textContent =
+              "Error calling AI backend. Check your Worker URL and console log.";
+          }
+        });
+
+      // copy AI summaries
+      function copyTextById(id, label) {
+        const txt = document.getElementById(id).value;
+        if (!txt) return;
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard
+            .writeText(txt)
+            .then(() => alert(label + " copied."))
+            .catch(() =>
+              alert("Unable to copy automatically. Select and copy manually.")
+            );
+        } else {
+          alert("Select the text manually and copy.");
+        }
+      }
+      document
+        .getElementById("btnCopyAiEn")
+        .addEventListener("click", () => copyTextById("aiSummaryEn", "English summary"));
+      document
+        .getElementById("btnCopyAiAr")
+        .addEventListener("click", () => copyTextById("aiSummaryAr", "Arabic summary"));
+      document
+        .getElementById("btnCopyAiKu")
+        .addEventListener("click", () => copyTextById("aiSummaryKu", "Kurdish summary"));
     }
 
-    // ----- PIN LOCK LOGIC -----
+    // ====== PIN LOCK LOGIC ======
     let existingPin = null;
 
     function configureLockScreen() {
