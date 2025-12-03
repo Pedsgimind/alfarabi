@@ -35,258 +35,369 @@
     .visit-card {
       border-left: 4px solid #0d6efd;
     }
-    .required::after {
-      content: " *";
-      color: red;
-    }
     .badge-visit {
       font-size: 0.7rem;
+    }
+    /* Lock screen */
+    .lock-screen {
+      position: fixed;
+      inset: 0;
+      background: #f3f4f6;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 2000;
+    }
+    .lock-screen .card {
+      max-width: 360px;
+      width: 100%;
     }
   </style>
 </head>
 <body>
-  <nav class="navbar navbar-light bg-white border-bottom mb-2">
-    <div class="container-fluid">
-      <span class="navbar-brand mb-0 h5">
-        Al Farabi Pediatric GI – Mini EMR / Registry
-      </span>
-      <div class="d-flex gap-2">
-        <button class="btn btn-outline-secondary btn-sm" id="btnExport">
-          Backup (Export JSON)
+  <!-- PIN LOCK SCREEN -->
+  <div id="lockScreen" class="lock-screen">
+    <div class="card shadow-sm">
+      <div class="card-body">
+        <h5 class="card-title mb-2" id="lockTitle">Set up a PIN for this EMR</h5>
+        <p class="small text-muted" id="lockSubtitle">
+          Choose a 4–8 digit PIN to protect access to this EMR on <strong>this device</strong>.
+        </p>
+        <div class="mb-2">
+          <label class="form-label small mb-1" id="lockLabel">New PIN</label>
+          <input
+            type="password"
+            class="form-control form-control-sm"
+            id="lockPinInput"
+            inputmode="numeric"
+            autocomplete="off"
+          />
+        </div>
+        <div class="mb-2" id="lockConfirmGroup">
+          <label class="form-label small mb-1">Confirm PIN</label>
+          <input
+            type="password"
+            class="form-control form-control-sm"
+            id="lockPinConfirm"
+            inputmode="numeric"
+            autocomplete="off"
+          />
+        </div>
+        <div class="text-danger small mb-2" id="lockError"></div>
+        <button class="btn btn-primary btn-sm w-100" id="lockBtn">
+          Set PIN &amp; unlock
         </button>
-        <label class="btn btn-outline-secondary btn-sm mb-0">
-          Restore
-          <input type="file" id="importFile" hidden />
-        </label>
+        <p class="small text-muted mt-2 mb-0">
+          Note: PIN and all patient data are stored locally in this browser.
+          Clearing browser data will remove the PIN <strong>and</strong> the EMR data.
+        </p>
       </div>
     </div>
-  </nav>
+  </div>
 
-  <div class="container-fluid">
-    <div class="row">
-      <!-- LEFT: patients -->
-      <div class="col-12 col-md-3 sidebar bg-white p-2">
-        <div class="d-flex justify-content-between align-items-center mb-2">
-          <h6 class="mb-0">Patients</h6>
-          <button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#patientModal">
-            + New
+  <!-- MAIN APP (hidden until unlocked) -->
+  <div id="appMain" class="d-none">
+    <nav class="navbar navbar-light bg-white border-bottom mb-2">
+      <div class="container-fluid">
+        <span class="navbar-brand mb-0 h5">
+          Al Farabi Pediatric GI – Mini EMR / Registry
+        </span>
+        <div class="d-flex gap-2">
+          <button class="btn btn-outline-secondary btn-sm" id="btnExport">
+            Backup (Export JSON)
           </button>
+          <label class="btn btn-outline-secondary btn-sm mb-0">
+            Restore
+            <input type="file" id="importFile" hidden />
+          </label>
         </div>
-        <input
-          type="text"
-          id="patientSearch"
-          class="form-control form-control-sm mb-2"
-          placeholder="Search name / phone..."
-        />
-        <ul class="list-group" id="patientList"></ul>
       </div>
+    </nav>
 
-      <!-- RIGHT: details -->
-      <div class="col-12 col-md-9">
-        <div id="noPatientSelected" class="text-muted p-4">
-          Select a patient or create a new one.
-        </div>
-
-        <div id="patientDetail" class="d-none p-2">
-          <!-- Patient header -->
-          <div class="d-flex justify-content-between align-items-start mb-2">
-            <div>
-              <h5 id="detailName"></h5>
-              <div class="small-label" id="detailId"></div>
-              <div class="small text-muted" id="detailDemographics"></div>
-            </div>
-            <button
-              class="btn btn-outline-secondary btn-sm"
-              id="btnEditPatient"
-            >
-              Edit Patient
+    <div class="container-fluid">
+      <div class="row">
+        <!-- LEFT: patients -->
+        <div class="col-12 col-md-3 sidebar bg-white p-2">
+          <div class="d-flex justify-content-between align-items-center mb-2">
+            <h6 class="mb-0">Patients</h6>
+            <button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#patientModal">
+              + New
             </button>
           </div>
+          <input
+            type="text"
+            id="patientSearch"
+            class="form-control form-control-sm mb-2"
+            placeholder="Search name / phone..."
+          />
+          <ul class="list-group" id="patientList"></ul>
+        </div>
 
-          <!-- Visit creation -->
-          <div class="card mb-3">
-            <div class="card-header d-flex justify-content-between align-items-center">
-              <span>New Visit</span>
-              <span class="badge bg-info text-dark badge-visit">Enter note in English, summaries will be EN/AR/KU via ChatGPT</span>
+        <!-- RIGHT: details -->
+        <div class="col-12 col-md-9">
+          <div id="noPatientSelected" class="text-muted p-4">
+            Select a patient or create a new one.
+          </div>
+
+          <div id="patientDetail" class="d-none p-2">
+            <!-- Patient header -->
+            <div class="d-flex justify-content-between align-items-start mb-2">
+              <div>
+                <h5 id="detailName"></h5>
+                <div class="small-label" id="detailId"></div>
+                <div class="small text-muted" id="detailDemographics"></div>
+              </div>
+              <button
+                class="btn btn-outline-secondary btn-sm"
+                id="btnEditPatient"
+              >
+                Edit Patient
+              </button>
             </div>
-            <div class="card-body">
-              <form id="visitForm">
-                <div class="row g-2">
-                  <div class="col-md-3">
-                    <label class="form-label required">Date</label>
-                    <input
-                      type="date"
-                      class="form-control form-control-sm"
-                      id="visitDate"
-                      required
-                    />
+
+            <!-- Visit creation -->
+            <div class="card mb-3">
+              <div class="card-header d-flex justify-content-between align-items-center">
+                <span>New Visit</span>
+                <span class="badge bg-info text-dark badge-visit">
+                  Enter note in English, summaries will be EN/AR/KU via ChatGPT
+                </span>
+              </div>
+              <div class="card-body">
+                <form id="visitForm">
+                  <div class="row g-2">
+                    <div class="col-md-3">
+                      <label class="form-label required">Date</label>
+                      <input
+                        type="date"
+                        class="form-control form-control-sm"
+                        id="visitDate"
+                        required
+                      />
+                    </div>
+                    <div class="col-md-3">
+                      <label class="form-label required">Visit type</label>
+                      <select
+                        class="form-select form-select-sm"
+                        id="visitType"
+                        required
+                      >
+                        <option value="New consultation">New consultation</option>
+                        <option value="Follow-up">Follow-up</option>
+                        <option value="Urgent">Urgent</option>
+                      </select>
+                    </div>
+                    <div class="col-md-6">
+                      <label class="form-label required">Chief complaint</label>
+                      <input
+                        type="text"
+                        class="form-control form-control-sm"
+                        id="visitCC"
+                        required
+                      />
+                    </div>
                   </div>
-                  <div class="col-md-3">
-                    <label class="form-label required">Visit type</label>
-                    <select
-                      class="form-select form-select-sm"
-                      id="visitType"
-                      required
-                    >
-                      <option value="New consultation">New consultation</option>
-                      <option value="Follow-up">Follow-up</option>
-                      <option value="Urgent">Urgent</option>
+
+                  <div class="row g-2 mt-1">
+                    <div class="col-md-6">
+                      <label class="form-label">HPI (History of Present Illness)</label>
+                      <textarea
+                        class="form-control form-control-sm"
+                        rows="3"
+                        id="visitHPI"
+                      ></textarea>
+                    </div>
+                    <div class="col-md-6">
+                      <label class="form-label">Past history / Meds / Allergies</label>
+                      <textarea
+                        class="form-control form-control-sm"
+                        rows="3"
+                        id="visitPMH"
+                      ></textarea>
+                    </div>
+                  </div>
+
+                  <div class="row g-2 mt-1">
+                    <div class="col-md-4">
+                      <label class="form-label">Vitals</label>
+                      <textarea
+                        class="form-control form-control-sm"
+                        rows="2"
+                        id="visitVitals"
+                        placeholder="HR, RR, BP, Temp, Wt, Ht, BMI, centiles..."
+                      ></textarea>
+                    </div>
+                    <div class="col-md-4">
+                      <label class="form-label">Exam – General / Abdomen</label>
+                      <textarea
+                        class="form-control form-control-sm"
+                        rows="2"
+                        id="visitExam"
+                      ></textarea>
+                    </div>
+                    <div class="col-md-4">
+                      <label class="form-label">Other exam findings</label>
+                      <textarea
+                        class="form-control form-control-sm"
+                        rows="2"
+                        id="visitOtherExam"
+                      ></textarea>
+                    </div>
+                  </div>
+
+                  <div class="row g-2 mt-1">
+                    <div class="col-md-6">
+                      <label class="form-label required">Impression / Diagnosis</label>
+                      <textarea
+                        class="form-control form-control-sm"
+                        rows="2"
+                        id="visitImpression"
+                        required
+                      ></textarea>
+                    </div>
+                    <div class="col-md-6">
+                      <label class="form-label">Plan – Investigations (labs, imaging, scopes)</label>
+                      <textarea
+                        class="form-control form-control-sm"
+                        rows="2"
+                        id="visitPlanInvestigations"
+                      ></textarea>
+                    </div>
+                  </div>
+
+                  <div class="row g-2 mt-1">
+                    <div class="col-md-6">
+                      <label class="form-label">Plan – Medications</label>
+                      <textarea
+                        class="form-control form-control-sm"
+                        rows="2"
+                        id="visitPlanMeds"
+                      ></textarea>
+                    </div>
+                    <div class="col-md-6">
+                      <label class="form-label">Plan – Diet / Counseling / Follow-up</label>
+                      <textarea
+                        class="form-control form-control-sm"
+                        rows="2"
+                        id="visitPlanCounsel"
+                      ></textarea>
+                    </div>
+                  </div>
+
+                  <div class="row g-2 mt-1">
+                    <div class="col-md-4">
+                      <label class="form-label">Follow-up interval</label>
+                      <select
+                        class="form-select form-select-sm"
+                        id="visitFollowInterval"
+                      >
+                        <option value="">PRN</option>
+                        <option value="1 week">1 week</option>
+                        <option value="2 weeks">2 weeks</option>
+                        <option value="1 month">1 month</option>
+                        <option value="3 months">3 months</option>
+                        <option value="6 months">6 months</option>
+                      </select>
+                    </div>
+                    <div class="col-md-4">
+                      <label class="form-label">Next follow-up date</label>
+                      <input
+                        type="date"
+                        class="form-control form-control-sm"
+                        id="visitNextDate"
+                      />
+                    </div>
+                    <div class="col-md-4 d-flex align-items-end justify-content-end">
+                      <button type="submit" class="btn btn-success btn-sm w-100">
+                        Save visit
+                      </button>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
+
+            <!-- Visit list + ChatGPT + Orders -->
+            <div class="row g-3">
+              <div class="col-md-7">
+                <h6>Previous Visits</h6>
+                <div id="visitList" class="d-flex flex-column gap-2"></div>
+              </div>
+              <div class="col-md-5">
+                <h6>ChatGPT Summary Helper</h6>
+                <p class="small text-muted">
+                  Select a visit below, then click "Copy prompt" to generate parent-friendly summaries
+                  in <strong>English, Arabic and Kurdish</strong> using ChatGPT. Paste the answers into
+                  your clinic letter or discharge sheet.
+                </p>
+                <textarea
+                  id="chatgptPrompt"
+                  class="form-control form-control-sm mb-2"
+                  rows="8"
+                  readonly
+                ></textarea>
+                <button class="btn btn-outline-primary btn-sm mb-3" id="btnCopyPrompt">
+                  Copy prompt text
+                </button>
+
+                <hr class="my-2" />
+                <h6>Orders (labs / imaging / scopes) for selected visit</h6>
+                <p class="small text-muted">
+                  Click "Details" on a visit first, then use this form to add tests for that visit.
+                </p>
+                <form id="orderForm" class="border rounded p-2 mb-2 small">
+                  <div class="mb-1">
+                    <label class="form-label small mb-0">Type</label>
+                    <select class="form-select form-select-sm" id="orderType">
+                      <option value="Lab">Lab</option>
+                      <option value="Imaging">Imaging</option>
+                      <option value="Endoscopy">Endoscopy</option>
+                      <option value="Other">Other</option>
                     </select>
                   </div>
-                  <div class="col-md-6">
-                    <label class="form-label required">Chief complaint</label>
+                  <div class="mb-1">
+                    <label class="form-label small mb-0">Test / procedure name</label>
                     <input
                       type="text"
                       class="form-control form-control-sm"
-                      id="visitCC"
-                      required
+                      id="orderName"
+                      placeholder="CBC, TTG IgA, Abdominal US, EGD..."
                     />
                   </div>
-                </div>
-
-                <div class="row g-2 mt-1">
-                  <div class="col-md-6">
-                    <label class="form-label">HPI (History of Present Illness)</label>
-                    <textarea
-                      class="form-control form-control-sm"
-                      rows="3"
-                      id="visitHPI"
-                    ></textarea>
+                  <div class="mb-1">
+                    <label class="form-label small mb-0">Ordered date</label>
+                    <input type="date" class="form-control form-control-sm" id="orderDate" />
                   </div>
-                  <div class="col-md-6">
-                    <label class="form-label">Past history / Meds / Allergies</label>
-                    <textarea
-                      class="form-control form-control-sm"
-                      rows="3"
-                      id="visitPMH"
-                    ></textarea>
-                  </div>
-                </div>
-
-                <div class="row g-2 mt-1">
-                  <div class="col-md-4">
-                    <label class="form-label">Vitals</label>
-                    <textarea
-                      class="form-control form-control-sm"
-                      rows="2"
-                      id="visitVitals"
-                      placeholder="HR, RR, BP, Temp, Wt, Ht, BMI, centiles..."
-                    ></textarea>
-                  </div>
-                  <div class="col-md-4">
-                    <label class="form-label">Exam – General / Abdomen</label>
-                    <textarea
-                      class="form-control form-control-sm"
-                      rows="2"
-                      id="visitExam"
-                    ></textarea>
-                  </div>
-                  <div class="col-md-4">
-                    <label class="form-label">Other exam findings</label>
-                    <textarea
-                      class="form-control form-control-sm"
-                      rows="2"
-                      id="visitOtherExam"
-                    ></textarea>
-                  </div>
-                </div>
-
-                <div class="row g-2 mt-1">
-                  <div class="col-md-6">
-                    <label class="form-label required">Impression / Diagnosis</label>
-                    <textarea
-                      class="form-control form-control-sm"
-                      rows="2"
-                      id="visitImpression"
-                      required
-                    ></textarea>
-                  </div>
-                  <div class="col-md-6">
-                    <label class="form-label">Plan – Investigations (labs, imaging, scopes)</label>
-                    <textarea
-                      class="form-control form-control-sm"
-                      rows="2"
-                      id="visitPlanInvestigations"
-                    ></textarea>
-                  </div>
-                </div>
-
-                <div class="row g-2 mt-1">
-                  <div class="col-md-6">
-                    <label class="form-label">Plan – Medications</label>
-                    <textarea
-                      class="form-control form-control-sm"
-                      rows="2"
-                      id="visitPlanMeds"
-                    ></textarea>
-                  </div>
-                  <div class="col-md-6">
-                    <label class="form-label">Plan – Diet / Counseling / Follow-up</label>
-                    <textarea
-                      class="form-control form-control-sm"
-                      rows="2"
-                      id="visitPlanCounsel"
-                    ></textarea>
-                  </div>
-                </div>
-
-                <div class="row g-2 mt-1">
-                  <div class="col-md-4">
-                    <label class="form-label">Follow-up interval</label>
-                    <select
-                      class="form-select form-select-sm"
-                      id="visitFollowInterval"
-                    >
-                      <option value="">PRN</option>
-                      <option value="1 week">1 week</option>
-                      <option value="2 weeks">2 weeks</option>
-                      <option value="1 month">1 month</option>
-                      <option value="3 months">3 months</option>
-                      <option value="6 months">6 months</option>
+                  <div class="mb-1">
+                    <label class="form-label small mb-0">Status</label>
+                    <select class="form-select form-select-sm" id="orderStatus">
+                      <option value="Ordered">Ordered</option>
+                      <option value="Pending result">Pending result</option>
+                      <option value="Resulted">Resulted</option>
+                      <option value="Cancelled">Cancelled</option>
                     </select>
                   </div>
-                  <div class="col-md-4">
-                    <label class="form-label">Next follow-up date</label>
-                    <input
-                      type="date"
+                  <div class="mb-1">
+                    <label class="form-label small mb-0">Result date (if available)</label>
+                    <input type="date" class="form-control form-control-sm" id="orderResultDate" />
+                  </div>
+                  <div class="mb-1">
+                    <label class="form-label small mb-0">Result summary / notes</label>
+                    <textarea
                       class="form-control form-control-sm"
-                      id="visitNextDate"
-                    />
+                      rows="2"
+                      id="orderResultText"
+                    ></textarea>
                   </div>
-                  <div class="col-md-4 d-flex align-items-end justify-content-end">
-                    <button type="submit" class="btn btn-success btn-sm w-100">
-                      Save visit
-                    </button>
-                  </div>
-                </div>
-              </form>
+                  <button type="submit" class="btn btn-outline-success btn-sm w-100">
+                    Add order to this visit
+                  </button>
+                </form>
+                <div id="orderList" class="small"></div>
+              </div>
             </div>
           </div>
-
-          <!-- Visit list & ChatGPT helper -->
-          <div class="row g-3">
-            <div class="col-md-7">
-              <h6>Previous Visits</h6>
-              <div id="visitList" class="d-flex flex-column gap-2"></div>
-            </div>
-            <div class="col-md-5">
-              <h6>ChatGPT Summary Helper</h6>
-              <p class="small text-muted">
-                Select a visit below, then click "Copy prompt" to generate parent-friendly summaries
-                in <strong>English, Arabic and Kurdish</strong> using ChatGPT.
-              </p>
-              <textarea
-                id="chatgptPrompt"
-                class="form-control form-control-sm mb-2"
-                rows="10"
-                readonly
-              ></textarea>
-              <button class="btn btn-outline-primary btn-sm" id="btnCopyPrompt">
-                Copy prompt text
-              </button>
-            </div>
-          </div>
-        </div>
+        </div> <!-- /right col -->
       </div>
     </div>
   </div>
@@ -456,27 +567,35 @@
     // ----- DATA STRUCTURES -----
     let patients = [];
     let visits = [];
+    let orders = [];
     let selectedPatientId = null;
+    let currentVisitIdForOrders = null;
 
     const LS_PATIENTS_KEY = "af_emr_patients";
     const LS_VISITS_KEY = "af_emr_visits";
+    const LS_ORDERS_KEY = "af_emr_orders";
+    const PIN_KEY = "af_emr_pin";
 
     function loadData() {
       try {
         const p = localStorage.getItem(LS_PATIENTS_KEY);
         const v = localStorage.getItem(LS_VISITS_KEY);
+        const o = localStorage.getItem(LS_ORDERS_KEY);
         patients = p ? JSON.parse(p) : [];
         visits = v ? JSON.parse(v) : [];
+        orders = o ? JSON.parse(o) : [];
       } catch (e) {
         console.error("Error loading data", e);
         patients = [];
         visits = [];
+        orders = [];
       }
     }
 
     function saveData() {
       localStorage.setItem(LS_PATIENTS_KEY, JSON.stringify(patients));
       localStorage.setItem(LS_VISITS_KEY, JSON.stringify(visits));
+      localStorage.setItem(LS_ORDERS_KEY, JSON.stringify(orders));
     }
 
     // ----- PATIENTS -----
@@ -548,7 +667,9 @@
       ).textContent = [dob, sex, city].filter(Boolean).join(" · ");
 
       document.getElementById("chatgptPrompt").value = "";
+      currentVisitIdForOrders = null;
       renderVisitsForPatient();
+      renderOrdersForVisit();
     }
 
     // ----- VISITS -----
@@ -566,16 +687,14 @@
         return;
       }
 
-      patientVisits.forEach((v, idx) => {
+      patientVisits.forEach((v) => {
         const card = document.createElement("div");
         card.className = "card visit-card";
         card.innerHTML = `
           <div class="card-body py-2">
             <div class="d-flex justify-content-between">
               <div>
-                <div class="fw-semibold">${v.date || ""} – ${
-          v.type || ""
-        }</div>
+                <div class="fw-semibold">${v.date || ""} – ${v.type || ""}</div>
                 <div class="small text-muted">${v.cc || ""}</div>
               </div>
               <button class="btn btn-outline-secondary btn-sm">Details</button>
@@ -591,6 +710,9 @@
 
     function showVisitPrompt(v) {
       const patient = getPatientById(v.patientId);
+      currentVisitIdForOrders = v.id;
+      renderOrdersForVisit();
+
       const text = `
 You are a pediatric gastroenterologist helping a parent understand their child’s clinic visit.
 
@@ -646,8 +768,53 @@ ${v.planCounsel}
       document.getElementById("chatgptPrompt").value = text.trim();
     }
 
-    // ----- EVENT HANDLERS -----
-    document.addEventListener("DOMContentLoaded", () => {
+    // ----- ORDERS -----
+    function renderOrdersForVisit() {
+      const listEl = document.getElementById("orderList");
+      if (!listEl) return;
+      listEl.innerHTML = "";
+      if (!currentVisitIdForOrders) {
+        listEl.innerHTML =
+          '<div class="text-muted small">No visit selected yet. Click "Details" on a visit.</div>';
+        return;
+      }
+      const thisOrders = orders.filter(
+        (o) => o.visitId === currentVisitIdForOrders
+      );
+      if (!thisOrders.length) {
+        listEl.innerHTML =
+          '<div class="text-muted small">No orders for this visit yet.</div>';
+        return;
+      }
+      thisOrders
+        .slice()
+        .sort((a, b) =>
+          (a.orderedDate || "").localeCompare(b.orderedDate || "")
+        )
+        .forEach((o) => {
+          const div = document.createElement("div");
+          div.className = "border rounded p-1 mb-1";
+          div.innerHTML = `
+            <div><strong>${o.type}</strong> – ${o.name || ""}</div>
+            <div>${o.orderedDate || ""} · Status: ${o.status || ""}</div>
+            ${
+              o.resultDate || o.resultText
+                ? `<div class="text-muted">Result: ${o.resultDate || ""} ${
+                    o.resultText ? "– " + o.resultText : ""
+                  }</div>`
+                : ""
+            }
+          `;
+          listEl.appendChild(div);
+        });
+    }
+
+    // ----- INIT EMR APP (runs after PIN unlock) -----
+    let emrInitialized = false;
+    function initEmrApp() {
+      if (emrInitialized) return;
+      emrInitialized = true;
+
       loadData();
       renderPatients();
 
@@ -658,13 +825,12 @@ ${v.planCounsel}
           renderPatients(e.target.value);
         });
 
-      // new patient button
+      // patient modal show
       document
         .getElementById("patientModal")
-        .addEventListener("show.bs.modal", (event) => {
+        .addEventListener("show.bs.modal", () => {
           const editIndexInput = document.getElementById("patEditIndex");
           if (editIndexInput.value) {
-            // editing existing
             document.getElementById("patientModalTitle").textContent =
               "Edit Patient";
           } else {
@@ -674,7 +840,7 @@ ${v.planCounsel}
           }
         });
 
-      // edit patient
+      // edit patient button
       document.getElementById("btnEditPatient").addEventListener("click", () => {
         const patient = getPatientById(selectedPatientId);
         if (!patient) return;
@@ -782,7 +948,39 @@ ${v.planCounsel}
           saveData();
           document.getElementById("visitForm").reset();
           renderVisitsForPatient();
-          showVisitPrompt(v); // auto prepare prompt for last visit
+          showVisitPrompt(v); // auto prepare prompt + orders panel for last visit
+        });
+
+      // order form submit
+      document
+        .getElementById("orderForm")
+        .addEventListener("submit", (e) => {
+          e.preventDefault();
+          if (!selectedPatientId || !currentVisitIdForOrders) {
+            alert("Please select a visit (click Details) before adding an order.");
+            return;
+          }
+          const o = {
+            id:
+              "O-" +
+              Date.now().toString(36) +
+              "-" +
+              Math.random().toString(36).slice(2, 6),
+            patientId: selectedPatientId,
+            visitId: currentVisitIdForOrders,
+            type: document.getElementById("orderType").value,
+            name: document.getElementById("orderName").value.trim(),
+            orderedDate: document.getElementById("orderDate").value,
+            status: document.getElementById("orderStatus").value,
+            resultDate: document.getElementById("orderResultDate").value,
+            resultText: document
+              .getElementById("orderResultText")
+              .value.trim(),
+          };
+          orders.push(o);
+          saveData();
+          document.getElementById("orderForm").reset();
+          renderOrdersForVisit();
         });
 
       // export backup
@@ -790,6 +988,7 @@ ${v.planCounsel}
         const data = {
           patients,
           visits,
+          orders,
           exportedAt: new Date().toISOString(),
         };
         const blob = new Blob([JSON.stringify(data, null, 2)], {
@@ -816,10 +1015,12 @@ ${v.planCounsel}
               if (obj.patients && obj.visits) {
                 patients = obj.patients;
                 visits = obj.visits;
+                orders = obj.orders || [];
                 saveData();
                 renderPatients();
                 selectedPatientId = null;
-                showPatientDetail();
+                document.getElementById("patientDetail").classList.add("d-none");
+                document.getElementById("noPatientSelected").classList.remove("d-none");
                 alert("Backup restored successfully.");
               } else {
                 alert("Invalid backup file.");
@@ -836,10 +1037,89 @@ ${v.planCounsel}
       document.getElementById("btnCopyPrompt").addEventListener("click", () => {
         const txt = document.getElementById("chatgptPrompt").value;
         if (!txt) return;
-        navigator.clipboard
-          .writeText(txt)
-          .then(() => alert("Prompt copied. Paste into ChatGPT to generate EN/AR/KU summaries."))
-          .catch(() => alert("Unable to copy. Select the text manually and copy."));
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard
+            .writeText(txt)
+            .then(() =>
+              alert(
+                "Prompt copied. Paste into ChatGPT to generate EN/AR/KU summaries."
+              )
+            )
+            .catch(() =>
+              alert("Unable to copy. Select the text manually and copy.")
+            );
+        } else {
+          alert("Select the text manually and copy.");
+        }
+      });
+    }
+
+    // ----- PIN LOCK LOGIC -----
+    let existingPin = null;
+
+    function configureLockScreen() {
+      existingPin = localStorage.getItem(PIN_KEY);
+      const hasPin = !!existingPin;
+      const title = document.getElementById("lockTitle");
+      const subtitle = document.getElementById("lockSubtitle");
+      const label = document.getElementById("lockLabel");
+      const confirmGroup = document.getElementById("lockConfirmGroup");
+      const btn = document.getElementById("lockBtn");
+
+      if (hasPin) {
+        title.textContent = "Enter PIN to unlock EMR";
+        subtitle.textContent =
+          "This helps protect access on this device. Use your private PIN.";
+        label.textContent = "PIN";
+        confirmGroup.classList.add("d-none");
+        btn.textContent = "Unlock";
+      } else {
+        title.textContent = "Set up a PIN for this EMR";
+        subtitle.textContent =
+          "Choose a 4–8 digit PIN to protect access on this device.";
+        label.textContent = "New PIN";
+        confirmGroup.classList.remove("d-none");
+        btn.textContent = "Set PIN & unlock";
+      }
+    }
+
+    function unlockApp() {
+      document.getElementById("lockScreen").classList.add("d-none");
+      document.getElementById("appMain").classList.remove("d-none");
+      initEmrApp();
+    }
+
+    document.addEventListener("DOMContentLoaded", () => {
+      configureLockScreen();
+
+      document.getElementById("lockBtn").addEventListener("click", () => {
+        const pinInput = document.getElementById("lockPinInput").value.trim();
+        const errorEl = document.getElementById("lockError");
+        errorEl.textContent = "";
+
+        if (!existingPin) {
+          const pinConfirm = document
+            .getElementById("lockPinConfirm")
+            .value.trim();
+          if (pinInput.length < 4 || pinInput.length > 8 || !/^\d+$/.test(pinInput)) {
+            errorEl.textContent =
+              "Please choose a 4–8 digit numeric PIN.";
+            return;
+          }
+          if (pinInput !== pinConfirm) {
+            errorEl.textContent = "PIN and confirmation do not match.";
+            return;
+          }
+          localStorage.setItem(PIN_KEY, pinInput);
+          existingPin = pinInput;
+          unlockApp();
+        } else {
+          if (pinInput === existingPin) {
+            unlockApp();
+          } else {
+            errorEl.textContent = "Incorrect PIN. Try again.";
+          }
+        }
       });
     });
   </script>
