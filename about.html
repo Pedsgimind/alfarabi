@@ -22,6 +22,9 @@
         <li><a href="conditions.html">Conditions</a></li>
         <li><a href="education.html">Education</a></li>
         <li><a href="contact.html">Contact</a></li>
+     <li class="lang-switcher">
+      <div id="google_translate_element"></div>
+    </li>   
       </ul>
     </nav>
   </div>
@@ -149,6 +152,21 @@
     <span>💬</span> WhatsApp
   </a>
 </div>
-
+<script type="text/javascript">
+  function googleTranslateElementInit() {
+    new google.translate.TranslateElement(
+      {
+        pageLanguage: 'en',
+        layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+        // If later you want to limit languages:
+        // includedLanguages: 'en,ar,fr,es'
+      },
+      'google_translate_element'
+    );
+  }
+</script>
+<script type="text/javascript"
+        src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit">
+</script>
 </body>
 </html>
