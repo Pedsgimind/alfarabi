@@ -68,39 +68,9 @@ nav a.active {
 
 /* Hero section */
 .hero {
-  background: #0073e6;          /* keep your blue hero background */
-  padding: 80px 20px 60px;
-  text-align: center;
-}
-
-.hero-inner {
-  max-width: 1100px;
-  margin: 0 auto;
-}
-
-.hero-title {
-  font-size: 2.4rem;
-  line-height: 1.2;
-  font-weight: 700;
-  color: #ffffff;
-  margin-bottom: 24px;
-}
-
-.hero-main-image {
-  width: 100%;                  /* stretch horizontally to fit container */
-  max-width: 1000px;            /* stops it getting TOO huge on big screens */
-  height: auto;                 /* keeps proportions, no distortion */
-  border-radius: 24px;
-  display: block;
-  margin: 0 auto 24px;
-}
-
-.hero-description {
-  font-size: 1.05rem;
-  line-height: 1.7;
-  color: #ffffff;
-  max-width: 900px;
-  margin: 0 auto 24px;
+  background: linear-gradient(135deg, #0f3c68, #1e88e5);
+  color: #fff;
+  padding: 3rem 1.5rem 3.2rem;
 }
 
 .hero-inner {
@@ -380,50 +350,4 @@ body[dir="rtl"] .hero-inner {
   .contact-block {
     grid-template-columns: 1fr;
   }
-}
-.hero {
-  background: #0073e6;
-  padding: 60px 0 40px;       /* even top/bottom, no left/right padding */
-}
-
-.hero-inner {
-  max-width: 1200px;
-  margin: 0 auto;             /* centers everything */
-  padding: 0 20px;            /* equal spacing left and right */
-}
-
-.hero-main-image {
-  width: 100%;
-  max-width: 1100px;
-  display: block;
-  margin: 20px auto;          /* centers the image horizontally */
-  border-radius: 20px;
-}
-/* Language switcher in navbar */
-.lang-switcher {
-  margin-left: 12px;
-}
-
-.lang-switcher #google_translate_element {
-  display: inline-block;
-}
-
-/* Make the Google widget look like a small modern pill button */
-.goog-te-gadget-simple {
-  background-color: #ffffff !important;
-  border-radius: 999px !important;
-  border: none !important;
-  padding: 4px 10px !important;
-  box-shadow: 0 2px 6px rgba(15, 23, 42, 0.12) !important;
-  font-size: 0.8rem !important;
-  font-family: inherit !important;
-}
-
-.goog-te-gadget-simple span {
-  color: #0f172a !important;
-}
-
-/* Optional: hide the tiny globe icon but keep the text + attribution */
-.goog-te-gadget-icon {
-  display: none !important;
 }
