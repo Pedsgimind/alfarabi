@@ -399,3 +399,31 @@ body[dir="rtl"] .hero-inner {
   margin: 20px auto;          /* centers the image horizontally */
   border-radius: 20px;
 }
+/* Language switcher in navbar */
+.lang-switcher {
+  margin-left: 12px;
+}
+
+.lang-switcher #google_translate_element {
+  display: inline-block;
+}
+
+/* Make the Google widget look like a small modern pill button */
+.goog-te-gadget-simple {
+  background-color: #ffffff !important;
+  border-radius: 999px !important;
+  border: none !important;
+  padding: 4px 10px !important;
+  box-shadow: 0 2px 6px rgba(15, 23, 42, 0.12) !important;
+  font-size: 0.8rem !important;
+  font-family: inherit !important;
+}
+
+.goog-te-gadget-simple span {
+  color: #0f172a !important;
+}
+
+/* Optional: hide the tiny globe icon but keep the text + attribution */
+.goog-te-gadget-icon {
+  display: none !important;
+}
