@@ -369,3 +369,12 @@ body[dir="rtl"] .hero-inner {
   margin: 20px auto;          /* centers the image horizontally */
   border-radius: 20px;
 }
+/* === FINAL HERO IMAGE FIX === */
+.hero-image {
+  width: 100%;              /* stretch to full width of hero-inner */
+  max-width: 1100px;        /* matches the hero-inner width */
+  height: auto;
+  border-radius: 0;         /* remove rounding so edges align cleanly */
+  display: block;
+  margin: 0 auto 24px;      /* center image and keep bottom spacing */
+}
