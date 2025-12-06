@@ -1,0 +1,370 @@
+<!-- DOCTORS PAGE START -->
+
+<style>
+  /* هاوشێوەی ستایلی لاپەڕەی دۆکتۆران – بێ گۆرانكاری */
+  .doctors-page {
+    padding: 3rem 1.5rem 4rem;
+    background: #f5f7fb;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  }
+
+  .doctors-layout {
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .doctors-header h1 {
+    font-size: 2.4rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .doctors-header p {
+    max-width: 720px;
+    color: #555;
+    line-height: 1.6;
+  }
+
+  .doctor-filter {
+    margin-top: 1.5rem;
+    margin-bottom: 2rem;
+  }
+
+  .doctor-filter label {
+    font-weight: 600;
+    margin-right: 0.5rem;
+  }
+
+  .doctor-filter select {
+    padding: 0.6rem 0.75rem;
+    border-radius: 999px;
+    border: 1px solid #cbd5e1;
+    min-width: 260px;
+    font-size: 0.95rem;
+    background: #fff;
+  }
+
+  .doctors-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.75rem;
+  }
+
+  .doctor-card {
+    background: #ffffff;
+    border-radius: 18px;
+    padding: 1.6rem 1.8rem;
+    box-shadow: 0 10px 25px rgba(15, 23, 42, 0.08);
+    border: 1px solid #e2e8f0;
+    transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .doctor-card::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at top left, rgba(56, 189, 248, 0.12), transparent 55%);
+    opacity: 0;
+    transition: opacity 0.25s ease;
+    pointer-events: none;
+  }
+
+  .doctor-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 16px 35px rgba(15, 23, 42, 0.14);
+    border-color: #bfdbfe;
+  }
+
+  .doctor-card:hover::before {
+    opacity: 1;
+  }
+
+  .doctor-name {
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin-bottom: 0.25rem;
+    display: flex;
+    align-items: center;
+    gap: 0.45rem;
+  }
+
+  .doctor-name span.emoji {
+    font-size: 1.2rem;
+  }
+
+  .doctor-specialty {
+    font-size: 0.98rem;
+    font-weight: 600;
+    color: #0369a1;
+    margin-bottom: 0.75rem;
+  }
+
+  .doctor-description {
+    font-size: 0.95rem;
+    color: #374151;
+    line-height: 1.6;
+    margin-bottom: 0.75rem;
+  }
+
+  .doctor-services {
+    padding-left: 1.1rem;
+    margin: 0 0 0.9rem 0;
+    font-size: 0.93rem;
+    color: #374151;
+  }
+
+  .doctor-services li {
+    margin-bottom: 0.25rem;
+  }
+
+  .doctor-contact {
+    font-size: 0.92rem;
+    color: #111827;
+    margin-top: 0.5rem;
+    border-top: 1px solid #e5e7eb;
+    padding-top: 0.6rem;
+  }
+
+  .doctor-contact a {
+    color: #0369a1;
+    text-decoration: none;
+  }
+
+  .doctor-contact a:hover {
+    text-decoration: underline;
+  }
+
+  @media (max-width: 640px) {
+    .doctors-page {
+      padding: 2.25rem 1rem 3rem;
+    }
+    .doctors-header h1 {
+      font-size: 1.9rem;
+    }
+  }
+</style>
+
+<section class="doctors-page">
+  <div class="doctors-layout">
+    <header class="doctors-header">
+      <h1>پزیشكانی ناوەند</h1>
+      <p>
+        ناوەندی فەڕابی بۆ نەخۆشییەکانی جێگای هەڵمڕاو و ئۆندۆسکۆپی خاوەن تیمێكە لە
+        پسپۆڕان و كۆنسڵتانە گەشەپێدراوەكان. دەتوانیت ناوی یەكێك لە پزیشكان لە خوارەوە
+        دیاری بكەیت بۆ گواستنەوەی خێرا بۆ پڕۆفایلەكاتیان، یان لاپەرەكە خزمه‌كێشی
+        بخوێنیتەوە بۆ ئاشنا بوون بە هەر دكتۆر، خزمەتگوزارییەكانی و چۆنیەتی پەیوەندیدان.
+      </p>
+
+      <div class="doctor-filter">
+        <label for="doctorSelect">پزیشك هەڵبژێرە:</label>
+        <select id="doctorSelect">
+          <option value="">-- پزیشك هەڵبژێرە --</option>
+          <option value="dr-mohammad-hussein">د. محمد حسین – جێگای هەڵمڕاو بۆ منداڵان</option>
+          <option value="dr-a-khazraji">د. ع. خه‌زر‌اجی – جێگای هەڵمڕاو بۆ گەورەان</option>
+          <option value="dr-nadine-ahmed">د. نادین ئەحمەد – پزیشکی گشتی منداڵان</option>
+          <option value="dr-sardar-saman">د. سەردار سامان – پزیشکی داخلی</option>
+          <option value="dr-wasd-ali">د. وەسد عەلی – نەخۆشییەکانی پوست</option>
+          <option value="dr-sarmed-qaysim">د. سەرمەد قەیسیم – جەرایەتی گشتی</option>
+        </select>
+      </div>
+    </header>
+
+    <div class="doctors-grid">
+      <!-- Dr. Mohammad Hussein -->
+      <article id="dr-mohammad-hussein" class="doctor-card">
+        <h2 class="doctor-name">
+          <span class="emoji">🧒🏻</span>
+          <span>د. محمد حسین</span>
+        </h2>
+        <div class="doctor-specialty">
+          پزیشكی جێگای هەڵمڕاو، كەبد و خواردن بۆ منداڵان
+        </div>
+        <p class="doctor-description">
+          د. حسین تاقیكردنەوە و چاودێری تەواو بۆ منداڵان لە تەمەنە جیاوازەكان، لە نووسینەوە
+          تا گەنجی، بەهۆی نەخۆشییە جێگای هەڵمڕاو، كەبد، خواردن و گەشە دەكات.
+        </p>
+        <ul class="doctor-services">
+          <li>شێلیاك و تر نەخۆشییە سۆی‌ئەمزەییەكان</li>
+          <li>نەخۆشییە ڕه‌وانداریەكانی كۆڵان (كرۆن و وڵسەراتیڤ كۆلایت)</li>
+          <li>ئازاری كرانی ماف، قبز، گەرداوه‌دان و نەخۆشییە كاركردییەكانی كۆڵان</li>
+          <li>كێشەكانی خواردن، نەرخ و گەشە و کێسەکانی به‌غایەتی تەغذیە</li>
+          <li>ئۆندۆسکۆپی تاقیكاری و چارەسەری (منظار بەرز، كۆلۆنۆسکۆپی، لابردنی پۆلیپ، لابردنی جەستەی بیانی)</li>
+        </ul>
+        <div class="doctor-contact">
+          <strong>پەیوەندی:</strong><br>
+          ئیمەیل:
+          <a href="mailto:info@avicennamedical.org">info@avicennamedical.org</a><br>
+          واتساب:
+          <a href="https://wa.me/9647721738755">+964 772-173-8755</a>
+        </div>
+      </article>
+
+      <!-- Dr. A. Khazraji -->
+      <article id="dr-a-khazraji" class="doctor-card">
+        <h2 class="doctor-name">
+          <span class="emoji">🩺</span>
+          <span>د. ع. خه‌زر‌اجی</span>
+        </h2>
+        <div class="doctor-specialty">
+          نەخۆشییەکانی جێگای هەڵمڕاو بۆ گەورەان و ئۆندۆسکۆپی
+        </div>
+        <p class="doctor-description">
+          د. خه‌زر‌اجی چاودێری و چارەسەری بۆ گەورەكان دەكات كە تووشی نەخۆشییە جێگای
+          هەڵمڕاو و كەبدی بوون.
+        </p>
+        <ul class="doctor-services">
+          <li>تاقیكردنەوە و چارەسەری ریفڵوكس، نەخۆشی شڕینی معده‌ و عەسر‌هەڵمڕاو</li>
+          <li>پشكنینی خوێنبه‌ردن لە جێگای هەڵمڕاو، كه‌می خوێن و ئازاری كرانی مافی درێژخایەن</li>
+          <li>كۆلۆنۆسکۆپی بۆ پشكنینی پۆلیپ و شێرپەنجەی كۆڵان و چاودێری لێدوانی</li>
+          <li>تاقیكردنەوە و چارەسەری نەخۆشییە كەبدییەكان، وەكو كەبدی دڵۆپ و هێپا‌تايت ڤیرۆسی</li>
+          <li>ئۆندۆسکۆپی تاقیكاری و چارەسەری (منظار بەرز و كۆلۆنۆسکۆپی)</li>
+        </ul>
+        <div class="doctor-contact">
+          <strong>پەیوەندی:</strong><br>
+          ئیمەیل:
+          <a href="mailto:info@avicennamedical.org">info@avicennamedical.org</a><br>
+          واتساب:
+          <a href="https://wa.me/9647721738755">+964 772-173-8755</a>
+        </div>
+      </article>
+
+      <!-- Dr. Nadine Ahmed -->
+      <article id="dr-nadine-ahmed" class="doctor-card">
+        <h2 class="doctor-name">
+          <span class="emoji">👶🏼</span>
+          <span>د. نادین ئەحمەد</span>
+        </h2>
+        <div class="doctor-specialty">
+          پزیشکی گشتی منداڵان
+        </div>
+        <p class="doctor-description">
+          د. نادین ئەحمەد خزمەتگوزاریی پزیشکی گشتی بۆ منداڵان لە جۆرخەری تەمەنەكان
+          دابین دەكات.
+        </p>
+        <ul class="doctor-services">
+          <li>سەردانی منداڵی تندرست، چاودێری گەشە و قەبارە و ئاژۆڵەكردن</li>
+          <li>تاقیكردنەوە و چارەسەری نەخۆشییە ئاساییەكان و هێرشەكان</li>
+          <li>چاودێری نەخۆشیی درێژخایەن وەكو هەناسەتنگی (ئەسمە) و ئالێرژی</li>
+          <li>كێشەكانی قوتابخانە، ڕەفتار و فێربوون</li>
+          <li>چاودێری پێشوەختە و ڕاوێژكاری خێزانی‌محور</li>
+        </ul>
+        <div class="doctor-contact">
+          <strong>پەیوەندی:</strong><br>
+          ئیمەیل:
+          <a href="mailto:info@avicennamedical.org">info@avicennamedical.org</a><br>
+          واتساب:
+          <a href="https://wa.me/9647721738755">+964 772-173-8755</a>
+        </div>
+      </article>
+
+      <!-- Dr. Sardar Saman -->
+      <article id="dr-sardar-saman" class="doctor-card">
+        <h2 class="doctor-name">
+          <span class="emoji">🫀</span>
+          <span>د. سەردار سامان</span>
+        </h2>
+        <div class="doctor-specialty">
+          پزیشکی داخلی
+        </div>
+        <p class="doctor-description">
+          د. سامان سەرنجی تایبەتی هەیە لە دەستپێكردنی نەخۆشیی درێژخایەن لە گەورەكان.
+        </p>
+        <ul class="doctor-services">
+          <li>ناسین و چاودێری درێژخایەن بۆ شێكرە، برزی فشاری خوێن و نەخۆشی دڵ</li>
+          <li>تاقیكردنەوەی تەواوی پزیشكی بۆ حاڵەتە كۆمپیلكەكان و ڕەوشی زۆر سیستەم</li>
+          <li>سكڕینینگ و چاودێری پێشوەختە و گۆڕانكاری لە فەكترە خەطرناكەكان</li>
+          <li>هاوكاری و هەماهنگكردن لەگەڵ پسپۆڕانی تر كاتێك پێویست بێت</li>
+        </ul>
+        <div class="doctor-contact">
+          <strong>پەیوەندی:</strong><br>
+          ئیمەیل:
+          <a href="mailto:info@avicennamedical.org">info@avicennamedical.org</a><br>
+          واتساب:
+          <a href="https://wa.me/9647721738755">+964 772-173-8755</a>
+        </div>
+      </article>
+
+      <!-- Dr. Wasd Ali -->
+      <article id="dr-wasd-ali" class="doctor-card">
+        <h2 class="doctor-name">
+          <span class="emoji">🌤️</span>
+          <span>د. وەسد عەلی</span>
+        </h2>
+        <div class="doctor-specialty">
+          نەخۆشییەکانی پوست
+        </div>
+        <p class="doctor-description">
+          د. وەسد عەلی تاقیكردنەوە و چارەسەری بۆ زۆر ناوچەیەك لە نەخۆشییەكانی پوست، قژ و
+          ناخن دابین دەكات.
+        </p>
+        <ul class="doctor-services">
+          <li>ئێكزێما، سۆریاسیس، ئەكنه‌ و هەڕەشە درێژخایەن</li>
+          <li>هێرشە پوستییەكان و نەخۆشییە ئالێرژییەكانی پوست</li>
+          <li>سكڕینینگ و چاودێری خال و جەستە پوستییەكان</li>
+          <li>ڕاوێژكردن لەسەر چاودێری پوست، پاراستن لە خۆرهاتن و پێشگیری</li>
+        </ul>
+        <div class="doctor-contact">
+          <strong>پەیوەندی:</strong><br>
+          ئیمەیل:
+          <a href="mailto:info@avicennamedical.org">info@avicennamedical.org</a><br>
+          واتساب:
+          <a href="https://wa.me/9647721738755">+964 772-173-8755</a>
+        </div>
+      </article>
+
+      <!-- Dr. Sarmed Qaysim -->
+      <article id="dr-sarmed-qaysim" class="doctor-card">
+        <h2 class="doctor-name">
+          <span class="emoji">🧵</span>
+          <span>د. سەرمەد قەیسیم</span>
+        </h2>
+        <div class="doctor-specialty">
+          جەرایەتی گشتی
+        </div>
+        <p class="doctor-description">
+          د. قەیسیم تاقیكردنەوە و چارەسەری جەرایەتی بۆ زۆرتر حاڵەتە گشتیەكانی جەرایەتی
+          دابین دەكات.
+        </p>
+        <ul class="doctor-services">
+          <li>جەرایەتی كێسەكەی كەبد، فتووق و دیوارە شكەم</li>
+          <li>چاودێری حاڵەتە فەڕمییە جەرایەتییەكان</li>
+          <li>تاقیكردنەوەی پێش جەرایەت و چاودێری دوای جەرایەت</li>
+          <li>چاودێری هاوبەش لەگەڵ تیمی جێگای هەڵمڕاو و پسپۆڕانی تر</li>
+        </ul>
+        <div class="doctor-contact">
+          <strong>پەیوەندی:</strong><br>
+          ئیمەیل:
+          <a href="mailto:info@avicennamedical.org">info@avicennamedical.org</a><br>
+          واتساب:
+          <a href="https://wa.me/9647721738755">+964 772-173-8755</a>
+        </div>
+      </article>
+    </div>
+
+    <p style="margin-top: 2rem; font-size: 0.95rem; color:#4b5563;">
+      لەگەڵ فراوانبوونی خزمەتگوزاریی ناوەندی فەڕابی، پسپۆڕ و كۆنسڵتانە نوێیەكان و
+      زانیاری زیاتر لەسەر پڕۆفایلەكانی پزیشكان زیاددەكرێن. بۆ وەرگرتنی نوێترین
+      زانیاری لەسەر هەبوونی پزیشكان و كاتەكانی كلینیک، تكایە ڕاستەوخۆ پەیوەندیمان
+      پێوەبكە.
+    </p>
+  </div>
+</section>
+
+<script>
+  // گواستنەوە بۆ پڕۆفایلی پزیشك پێیەوە لە كاتی هەڵبژاردن
+  (function () {
+    var select = document.getElementById('doctorSelect');
+    if (!select) return;
+    select.addEventListener('change', function () {
+      var targetId = this.value;
+      if (!targetId) return;
+      var el = document.getElementById(targetId);
+      if (el) {
+        el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    });
+  })();
+</script>
+
+<!-- DOCTORS PAGE END -->
