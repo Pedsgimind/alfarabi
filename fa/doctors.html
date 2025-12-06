@@ -1,0 +1,369 @@
+<!-- DOCTORS PAGE START -->
+
+<style>
+  /* همان استایل صفحه پزشکان – بدون تغییر ساختاری */
+  .doctors-page {
+    padding: 3rem 1.5rem 4rem;
+    background: #f5f7fb;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  }
+
+  .doctors-layout {
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .doctors-header h1 {
+    font-size: 2.4rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .doctors-header p {
+    max-width: 720px;
+    color: #555;
+    line-height: 1.6;
+  }
+
+  .doctor-filter {
+    margin-top: 1.5rem;
+    margin-bottom: 2rem;
+  }
+
+  .doctor-filter label {
+    font-weight: 600;
+    margin-right: 0.5rem;
+  }
+
+  .doctor-filter select {
+    padding: 0.6rem 0.75rem;
+    border-radius: 999px;
+    border: 1px solid #cbd5e1;
+    min-width: 260px;
+    font-size: 0.95rem;
+    background: #fff;
+  }
+
+  .doctors-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.75rem;
+  }
+
+  .doctor-card {
+    background: #ffffff;
+    border-radius: 18px;
+    padding: 1.6rem 1.8rem;
+    box-shadow: 0 10px 25px rgba(15, 23, 42, 0.08);
+    border: 1px solid #e2e8f0;
+    transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .doctor-card::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at top left, rgba(56, 189, 248, 0.12), transparent 55%);
+    opacity: 0;
+    transition: opacity 0.25s ease;
+    pointer-events: none;
+  }
+
+  .doctor-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 16px 35px rgba(15, 23, 42, 0.14);
+    border-color: #bfdbfe;
+  }
+
+  .doctor-card:hover::before {
+    opacity: 1;
+  }
+
+  .doctor-name {
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin-bottom: 0.25rem;
+    display: flex;
+    align-items: center;
+    gap: 0.45rem;
+  }
+
+  .doctor-name span.emoji {
+    font-size: 1.2rem;
+  }
+
+  .doctor-specialty {
+    font-size: 0.98rem;
+    font-weight: 600;
+    color: #0369a1;
+    margin-bottom: 0.75rem;
+  }
+
+  .doctor-description {
+    font-size: 0.95rem;
+    color: #374151;
+    line-height: 1.6;
+    margin-bottom: 0.75rem;
+  }
+
+  .doctor-services {
+    padding-left: 1.1rem;
+    margin: 0 0 0.9rem 0;
+    font-size: 0.93rem;
+    color: #374151;
+  }
+
+  .doctor-services li {
+    margin-bottom: 0.25rem;
+  }
+
+  .doctor-contact {
+    font-size: 0.92rem;
+    color: #111827;
+    margin-top: 0.5rem;
+    border-top: 1px solid #e5e7eb;
+    padding-top: 0.6rem;
+  }
+
+  .doctor-contact a {
+    color: #0369a1;
+    text-decoration: none;
+  }
+
+  .doctor-contact a:hover {
+    text-decoration: underline;
+  }
+
+  @media (max-width: 640px) {
+    .doctors-page {
+      padding: 2.25rem 1rem 3rem;
+    }
+    .doctors-header h1 {
+      font-size: 1.9rem;
+    }
+  }
+</style>
+
+<section class="doctors-page">
+  <div class="doctors-layout">
+    <header class="doctors-header">
+      <h1>پزشکان ما</h1>
+      <p>
+        مرکز گوارش و آندوسکوپی الفارابی میزبان تیمی در حال گسترش از متخصصان و مشاوران
+        است. می‌توانید از فهرست زیر نام پزشک مورد نظر را انتخاب کنید تا مستقیماً به
+        پروفایل او بروید، یا با اسکرول، توضیحات مربوط به هر پزشک، خدمات ارائه‌شده و
+        اطلاعات تماس را مطالعه کنید.
+      </p>
+
+      <div class="doctor-filter">
+        <label for="doctorSelect">انتخاب پزشک:</label>
+        <select id="doctorSelect">
+          <option value="">-- یک پزشک را انتخاب کنید --</option>
+          <option value="dr-mohammad-hussein">دکتر محمد حسین – گوارش کودکان</option>
+          <option value="dr-a-khazraji">دکتر ع. خزرجی – گوارش بزرگسالان</option>
+          <option value="dr-nadine-ahmed">دکتر نادین احمد – اطفال عمومی</option>
+          <option value="dr-sardar-saman">دکتر سردار سامان – طب داخلی</option>
+          <option value="dr-wasd-ali">دکتر وسد علی – پوست</option>
+          <option value="dr-sarmed-qaysim">دکتر سرمد قیسیم – جراحی عمومی</option>
+        </select>
+      </div>
+    </header>
+
+    <div class="doctors-grid">
+      <!-- Dr. Mohammad Hussein -->
+      <article id="dr-mohammad-hussein" class="doctor-card">
+        <h2 class="doctor-name">
+          <span class="emoji">🧒🏻</span>
+          <span>دکتر محمد حسین</span>
+        </h2>
+        <div class="doctor-specialty">
+          فوق‌تخصص گوارش، کبد و تغذیه کودکان
+        </div>
+        <p class="doctor-description">
+          دکتر حسین ارزیابی و درمان جامع نوزادان، کودکان و نوجوانان مبتلا به بیماری‌های
+          گوارشی، کبدی، مشکلات تغذیه و اختلال رشد را بر عهده دارد.
+        </p>
+        <ul class="doctor-services">
+          <li>بیماری سلیاک و سایر اختلالات سوءجذب</li>
+          <li>بیماری‌های التهابی روده (کرون و کولیت اولسراتیو)</li>
+          <li>درد شکم مزمن، یبوست، ریفلاکس و اختلالات عملکردی روده</li>
+          <li>مشکلات تغذیه، اختلال رشد و موارد پیچیده تغذیه‌ای</li>
+          <li>آندوسکوپی تشخیصی و درمانی (اندوسکوپی فوقانی، کولونوسکوپی، پولیپکتومی، خارج‌کردن جسم خارجی)</li>
+        </ul>
+        <div class="doctor-contact">
+          <strong>تماس:</strong><br>
+          ایمیل:
+          <a href="mailto:info@avicennamedical.org">info@avicennamedical.org</a><br>
+          واتساپ:
+          <a href="https://wa.me/9647721738755">+964 772-173-8755</a>
+        </div>
+      </article>
+
+      <!-- Dr. A. Khazraji -->
+      <article id="dr-a-khazraji" class="doctor-card">
+        <h2 class="doctor-name">
+          <span class="emoji">🩺</span>
+          <span>دکتر ع. خزرجی</span>
+        </h2>
+        <div class="doctor-specialty">
+          متخصص گوارش بزرگسالان و آندوسکوپی
+        </div>
+        <p class="doctor-description">
+          دکتر خزرجی خدمات تشخیصی و درمانی جامع برای بزرگسالان مبتلا به بیماری‌های
+          گوارشی و کبدی ارائه می‌دهد.
+        </p>
+        <ul class="doctor-services">
+          <li>ارزیابی و مدیریت ریفلاکس، زخم معده و سوءهاضمه</li>
+          <li>بررسی خونریزی گوارشی، کم‌خونی و درد شکم مزمن</li>
+          <li>کولونوسکوپی غربالگری و پیگیری برای پولیپ‌ها و سرطان کولون</li>
+          <li>تشخیص و درمان بیماری‌های کبدی، شامل کبد چرب و هپاتیت ویروسی</li>
+          <li>آندوسکوپی تشخیصی و درمانی (اندوسکوپی فوقانی و کولونوسکوپی)</li>
+        </ul>
+        <div class="doctor-contact">
+          <strong>تماس:</strong><br>
+          ایمیل:
+          <a href="mailto:info@avicennamedical.org">info@avicennamedical.org</a><br>
+          واتساپ:
+          <a href="https://wa.me/9647721738755">+964 772-173-8755</a>
+        </div>
+      </article>
+
+      <!-- Dr. Nadine Ahmed -->
+      <article id="dr-nadine-ahmed" class="doctor-card">
+        <h2 class="doctor-name">
+          <span class="emoji">👶🏼</span>
+          <span>دکتر نادین احمد</span>
+        </h2>
+        <div class="doctor-specialty">
+          متخصص اطفال عمومی
+        </div>
+        <p class="doctor-description">
+          دکتر نادین احمد مراقبت کامل اطفال عمومی را برای نوزادان، کودکان و نوجوانان
+          ارائه می‌کند.
+        </p>
+        <ul class="doctor-services">
+          <li>ویزیت اطفال سالم، پایش رشد و تکامل و واکسیناسیون</li>
+          <li>ارزیابی و درمان بیماری‌ها و عفونت‌های شایع کودکی</li>
+          <li>پیگیری بیماری‌های مزمن مانند آسم و آلرژی</li>
+          <li>رسیدگی به مسائل مدرسه، رفتار و یادگیری</li>
+          <li>مراقبت پیشگیرانه و مشاوره خانواده‌محور</li>
+        </ul>
+        <div class="doctor-contact">
+          <strong>تماس:</strong><br>
+          ایمیل:
+          <a href="mailto:info@avicennamedical.org">info@avicennamedical.org</a><br>
+          واتساپ:
+          <a href="https://wa.me/9647721738755">+964 772-173-8755</a>
+        </div>
+      </article>
+
+      <!-- Dr. Sardar Saman -->
+      <article id="dr-sardar-saman" class="doctor-card">
+        <h2 class="doctor-name">
+          <span class="emoji">🫀</span>
+          <span>دکتر سردار سامان</span>
+        </h2>
+        <div class="doctor-specialty">
+          متخصص طب داخلی
+        </div>
+        <p class="doctor-description">
+          دکتر سامان بر طب داخلی بزرگسالان و مدیریت بیماری‌های مزمن تمرکز دارد.
+        </p>
+        <ul class="doctor-services">
+          <li>تشخیص و پیگیری دیابت، فشار خون بالا و بیماری‌های قلبی</li>
+          <li>ارزیابی جامع برای شرایط پیچیده و چندسیستمی</li>
+          <li>غربالگری پیشگیرانه و مدیریت عوامل خطر</li>
+          <li>هماهنگی مراقبت با فوق‌تخصص‌های دیگر در صورت نیاز</li>
+        </ul>
+        <div class="doctor-contact">
+          <strong>تماس:</strong><br>
+          ایمیل:
+          <a href="mailto:info@avicennamedical.org">info@avicennamedical.org</a><br>
+          واتساپ:
+          <a href="https://wa.me/9647721738755">+964 772-173-8755</a>
+        </div>
+      </article>
+
+      <!-- Dr. Wasd Ali -->
+      <article id="dr-wasd-ali" class="doctor-card">
+        <h2 class="doctor-name">
+          <span class="emoji">🌤️</span>
+          <span>دکتر وسد علی</span>
+        </h2>
+        <div class="doctor-specialty">
+          متخصص پوست
+        </div>
+        <p class="doctor-description">
+          دکتر وسد علی طیف گسترده‌ای از بیماری‌های پوست، مو و ناخن را ارزیابی و درمان
+          می‌کند.
+        </p>
+        <ul class="doctor-services">
+          <li>اگزما، پسوریازیس، آکنه و ضایعات پوستی مزمن</li>
+          <li>عفونت‌های پوستی و بیماری‌های آلرژیک پوست</li>
+          <li>غربالگری و پیگیری خال‌ها و ضایعات پوستی مشکوک</li>
+          <li>مشاوره در مورد مراقبت از پوست، محافظت در برابر آفتاب و پیشگیری</li>
+        </ul>
+        <div class="doctor-contact">
+          <strong>تماس:</strong><br>
+          ایمیل:
+          <a href="mailto:info@avicennamedical.org">info@avicennamedical.org</a><br>
+          واتساپ:
+          <a href="https://wa.me/9647721738755">+964 772-173-8755</a>
+        </div>
+      </article>
+
+      <!-- Dr. Sarmed Qaysim -->
+      <article id="dr-sarmed-qaysim" class="doctor-card">
+        <h2 class="doctor-name">
+          <span class="emoji">🧵</span>
+          <span>دکتر سرمد قیسیم</span>
+        </h2>
+        <div class="doctor-specialty">
+          متخصص جراحی عمومی
+        </div>
+        <p class="doctor-description">
+          دکتر قیسیم ارزیابی و مدیریت جراحی برای بسیاری از شرایط شایع جراحی عمومی
+          را انجام می‌دهد.
+        </p>
+        <ul class="doctor-services">
+          <li>جراحی کیسه صفرا، فتق‌ها و دیواره شکم</li>
+          <li>مدیریت موارد اورژانسی جراحی</li>
+          <li>ارزیابی پیش از عمل و پیگیری پس از عمل</li>
+          <li>مراقبت هماهنگ جراحی با تیم گوارش و سایر تخصص‌ها</li>
+        </ul>
+        <div class="doctor-contact">
+          <strong>تماس:</strong><br>
+          ایمیل:
+          <a href="mailto:info@avicennamedical.org">info@avicennamedical.org</a><br>
+          واتساپ:
+          <a href="https://wa.me/9647721738755">+964 772-173-8755</a>
+        </div>
+      </article>
+    </div>
+
+    <p style="margin-top: 2rem; font-size: 0.95rem; color:#4b5563;">
+      با گسترش خدمات مرکز الفارابی، پزشکان و مشاوران جدید و پروفایل‌های تکمیلی به
+      این صفحه افزوده خواهد شد. برای دریافت به‌روزترین اطلاعات درباره پزشکان و
+      ساعات کلینیک، لطفاً مستقیماً با مرکز تماس بگیرید.
+    </p>
+  </div>
+</section>
+
+<script>
+  // اسکرول به پروفایل پزشک هنگام انتخاب از فهرست
+  (function () {
+    var select = document.getElementById('doctorSelect');
+    if (!select) return;
+    select.addEventListener('change', function () {
+      var targetId = this.value;
+      if (!targetId) return;
+      var el = document.getElementById(targetId);
+      if (el) {
+        el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    });
+  })();
+</script>
+
+<!-- DOCTORS PAGE END -->
