@@ -1,122 +1,239 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Conditions We Treat | Al Farabi Center</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Conditions We See | Al Farabi Gastroenterology &amp; Endoscopy Centre</title>
+  <link rel="stylesheet" href="styles.css" />
+
+  <style>
+    .af-main {
+      background: #f5f7fb;
+    }
+
+    .conditions-hero {
+      padding: 3rem 0 1.8rem;
+    }
+
+    .conditions-hero-inner {
+      background: #ffffff;
+      border-radius: 18px;
+      padding: 2.4rem 2.5rem 2rem;
+      box-shadow: 0 18px 40px rgba(15, 23, 42, 0.08);
+    }
+
+    .conditions-hero h1 {
+      font-size: 2.05rem;
+      margin-bottom: 0.7rem;
+    }
+
+    .conditions-hero p {
+      max-width: 780px;
+      color: #4b5563;
+      line-height: 1.7;
+    }
+
+    .conditions-grid-section {
+      padding: 0 0 3.5rem;
+    }
+
+    .conditions-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 1.5rem 1.8rem;
+    }
+
+    .condition-card {
+      background: #ffffff;
+      border-radius: 16px;
+      padding: 1.7rem 1.6rem 1.5rem;
+      box-shadow: 0 14px 32px rgba(15, 23, 42, 0.06);
+      border: 1px solid #e5e7eb;
+    }
+
+    .condition-card h3 {
+      font-size: 1.15rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .condition-card p {
+      font-size: 0.95rem;
+      color: #374151;
+      line-height: 1.6;
+      margin-bottom: 0.5rem;
+    }
+
+    .condition-card ul {
+      font-size: 0.93rem;
+      color: #374151;
+      line-height: 1.6;
+      margin-left: 1.1rem;
+      list-style: disc;
+    }
+
+    .conditions-note {
+      margin-top: 2rem;
+      font-size: 0.94rem;
+      color: #4b5563;
+    }
+
+    @media (max-width: 900px) {
+      .conditions-grid {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    @media (max-width: 640px) {
+      .conditions-hero {
+        padding-top: 2.3rem;
+      }
+      .conditions-hero-inner {
+        padding-inline: 1.5rem;
+        border-radius: 0;
+        box-shadow: none;
+      }
+      .conditions-grid-section {
+        padding-bottom: 2.5rem;
+      }
+    }
+  </style>
 </head>
-<body>
-<header>
-  <div class="header-inner">
-    <div class="logo-area">
-      <h1>Al Farabi Gastroenterology &amp; Endoscopy Center</h1>
-      <p>Multi-Specialty Digestive &amp; Pediatric Clinic – Diyala Health Ministry, Iraq</p>
-    </div>
-    <nav>
-      <ul>
-        <li><a href="index.html">Home</a></li>
-        <li><a href="about.html">About</a></li>
-        <li><a href="services.html">Services</a></li>
-        <li><a href="doctors.html">Doctors</a></li>
-        <li><a href="conditions.html" class="active">Conditions</a></li>
-        <li><a href="education.html">Education</a></li>
-        <li><a href="contact.html">Contact</a></li>
+
+<body class="af-page">
+  <!-- HEADER -->
+  <header class="af-header">
+    <div class="af-container af-header-inner">
+      <div class="af-brand">
+        <div class="af-logo-circle">
+          <span class="af-logo-icon">胃</span>
+        </div>
+        <div class="af-brand-text">
+          <span class="af-brand-top">Avicenna Medical Inc.</span>
+          <span class="af-brand-main">Al Farabi Gastroenterology &amp; Endoscopy Centre</span>
+        </div>
+      </div>
+
+      <nav class="af-nav">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="services.html">Services</a>
+        <a href="doctors.html">Doctors</a>
+        <a href="conditions.html" class="active">Conditions</a>
+        <a href="education.html">Education</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+
+      <ul class="af-lang-switch">
+        <li><a href="index.html">EN</a></li>
+        <li><a href="ar/index.html">عربي</a></li>
+        <li><a href="ku/index.html">کوردی</a></li>
       </ul>
-    </nav>
-  </div>
-</header>
-
-<section class="section">
-  <div class="container">
-    <h2>Conditions We Commonly See</h2>
-    <p class="lead">
-      The list below includes many of the adult and pediatric conditions evaluated at Al Farabi Center.
-      It is not complete; if you are unsure whether we can help, please contact us.
-    </p>
-
-    <div class="cards">
-      <div class="card">
-        <h3>Pediatric Gastroenterology</h3>
-        <ul class="checklist">
-          <li>Abdominal pain, vomiting &amp; reflux</li>
-          <li>Constipation, stool withholding &amp; encopresis</li>
-          <li>Chronic diarrhea &amp; malabsorption</li>
-          <li>Celiac disease</li>
-          <li>Inflammatory bowel disease (IBD)</li>
-          <li>Chronic liver disease in children</li>
-          <li>Feeding difficulties &amp; poor weight gain</li>
-        </ul>
-      </div>
-
-      <div class="card">
-        <h3>Adult Gastroenterology</h3>
-        <ul class="checklist">
-          <li>Gastroesophageal reflux disease (GERD)</li>
-          <li>Peptic ulcer disease &amp; H. pylori</li>
-          <li>IBD (Crohn’s disease &amp; ulcerative colitis)</li>
-          <li>Chronic diarrhea, constipation &amp; IBS</li>
-          <li>Chronic hepatitis &amp; fatty liver disease</li>
-          <li>Rectal bleeding, hemorrhoids &amp; polyps</li>
-        </ul>
-      </div>
-
-      <div class="card">
-        <h3>General Pediatrics</h3>
-        <ul class="checklist">
-          <li>Fever, infections &amp; respiratory illnesses</li>
-          <li>Newborn and infant follow-up</li>
-          <li>Allergy symptoms &amp; skin rashes</li>
-          <li>Growth and development concerns</li>
-        </ul>
-      </div>
-
-      <div class="card">
-        <h3>General Surgery</h3>
-        <ul class="checklist">
-          <li>Hernias</li>
-          <li>Appendicitis evaluation</li>
-          <li>Skin lumps, cysts &amp; minor procedures</li>
-        </ul>
-      </div>
-
-      <div class="card">
-        <h3>Dermatology</h3>
-        <ul class="checklist">
-          <li>Eczema, psoriasis and dermatitis</li>
-          <li>Acne and acne scarring</li>
-          <li>Hair and nail problems</li>
-          <li>Skin infections and allergies</li>
-        </ul>
-      </div>
-
-      <div class="card">
-        <h3>Internal Medicine</h3>
-        <ul class="checklist">
-          <li>Diabetes &amp; hypertension</li>
-          <li>Chronic cardiac and respiratory conditions</li>
-          <li>General adult medical problems</li>
-        </ul>
-      </div>
     </div>
-  </div>
-</section>
+  </header>
 
-<footer>
-  <div class="container">
-    <div>© <span id="year"></span>  Avicenna Medical Inc., Headquarter Office, Baghdad, Iraq.  All rights reserved.</div>
-    <div>For emergencies, please use local emergency services or the nearest hospital.</div>
-  </div>
-  <script>
-    document.getElementById("year").textContent = new Date().getFullYear();
-  </script>
-</footer>
+  <main class="af-main">
+    <!-- HERO -->
+    <section class="af-section conditions-hero">
+      <div class="af-container">
+        <div class="conditions-hero-inner">
+          <h1>Conditions we commonly see</h1>
+          <p>
+            The list below summarises many of the digestive, liver, pancreatic, and nutrition problems evaluated
+            at Al Farabi Centre. It is not exhaustive. If you or your child have symptoms that may be related to
+            the digestive system, please contact the clinic for triage.
+          </p>
+        </div>
+      </div>
+    </section>
 
-<div class="floating-whatsapp">
-  <a href="https://wa.me/9647721738755" target="_blank">
-    <span>💬</span> WhatsApp
-  </a>
-</div>
+    <!-- GRID -->
+    <section class="af-section conditions-grid-section">
+      <div class="af-container">
+        <div class="conditions-grid">
+          <article class="condition-card">
+            <h3>Esophagus &amp; stomach</h3>
+            <p>Upper gastrointestinal symptoms in adults and children.</p>
+            <ul>
+              <li>Gastroesophageal reflux disease (GERD) and heartburn.</li>
+              <li>Difficulty swallowing, food sticking, or chest pain.</li>
+              <li>Peptic ulcer disease and H. pylori infection.</li>
+              <li>Unexplained vomiting, early satiety, or weight loss.</li>
+            </ul>
+          </article>
 
+          <article class="condition-card">
+            <h3>Small bowel &amp; colon</h3>
+            <p>Chronic abdominal symptoms and bowel habit changes.</p>
+            <ul>
+              <li>Chronic abdominal pain and bloating.</li>
+              <li>Constipation, diarrhoea, or alternating bowel habits.</li>
+              <li>Inflammatory bowel disease (Crohn’s disease and ulcerative colitis).</li>
+              <li>Irritable bowel syndrome and functional bowel disorders.</li>
+            </ul>
+          </article>
+
+          <article class="condition-card">
+            <h3>Liver, pancreas &amp; biliary tree</h3>
+            <p>Evaluation of abnormal liver tests and hepatobiliary symptoms.</p>
+            <ul>
+              <li>Fatty liver disease and metabolic-associated steatotic liver disease.</li>
+              <li>Viral hepatitis and autoimmune liver disease.</li>
+              <li>Jaundice, cholestasis, and biliary colic.</li>
+              <li>Pancreatitis and suspected pancreatic disorders.</li>
+            </ul>
+          </article>
+
+          <article class="condition-card">
+            <h3>Nutrition &amp; growth</h3>
+            <p>Feeding, weight, and micronutrient issues in children and adults.</p>
+            <ul>
+              <li>Celiac disease, malabsorption, and chronic diarrhoea.</li>
+              <li>Feeding difficulties, oral aversion, and selective eating.</li>
+              <li>Under-nutrition, faltering growth, and obesity.</li>
+              <li>Vitamin and mineral deficiencies related to GI disease.</li>
+            </ul>
+          </article>
+
+          <article class="condition-card">
+            <h3>Bleeding, anaemia &amp; screening</h3>
+            <p>Endoscopic and non-invasive evaluation.</p>
+            <ul>
+              <li>Iron deficiency anaemia of unclear cause.</li>
+              <li>Positive stool blood tests.</li>
+              <li>Black, red, or maroon stools.</li>
+              <li>Screening and surveillance for colorectal polyps and cancer.</li>
+            </ul>
+          </article>
+
+          <article class="condition-card">
+            <h3>Other symptoms</h3>
+            <p>Multi-system or non-specific complaints where GI evaluation is helpful.</p>
+            <ul>
+              <li>Recurrent nausea, vomiting, or poor appetite.</li>
+              <li>Unexplained weight loss or failure to thrive.</li>
+              <li>Systemic diseases with GI manifestations.</li>
+              <li>Abnormal imaging or lab results requiring specialist review.</li>
+            </ul>
+          </article>
+        </div>
+
+        <p class="conditions-note">
+          This information is for general guidance only and is not a substitute for a medical assessment.
+          Emergency symptoms such as severe pain, vomiting blood, black stools, or signs of shock
+          should be assessed urgently in the nearest emergency department.
+        </p>
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="af-footer">
+    <div class="af-container">
+      <p>&copy; 2025 Avicenna Medical Inc., Headquarter Office, Baghdad, Iraq. All rights reserved.</p>
+      <p class="af-footer-meta">
+        Avicenna Medical Inc. proudly launching Al Farabi Gastroenterology &amp; Endoscopy Centre.
+      </p>
+    </div>
+  </footer>
 </body>
 </html>
