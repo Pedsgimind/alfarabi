@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Education &amp; Resources | Al Farabi Gastroenterology &amp; Endoscopy Centre</title>
+  <title>Education | Al Farabi Gastroenterology &amp; Endoscopy Centre</title>
   <link rel="stylesheet" href="styles.css" />
 
   <style>
@@ -18,12 +18,12 @@
     .edu-hero-inner {
       background: #ffffff;
       border-radius: 18px;
-      padding: 2.4rem 2.5rem 2rem;
+      padding: 2.5rem 2.5rem 2rem;
       box-shadow: 0 18px 40px rgba(15, 23, 42, 0.08);
     }
 
     .edu-hero h1 {
-      font-size: 2.05rem;
+      font-size: 2.1rem;
       margin-bottom: 0.7rem;
     }
 
@@ -33,48 +33,61 @@
       line-height: 1.7;
     }
 
-    .edu-grid-section {
+    .edu-section {
       padding: 0 0 3.5rem;
     }
 
-    .edu-grid {
+    .edu-groups {
       display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 1.5rem 1.5rem;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 2rem 2.5rem;
     }
 
-    .edu-card {
+    .edu-group {
       background: #ffffff;
       border-radius: 16px;
-      padding: 1.5rem 1.5rem 1.4rem;
+      padding: 1.8rem 1.7rem 1.5rem;
       box-shadow: 0 14px 32px rgba(15, 23, 42, 0.06);
       border: 1px solid #e5e7eb;
     }
 
-    .edu-card h3 {
-      font-size: 1.1rem;
+    .edu-group h2 {
+      font-size: 1.25rem;
       margin-bottom: 0.4rem;
+      display: flex;
+      align-items: center;
+      gap: 0.45rem;
     }
 
-    .edu-card p {
+    .edu-group-icon {
+      font-size: 1.25rem;
+    }
+
+    .edu-group p {
       font-size: 0.95rem;
       color: #374151;
       line-height: 1.6;
       margin-bottom: 0.7rem;
     }
 
-    .edu-tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.35rem;
+    .edu-list {
+      list-style: none;
+      margin: 0;
+      padding: 0;
     }
 
-    .edu-tag {
-      font-size: 0.78rem;
-      padding: 0.2rem 0.55rem;
-      border-radius: 999px;
-      background: #eff6ff;
+    .edu-list li {
+      margin-bottom: 0.4rem;
+    }
+
+    .edu-list a {
+      font-size: 0.95rem;
       color: #1d4ed8;
+      text-decoration: none;
+    }
+
+    .edu-list a:hover {
+      text-decoration: underline;
     }
 
     .edu-note {
@@ -83,9 +96,9 @@
       color: #4b5563;
     }
 
-    @media (max-width: 960px) {
-      .edu-grid {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
+    @media (max-width: 900px) {
+      .edu-groups {
+        grid-template-columns: minmax(0, 1fr);
       }
     }
 
@@ -98,10 +111,7 @@
         border-radius: 0;
         box-shadow: none;
       }
-      .edu-grid {
-        grid-template-columns: minmax(0, 1fr);
-      }
-      .edu-grid-section {
+      .edu-section {
         padding-bottom: 2.5rem;
       }
     }
@@ -145,96 +155,118 @@
     <section class="af-section edu-hero">
       <div class="af-container">
         <div class="edu-hero-inner">
-          <h1>Education &amp; patient resources</h1>
+          <h1>Patient &amp; Family Education</h1>
           <p>
-            We are developing a library of handouts and videos in English, Arabic, and Kurdish to help families
-            understand common digestive and liver conditions, tests, and treatments. The topics below represent
-            areas that will gradually be expanded into full patient-friendly resources.
+            This page is a one-stop library of patient-friendly information for adults, children,
+            and families. You can explore topics by specialty and download or open clear, easy-to-understand
+            educational resources about digestive, liver, skin, surgical, and general medical conditions.
           </p>
         </div>
       </div>
     </section>
 
-    <!-- GRID -->
-    <section class="af-section edu-grid-section">
+    <!-- EDUCATION GROUPS -->
+    <section class="af-section edu-section">
       <div class="af-container">
-        <div class="edu-grid">
-          <article class="edu-card">
-            <h3>Understanding abdominal pain in children</h3>
-            <p>
-              How to recognise red flags, when to seek urgent care, and what information helps the pediatrician.
-            </p>
-            <div class="edu-tags">
-              <span class="edu-tag">Children</span>
-              <span class="edu-tag">Abdominal pain</span>
-              <span class="edu-tag">When to worry</span>
-            </div>
-          </article>
+        <div class="edu-groups">
 
-          <article class="edu-card">
-            <h3>Constipation &amp; toilet habits</h3>
-            <p>
-              Practical guidance on diet, fluids, toilet routine, and medications such as PEG 3350.
-            </p>
-            <div class="edu-tags">
-              <span class="edu-tag">Children</span>
-              <span class="edu-tag">Constipation</span>
-              <span class="edu-tag">Diet</span>
-            </div>
-          </article>
+          <!-- 1. Pediatric Gastroenterology -->
+          <section class="edu-group" id="peds-gi-edu">
+            <h2><span class="edu-group-icon">👶</span>Pediatric Gastroenterology, Hepatology &amp; Nutrition</h2>
+            <p>Select a topic to open a parent-friendly resource about your child’s condition.</p>
+            <ul class="edu-list">
+              <li><a href="education-resources/peds-constipation.html">Constipation in children</a></li>
+              <li><a href="education-resources/peds-reflux.html">Reflux and heartburn in infants and children</a></li>
+              <li><a href="education-resources/peds-abdominal-pain.html">Chronic or recurrent abdominal pain</a></li>
+              <li><a href="education-resources/peds-celiac-disease.html">Celiac disease</a></li>
+              <li><a href="education-resources/peds-chronic-diarrhea.html">Chronic diarrhea and malabsorption</a></li>
+              <li><a href="education-resources/peds-ibd.html">Inflammatory bowel disease (Crohn’s &amp; ulcerative colitis)</a></li>
+              <li><a href="education-resources/peds-failure-to-thrive.html">Poor weight gain and “failure to thrive”</a></li>
+              <li><a href="education-resources/peds-feeding-difficulty.html">Feeding difficulties and picky eating</a></li>
+              <li><a href="education-resources/peds-eoe.html">Eosinophilic esophagitis and food-related swallowing problems</a></li>
+              <li><a href="education-resources/peds-fatty-liver.html">Fatty liver and obesity-related liver disease in children</a></li>
+            </ul>
+          </section>
 
-          <article class="edu-card">
-            <h3>Celiac disease and gluten-free diet</h3>
-            <p>
-              Overview of diagnosis, blood tests, biopsy, and how to maintain a strict gluten-free diet.
-            </p>
-            <div class="edu-tags">
-              <span class="edu-tag">Celiac</span>
-              <span class="edu-tag">Nutrition</span>
-              <span class="edu-tag">Gluten-free</span>
-            </div>
-          </article>
+          <!-- 2. Adult Gastroenterology -->
+          <section class="edu-group" id="adult-gi-edu">
+            <h2><span class="edu-group-icon">🧑‍⚕️</span>Adult Gastroenterology &amp; Hepatology</h2>
+            <p>Information for adults with digestive and liver conditions.</p>
+            <ul class="edu-list">
+              <li><a href="education-resources/adult-gerd.html">Acid reflux and GERD</a></li>
+              <li><a href="education-resources/adult-peptic-ulcer.html">Peptic ulcer disease and H. pylori</a></li>
+              <li><a href="education-resources/adult-ibs.html">Irritable bowel syndrome (IBS)</a></li>
+              <li><a href="education-resources/adult-ibd.html">Inflammatory bowel disease (Crohn’s &amp; ulcerative colitis)</a></li>
+              <li><a href="education-resources/adult-fatty-liver.html">Fatty liver disease (NAFLD/NASH)</a></li>
+              <li><a href="education-resources/adult-liver-cirrhosis.html">Liver cirrhosis and portal hypertension</a></li>
+              <li><a href="education-resources/adult-hemorrhoids.html">Hemorrhoids and rectal bleeding</a></li>
+              <li><a href="education-resources/adult-gallstones.html">Gallstones and biliary colic</a></li>
+              <li><a href="education-resources/adult-pancreatitis.html">Acute and chronic pancreatitis</a></li>
+              <li><a href="education-resources/adult-colon-cancer-screening.html">Colonoscopy and colorectal cancer screening</a></li>
+            </ul>
+          </section>
 
-          <article class="edu-card">
-            <h3>Preparing for endoscopy or colonoscopy</h3>
-            <p>
-              What to expect before, during, and after the procedure, including fasting and bowel preparation.
-            </p>
-            <div class="edu-tags">
-              <span class="edu-tag">Endoscopy</span>
-              <span class="edu-tag">Colonoscopy</span>
-              <span class="edu-tag">Sedation</span>
-            </div>
-          </article>
+          <!-- 3. General Pediatrics -->
+          <section class="edu-group" id="general-peds-edu">
+            <h2><span class="edu-group-icon">🧸</span>General Pediatrics</h2>
+            <p>Common childhood conditions and general health topics.</p>
+            <ul class="edu-list">
+              <li><a href="education-resources/peds-fever.html">Fever in children: when to worry</a></li>
+              <li><a href="education-resources/peds-common-infections.html">Common infections (cold, flu, ear infections)</a></li>
+              <li><a href="education-resources/peds-asthma.html">Asthma and wheezing</a></li>
+              <li><a href="education-resources/peds-vaccines.html">Vaccines and routine immunizations</a></li>
+              <li><a href="education-resources/peds-growth.html">Growth, weight, and height concerns</a></li>
+              <li><a href="education-resources/peds-headache.html">Headaches in children</a></li>
+              <li><a href="education-resources/peds-sleep.html">Healthy sleep habits</a></li>
+            </ul>
+          </section>
 
-          <article class="edu-card">
-            <h3>Fatty liver and lifestyle change</h3>
-            <p>
-              Key messages on weight, diet, physical activity, and monitoring for adults and adolescents.
-            </p>
-            <div class="edu-tags">
-              <span class="edu-tag">Liver</span>
-              <span class="edu-tag">Metabolic</span>
-              <span class="edu-tag">Lifestyle</span>
-            </div>
-          </article>
+          <!-- 4. Dermatology -->
+          <section class="edu-group" id="derm-edu">
+            <h2><span class="edu-group-icon">🌿</span>Dermatology</h2>
+            <p>Skin, hair, and nail conditions for adults and children.</p>
+            <ul class="edu-list">
+              <li><a href="education-resources/derm-eczema.html">Eczema (atopic dermatitis)</a></li>
+              <li><a href="education-resources/derm-acne.html">Acne</a></li>
+              <li><a href="education-resources/derm-psoriasis.html">Psoriasis</a></li>
+              <li><a href="education-resources/derm-urticaria.html">Hives (urticaria)</a></li>
+              <li><a href="education-resources/derm-fungal-infections.html">Fungal skin infections</a></li>
+              <li><a href="education-resources/derm-hair-loss.html">Hair loss and scalp conditions</a></li>
+            </ul>
+          </section>
 
-          <article class="edu-card">
-            <h3>Inflammatory bowel disease (IBD) basics</h3>
-            <p>
-              Explanation of Crohn’s disease and ulcerative colitis, medication classes, and monitoring.
-            </p>
-            <div class="edu-tags">
-              <span class="edu-tag">Crohn’s</span>
-              <span class="edu-tag">Ulcerative colitis</span>
-              <span class="edu-tag">IBD</span>
-            </div>
-          </article>
+          <!-- 5. Surgery -->
+          <section class="edu-group" id="surgery-edu">
+            <h2><span class="edu-group-icon">🔪</span>General &amp; Gastrointestinal Surgery</h2>
+            <p>Information about common surgical problems and operations.</p>
+            <ul class="edu-list">
+              <li><a href="education-resources/surg-appendicitis.html">Appendicitis</a></li>
+              <li><a href="education-resources/surg-hernia.html">Hernias (inguinal, umbilical, ventral)</a></li>
+              <li><a href="education-resources/surg-gallbladder-surgery.html">Gallbladder removal (cholecystectomy)</a></li>
+              <li><a href="education-resources/surg-anorectal.html">Anal fissures, fistula, and hemorrhoids</a></li>
+              <li><a href="education-resources/surg-preop-postop.html">Preparing for surgery &amp; recovering after surgery</a></li>
+            </ul>
+          </section>
+
+          <!-- 6. Internal Medicine -->
+          <section class="edu-group" id="im-edu">
+            <h2><span class="edu-group-icon">❤️</span>Internal Medicine &amp; Chronic Conditions</h2>
+            <p>General adult health topics linked to digestive and liver health.</p>
+            <ul class="edu-list">
+              <li><a href="education-resources/im-hypertension.html">High blood pressure (hypertension)</a></li>
+              <li><a href="education-resources/im-diabetes.html">Type 2 diabetes</a></li>
+              <li><a href="education-resources/im-cholesterol.html">High cholesterol</a></li>
+              <li><a href="education-resources/im-anemia.html">Anemia and low blood count</a></li>
+              <li><a href="education-resources/im-weight-management.html">Healthy weight and lifestyle changes</a></li>
+              <li><a href="education-resources/im-smoking-cessation.html">Support for quitting smoking</a></li>
+            </ul>
+          </section>
+
         </div>
 
         <p class="edu-note">
-          Printed and translated handouts will be available at the clinic during visits. As our digital
-          education platform grows, links to videos and downloadable PDFs will be added to this page.
+          These resources are for education only and do not replace a medical consultation.
+          If you have urgent symptoms or concerns, please seek medical attention or contact your doctor.
         </p>
       </div>
     </section>
