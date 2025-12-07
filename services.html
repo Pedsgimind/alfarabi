@@ -1,166 +1,237 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Services | Al Farabi Gastroenterology & Endoscopy Center</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Services | Al Farabi Gastroenterology &amp; Endoscopy Centre</title>
+  <link rel="stylesheet" href="styles.css" />
+
+  <style>
+    .af-main {
+      background: #f5f7fb;
+    }
+
+    .services-hero {
+      padding: 3rem 0 1.8rem;
+    }
+
+    .services-hero-inner {
+      background: #ffffff;
+      border-radius: 18px;
+      padding: 2.5rem 2.5rem 2rem;
+      box-shadow: 0 18px 40px rgba(15, 23, 42, 0.08);
+    }
+
+    .services-hero h1 {
+      font-size: 2.1rem;
+      margin-bottom: 0.7rem;
+    }
+
+    .services-hero p {
+      max-width: 760px;
+      color: #4b5563;
+      line-height: 1.7;
+    }
+
+    .services-grid-section {
+      padding: 0 0 3.5rem;
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 1.5rem 1.8rem;
+    }
+
+    .service-card {
+      background: #ffffff;
+      border-radius: 16px;
+      padding: 1.7rem 1.6rem 1.5rem;
+      box-shadow: 0 14px 32px rgba(15, 23, 42, 0.06);
+      border: 1px solid #e5e7eb;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .service-card h3 {
+      font-size: 1.15rem;
+      margin-bottom: 0.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.45rem;
+    }
+
+    .service-icon {
+      font-size: 1.25rem;
+    }
+
+    .service-card p {
+      font-size: 0.95rem;
+      color: #374151;
+      line-height: 1.6;
+      margin-bottom: 0.6rem;
+    }
+
+    .service-card ul {
+      font-size: 0.93rem;
+      color: #374151;
+      line-height: 1.6;
+      margin-left: 1.1rem;
+      list-style: disc;
+    }
+
+    .services-note {
+      margin-top: 2rem;
+      font-size: 0.94rem;
+      color: #4b5563;
+    }
+
+    @media (max-width: 900px) {
+      .services-grid {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    @media (max-width: 640px) {
+      .services-hero {
+        padding-top: 2.3rem;
+      }
+      .services-hero-inner {
+        padding-inline: 1.5rem;
+        border-radius: 0;
+        box-shadow: none;
+      }
+      .services-grid-section {
+        padding-bottom: 2.5rem;
+      }
+    }
+  </style>
 </head>
-<body>
-<header>
-  <div class="header-inner">
-    <div class="logo-area">
-      <h1>Al Farabi Gastroenterology &amp; Endoscopy Center</h1>
-      <p>Multi-Specialty Digestive &amp; Pediatric Clinic – Diyala Health Ministry, Iraq</p>
-    </div>
-    <nav>
-      <ul>
-        <li><a href="index.html">Home</a></li>
-        <li><a href="about.html">About</a></li>
-        <li><a href="services.html" class="active">Services</a></li>
-        <li><a href="doctors.html">Doctors</a></li>
-        <li><a href="conditions.html">Conditions</a></li>
-        <li><a href="education.html">Education</a></li>
-        <li><a href="contact.html">Contact</a></li>
+
+<body class="af-page">
+  <!-- HEADER -->
+  <header class="af-header">
+    <div class="af-container af-header-inner">
+      <div class="af-brand">
+        <div class="af-logo-circle">
+          <span class="af-logo-icon">胃</span>
+        </div>
+        <div class="af-brand-text">
+          <span class="af-brand-top">Avicenna Medical Inc.</span>
+          <span class="af-brand-main">Al Farabi Gastroenterology &amp; Endoscopy Centre</span>
+        </div>
+      </div>
+
+      <nav class="af-nav">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="services.html" class="active">Services</a>
+        <a href="doctors.html">Doctors</a>
+        <a href="conditions.html">Conditions</a>
+        <a href="education.html">Education</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+
+      <ul class="af-lang-switch">
+        <li><a href="index.html">EN</a></li>
+        <li><a href="ar/index.html">عربي</a></li>
+        <li><a href="ku/index.html">کوردی</a></li>
       </ul>
-    </nav>
-  </div>
-</header>
-
-<section class="section">
-  <div class="container">
-    <h2>Clinical Services</h2>
-    <p class="lead">
-      Al Farabi Center offers coordinated care for adults and children with digestive and general
-      medical problems. Services are usually provided by appointment, with some flexibility based
-      on physician schedules.
-    </p>
-
-    <div class="cards">
-      <div class="card">
-        <div class="dept-icon">🧍‍♂️</div>
-        <h3>Adult Gastroenterology &amp; Hepatology</h3>
-        <ul class="inline-list">
-          <li>Evaluation of reflux, abdominal pain, diarrhea, constipation &amp; bleeding</li>
-          <li>Assessment of chronic liver disease and abnormal liver tests</li>
-          <li>Endoscopic diagnosis and treatment where indicated</li>
-        </ul>
-      </div>
-
-      <div class="card">
-        <div class="dept-icon">🧒</div>
-        <h3>Pediatric Gastroenterology</h3>
-        <ul class="inline-list">
-          <li>Abdominal pain, vomiting and reflux in infants &amp; children</li>
-          <li>Constipation, stool withholding and encopresis</li>
-          <li>Chronic diarrhea, blood in stool, weight loss and growth concerns</li>
-          <li>Celiac disease, inflammatory bowel disease and pediatric liver disease</li>
-          <li>Feeding problems, poor weight gain and nutrition issues</li>
-        </ul>
-      </div>
-
-      <div class="card">
-        <div class="dept-icon">👶</div>
-        <h3>General Pediatrics</h3>
-        <ul class="inline-list">
-          <li>General pediatric consultations &amp; follow-up</li>
-          <li>Common infections &amp; respiratory illnesses</li>
-          <li>Growth and development concerns</li>
-        </ul>
-      </div>
-
-      <div class="card">
-        <div class="dept-icon">🩺</div>
-        <h3>Internal Medicine</h3>
-        <ul class="inline-list">
-          <li>Diabetes, hypertension &amp; chronic disease follow-up</li>
-          <li>Cardiac and respiratory symptoms</li>
-          <li>Preventive care &amp; risk factor management</li>
-        </ul>
-      </div>
-
-      <div class="card">
-        <div class="dept-icon">🩻</div>
-        <h3>General Surgery &amp; Dermatology</h3>
-        <ul class="inline-list">
-          <li>Outpatient surgical assessment and follow-up</li>
-          <li>Minor procedures where appropriate</li>
-          <li>Dermatology consultations for common skin diseases</li>
-        </ul>
-      </div>
-
-      <div class="card">
-        <div class="dept-icon">🔍</div>
-        <h3>Endoscopy Suite &amp; Anesthesia</h3>
-        <ul class="inline-list">
-          <li>Upper endoscopy (gastroscopy)</li>
-          <li>Colonoscopy and polyp removal</li>
-          <li>Biopsies for celiac disease, IBD and other conditions</li>
-          <li>Anesthesia support and monitoring</li>
-        </ul>
-      </div>
-
-      <div class="card">
-        <div class="dept-icon">💊</div>
-        <h3>Laboratory &amp; Pharmacy</h3>
-        <ul class="inline-list">
-          <li>On-site clinical laboratory for routine tests</li>
-          <li>On-site pharmacy for common medications</li>
-        </ul>
-      </div>
     </div>
-  </div>
-</section>
+  </header>
 
-<section class="section">
-  <div class="container">
-    <h2>Clinic Hours</h2>
-    <p class="lead">
-      Hours may vary slightly by physician. The schedule below reflects the usual availability.
-    </p>
+  <main class="af-main">
+    <!-- HERO -->
+    <section class="af-section services-hero">
+      <div class="af-container">
+        <div class="services-hero-inner">
+          <h1>Clinic services</h1>
+          <p>
+            Al Farabi Centre provides coordinated adult and pediatric digestive health care,
+            with on-site endoscopy and access to supporting specialties including internal medicine,
+            pediatrics, dermatology, and surgery.
+          </p>
+        </div>
+      </div>
+    </section>
 
-    <div class="cards">
-      <div class="card">
-        <h3>Dermatology, GP, General Surgery &amp; Pediatric Gastroenterology</h3>
-        <p>
-          <strong>Days:</strong> Sunday – Thursday<br>
-          <strong>Clinic Hours:</strong> 09:00 – 15:00
+    <!-- SERVICES GRID -->
+    <section class="af-section services-grid-section">
+      <div class="af-container">
+        <div class="services-grid">
+          <article class="service-card">
+            <h3><span class="service-icon">🧑‍⚕️</span>Adult gastroenterology &amp; hepatology</h3>
+            <p>
+              Evaluation and management of gastrointestinal and liver disorders in adults.
+            </p>
+            <ul>
+              <li>Reflux, peptic ulcer disease, and dyspepsia.</li>
+              <li>Chronic abdominal pain, bloating, and bowel habit changes.</li>
+              <li>Inflammatory bowel disease (IBD) and irritable bowel syndrome (IBS).</li>
+              <li>Liver disease including fatty liver, viral hepatitis, and cirrhosis.</li>
+              <li>Gastrointestinal bleeding and anemia workup.</li>
+            </ul>
+          </article>
+
+          <article class="service-card">
+            <h3><span class="service-icon">👶</span>Pediatric GI, liver &amp; nutrition</h3>
+            <p>
+              Subspecialty care for infants, children, and adolescents with digestive and nutrition concerns.
+            </p>
+            <ul>
+              <li>Celiac disease and malabsorption disorders.</li>
+              <li>Constipation, reflux, and functional abdominal pain.</li>
+              <li>Inflammatory bowel disease in children.</li>
+              <li>Feeding difficulties, growth faltering, and obesity.</li>
+              <li>Chronic liver, pancreatic, and biliary disorders.</li>
+            </ul>
+          </article>
+
+          <article class="service-card">
+            <h3><span class="service-icon">📹</span>Endoscopy &amp; procedures</h3>
+            <p>
+              On-site diagnostic and therapeutic endoscopy performed by trained endoscopists.
+            </p>
+            <ul>
+              <li>Upper endoscopy (EGD) and colonoscopy.</li>
+              <li>Polypectomy, hemostasis, and variceal band ligation.</li>
+              <li>Foreign body removal and esophageal dilatation.</li>
+              <li>Percutaneous endoscopic gastrostomy (PEG) placement and care.</li>
+              <li>Screening and surveillance for colorectal cancer.</li>
+            </ul>
+          </article>
+
+          <article class="service-card">
+            <h3><span class="service-icon">🤝</span>Allied and support services</h3>
+            <p>
+              On-site or closely linked services to support comprehensive gastrointestinal care.
+            </p>
+            <ul>
+              <li>General pediatrics and internal medicine follow-up.</li>
+              <li>Dermatology for skin manifestations of GI and liver disease.</li>
+              <li>General surgery support for gallbladder, hernia, and acute abdomen.</li>
+              <li>On-site pharmacy and laboratory services.</li>
+              <li>Coordination with regional hospitals for advanced imaging and interventions.</li>
+            </ul>
+          </article>
+        </div>
+
+        <p class="services-note">
+          Detailed availability and scheduling for each service may vary.
+          Please contact the clinic or your referring physician for the most up-to-date information.
         </p>
       </div>
+    </section>
+  </main>
 
-      <div class="card">
-        <h3>Laboratory &amp; Pharmacy</h3>
-        <p>
-          <strong>Days:</strong> Sunday – Thursday<br>
-          <strong>Hours:</strong> 08:00 – 21:00
-        </p>
-      </div>
-
-      <div class="card">
-        <h3>Other Physician Clinics (Adult GI, Internal Medicine, etc.)</h3>
-        <p>
-          <strong>Typical Hours:</strong> 16:00 – 21:00, Sunday – Thursday<br>
-          <strong>Note:</strong> Exact timing depends on each physician’s schedule; please confirm when booking.
-        </p>
-      </div>
+  <!-- FOOTER -->
+  <footer class="af-footer">
+    <div class="af-container">
+      <p>&copy; 2025 Avicenna Medical Inc., Headquarter Office, Baghdad, Iraq. All rights reserved.</p>
+      <p class="af-footer-meta">
+        Avicenna Medical Inc. proudly launching Al Farabi Gastroenterology &amp; Endoscopy Centre.
+      </p>
     </div>
-  </div>
-</section>
-
-<footer>
-  <div class="container">
-    <div>© <span id="year"></span>  Avicenna Medical Inc., Headquarter Office, Baghdad, Iraq.  All rights reserved.</div>
-    <div>For emergencies, please use local emergency services or the nearest hospital.</div>
-  </div>
-  <script>
-    document.getElementById("year").textContent = new Date().getFullYear();
-  </script>
-</footer>
-<div class="floating-whatsapp">
-  <a href="https://wa.me/9647721738755" target="_blank">
-    <span>💬</span> WhatsApp
-  </a>
-</div>
-
+  </footer>
 </body>
 </html>
