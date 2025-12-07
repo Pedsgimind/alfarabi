@@ -1,97 +1,253 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Patient Education | Al Farabi Center</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Education &amp; Resources | Al Farabi Gastroenterology &amp; Endoscopy Centre</title>
+  <link rel="stylesheet" href="styles.css" />
+
+  <style>
+    .af-main {
+      background: #f5f7fb;
+    }
+
+    .edu-hero {
+      padding: 3rem 0 1.8rem;
+    }
+
+    .edu-hero-inner {
+      background: #ffffff;
+      border-radius: 18px;
+      padding: 2.4rem 2.5rem 2rem;
+      box-shadow: 0 18px 40px rgba(15, 23, 42, 0.08);
+    }
+
+    .edu-hero h1 {
+      font-size: 2.05rem;
+      margin-bottom: 0.7rem;
+    }
+
+    .edu-hero p {
+      max-width: 780px;
+      color: #4b5563;
+      line-height: 1.7;
+    }
+
+    .edu-grid-section {
+      padding: 0 0 3.5rem;
+    }
+
+    .edu-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1.5rem 1.5rem;
+    }
+
+    .edu-card {
+      background: #ffffff;
+      border-radius: 16px;
+      padding: 1.5rem 1.5rem 1.4rem;
+      box-shadow: 0 14px 32px rgba(15, 23, 42, 0.06);
+      border: 1px solid #e5e7eb;
+    }
+
+    .edu-card h3 {
+      font-size: 1.1rem;
+      margin-bottom: 0.4rem;
+    }
+
+    .edu-card p {
+      font-size: 0.95rem;
+      color: #374151;
+      line-height: 1.6;
+      margin-bottom: 0.7rem;
+    }
+
+    .edu-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.35rem;
+    }
+
+    .edu-tag {
+      font-size: 0.78rem;
+      padding: 0.2rem 0.55rem;
+      border-radius: 999px;
+      background: #eff6ff;
+      color: #1d4ed8;
+    }
+
+    .edu-note {
+      margin-top: 2rem;
+      font-size: 0.94rem;
+      color: #4b5563;
+    }
+
+    @media (max-width: 960px) {
+      .edu-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 640px) {
+      .edu-hero {
+        padding-top: 2.3rem;
+      }
+      .edu-hero-inner {
+        padding-inline: 1.5rem;
+        border-radius: 0;
+        box-shadow: none;
+      }
+      .edu-grid {
+        grid-template-columns: minmax(0, 1fr);
+      }
+      .edu-grid-section {
+        padding-bottom: 2.5rem;
+      }
+    }
+  </style>
 </head>
-<body>
-<header>
-  <div class="header-inner">
-    <div class="logo-area">
-      <h1>Al Farabi Gastroenterology &amp; Endoscopy Center</h1>
-      <p>Multi-Specialty Digestive &amp; Pediatric Clinic – Diyala Health Ministry, Iraq</p>
-    </div>
-    <nav>
-      <ul>
-        <li><a href="index.html">Home</a></li>
-        <li><a href="about.html">About</a></li>
-        <li><a href="services.html">Services</a></li>
-        <li><a href="doctors.html">Doctors</a></li>
-        <li><a href="conditions.html">Conditions</a></li>
-        <li><a href="education.html" class="active">Education</a></li>
-        <li><a href="contact.html">Contact</a></li>
+
+<body class="af-page">
+  <!-- HEADER -->
+  <header class="af-header">
+    <div class="af-container af-header-inner">
+      <div class="af-brand">
+        <div class="af-logo-circle">
+          <span class="af-logo-icon">胃</span>
+        </div>
+        <div class="af-brand-text">
+          <span class="af-brand-top">Avicenna Medical Inc.</span>
+          <span class="af-brand-main">Al Farabi Gastroenterology &amp; Endoscopy Centre</span>
+        </div>
+      </div>
+
+      <nav class="af-nav">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="services.html">Services</a>
+        <a href="doctors.html">Doctors</a>
+        <a href="conditions.html">Conditions</a>
+        <a href="education.html" class="active">Education</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+
+      <ul class="af-lang-switch">
+        <li><a href="index.html">EN</a></li>
+        <li><a href="ar/index.html">عربي</a></li>
+        <li><a href="ku/index.html">کوردی</a></li>
       </ul>
-    </nav>
-  </div>
-</header>
-
-<section class="section">
-  <div class="container">
-    <h2>Patient &amp; Parent Education</h2>
-    <p class="lead">
-      This section will gradually include simple explanations, handouts and videos in Arabic and
-      English to help families understand common digestive and liver conditions.
-    </p>
-
-    <div class="cards">
-      <div class="card">
-        <h3>Celiac Disease in Children</h3>
-        <p>
-          Overview of what celiac disease is, how it can present in children, how it is diagnosed,
-          and the basics of a gluten-free diet.
-        </p>
-      </div>
-
-      <div class="card">
-        <h3>Constipation &amp; Toilet Training</h3>
-        <p>
-          How constipation and stool withholding develop, why laxatives may be needed, and practical
-          strategies for toilet training without punishment.
-        </p>
-      </div>
-
-      <div class="card">
-        <h3>Endoscopy &amp; Colonoscopy</h3>
-        <p>
-          What to expect before, during and after an endoscopy or colonoscopy, including fasting,
-          anesthesia and recovery at home.
-        </p>
-      </div>
-
-      <div class="card">
-        <h3>Nutrition &amp; Healthy Growth</h3>
-        <p>
-          Practical advice on balanced diets for children, dealing with picky eating, and when
-          additional nutrition support or supplements may be needed.
-        </p>
-      </div>
     </div>
+  </header>
 
-    <p style="margin-top:2rem; font-size:0.9rem;">
-      <strong>Important:</strong> Information on this website is for education only and does not
-      replace individualized medical advice. For specific questions about your or your child’s
-      health, please consult your physician or book a clinic appointment.
-    </p>
-  </div>
-</section>
+  <main class="af-main">
+    <!-- HERO -->
+    <section class="af-section edu-hero">
+      <div class="af-container">
+        <div class="edu-hero-inner">
+          <h1>Education &amp; patient resources</h1>
+          <p>
+            We are developing a library of handouts and videos in English, Arabic, and Kurdish to help families
+            understand common digestive and liver conditions, tests, and treatments. The topics below represent
+            areas that will gradually be expanded into full patient-friendly resources.
+          </p>
+        </div>
+      </div>
+    </section>
 
-<footer>
-  <div class="container">
-    <div>© <span id="year"></span>  Avicenna Medical Inc., Headquarter Office, Baghdad, Iraq.  All rights reserved.</div>
-    <div>For emergencies, please use local emergency services or the nearest hospital.</div>
-  </div>
-  <script>
-    document.getElementById("year").textContent = new Date().getFullYear();
-  </script>
-</footer>
+    <!-- GRID -->
+    <section class="af-section edu-grid-section">
+      <div class="af-container">
+        <div class="edu-grid">
+          <article class="edu-card">
+            <h3>Understanding abdominal pain in children</h3>
+            <p>
+              How to recognise red flags, when to seek urgent care, and what information helps the pediatrician.
+            </p>
+            <div class="edu-tags">
+              <span class="edu-tag">Children</span>
+              <span class="edu-tag">Abdominal pain</span>
+              <span class="edu-tag">When to worry</span>
+            </div>
+          </article>
 
-<div class="floating-whatsapp">
-  <a href="https://wa.me/9647721738755" target="_blank">
-    <span>💬</span> WhatsApp
-  </a>
-</div>
+          <article class="edu-card">
+            <h3>Constipation &amp; toilet habits</h3>
+            <p>
+              Practical guidance on diet, fluids, toilet routine, and medications such as PEG 3350.
+            </p>
+            <div class="edu-tags">
+              <span class="edu-tag">Children</span>
+              <span class="edu-tag">Constipation</span>
+              <span class="edu-tag">Diet</span>
+            </div>
+          </article>
 
+          <article class="edu-card">
+            <h3>Celiac disease and gluten-free diet</h3>
+            <p>
+              Overview of diagnosis, blood tests, biopsy, and how to maintain a strict gluten-free diet.
+            </p>
+            <div class="edu-tags">
+              <span class="edu-tag">Celiac</span>
+              <span class="edu-tag">Nutrition</span>
+              <span class="edu-tag">Gluten-free</span>
+            </div>
+          </article>
+
+          <article class="edu-card">
+            <h3>Preparing for endoscopy or colonoscopy</h3>
+            <p>
+              What to expect before, during, and after the procedure, including fasting and bowel preparation.
+            </p>
+            <div class="edu-tags">
+              <span class="edu-tag">Endoscopy</span>
+              <span class="edu-tag">Colonoscopy</span>
+              <span class="edu-tag">Sedation</span>
+            </div>
+          </article>
+
+          <article class="edu-card">
+            <h3>Fatty liver and lifestyle change</h3>
+            <p>
+              Key messages on weight, diet, physical activity, and monitoring for adults and adolescents.
+            </p>
+            <div class="edu-tags">
+              <span class="edu-tag">Liver</span>
+              <span class="edu-tag">Metabolic</span>
+              <span class="edu-tag">Lifestyle</span>
+            </div>
+          </article>
+
+          <article class="edu-card">
+            <h3>Inflammatory bowel disease (IBD) basics</h3>
+            <p>
+              Explanation of Crohn’s disease and ulcerative colitis, medication classes, and monitoring.
+            </p>
+            <div class="edu-tags">
+              <span class="edu-tag">Crohn’s</span>
+              <span class="edu-tag">Ulcerative colitis</span>
+              <span class="edu-tag">IBD</span>
+            </div>
+          </article>
+        </div>
+
+        <p class="edu-note">
+          Printed and translated handouts will be available at the clinic during visits. As our digital
+          education platform grows, links to videos and downloadable PDFs will be added to this page.
+        </p>
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="af-footer">
+    <div class="af-container">
+      <p>&copy; 2025 Avicenna Medical Inc., Headquarter Office, Baghdad, Iraq. All rights reserved.</p>
+      <p class="af-footer-meta">
+        Avicenna Medical Inc. proudly launching Al Farabi Gastroenterology &amp; Endoscopy Centre.
+      </p>
+    </div>
+  </footer>
 </body>
 </html>
