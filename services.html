@@ -37,59 +37,33 @@
       padding: 0 0 3.5rem;
     }
 
-    .services-grid {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 1.5rem 1.8rem;
-    }
-
-    .service-card {
-      background: #ffffff;
-      border-radius: 16px;
-      padding: 1.7rem 1.6rem 1.5rem;
-      box-shadow: 0 14px 32px rgba(15, 23, 42, 0.06);
-      border: 1px solid #e5e7eb;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .service-card h3 {
-      font-size: 1.15rem;
+    /* Optional: spacing and list styling for the new grouped layout */
+    .services-groups h2 {
+      font-size: 1.4rem;
+      margin-top: 1.8rem;
       margin-bottom: 0.5rem;
-      display: flex;
-      align-items: center;
-      gap: 0.45rem;
     }
 
-    .service-icon {
-      font-size: 1.25rem;
-    }
-
-    .service-card p {
+    .services-groups p {
       font-size: 0.95rem;
       color: #374151;
       line-height: 1.6;
-      margin-bottom: 0.6rem;
+      margin-bottom: 0.5rem;
     }
 
-    .service-card ul {
+    .services-groups ul {
       font-size: 0.93rem;
       color: #374151;
       line-height: 1.6;
       margin-left: 1.1rem;
       list-style: disc;
+      margin-bottom: 1rem;
     }
 
     .services-note {
       margin-top: 2rem;
       font-size: 0.94rem;
       color: #4b5563;
-    }
-
-    @media (max-width: 900px) {
-      .services-grid {
-        grid-template-columns: minmax(0, 1fr);
-      }
     }
 
     @media (max-width: 640px) {
@@ -155,71 +129,165 @@
       </div>
     </section>
 
-    <!-- SERVICES GRID -->
+    <!-- GROUPED SERVICES (NEW) -->
     <section class="af-section services-grid-section">
-      <div class="af-container">
-        <div class="services-grid">
-          <article class="service-card">
-            <h3><span class="service-icon">🧑‍⚕️</span>Adult gastroenterology &amp; hepatology</h3>
-            <p>
-              Evaluation and management of gastrointestinal and liver disorders in adults.
-            </p>
-            <ul>
-              <li>Reflux, peptic ulcer disease, and dyspepsia.</li>
-              <li>Chronic abdominal pain, bloating, and bowel habit changes.</li>
-              <li>Inflammatory bowel disease (IBD) and irritable bowel syndrome (IBS).</li>
-              <li>Liver disease including fatty liver, viral hepatitis, and cirrhosis.</li>
-              <li>Gastrointestinal bleeding and anemia workup.</li>
-            </ul>
-          </article>
-
-          <article class="service-card">
-            <h3><span class="service-icon">👶</span>Pediatric GI, liver &amp; nutrition</h3>
-            <p>
-              Subspecialty care for infants, children, and adolescents with digestive and nutrition concerns.
-            </p>
-            <ul>
-              <li>Celiac disease and malabsorption disorders.</li>
-              <li>Constipation, reflux, and functional abdominal pain.</li>
-              <li>Inflammatory bowel disease in children.</li>
-              <li>Feeding difficulties, growth faltering, and obesity.</li>
-              <li>Chronic liver, pancreatic, and biliary disorders.</li>
-            </ul>
-          </article>
-
-          <article class="service-card">
-            <h3><span class="service-icon">📹</span>Endoscopy &amp; procedures</h3>
-            <p>
-              On-site diagnostic and therapeutic endoscopy performed by trained endoscopists.
-            </p>
-            <ul>
-              <li>Upper endoscopy (EGD) and colonoscopy.</li>
-              <li>Polypectomy, hemostasis, and variceal band ligation.</li>
-              <li>Foreign body removal and esophageal dilatation.</li>
-              <li>Percutaneous endoscopic gastrostomy (PEG) placement and care.</li>
-              <li>Screening and surveillance for colorectal cancer.</li>
-            </ul>
-          </article>
-
-          <article class="service-card">
-            <h3><span class="service-icon">🤝</span>Allied and support services</h3>
-            <p>
-              On-site or closely linked services to support comprehensive gastrointestinal care.
-            </p>
-            <ul>
-              <li>General pediatrics and internal medicine follow-up.</li>
-              <li>Dermatology for skin manifestations of GI and liver disease.</li>
-              <li>General surgery support for gallbladder, hernia, and acute abdomen.</li>
-              <li>On-site pharmacy and laboratory services.</li>
-              <li>Coordination with regional hospitals for advanced imaging and interventions.</li>
-            </ul>
-          </article>
-        </div>
-
-        <p class="services-note">
-          Detailed availability and scheduling for each service may vary.
-          Please contact the clinic or your referring physician for the most up-to-date information.
+      <div class="af-container services-groups">
+        <h2>Our Clinical Services</h2>
+        <p>
+          Avicenna Medical Inc. provides comprehensive, collaborative care for adults and children
+          with digestive, liver, nutrition, skin, surgical, and general health needs. Below is an
+          overview of the main service groups and examples of conditions we assess and manage.
         </p>
+
+        <!-- 1. Adult Gastroenterology & Hepatology -->
+        <section id="adult-gi">
+          <h2>Adult Gastroenterology &amp; Hepatology</h2>
+          <p>Evaluation and management of digestive and liver diseases in adults, including:</p>
+          <ul>
+            <li>Acid reflux, heartburn, and gastroesophageal reflux disease (GERD).</li>
+            <li>Peptic ulcer disease, gastritis, and Helicobacter pylori infection.</li>
+            <li>Difficulty swallowing (dysphagia), esophageal strictures, and motility disorders.</li>
+            <li>Irritable bowel syndrome (IBS) and functional bowel disorders.</li>
+            <li>Inflammatory bowel disease (IBD): Crohn’s disease and ulcerative colitis.</li>
+            <li>Chronic diarrhea, constipation, bloating, and abdominal pain.</li>
+            <li>Screening and surveillance colonoscopy for polyps and colorectal cancer.</li>
+            <li>Investigation of gastrointestinal bleeding and iron deficiency anemia.</li>
+            <li>Fatty liver disease (NAFLD/NASH) and alcohol-related liver disease.</li>
+            <li>Chronic viral hepatitis (when applicable by local guidelines and referral pathways).</li>
+            <li>Cirrhosis, portal hypertension, and complications such as ascites or varices.</li>
+            <li>Pancreatic disorders, including acute and chronic pancreatitis.</li>
+            <li>Gallbladder and biliary tract problems (e.g., gallstones, biliary colic).</li>
+          </ul>
+        </section>
+
+        <!-- 2. Pediatric Gastroenterology, Hepatology & Nutrition -->
+        <section id="peds-gi">
+          <h2>Pediatric Gastroenterology, Hepatology &amp; Nutrition</h2>
+          <p>
+            Specialized care for infants, children, and adolescents with digestive, liver, feeding,
+            and nutrition problems, including:
+          </p>
+          <ul>
+            <li>Chronic abdominal pain, vomiting, reflux, and feeding difficulties.</li>
+            <li>Constipation, encopresis, chronic diarrhea, and stooling problems.</li>
+            <li>Failure to thrive, poor weight gain, and growth concerns.</li>
+            <li>Celiac disease and other causes of chronic diarrhea and malabsorption.</li>
+            <li>Food allergies, food intolerance, and eosinophilic gastrointestinal disorders.</li>
+            <li>Functional stomach and bowel disorders (e.g., functional dyspepsia, IBS).</li>
+            <li>Inflammatory bowel disease in children (Crohn’s disease and ulcerative colitis).</li>
+            <li>Pediatric liver disease, jaundice, and abnormal liver tests.</li>
+            <li>Pancreatic disorders in children, including recurrent pancreatitis.</li>
+            <li>Nutritional assessment and support, including obesity and undernutrition.</li>
+            <li>Feeding team approach for complex feeding and swallowing difficulties.</li>
+          </ul>
+        </section>
+
+        <!-- 3. General Pediatrics -->
+        <section id="general-peds">
+          <h2>General Pediatrics</h2>
+          <p>Comprehensive care for infants, children, and adolescents, including:</p>
+          <ul>
+            <li>Routine well-child visits and growth and development monitoring.</li>
+            <li>Assessment and management of common childhood infections.</li>
+            <li>Asthma, allergic conditions, and respiratory problems.</li>
+            <li>Headache, abdominal pain, and other common pediatric complaints.</li>
+            <li>Behavior, sleep, and school-related health concerns.</li>
+            <li>Vaccination counseling according to local and international guidelines.</li>
+            <li>Coordination of care for children with complex or chronic medical conditions.</li>
+          </ul>
+        </section>
+
+        <!-- 4. Dermatology -->
+        <section id="dermatology">
+          <h2>Dermatology</h2>
+          <p>Diagnosis and treatment of skin, hair, and nail conditions, such as:</p>
+          <ul>
+            <li>Eczema, atopic dermatitis, and contact dermatitis.</li>
+            <li>Acne, rosacea, and other inflammatory skin disorders.</li>
+            <li>Psoriasis and autoimmune-related skin conditions.</li>
+            <li>Fungal, viral, and bacterial skin infections.</li>
+            <li>Pigmented lesions, moles, and skin cancer screening (where applicable).</li>
+            <li>Hair loss, scalp conditions, and nail disorders.</li>
+          </ul>
+        </section>
+
+        <!-- 5. General & Gastrointestinal Surgery -->
+        <section id="surgery">
+          <h2>General &amp; Gastrointestinal Surgery</h2>
+          <p>
+            Surgical consultation and procedures for adults and children, including:
+          </p>
+          <ul>
+            <li>Gallbladder surgery for gallstones and biliary colic.</li>
+            <li>Hernia repair (inguinal, umbilical, ventral, and others).</li>
+            <li>Appendectomy and emergency abdominal surgery.</li>
+            <li>Colorectal surgery planning and coordination.</li>
+            <li>Management of anorectal problems (fissures, fistulae, hemorrhoids).</li>
+            <li>Minor surgical procedures performed in clinic (where applicable).</li>
+          </ul>
+        </section>
+
+        <!-- 6. Laboratory Services -->
+        <section id="lab">
+          <h2>Laboratory Services</h2>
+          <p>
+            On-site or affiliated laboratory services to support diagnosis and follow-up, including:
+          </p>
+          <ul>
+            <li>Complete blood count, biochemistry, and liver function tests.</li>
+            <li>Inflammatory markers (e.g., CRP, ESR) and anemia workup.</li>
+            <li>Stool tests for infection, inflammation, and malabsorption.</li>
+            <li>Celiac serology and other autoimmune panels.</li>
+            <li>Hormonal and metabolic testing when clinically indicated.</li>
+          </ul>
+        </section>
+
+        <!-- 7. Imaging Services -->
+        <section id="imaging">
+          <h2>Imaging Services</h2>
+          <p>
+            Imaging is provided on-site or through trusted partner centers, including:
+          </p>
+          <ul>
+            <li>Abdominal ultrasound for liver, gallbladder, pancreas, and bowel.</li>
+            <li>Pelvic and renal ultrasound for urinary and gynecological concerns.</li>
+            <li>X-ray imaging (plain radiography) where indicated.</li>
+            <li>Advanced imaging (CT, MRI, MRCP, endoscopic ultrasound) arranged by referral.</li>
+          </ul>
+        </section>
+
+        <!-- 8. Pharmacy -->
+        <section id="pharmacy">
+          <h2>Pharmacy Services</h2>
+          <p>
+            Pharmacy support for patients seen in our clinic, including:
+          </p>
+          <ul>
+            <li>Medication dispensing according to local regulations.</li>
+            <li>Counseling on proper use of medications and possible side effects.</li>
+            <li>Support with complex treatment plans (e.g., IBD, chronic liver disease).</li>
+            <li>Coordination for special or hard-to-access medications when necessary.</li>
+          </ul>
+        </section>
+
+        <!-- 9. Other Services & Referrals -->
+        <section id="other-services">
+          <h2>Other Services &amp; Referral-Based Care</h2>
+          <p>
+            Additional services may be offered directly or through trusted referral partners, such as:
+          </p>
+          <ul>
+            <li>Nutrition and dietitian consultations for adults and children.</li>
+            <li>Psychology and mental health support for chronic illness and functional disorders.</li>
+            <li>Endocrinology, cardiology, and other medical subspecialties as needed.</li>
+            <li>Pre-operative and post-operative assessments and follow-up.</li>
+            <li>Coordination with hospitals for advanced procedures and inpatient care.</li>
+          </ul>
+          <p class="services-note">
+            If the service you need is not listed here, please contact us.
+            Our team will guide you to the most appropriate clinic or referral pathway.
+          </p>
+        </section>
       </div>
     </section>
   </main>
