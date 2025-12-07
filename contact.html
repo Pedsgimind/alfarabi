@@ -1,153 +1,299 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Contact & Location | Al Farabi Center</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Contact | Al Farabi Gastroenterology &amp; Endoscopy Centre</title>
+  <link rel="stylesheet" href="styles.css" />
+
+  <style>
+    .af-main {
+      background: #f5f7fb;
+    }
+
+    .contact-hero {
+      padding: 3rem 0 1.8rem;
+    }
+
+    .contact-hero-inner {
+      background: #ffffff;
+      border-radius: 18px;
+      padding: 2.4rem 2.5rem 2rem;
+      box-shadow: 0 18px 40px rgba(15, 23, 42, 0.08);
+    }
+
+    .contact-hero h1 {
+      font-size: 2.05rem;
+      margin-bottom: 0.7rem;
+    }
+
+    .contact-hero p {
+      max-width: 780px;
+      color: #4b5563;
+      line-height: 1.7;
+    }
+
+    .contact-grid-section {
+      padding: 0 0 3.5rem;
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 2.2fr) minmax(0, 2fr);
+      gap: 1.8rem;
+    }
+
+    .contact-card {
+      background: #ffffff;
+      border-radius: 16px;
+      padding: 1.7rem 1.6rem 1.5rem;
+      box-shadow: 0 14px 32px rgba(15, 23, 42, 0.06);
+      border: 1px solid #e5e7eb;
+    }
+
+    .contact-card h2 {
+      font-size: 1.15rem;
+      margin-bottom: 0.6rem;
+    }
+
+    .contact-card p {
+      font-size: 0.95rem;
+      color: #374151;
+      line-height: 1.6;
+      margin-bottom: 0.5rem;
+    }
+
+    .contact-list {
+      font-size: 0.94rem;
+      color: #111827;
+      line-height: 1.7;
+    }
+
+    .contact-list strong {
+      font-weight: 600;
+    }
+
+    .contact-list a {
+      color: #0369a1;
+      text-decoration: none;
+    }
+
+    .contact-list a:hover {
+      text-decoration: underline;
+    }
+
+    .contact-note {
+      margin-top: 1.2rem;
+      font-size: 0.9rem;
+      color: #6b7280;
+    }
+
+    .contact-form {
+      display: grid;
+      gap: 0.85rem;
+      margin-top: 0.5rem;
+    }
+
+    .contact-form label {
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: #374151;
+    }
+
+    .contact-form input,
+    .contact-form textarea {
+      width: 100%;
+      padding: 0.55rem 0.7rem;
+      border-radius: 10px;
+      border: 1px solid #d1d5db;
+      font-size: 0.94rem;
+      outline: none;
+      transition: border-color 0.15s ease, box-shadow 0.15s ease;
+    }
+
+    .contact-form input:focus,
+    .contact-form textarea:focus {
+      border-color: #2563eb;
+      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.18);
+    }
+
+    .contact-form textarea {
+      resize: vertical;
+      min-height: 110px;
+    }
+
+    .contact-form button {
+      margin-top: 0.4rem;
+      padding: 0.6rem 1.2rem;
+      border-radius: 999px;
+      border: none;
+      background: #1d4ed8;
+      color: #ffffff;
+      font-size: 0.95rem;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    .contact-form button:hover {
+      background: #1e40af;
+    }
+
+    @media (max-width: 900px) {
+      .contact-grid {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    @media (max-width: 640px) {
+      .contact-hero {
+        padding-top: 2.3rem;
+      }
+      .contact-hero-inner {
+        padding-inline: 1.5rem;
+        border-radius: 0;
+        box-shadow: none;
+      }
+      .contact-grid-section {
+        padding-bottom: 2.5rem;
+      }
+    }
+  </style>
 </head>
-<body>
-<header>
-  <div class="header-inner">
-    <div class="logo-area">
-      <h1>Al Farabi Gastroenterology &amp; Endoscopy Center</h1>
-      <p>Multi-Specialty Digestive &amp; Pediatric Clinic – Diyala Health Ministry, Iraq</p>
-    </div>
-    <nav>
-      <ul>
-        <li><a href="index.html">Home</a></li>
-        <li><a href="about.html">About</a></li>
-        <li><a href="services.html">Services</a></li>
-        <li><a href="doctors.html">Doctors</a></li>
-        <li><a href="conditions.html">Conditions</a></li>
-        <li><a href="education.html">Education</a></li>
-        <li><a href="contact.html" class="active">Contact</a></li>
-      </ul>
-    </nav>
-  </div>
-</header>
 
-<section class="section">
-  <div class="container">
-    <h1>Contact &amp; Location</h1>
-
-    <p class="lead">
-      For non urgent appointments and inquiries at
-      <strong>Al Farabi Gastroenterology &amp; Endoscopy Center Branch in Diyala, Iraq</strong>
-      please contact the center by:
-    </p>
-
-    <div class="contact-block">
-      <!-- LEFT COLUMN: CONTACT DETAILS -->
-      <div class="contact-details">
-        <h2>How to Reach Us</h2>
-
-        <ol>
-          <li>
-            <strong>Call:</strong>
-            <a href="tel:+9647721738755">772-173-8755</a>
-            (from outside Iraq: +964 772-173-8755)
-          </li>
-          <li>
-            <strong>Email:</strong>
-            <a href="mailto:appointment@avicennamedical.org">
-              appointment@avicennamedical.org
-            </a>
-          </li>
-          <li>
-            <strong>In person / WhatsApp:</strong>
-            phone or in person during clinic hours. WhatsApp may be used for
-            non-urgent appointment questions.
-          </li>
-        </ol>
-
-        <h2>Clinic Hours</h2>
-        <ul class="checklist">
-          <li>
-            <strong>Dermatology, GP, General Surgery &amp; Pediatric GI:</strong>
-            Sun–Thu, 09:00 – 15:00
-          </li>
-          <li>
-            <strong>Laboratory &amp; Pharmacy:</strong>
-            Sun–Thu, 08:00 – 21:00
-          </li>
-          <li>
-            <strong>Other Specialists (Adult GI, Internal Medicine, etc.):</strong>
-            Usually 16:00 – 21:00, Sun–Thu
-          </li>
-        </ul>
-
-        <p>
-          Clinic days and hours may change; please confirm by phone, email, or WhatsApp when booking.
-        </p>
-
-        <h2>Emergency</h2>
-        <p>
-          For any emergency please <strong>do not call our office</strong>. Instead, head to the
-          nearest emergency department.
-        </p>
-
-<h2>Main Office Contact</h2>
-
-<p>
-  <strong>📍 Location:</strong> Almansor, Baghdad, Iraq.
-</p>
-
-<p>
-  <strong>✉️ Administrative & Documents-Related Inquiries:</strong><br>
-  <a href="mailto:documents@avicennamedical.org">Documents@avicennamedical.org</a>
-</p>
-
-<p>
-  <strong>✉️ Complaints & Quality-Related Inquiries:</strong><br>
-  <a href="mailto:complaints@avicennamedical.org">Complaints@avicennamedical.org</a>
-</p>
-
-<p>
-  <strong>📍 Avicenna Medical Inc., Headquarter Office, Baghdad, Iraq</strong><br>
-  ✉️ Email: <a href="mailto:info@avicennamedical.org">info@avicennamedical.org</a>
-</p>
+<body class="af-page">
+  <!-- HEADER -->
+  <header class="af-header">
+    <div class="af-container af-header-inner">
+      <div class="af-brand">
+        <div class="af-logo-circle">
+          <span class="af-logo-icon">胃</span>
+        </div>
+        <div class="af-brand-text">
+          <span class="af-brand-top">Avicenna Medical Inc.</span>
+          <span class="af-brand-main">Al Farabi Gastroenterology &amp; Endoscopy Centre</span>
+        </div>
       </div>
 
-      <!-- RIGHT COLUMN: MAP & ADDRESS -->
-      <div>
-        <h2>Map &amp; Directions</h2>
+      <nav class="af-nav">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="services.html">Services</a>
+        <a href="doctors.html">Doctors</a>
+        <a href="conditions.html">Conditions</a>
+        <a href="education.html">Education</a>
+        <a href="contact.html" class="active">Contact</a>
+      </nav>
 
-       <p>
-  <strong>Clinic Address:</strong><br>
-  Near New Baqubah,<br>
-  PJWC+7FJ Baqubah, Iraq,<br>
-  Baqubah, Diyala Governorate, Iraq
-</p> 
-<div class="map-placeholder">
-  <iframe
-    src="https://www.google.com/maps?q=33.7457132,44.6211256&z=17&output=embed"
-    width="100%"
-    height="260"
-    style="border:0;"
-    allowfullscreen=""
-    loading="lazy"
-    referrerpolicy="no-referrer-when-downgrade">
-  </iframe>
-</div>
-        
-</section>
+      <ul class="af-lang-switch">
+        <li><a href="index.html">EN</a></li>
+        <li><a href="ar/index.html">عربي</a></li>
+        <li><a href="ku/index.html">کوردی</a></li>
+      </ul>
+    </div>
+  </header>
 
-<footer>
-  <div class="container">
-    <div>© <span id="year"></span>  Avicenna Medical Inc., Headquarter Office, Baghdad, Iraq.  All rights reserved.</div>
-    <div>For emergencies, please use local emergency services or the nearest hospital.</div>
-  </div>
-  <script>
-    document.getElementById("year").textContent = new Date().getFullYear();
-  </script>
-</footer>
+  <main class="af-main">
+    <!-- HERO -->
+    <section class="af-section contact-hero">
+      <div class="af-container">
+        <div class="contact-hero-inner">
+          <h1>Contact &amp; referrals</h1>
+          <p>
+            Patients, families, and referring physicians can reach Al Farabi Centre through the contact details
+            below. WhatsApp is available for appointment coordination and brief administrative questions.
+          </p>
+        </div>
+      </div>
+    </section>
 
-<div class="floating-whatsapp">
-  <a href="https://wa.me/9647721738755" target="_blank">
-    <span>💬</span> WhatsApp
-  </a>
-</div>
+    <!-- GRID -->
+    <section class="af-section contact-grid-section">
+      <div class="af-container">
+        <div class="contact-grid">
+          <!-- Al Farabi clinic -->
+          <article class="contact-card">
+            <h2>Al Farabi Gastroenterology &amp; Endoscopy Centre – Clinic contact</h2>
+            <div class="contact-list">
+              <p>
+                <strong>Clinic location:</strong><br />
+                Baqubah, Diyala Governorate, Iraq.
+              </p>
+              <p>
+                <strong>WhatsApp / Phone (clinic):</strong><br />
+                <a href="https://wa.me/9647721738755" target="_blank">+964 772-173-8755</a>
+              </p>
+              <p>
+                <strong>Email (clinic):</strong><br />
+                <a href="mailto:info@avicennamedical.org">info@avicennamedical.org</a>
+              </p>
+              <p>
+                <strong>Referral letters &amp; medical reports:</strong><br />
+                Please ask your referring physician to include a brief summary, key investigations,
+                and contact details for feedback.
+              </p>
+            </div>
+            <p class="contact-note">
+              Clinical questions about a specific patient should be sent through the referring doctor
+              or discussed during a scheduled clinic visit whenever possible.
+            </p>
+          </article>
 
+          <!-- HQ & simple form -->
+          <article class="contact-card">
+            <h2>Avicenna Medical Inc. – Headquarter office</h2>
+            <div class="contact-list">
+              <p>
+                <strong>Main office contact:</strong><br />
+                Almansor, Baghdad, Iraq.
+              </p>
+              <p>
+                <strong>Administrative &amp; documents:</strong><br />
+                <a href="mailto:Documents@avicennamedical.org">Documents@avicennamedical.org</a>
+              </p>
+              <p>
+                <strong>Complaints &amp; quality-related inquiries:</strong><br />
+                <a href="mailto:Complaints@avicennamedical.org">Complaints@avicennamedical.org</a>
+              </p>
+              <p>
+                <strong>General email:</strong><br />
+                <a href="mailto:info@avicennamedical.org">info@avicennamedical.org</a>
+              </p>
+            </div>
+
+            <p style="margin-top: 0.6rem; font-size: 0.92rem; color: #4b5563;">
+              For general written inquiries, you may also use the short form below. This form is not for emergencies
+              and should not be used to request urgent medical advice.
+            </p>
+
+            <form class="contact-form">
+              <div>
+                <label for="cf-name">Name</label>
+                <input id="cf-name" type="text" placeholder="Your full name" />
+              </div>
+              <div>
+                <label for="cf-email">Email</label>
+                <input id="cf-email" type="email" placeholder="you@example.com" />
+              </div>
+              <div>
+                <label for="cf-message">Message</label>
+                <textarea id="cf-message" placeholder="Briefly describe your inquiry"></textarea>
+              </div>
+              <button type="button">Submit (sample only)</button>
+            </form>
+          </article>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="af-footer">
+    <div class="af-container">
+      <p>&copy; 2025 Avicenna Medical Inc., Headquarter Office, Baghdad, Iraq. All rights reserved.</p>
+      <p class="af-footer-meta">
+        Avicenna Medical Inc. proudly launching Al Farabi Gastroenterology &amp; Endoscopy Centre.
+      </p>
+    </div>
+  </footer>
 </body>
 </html>
