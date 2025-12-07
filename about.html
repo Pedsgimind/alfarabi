@@ -1,155 +1,297 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>About | Al Farabi Gastroenterology & Endoscopy Center</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>About | Al Farabi Gastroenterology &amp; Endoscopy Centre</title>
+  <link rel="stylesheet" href="styles.css" />
+
+  <style>
+    .af-main {
+      background: #f5f7fb;
+    }
+
+    .about-hero {
+      padding: 3rem 0 2rem;
+    }
+
+    .about-hero-inner {
+      display: grid;
+      grid-template-columns: minmax(0, 3fr) minmax(0, 2.5fr);
+      gap: 2rem;
+      background: #ffffff;
+      border-radius: 18px;
+      padding: 2.5rem 2.5rem;
+      box-shadow: 0 18px 40px rgba(15, 23, 42, 0.08);
+    }
+
+    .about-hero h1 {
+      font-size: 2.1rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .about-lead {
+      color: #4b5563;
+      line-height: 1.7;
+      margin-bottom: 1.6rem;
+    }
+
+    .about-points {
+      list-style: disc;
+      margin-left: 1.25rem;
+      color: #374151;
+      font-size: 0.96rem;
+      line-height: 1.7;
+    }
+
+    .about-hero-image-card {
+      background: #0f172a;
+      border-radius: 18px;
+      overflow: hidden;
+      position: relative;
+      color: #e5e7eb;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+    }
+
+    .about-hero-image-card img {
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+      opacity: 0.85;
+    }
+
+    .about-hero-image-content {
+      padding: 1.2rem 1.5rem 1.4rem;
+    }
+
+    .about-hero-image-content h2 {
+      font-size: 1rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #bfdbfe;
+      margin-bottom: 0.4rem;
+    }
+
+    .about-hero-image-content p {
+      font-size: 0.94rem;
+      line-height: 1.6;
+    }
+
+    .about-grid {
+      padding: 0 0 3.5rem;
+    }
+
+    .about-grid-inner {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1.5rem;
+    }
+
+    .about-card {
+      background: #ffffff;
+      border-radius: 16px;
+      padding: 1.7rem 1.6rem 1.5rem;
+      box-shadow: 0 14px 32px rgba(15, 23, 42, 0.06);
+      border: 1px solid #e5e7eb;
+    }
+
+    .about-card h3 {
+      font-size: 1.1rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .about-card p,
+    .about-card ul {
+      font-size: 0.95rem;
+      color: #374151;
+      line-height: 1.7;
+    }
+
+    .about-card ul {
+      list-style: disc;
+      margin-left: 1.1rem;
+      margin-top: 0.4rem;
+    }
+
+    .about-meta-row {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1rem;
+      margin-top: 1.4rem;
+    }
+
+    .about-meta-item span {
+      display: block;
+    }
+
+    .about-meta-label {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: #6b7280;
+      margin-bottom: 0.1rem;
+    }
+
+    .about-meta-value {
+      font-weight: 700;
+      color: #111827;
+    }
+
+    @media (max-width: 960px) {
+      .about-hero-inner {
+        grid-template-columns: minmax(0, 1fr);
+        padding: 2rem 1.5rem;
+      }
+      .about-grid-inner,
+      .about-meta-row {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    @media (max-width: 640px) {
+      .about-hero {
+        padding-top: 2.3rem;
+      }
+      .about-hero-inner {
+        border-radius: 0;
+        box-shadow: none;
+      }
+      .about-grid {
+        padding-bottom: 2.5rem;
+      }
+      .about-card {
+        border-radius: 14px;
+      }
+    }
+  </style>
 </head>
-<body>
-<header>
-  <div class="header-inner">
-    <div class="logo-area">
-      <h1>Al Farabi Gastroenterology &amp; Endoscopy Center</h1>
-      <p>Multi-Specialty Digestive &amp; Pediatric Clinic – Diyala Health Ministry, Iraq</p>
-    </div>
-    <nav>
-      <ul>
-        <li><a href="index.html">Home</a></li>
-        <li><a href="about.html" class="active">About</a></li>
-        <li><a href="services.html">Services</a></li>
-        <li><a href="doctors.html">Doctors</a></li>
-        <li><a href="conditions.html">Conditions</a></li>
-        <li><a href="education.html">Education</a></li>
-        <li><a href="contact.html">Contact</a></li>
+
+<body class="af-page">
+  <!-- HEADER -->
+  <header class="af-header">
+    <div class="af-container af-header-inner">
+      <div class="af-brand">
+        <div class="af-logo-circle">
+          <span class="af-logo-icon">胃</span>
+        </div>
+        <div class="af-brand-text">
+          <span class="af-brand-top">Avicenna Medical Inc.</span>
+          <span class="af-brand-main">Al Farabi Gastroenterology &amp; Endoscopy Centre</span>
+        </div>
+      </div>
+
+      <nav class="af-nav">
+        <a href="index.html">Home</a>
+        <a href="about.html" class="active">About</a>
+        <a href="services.html">Services</a>
+        <a href="doctors.html">Doctors</a>
+        <a href="conditions.html">Conditions</a>
+        <a href="education.html">Education</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+
+      <ul class="af-lang-switch">
+        <li><a href="index.html">EN</a></li>
+        <li><a href="ar/index.html">عربي</a></li>
+        <li><a href="ku/index.html">کوردی</a></li>
       </ul>
-    </nav>
-  </div>
-</header>
+    </div>
+  </header>
 
-<section class="section">
-  <div class="container">
-    <h2>About Al Farabi Center</h2>
-    <p class="lead">
-      Al Farabi Gastroenterology &amp; Endoscopy Center is a dedicated digestive health and multi-specialty
-      clinic in Diyala, Iraq, affiliated with the Diyala Health Ministry. The center brings together
-      adult and pediatric gastroenterology, general pediatrics, internal medicine, general surgery,
-      dermatology, endoscopy, laboratory and pharmacy services.
-    </p>
+  <main class="af-main">
+    <!-- HERO -->
+    <section class="af-section about-hero">
+      <div class="af-container">
+        <div class="about-hero-inner">
+          <div>
+            <h1>About Al Farabi Gastroenterology &amp; Endoscopy Centre</h1>
+            <p class="about-lead">
+              Al Farabi is a multidisciplinary digestive health centre in Baqubah, Diyala.
+              We combine adult and pediatric gastroenterology, hepatology, nutrition, internal medicine,
+              pediatrics, surgery, dermatology, pharmacy, and on-site endoscopy under one roof.
+            </p>
 
-    <div class="cards">
-      <div class="card">
-        <h3>Our Mission</h3>
-        <p>
-          To provide high-quality, evidence-based gastroenterology and general medical care in a
-          respectful, family-centred environment, with particular attention to the needs of children
-          and adolescents requiring specialized GI services.
-        </p>
+            <ul class="about-points">
+              <li>Integrated care for adults and children with digestive, liver, pancreatic, and nutrition disorders.</li>
+              <li>On-site endoscopy suite for urgent and elective procedures.</li>
+              <li>Close collaboration with Diyala Health Directorate and regional hospital partners.</li>
+            </ul>
+
+            <div class="about-meta-row">
+              <div class="about-meta-item">
+                <span class="about-meta-label">Location</span>
+                <span class="about-meta-value">Baqubah, Diyala</span>
+              </div>
+              <div class="about-meta-item">
+                <span class="about-meta-label">Specialties</span>
+                <span class="about-meta-value">7+</span>
+              </div>
+              <div class="about-meta-item">
+                <span class="about-meta-label">Emergency triage</span>
+                <span class="about-meta-value">24/7 phone / WhatsApp</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="about-hero-image-card">
+            <img src="images/alfarabi-entrance-1.jpg" alt="Al Farabi Center entrance" />
+            <div class="about-hero-image-content">
+              <h2>Patient-centred care</h2>
+              <p>
+                Our model prioritizes clear explanations, written plans, and coordination with referring
+                physicians. We aim to make advanced endoscopy and subspecialty care accessible within Diyala.
+              </p>
+            </div>
+          </div>
+        </div>
       </div>
+    </section>
 
-      <div class="card">
-        <h3>Core Services</h3>
-        <ul class="inline-list">
-          <li>Adult Gastroenterology &amp; Hepatology</li>
-          <li>Pediatric Gastroenterology – Dr. Mohammad Hussein</li>
-          <li>General Pediatrics</li>
-          <li>Internal Medicine</li>
-          <li>General Surgery</li>
-          <li>Dermatology</li>
-          <li>Endoscopy &amp; Colonoscopy Suite with Anesthesia Support</li>
-          <li>On-site Laboratory &amp; Pharmacy</li>
-        </ul>
+    <!-- MISSION / VISION / MODEL -->
+    <section class="af-section about-grid">
+      <div class="af-container">
+        <div class="about-grid-inner">
+          <article class="about-card">
+            <h3>Our mission</h3>
+            <p>
+              To deliver safe, evidence-based gastroenterology and endoscopy services for adults and children
+              in Diyala and the surrounding governorates, with a focus on quality, safety, and teaching.
+            </p>
+          </article>
+
+          <article class="about-card">
+            <h3>Our vision</h3>
+            <p>
+              To become a regional reference centre for digestive health in Iraq,
+              partnering with local hospitals, universities, and international centres
+              to raise standards of endoscopy and pediatric GI care.
+            </p>
+          </article>
+
+          <article class="about-card">
+            <h3>How we work</h3>
+            <ul>
+              <li>Structured clinic triage and appointment system.</li>
+              <li>Standardized documentation and electronic visit summaries.</li>
+              <li>Close communication with referring physicians and families.</li>
+              <li>Staged investigation plans to keep testing focused and affordable.</li>
+            </ul>
+          </article>
+        </div>
       </div>
+    </section>
+  </main>
 
-     <div class="card">
-  <h3>Pediatric Gastroenterologist – Dr. Mohammad Hussein</h3>
-  <p>
-    Dr. Mohammad Hussein is a Pediatric Gastroenterologist and consultant with
-    training and experience in Canada and internationally. He assesses infants,
-    children and adolescents with digestive, liver and nutrition disorders,
-    including celiac disease, inflammatory bowel disease, chronic abdominal pain,
-    constipation, reflux, feeding and growth concerns.
-  </p>
-</div>
-
-<div class="card">
-  <h3>Adult Gastroenterology & Endoscopy – Dr. A. Khazraji</h3>
-  <p>
-    Dr. A. Khazraji provides care for adults with gastrointestinal and liver
-    disorders. His expertise includes acid reflux, peptic ulcer disease,
-    dyspepsia, gastrointestinal bleeding, anemia, colorectal cancer screening,
-    diagnostic and therapeutic upper endoscopy and colonoscopy, and management
-    of fatty liver and viral hepatitis.
-  </p>
-</div>
-
-<div class="card">
-  <h3>General Pediatrics – Dr. Nadine Ahmed</h3>
-  <p>
-    Dr. Nadine Ahmed offers comprehensive pediatric care for infants, children
-    and adolescents. Her services include well-child visits, growth monitoring,
-    vaccinations, management of common childhood illnesses, chronic disease
-    follow-up, and guidance for school, behavior and learning concerns.
-  </p>
-</div>
-
-<div class="card">
-  <h3>Internal Medicine – Dr. Sardar Saman</h3>
-  <p>
-    Dr. Sardar Saman provides adult internal medicine care with a focus on
-    chronic disease management, including diabetes, hypertension and heart
-    disease. He performs comprehensive medical assessments, preventive health
-    screening and coordinates care with other subspecialists when needed.
-  </p>
-</div>
-
-<div class="card">
-  <h3>Dermatology – Dr. Wasd Ali</h3>
-  <p>
-    Dr. Wasd Ali evaluates and treats a wide range of skin, hair and nail
-    conditions, including eczema, psoriasis, acne, infections, pigmentary
-    disorders, alopecia and other inflammatory dermatologic conditions. She
-    provides medical, procedural and counseling-based skin care.
-  </p>
-</div>
-
-<div class="card">
-  <h3>General Surgery – Dr. Sarmed Qaysim</h3>
-  <p>
-    Dr. Sarmed Qaysim provides surgical assessment and treatment for common
-    conditions such as gallbladder disease, hernias and abdominal pain. He works
-    closely with the gastroenterology and internal medicine teams to provide
-    coordinated peri-operative care and optimal patient outcomes.
-  </p>
-</div>
-
-<div class="card">
-  <h3>Growing Multi-Disciplinary Team</h3>
-  <p>
-    The center continues to expand its multi-disciplinary medical team. Additional
-    specialists—including radiology, nutrition, anesthesia, and allied health—
-    will be added as services grow, ensuring comprehensive care for children and
-    adults.
-  </p>
-</div> 
-      
-</section>
-
-<footer>
-  <div class="container">
-    <div>© <span id="year"></span>  Avicenna Medical Inc., Headquarter Office, Baghdad, Iraq.  All rights reserved.</div>
-    <div>For emergencies, please use local emergency services or the nearest hospital.</div>
-  </div>
-  <script>
-    document.getElementById("year").textContent = new Date().getFullYear();
-  </script>
-</footer>
-
-<div class="floating-whatsapp">
-  <a href="https://wa.me/9647721738755" target="_blank">
-    <span>💬</span> WhatsApp
-  </a>
-</div>
-
+  <!-- FOOTER -->
+  <footer class="af-footer">
+    <div class="af-container">
+      <p>&copy; 2025 Avicenna Medical Inc., Headquarter Office, Baghdad, Iraq. All rights reserved.</p>
+      <p class="af-footer-meta">
+        Avicenna Medical Inc. proudly launching Al Farabi Gastroenterology &amp; Endoscopy Centre.
+      </p>
+    </div>
+  </footer>
 </body>
 </html>
