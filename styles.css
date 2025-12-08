@@ -1,4 +1,7 @@
-/* Global reset & typography */
+/* =======================================================
+   GLOBAL RESET & BASE
+   ======================================================= */
+
 * {
   box-sizing: border-box;
 }
@@ -6,717 +9,24 @@
 body {
   margin: 0;
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  background: #f5f7fb;
-  color: #1f2933;
+  background-color: #020617;
+  color: #e5e7eb;
 }
 
 a {
   text-decoration: none;
+  color: inherit;
 }
 
-/* Layout helpers */
-.container {
-  max-width: 1080px;
-  margin: 0 auto;
-  padding: 1.5rem;
-}
-
-/* Header & navigation */
-header {
-  background: #0f3c68;
-  color: #fff;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
-}
-
-.header-inner {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 1rem 1.5rem;
-}
-
-.logo-area h1 {
-  font-size: 1.3rem;
-  margin: 0;
-}
-
-.logo-area p {
-  margin: 0.2rem 0 0;
-  font-size: 0.9rem;
-  opacity: 0.9;
-}
-
-nav ul {
-  list-style: none;
-  display: flex;
-  gap: 0.8rem;
-  margin: 0;
-  padding: 0;
-}
-
-nav a {
-  color: #e5efff;
-  font-size: 0.95rem;
-  padding: 0.4rem 0.8rem;
-  border-radius: 999px;
-}
-
-nav a:hover,
-nav a.active {
-  background: rgba(255, 255, 255, 0.18);
-}
-
-/* ================= HERO SECTION (CENTERED) ================= */
-
-.hero {
-  background: #0073e6;           /* solid blue hero background */
-  color: #fff;
-  padding: 3.5rem 1.5rem 3rem;
-}
-
-.hero-inner {
-  max-width: 1100px;
-  margin: 0 auto;
-  text-align: center;
-  padding: 0 1rem;
-}
-
-.hero h2 {
-  margin: 0 0 1.8rem;
-  font-size: 2.4rem;
-  line-height: 1.25;
-}
-
-/* Main hero image – full width, aligned with text */
-.hero-image {
-  width: 100%;
-  max-width: 1100px;             /* matches hero-inner */
-  height: auto;
-  display: block;
-  margin: 0 auto 1.75rem;        /* centered + space below */
-  border-radius: 18px;
-  box-shadow: 0 14px 30px rgba(15, 23, 42, 0.35);
-}
-
-/* Description paragraph under image */
-.hero p {
-  line-height: 1.7;
-  max-width: 900px;
-  margin: 0 auto 1.5rem;
-}
-
-/* If you ever use badges again, they’ll still work */
-.hero-badges {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.4rem;
-  justify-content: center;
-  margin: 0.75rem 0 1.3rem;
-}
-
-.badge {
-  background: rgba(15, 60, 104, 0.3);
-  border-radius: 999px;
-  padding: 0.25rem 0.7rem;
-  font-size: 0.78rem;
-  border: 1px solid rgba(255, 255, 255, 0.35);
-}
-
-/* Buttons under the text */
-.hero-cta {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.75rem;
-  justify-content: center;
-}
-
-/* Buttons */
-.btn {
-  display: inline-block;
-  padding: 0.7rem 1.3rem;
-  border-radius: 999px;
-  font-size: 0.95rem;
-  cursor: pointer;
-}
-
-.btn-primary {
-  background: #ffb300;
-  color: #1f2933;
-  font-weight: 600;
-}
-
-.btn-outline {
-  background: transparent;
-  color: #fff;
-  border: 1px solid rgba(255, 255, 255, 0.85);
-}
-
-/* ================= OTHER SECTIONS & CARDS ================= */
-
-.section {
-  padding: 2.5rem 1.5rem;
-}
-
-.section h2 {
-  margin-top: 0;
-  font-size: 1.6rem;
-}
-
-.section p.lead {
-  margin-top: 0.5rem;
-  max-width: 720px;
-  color: #4b5563;
-}
-
-.cards {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-  gap: 1.5rem;
-  margin-top: 1.5rem;
-}
-
-.card {
-  background: #fff;
-  border-radius: 12px;
-  padding: 1.3rem 1.2rem;
-  box-shadow: 0 8px 18px rgba(15, 23, 42, 0.06);
-}
-
-.card h3 {
-  margin-top: 0;
-  font-size: 1.1rem;
-}
-
-ul.inline-list {
-  padding-left: 1.2rem;
-}
-
-/* Checklist styling */
-ul.checklist {
-  list-style: none;
-  padding-left: 0;
-}
-
-ul.checklist li {
-  margin-bottom: 0.4rem;
-}
-
-ul.checklist li::before {
-  content: "• ";
-  color: #1e88e5;
-}
-
-/* Doctors grid */
-.doctors-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
-  gap: 1.5rem;
-  margin-top: 1.5rem;
-}
-
-.doctor-card {
-  background: #fff;
-  border-radius: 12px;
-  box-shadow: 0 8px 18px rgba(15, 23, 42, 0.06);
-  overflow: hidden;
-}
-
-.doctor-photo img {
-  width: 100%;
-  height: 180px;
-  object-fit: cover;
-  display: block;
-}
-
-.doctor-body {
-  padding: 1rem 1.2rem 1.3rem;
-}
-
-.doctor-body h3 {
-  margin: 0 0 0.2rem;
-}
-
-.doctor-body p {
-  margin: 0.2rem 0;
-  font-size: 0.9rem;
-}
-
-/* Icons for departments (simple emoji style) */
-.dept-icon {
-  font-size: 2rem;
-  margin-bottom: 0.5rem;
-}
-
-/* Contact block */
-.contact-block {
-  display: grid;
-  grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
-  gap: 2rem;
-}
-
-.contact-details p {
-  margin: 0.3rem 0;
-}
-
-/* Map placeholder */
-.map-placeholder {
-  width: 100%;
-  height: 260px;
-  border-radius: 12px;
-  background: repeating-linear-gradient(
-    135deg,
-    #e0e7ff,
-    #e0e7ff 10px,
-    #cbd5f5 10px,
-    #cbd5f5 20px
-  );
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #374151;
-  font-size: 0.95rem;
-  text-align: center;
-  padding: 1rem;
-}
-
-/* Footer */
-footer {
-  background: #0b2641;
-  color: #d1e0ff;
-  padding: 1.5rem 1rem;
-  font-size: 0.85rem;
-}
-
-footer .container {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  gap: 1rem;
-}
-
-/* Floating WhatsApp button */
-.floating-whatsapp {
-  position: fixed;
-  right: 18px;
-  bottom: 18px;
-  z-index: 999;
-}
-
-.floating-whatsapp a {
-  display: flex;
-  align-items: center;
-  gap: 0.4rem;
-  background: #25d366;
-  color: #fff;
-  padding: 0.6rem 0.9rem;
-  border-radius: 999px;
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.25);
-  font-size: 0.9rem;
-}
-
-.floating-whatsapp span {
-  font-size: 1.2rem;
-}
-
-/* Arabic / RTL tweaks */
-body[dir="rtl"] {
-  direction: rtl;
-  text-align: right;
-}
-
-body[dir="rtl"] .header-inner {
-  flex-direction: row-reverse;
-}
-
-body[dir="rtl"] nav ul {
-  flex-direction: row-reverse;
-}
-
-/* For RTL hero, still centered visually */
-body[dir="rtl"] .hero-inner {
-  text-align: center;
-}
-
-/* Responsive */
-@media (max-width: 900px) {
-  .hero {
-    padding: 2.7rem 1.2rem 2.8rem;
-  }
-
-  .hero h2 {
-    font-size: 2.1rem;
-  }
-
-  .header-inner {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 0.6rem;
-  }
-
-  nav ul {
-    flex-wrap: wrap;
-  }
-
-  .contact-block {
-    grid-template-columns: 1fr;
-  }
-}
-/* RTL support for Arabic, Kurdish, Persian */
-html[dir="rtl"] body {
-  direction: rtl;
-  text-align: right;
-}
-
-html[dir="rtl"] nav ul {
-  flex-direction: row-reverse;
-}
-
-html[dir="rtl"] .hero-buttons {
-  flex-direction: row-reverse;
-}
-
-html[dir="rtl"] .hero-text,
-html[dir="rtl"] h1,
-html[dir="rtl"] h2,
-html[dir="rtl"] p {
-  text-align: right;
-}
-.language-switch {
-  display: flex;
-  gap: 10px;
-  margin-top: 10px;
-  justify-content: flex-end;
-  list-style: none;
-}
-
-.language-switch li a {
-  color: #004080;              /* dark blue text */
-  background-color: #ffffff;   /* white pill background */
-  padding: 4px 8px;
-  border: 1px solid rgba(0,64,128,0.3);
-  border-radius: 4px;
-  text-decoration: none;
-  font-size: 0.85rem;
-}
-/* =========================================================
-   MODERN REFRESH FOR AL FARABI / AVICENNA SITE
-   (Safe overrides – no HTML changes needed)
-   ========================================================= */
-
-/* Base layout & typography */
-body {
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
-    sans-serif;
-  color: #0f172a;
-  background-color: #f3f4f6;
-}
-
-/* Constrain main content width */
-.hero-inner,
-.logo-row,
-section,
-.contact-block,
-.container,
-.nav-container {
-  max-width: 1120px;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-/* ---------- HEADER / NAVBAR ---------- */
-
-header {
-  background-color: #ffffff;
-  box-shadow: 0 8px 18px rgba(15, 23, 42, 0.06);
-  position: sticky;
-  top: 0;
-  z-index: 50;
-}
-
-/* thin blue line at the very top (your .topbar) */
-.topbar {
-  height: 4px;
-  background: linear-gradient(90deg, #0ea5e9, #2563eb);
-}
-
-/* row with logo + nav + language switch */
-.logo-row {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 1.5rem;
-  padding: 0.75rem 1.5rem;
-}
-
-/* logo text */
-.logo-row .logo-title {
-  font-weight: 700;
-  font-size: 1.05rem;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: #0f172a;
-}
-
-/* main nav links */
-header nav ul {
-  list-style: none;
-  display: flex;
-  align-items: center;
-  gap: 1.75rem;
-  margin: 0;
-  padding: 0;
-}
-
-header nav a {
-  text-decoration: none;
-  font-size: 0.95rem;
-  font-weight: 500;
-  color: #4b5563;
-}
-
-header nav a:hover {
-  color: #111827;
-}
-
-header nav a.active {
-  color: #2563eb;
-}
-
-/* ---------- LANGUAGE SWITCHER ---------- */
-
-.language-switch {
-  display: flex;
-  gap: 0.4rem;
-  margin-left: 1.5rem;
-  align-items: center;
-}
-
-.language-switch li {
-  list-style: none;
-}
-
-.language-switch li a {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  padding: 3px 10px;
-  border-radius: 999px;
-  background-color: #ffffff;
-  border: 1px solid rgba(15, 23, 42, 0.18);
-  font-size: 0.8rem;
-  color: #0f172a;
-  text-decoration: none;
-}
-
-.language-switch li a:hover {
-  border-color: #2563eb;
-  color: #2563eb;
-}
-
-/* RTL header tweaks (Arabic / Kurdish) */
-html[dir="rtl"] header nav ul {
-  flex-direction: row-reverse;
-}
-
-html[dir="rtl"] .language-switch {
-  margin-left: 0;
-  margin-right: 1.5rem;
-}
-
-/* ---------- HERO SECTION ---------- */
-
-.hero {
-  background: radial-gradient(circle at top left, #2563eb 0, #0ea5e9 32%, #0b5cc4 75%);
-  color: #ffffff;
-  padding: 3.2rem 1.5rem 3.6rem;
-}
-
-/* inner grid: text left, image right (auto stacks on mobile) */
-.hero-inner {
-  display: grid;
-  grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
-  gap: 2.8rem;
-  align-items: center;
-}
-
-.hero-inner h2,
-.hero h2 {
-  font-size: 2.35rem;
-  line-height: 1.2;
-  margin-bottom: 1rem;
-}
-
-.hero-inner p,
-.hero p {
-  font-size: 1rem;
-  line-height: 1.7;
-  max-width: 34rem;
-}
-
-/* WhatsApp + View Services buttons */
-.hero-buttons {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.9rem;
-  margin-top: 1.6rem;
-}
-
-.hero-buttons .btn-primary,
-.hero-buttons .btn-outline {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0.7rem 1.5rem;
-  border-radius: 999px;
-  font-weight: 600;
-  font-size: 0.95rem;
-  text-decoration: none;
-}
-
-.hero-buttons .btn-primary {
-  background-color: #fbbf24;
-  color: #111827;
-  border: none;
-}
-
-.hero-buttons .btn-primary:hover {
-  background-color: #f59e0b;
-}
-
-.hero-buttons .btn-outline {
-  background-color: transparent;
-  border: 1px solid rgba(255, 255, 255, 0.7);
-  color: #ffffff;
-}
-
-.hero-buttons .btn-outline:hover {
-  background-color: rgba(15, 23, 42, 0.12);
-}
-
-/* hero image card */
-.hero-image {
-  width: 100%;
-  border-radius: 24px;
-  box-shadow: 0 22px 45px rgba(15, 23, 42, 0.35);
-  display: block;
-}
-
-/* RTL hero alignment */
-html[dir="rtl"] .hero-inner {
-  direction: rtl;
-}
-
-/* ---------- GENERIC SECTIONS ---------- */
-
-section {
-  padding: 2.8rem 1.5rem;
-  background-color: #f9fafb;
-}
-
-section:nth-of-type(2n + 1) {
-  background-color: #ffffff;
-}
-
-section h2 {
-  font-size: 1.75rem;
-  margin-bottom: 1.2rem;
-  color: #111827;
-}
-
-/* “Why Patients Choose Al Farabi” – card grid */
-.features-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-  gap: 1.6rem;
-  margin-top: 1.5rem;
-}
-
-.feature-card {
-  background-color: #ffffff;
-  border-radius: 18px;
-  padding: 1.4rem 1.5rem;
-  box-shadow: 0 12px 30px rgba(15, 23, 42, 0.09);
-}
-
-.feature-card h3 {
-  font-size: 1.1rem;
-  margin-bottom: 0.6rem;
-  color: #111827;
-}
-
-.feature-card p {
-  font-size: 0.95rem;
-  color: #4b5563;
-  line-height: 1.7;
-}
-
-/* If your “Why Patients choose…” already uses cards, these styles
-   will simply make them look more modern; if not, nothing breaks. */
-
-/* ---------- FOOTER ---------- */
-
-footer {
-  background-color: #0b1120;
-  color: #e5e7eb;
-  font-size: 0.85rem;
-  padding: 1.3rem 1.5rem;
-  text-align: center;
-}
-
-footer a {
-  color: #93c5fd;
-  text-decoration: none;
-}
-
-footer a:hover {
-  text-decoration: underline;
-}
-
-/* ---------- RESPONSIVE ---------- */
-
-@media (max-width: 900px) {
-  .hero-inner {
-    grid-template-columns: minmax(0, 1fr);
-  }
-
-  .hero-inner {
-    text-align: left;
-  }
-
-  html[dir="rtl"] .hero-inner {
-    text-align: right;
-  }
-
-  .logo-row {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 0.6rem;
-  }
-
-  .language-switch {
-    margin-left: 0;
-  }
-}
-/* =======================================================
-   NEW HOME PAGE DESIGN (scoped with .home-page & .af-*)
-   ======================================================= */
-
-body.home-page {
-  margin: 0;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
-    sans-serif;
-  background-color: #020617;
-  color: #0f172a;
-}
-
-/* Utility container */
 .af-container {
   max-width: 1120px;
   margin: 0 auto;
   padding: 0 1.5rem;
 }
 
-/* ---------- HEADER ---------- */
+/* =======================================================
+   HEADER (DARK PREMIUM)
+   ======================================================= */
 
 .af-header {
   position: sticky;
@@ -730,126 +40,104 @@ body.home-page {
 .af-header-inner {
   display: flex;
   align-items: center;
-  gap: 1.75rem;
-  padding: 0.75rem 0;
+  gap: 2rem;
+  padding: 0.9rem 0;
 }
 
-/* brand */
+/* ---------- LOGO + BRAND TEXT ---------- */
+
 .af-brand {
   display: flex;
   align-items: center;
-  gap: 0.75rem;
+  gap: 1rem;
   flex-shrink: 0;
 }
-/* FINAL LOGO STYLE */
+
 .af-logo-full {
-  height: 60px;      /* adjust to 32px or 36px if needed */
-  width: 60px;
-  object-fit: contain;
-  display: block;
-}
-.af-logo-circle {
-  .af-logo-circle-img {
-  width: 60%;
-  height: 60%;
-  object-fit: contain;
-  display: block;
-}
-  width: 40px;
-  height: 40px;
-  border-radius: 999px;
-  background: radial-gradient(circle at 30% 20%, #38bdf8, #0f766e);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #e5e7eb;
-  font-size: 0.9rem;
-  font-weight: 700;
-}
-.af-logo-image img {
-  height: 50px;
+  height: 70px;
   width: auto;
-  object-fit: contain;
   display: block;
+  object-fit: contain;
 }
+
+/* ---------- LARGE BRANDED TEXT ---------- */
+
 .af-brand-text {
   display: flex;
   flex-direction: column;
+  line-height: 1.2;
 }
 
-.af-brand-top {
-  font-size: 0.7rem;
-  text-transform: uppercase;
-  letter-spacing: 0.12em;
-  color: #9ca3af;
+.af-brand-line1 {
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: #f8fafc;
 }
 
-.af-brand-main {
-  font-size: 0.9rem;
-  font-weight: 600;
-  color: #f9fafb;
+.af-brand-line2 {
+  font-size: 1.9rem;
+  font-weight: 700;
+  color: #38bdf8;
 }
 
-/* nav */
+/* ---------- NAVIGATION ---------- */
+
 .af-nav {
   display: flex;
   align-items: center;
-  gap: 1.3rem;
-  margin-left: 1.5rem;
+  gap: 1.4rem;
+  margin-left: auto;
   flex-wrap: wrap;
 }
 
 .af-nav a {
-  text-decoration: none;
-  font-size: 0.9rem;
+  font-size: 0.95rem;
   color: #cbd5f5;
   padding-bottom: 2px;
   border-bottom: 2px solid transparent;
 }
-/* Call-to-action button in the top navigation */
-.af-nav .af-nav-cta {
-  margin-left: 0.75rem;
-  padding: 0.45rem 0.9rem;
-  border-radius: 999px;
-  background: #2563eb;        /* blue button */
-  color: #ffffff;
-  font-weight: 600;
-  border: 1px solid #1d4ed8;
-  text-decoration: none;
-  white-space: nowrap;
-}
 
-.af-nav .af-nav-cta:hover {
-  background: #1d4ed8;
-  border-color: #1e40af;
-}
 .af-nav a:hover {
   color: #ffffff;
 }
 
 .af-nav a.active {
-  color: #ffffff;
+  color: #38bdf8;
   border-color: #38bdf8;
 }
 
-/* language switch */
+/* ---------- CTA BUTTON IN NAV ---------- */
+
+.af-nav-cta {
+  padding: 0.45rem 0.9rem;
+  border-radius: 999px;
+  background: #2563eb;
+  color: #ffffff !important;
+  font-weight: 600;
+  border: 1px solid #1d4ed8;
+  white-space: nowrap;
+}
+
+.af-nav-cta:hover {
+  background: #1d4ed8;
+  border-color: #1e40af;
+}
+
+/* ---------- LANGUAGE SWITCH ---------- */
+
 .af-lang-switch {
   display: flex;
   gap: 0.4rem;
-  margin-left: auto;
   list-style: none;
+  margin-left: 1rem;
 }
 
 .af-lang-switch li a {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
   padding: 3px 9px;
   border-radius: 999px;
   border: 1px solid rgba(148, 163, 184, 0.6);
   font-size: 0.78rem;
   color: #e5e7eb;
-  text-decoration: none;
 }
 
 .af-lang-switch li a:hover {
@@ -857,11 +145,12 @@ body.home-page {
   color: #38bdf8;
 }
 
-/* ---------- HERO ---------- */
+/* =======================================================
+   HERO SECTION
+   ======================================================= */
 
 .af-hero {
   background: radial-gradient(circle at top left, #1e293b 0, #020617 45%, #020617 100%);
-  color: #e5e7eb;
   padding: 3.5rem 0 3.75rem;
 }
 
@@ -872,12 +161,7 @@ body.home-page {
   align-items: center;
 }
 
-/* hero text */
-.af-hero-text h1 {
-  font-size: 2.4rem;
-  line-height: 1.2;
-  margin: 0 0 0.9rem;
-}
+/* Hero text */
 
 .af-eyebrow {
   text-transform: uppercase;
@@ -885,6 +169,12 @@ body.home-page {
   font-size: 0.75rem;
   color: #38bdf8;
   margin-bottom: 0.6rem;
+}
+
+.af-hero-text h1 {
+  font-size: 2.4rem;
+  line-height: 1.2;
+  margin: 0 0 0.9rem;
 }
 
 .af-hero-lead {
@@ -902,7 +192,6 @@ body.home-page {
 
 .af-hero-points li {
   font-size: 0.95rem;
-  color: #e5e7eb;
   margin-bottom: 0.5rem;
   position: relative;
   padding-left: 1.5rem;
@@ -916,7 +205,6 @@ body.home-page {
   color: #22c55e;
 }
 
-/* hero buttons */
 .af-hero-buttons {
   display: flex;
   flex-wrap: wrap;
@@ -925,21 +213,18 @@ body.home-page {
 }
 
 .af-btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
   padding: 0.75rem 1.6rem;
   border-radius: 999px;
   font-size: 0.95rem;
   font-weight: 600;
-  text-decoration: none;
-  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .af-btn-primary {
   background: linear-gradient(135deg, #fbbf24, #f97316);
   color: #111827;
-  border: none;
 }
 
 .af-btn-primary:hover {
@@ -947,7 +232,6 @@ body.home-page {
 }
 
 .af-btn-ghost {
-  background: transparent;
   border: 1px solid rgba(148, 163, 184, 0.7);
   color: #e5e7eb;
 }
@@ -956,7 +240,6 @@ body.home-page {
   background: rgba(148, 163, 184, 0.18);
 }
 
-/* meta strip */
 .af-meta-strip {
   margin-top: 1.3rem;
   display: flex;
@@ -966,7 +249,8 @@ body.home-page {
   color: #9ca3af;
 }
 
-/* hero image card */
+/* Hero image card */
+
 .af-hero-image-card {
   background: rgba(15, 23, 42, 0.9);
   border-radius: 24px;
@@ -978,39 +262,20 @@ body.home-page {
 .af-hero-image-frame {
   border-radius: 20px;
   overflow: hidden;
-  background: #020617;
 }
 
 .af-hero-image-card img {
-  display: block;
   width: 100%;
-  height: auto;
-}
-
-.af-hero-stats {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 0.75rem;
-  margin-top: 0.9rem;
-}
-
-.af-stat-number {
   display: block;
-  font-size: 1rem;
-  font-weight: 700;
-  color: #facc15;
 }
 
-.af-stat-label {
-  display: block;
-  font-size: 0.75rem;
-  color: #e5e7eb;
-}
-
-/* ---------- GENERIC SECTIONS ---------- */
+/* =======================================================
+   SECTIONS
+   ======================================================= */
 
 .af-section {
   background: #f9fafb;
+  color: #0f172a;
   padding: 3rem 0;
 }
 
@@ -1026,7 +291,6 @@ body.home-page {
 .af-section-header h2 {
   font-size: 1.7rem;
   margin-bottom: 0.5rem;
-  color: #0f172a;
 }
 
 .af-section-header p {
@@ -1034,59 +298,35 @@ body.home-page {
   color: #4b5563;
 }
 
-/* feature cards */
-.af-feature-grid {
+/* Cards */
+
+.af-feature-grid,
+.af-service-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
   gap: 1.5rem;
 }
 
-.af-feature-card {
+.af-feature-card,
+.af-service-item {
   background: #ffffff;
   border-radius: 18px;
   padding: 1.4rem 1.6rem;
-  box-shadow: 0 16px 32px rgba(15, 23, 42, 0.08);
   border: 1px solid rgba(226, 232, 240, 0.9);
+  box-shadow: 0 10px 22px rgba(15, 23, 42, 0.08);
 }
 
-.af-feature-card h3 {
+.af-feature-card h3,
+.af-service-item h3 {
   font-size: 1.1rem;
   margin-bottom: 0.5rem;
   color: #111827;
 }
 
-.af-feature-card p {
-  font-size: 0.95rem;
-  color: #4b5563;
-  line-height: 1.7;
-}
+/* =======================================================
+   CTA STRIP
+   ======================================================= */
 
-/* services snapshot */
-.af-service-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
-  gap: 1.4rem;
-}
-
-.af-service-item {
-  background: #f9fafb;
-  border-radius: 16px;
-  padding: 1.2rem 1.3rem;
-  border: 1px solid rgba(226, 232, 240, 0.9);
-}
-
-.af-service-item h3 {
-  font-size: 1rem;
-  margin-bottom: 0.4rem;
-  color: #111827;
-}
-
-.af-service-item p {
-  font-size: 0.93rem;
-  color: #4b5563;
-}
-
-/* CTA strip */
 .af-cta-strip {
   background: linear-gradient(135deg, #0f766e, #2563eb);
   color: #e5e7eb;
@@ -1095,91 +335,49 @@ body.home-page {
 
 .af-cta-inner {
   display: flex;
-  align-items: center;
   justify-content: space-between;
   gap: 1.8rem;
+  align-items: center;
 }
 
-.af-cta-inner h2 {
-  font-size: 1.5rem;
-  margin-bottom: 0.4rem;
-}
-
-.af-cta-inner p {
-  font-size: 0.95rem;
-  color: #e5e7eb;
-}
-
-.af-cta-buttons {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.9rem;
-}
-
-.af-btn-outline {
-  background: transparent;
-  border: 1px solid rgba(226, 232, 240, 0.9);
-  color: #e5e7eb;
-}
-
-.af-btn-outline:hover {
-  background: rgba(15, 23, 42, 0.2);
-}
-
-/* ---------- FOOTER ---------- */
+/* =======================================================
+   FOOTER
+   ======================================================= */
 
 .af-footer {
   background: #020617;
   color: #9ca3af;
   padding: 1.6rem 0 2rem;
+  text-align: center;
   font-size: 0.85rem;
 }
 
 .af-footer-meta {
-  margin-top: 0.2rem;
   color: #6b7280;
+  margin-top: 0.2rem;
 }
 
-/* ---------- RESPONSIVE ---------- */
+/* =======================================================
+   RESPONSIVE
+   ======================================================= */
 
 @media (max-width: 960px) {
   .af-header-inner {
     flex-wrap: wrap;
   }
-
+  .af-brand-text {
+    text-align: left;
+  }
   .af-nav {
-    margin-left: 0.5rem;
-  }
-
-  .af-hero-grid {
-    grid-template-columns: minmax(0, 1fr);
-  }
-
-  .af-hero-image-card {
-    max-width: 420px;
-    margin: 1.5rem auto 0;
-  }
-
-  .af-cta-inner {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
-  .af-lang-switch {
     margin-left: 0;
+  }
+  .af-hero-grid {
+    grid-template-columns: 1fr;
   }
 }
 
 @media (max-width: 720px) {
   .af-nav {
-    display: none; /* simple mobile nav for now */
-  }
-
-  .af-header-inner {
-    justify-content: space-between;
-  }
-
-  .af-hero {
-    padding-top: 3rem;
+    display: none;
   }
 }
