@@ -8,75 +8,81 @@
 
   <style>
     .af-main {
-      background: #f5f7fb;
+      background: #020617;
+      background: radial-gradient(circle at top, #020617 0, #020617 45%, #020617 100%);
     }
 
     .about-hero {
-      padding: 3rem 0 2rem;
+      padding: 3rem 0 2.5rem;
     }
 
     .about-hero-inner {
       display: grid;
       grid-template-columns: minmax(0, 3fr) minmax(0, 2.5fr);
       gap: 2rem;
-      background: #ffffff;
+      background: #020617;
       border-radius: 18px;
       padding: 2.5rem 2.5rem;
-      box-shadow: 0 18px 40px rgba(15, 23, 42, 0.08);
+      box-shadow: 0 20px 45px rgba(15, 23, 42, 0.9);
+      border: 1px solid rgba(148, 163, 184, 0.5);
     }
 
     .about-hero h1 {
       font-size: 2.1rem;
       margin-bottom: 0.75rem;
+      color: #f9fafb;
     }
 
     .about-lead {
-      color: #4b5563;
+      color: #cbd5f5;
       line-height: 1.7;
       margin-bottom: 1.6rem;
+      font-size: 0.97rem;
     }
 
     .about-points {
       list-style: disc;
       margin-left: 1.25rem;
-      color: #374151;
-      font-size: 0.96rem;
+      color: #e5e7eb;
+      font-size: 0.95rem;
       line-height: 1.7;
     }
 
     .about-hero-image-card {
-      background: #0f172a;
+      background: #020617;
       border-radius: 18px;
       overflow: hidden;
-      position: relative;
       color: #e5e7eb;
       display: flex;
       flex-direction: column;
       justify-content: flex-end;
+      border: 1px solid rgba(148, 163, 184, 0.5);
     }
 
     .about-hero-image-card img {
       width: 100%;
       height: 220px;
       object-fit: cover;
-      opacity: 0.85;
+      opacity: 0.9;
     }
 
     .about-hero-image-content {
       padding: 1.2rem 1.5rem 1.4rem;
+      background: rgba(15, 23, 42, 0.96);
     }
 
     .about-hero-image-content h2 {
-      font-size: 1rem;
-      letter-spacing: 0.08em;
+      font-size: 0.95rem;
+      letter-spacing: 0.12em;
       text-transform: uppercase;
       color: #bfdbfe;
       margin-bottom: 0.4rem;
     }
 
     .about-hero-image-content p {
-      font-size: 0.94rem;
+      font-size: 0.93rem;
       line-height: 1.6;
+      color: #e5e7eb;
     }
 
     .about-grid {
@@ -90,22 +96,24 @@
     }
 
     .about-card {
-      background: #ffffff;
+      background: #020617;
       border-radius: 16px;
       padding: 1.7rem 1.6rem 1.5rem;
-      box-shadow: 0 14px 32px rgba(15, 23, 42, 0.06);
-      border: 1px solid #e5e7eb;
+      box-shadow: 0 18px 40px rgba(15, 23, 42, 0.9);
+      border: 1px solid rgba(148, 163, 184, 0.5);
+      color: #e5e7eb;
     }
 
     .about-card h3 {
       font-size: 1.1rem;
       margin-bottom: 0.5rem;
+      color: #f9fafb;
     }
 
     .about-card p,
     .about-card ul {
       font-size: 0.95rem;
-      color: #374151;
+      color: #e5e7eb;
       line-height: 1.7;
     }
 
@@ -130,13 +138,13 @@
       font-size: 0.8rem;
       text-transform: uppercase;
       letter-spacing: 0.08em;
-      color: #6b7280;
+      color: #9ca3af;
       margin-bottom: 0.1rem;
     }
 
     .about-meta-value {
       font-weight: 700;
-      color: #111827;
+      color: #e5e7eb;
     }
 
     @media (max-width: 960px) {
@@ -157,6 +165,8 @@
       .about-hero-inner {
         border-radius: 0;
         box-shadow: none;
+        border-left: none;
+        border-right: none;
       }
       .about-grid {
         padding-bottom: 2.5rem;
@@ -168,42 +178,33 @@
   </style>
 </head>
 
-<body class="af-page">
+<body>
   <!-- HEADER -->
   <header class="af-header">
     <div class="af-container af-header-inner">
       <div class="af-brand">
-        <div class="af-logo-circle">
-          <span class="af-logo-icon">胃</span>
-        </div>
+        <img src="images/avicenna-logo-horizontal.png" alt="Avicenna Medical Inc." class="af-logo-full" />
         <div class="af-brand-text">
-          <span class="af-brand-top">Avicenna Medical Inc.</span>
-          <span class="af-brand-main">Al Farabi Gastroenterology &amp; Endoscopy Centre</span>
+          <span class="af-brand-line1">Avicenna Medical Inc.</span>
+          <span class="af-brand-line2">Al Farabi Gastroenterology &amp; Endoscopy Centre</span>
         </div>
       </div>
 
       <nav class="af-nav">
-  <a href="index.html">Home</a>
-  <a href="about.html">About</a>
-  <a href="services.html">Services</a>
-  <a href="doctors.html">Doctors</a>
-  <a href="conditions.html">Conditions</a>
-  <a href="education.html">Education</a>
-  <a href="contact.html">Contact</a>
-
-  <!-- NEW: Book appointment button -->
-  <a href="booking.html" class="af-nav-cta">Book your appointment online</a>
-  <!-- or use an external link, e.g.
-  <a href="https://your-booking-platform-link" class="af-nav-cta" target="_blank">
-    Book your appointment online
-  </a>
-  -->
-</nav>
+        <a href="index.html">Home</a>
+        <a href="about.html" class="active">About</a>
+        <a href="services.html">Services</a>
+        <a href="doctors.html">Doctors</a>
+        <a href="conditions.html">Conditions</a>
+        <a href="education.html">Education</a>
+        <a href="contact.html">Contact</a>
+        <a href="booking.html" class="af-nav-cta">Book your appointment online</a>
+      </nav>
 
       <ul class="af-lang-switch">
-        <li><a href="index.html">EN</a></li>
-        <li><a href="ar/index.html">عربي</a></li>
-        <li><a href="ku/index.html">کوردی</a></li>
+        <li><a href="/index.html">EN</a></li>
+        <li><a href="/ar/index.html">عربي</a></li>
+        <li><a href="/ku/index.html">کوردی</a></li>
       </ul>
     </div>
   </header>
@@ -216,8 +217,8 @@
           <div>
             <h1>About Al Farabi Gastroenterology &amp; Endoscopy Centre</h1>
             <p class="about-lead">
-              Al Farabi is a multidisciplinary digestive health centre in Baqubah, Diyala.
-              We combine adult and pediatric gastroenterology, hepatology, nutrition, internal medicine,
+              Al Farabi is a multidisciplinary digestive health centre in Baqubah, Diyala. We combine
+              adult and pediatric gastroenterology, hepatology, nutrition, internal medicine,
               pediatrics, surgery, dermatology, pharmacy, and on-site endoscopy under one roof.
             </p>
 
@@ -272,9 +273,8 @@
           <article class="about-card">
             <h3>Our vision</h3>
             <p>
-              To become a regional reference centre for digestive health in Iraq,
-              partnering with local hospitals, universities, and international centres
-              to raise standards of endoscopy and pediatric GI care.
+              To become a regional reference centre for digestive health in Iraq, partnering with local hospitals,
+              universities, and international centres to raise standards of endoscopy and pediatric GI care.
             </p>
           </article>
 
