@@ -741,7 +741,13 @@ body.home-page {
   gap: 0.75rem;
   flex-shrink: 0;
 }
-
+/* FINAL LOGO STYLE */
+.af-logo-full {
+  height: 40px;      /* adjust to 32px or 36px if needed */
+  width: auto;
+  object-fit: contain;
+  display: block;
+}
 .af-logo-circle {
   .af-logo-circle-img {
   width: 60%;
