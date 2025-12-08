@@ -1,49 +1,340 @@
-<section id="contact">
-  <h2>Contact Us</h2>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Contact | Al Farabi Gastroenterology &amp; Endoscopy Centre</title>
+  <link rel="stylesheet" href="styles.css" />
 
-  <!-- Visible email text for patients -->
-  <p>
-    For general inquiries, please email
-    <a href="mailto:info@avicennamedical.org">info@avicennamedical.org</a>
-    or use the secure contact form below.
-  </p>
+  <style>
+    .af-main {
+      background: #f5f7fb;
+    }
 
-  <form action="https://formsubmit.co/Mohammad.Hussein@pedsgimind.ca" method="POST">
-    <!-- FormSubmit configuration -->
-    <input type="hidden" name="_captcha" value="false">
-    <input type="hidden" name="_template" value="table">
-    <input type="hidden" name="_subject" value="New CONTACT message from Avicenna Medical Inc. website (sent to info@avicennamedical.org)">
-    <input type="hidden" name="_autoresponse" value="Thank you for contacting Avicenna Medical Inc. We have received your message addressed to info@avicennamedical.org and will respond as soon as possible.">
-    <!-- If you want the email that arrives to show the FROM line -->
-    <input type="hidden" name="_from" value="Avicenna Medical Inc. &lt;info@avicennamedical.org&gt;">
+    .contact-hero {
+      padding: 3rem 0 1.8rem;
+    }
 
-    <!-- Your existing fields -->
-    <div class="form-group">
-      <label style="font-weight:600;">Full Name</label>
-      <input type="text" name="name" class="form-control" placeholder="Enter your full name" required
-             style="width: 100%; padding: 0.75rem; border: 1px solid #ccc; border-radius: 4px;">
+    .contact-hero-inner {
+      background: #ffffff;
+      border-radius: 18px;
+      padding: 2.4rem 2.5rem 2rem;
+      box-shadow: 0 18px 40px rgba(15, 23, 42, 0.08);
+    }
+
+    .contact-hero h1 {
+      font-size: 2.05rem;
+      margin-bottom: 0.7rem;
+    }
+
+    .contact-hero p {
+      max-width: 780px;
+      color: #4b5563;
+      line-height: 1.7;
+    }
+
+    .contact-grid-section {
+      padding: 0 0 3.5rem;
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 2.2fr) minmax(0, 2fr);
+      gap: 1.8rem;
+    }
+
+    .contact-card {
+      background: #ffffff;
+      border-radius: 16px;
+      padding: 1.7rem 1.6rem 1.5rem;
+      box-shadow: 0 14px 32px rgba(15, 23, 42, 0.06);
+      border: 1px solid #e5e7eb;
+    }
+
+    .contact-card h2 {
+      font-size: 1.15rem;
+      margin-bottom: 0.6rem;
+    }
+
+    .contact-card p {
+      font-size: 0.95rem;
+      color: #374151;
+      line-height: 1.6;
+      margin-bottom: 0.5rem;
+    }
+
+    .contact-list {
+      font-size: 0.94rem;
+      color: #111827;
+      line-height: 1.7;
+    }
+
+    .contact-list strong {
+      font-weight: 600;
+    }
+
+    .contact-list a {
+      color: #0369a1;
+      text-decoration: none;
+    }
+
+    .contact-list a:hover {
+      text-decoration: underline;
+    }
+
+    .contact-note {
+      margin-top: 1.2rem;
+      font-size: 0.9rem;
+      color: #6b7280;
+    }
+
+    .contact-form {
+      display: grid;
+      gap: 0.85rem;
+      margin-top: 0.5rem;
+    }
+
+    .contact-form label {
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: #374151;
+    }
+
+    .contact-form input,
+    .contact-form textarea {
+      width: 100%;
+      padding: 0.55rem 0.7rem;
+      border-radius: 10px;
+      border: 1px solid #d1d5db;
+      font-size: 0.94rem;
+      outline: none;
+      transition: border-color 0.15s ease, box-shadow 0.15s ease;
+    }
+
+    .contact-form input:focus,
+    .contact-form textarea:focus {
+      border-color: #2563eb;
+      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.18);
+    }
+
+    .contact-form textarea {
+      resize: vertical;
+      min-height: 110px;
+    }
+
+    .contact-form button {
+      margin-top: 0.4rem;
+      padding: 0.6rem 1.2rem;
+      border-radius: 999px;
+      border: none;
+      background: #1d4ed8;
+      color: #ffffff;
+      font-size: 0.95rem;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    .contact-form button:hover {
+      background: #1e40af;
+    }
+
+    @media (max-width: 900px) {
+      .contact-grid {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    @media (max-width: 640px) {
+      .contact-hero {
+        padding-top: 2.3rem;
+      }
+      .contact-hero-inner {
+        padding-inline: 1.5rem;
+        border-radius: 0;
+        box-shadow: none;
+      }
+      .contact-grid-section {
+        padding-bottom: 2.5rem;
+      }
+    }
+  </style>
+</head>
+
+<body class="af-page">
+  <!-- HEADER -->
+  <header class="af-header">
+    <div class="af-container af-header-inner">
+      <div class="af-brand">
+        <div class="af-logo-circle">
+          <span class="af-logo-icon">胃</span>
+        </div>
+        <div class="af-brand-text">
+          <span class="af-brand-top">Avicenna Medical Inc.</span>
+          <span class="af-brand-main">Al Farabi Gastroenterology &amp; Endoscopy Centre</span>
+        </div>
+      </div>
+
+     <nav class="af-nav">
+  <a href="index.html">Home</a>
+  <a href="about.html">About</a>
+  <a href="services.html">Services</a>
+  <a href="doctors.html">Doctors</a>
+  <a href="conditions.html">Conditions</a>
+  <a href="education.html">Education</a>
+  <a href="contact.html">Contact</a>
+
+  <!-- NEW: Book appointment button -->
+  <a href="booking.html" class="af-nav-cta">Book your appointment online</a>
+  <!-- or use an external link, e.g.
+  <a href="https://your-booking-platform-link" class="af-nav-cta" target="_blank">
+    Book your appointment online
+  </a>
+  -->
+</nav> 
+
+      <ul class="af-lang-switch">
+        <li><a href="index.html">EN</a></li>
+        <li><a href="ar/index.html">عربي</a></li>
+        <li><a href="ku/index.html">کوردی</a></li>
+      </ul>
     </div>
+  </header>
 
-    <div class="form-group">
-      <label style="font-weight:600;">Email Address</label>
-      <input type="email" name="email" class="form-control" placeholder="Enter your email address" required
-             style="width: 100%; padding: 0.75rem; border: 1px solid #ccc; border-radius: 4px;">
-    </div>
+  <main class="af-main">
+    <!-- HERO -->
+    <section class="af-section contact-hero">
+      <div class="af-container">
+        <div class="contact-hero-inner">
+          <h1>Contact &amp; referrals</h1>
+          <p>
+            Patients, families, and referring physicians can reach Al Farabi Centre through the contact details
+            below. WhatsApp is available for appointment coordination and brief administrative questions.
+          </p>
+        </div>
+      </div>
+    </section>
 
-    <div class="form-group">
-      <label style="font-weight:600;">Phone Number (optional)</label>
-      <input type="tel" name="phone" class="form-control" placeholder="Enter your phone number"
-             style="width: 100%; padding: 0.75rem; border: 1px solid #ccc; border-radius: 4px;">
-    </div>
+    <!-- GRID -->
+    <section class="af-section contact-grid-section">
+      <div class="af-container">
+        <div class="contact-grid">
+          <!-- Al Farabi clinic -->
+          <article class="contact-card">
+            <h2>Al Farabi Gastroenterology &amp; Endoscopy Centre – Clinic contact</h2>
+            <div class="contact-list">
+              <p>
+                <strong>Clinic location:</strong><br />
+                Baqubah, Diyala Governorate, Iraq.
+              </p>
+              <p>
+                <strong>WhatsApp / Phone (clinic):</strong><br />
+                <a href="https://wa.me/9647721738755" target="_blank">+964 772-173-8755</a>
+              </p>
+              <p>
+                <strong>Email (clinic):</strong><br />
+                <a href="mailto:info@avicennamedical.org">info@avicennamedical.org</a>
+              </p>
+              <p>
+                <strong>Referral letters &amp; medical reports:</strong><br />
+                Please ask your referring physician to include a brief summary, key investigations,
+                and contact details for feedback.
+              </p>
+            </div>
+            <p class="contact-note">
+              Clinical questions about a specific patient should be sent through the referring doctor
+              or discussed during a scheduled clinic visit whenever possible.
+            </p>
+          </article>
 
-    <div class="form-group">
-      <label style="font-weight:600;">Your Message</label>
-      <textarea name="message" rows="4" class="form-control" placeholder="Write your message here" required
-                style="width: 100%; padding: 0.75rem; border: 1px solid #ccc; border-radius: 4px;"></textarea>
-    </div>
+          <!-- HQ & simple form -->
+          <article class="contact-card">
+            <h2>Avicenna Medical Inc. – Headquarter office</h2>
+            <div class="contact-list">
+              <p>
+                <strong>Main office contact:</strong><br />
+                Almansor, Baghdad, Iraq.
+              </p>
+              <p>
+                <strong>Administrative &amp; documents:</strong><br />
+                <a href="mailto:Documents@avicennamedical.org">Documents@avicennamedical.org</a>
+              </p>
+              <p>
+                <strong>Complaints &amp; quality-related inquiries:</strong><br />
+                <a href="mailto:Complaints@avicennamedical.org">Complaints@avicennamedical.org</a>
+              </p>
+              <p>
+                <strong>General email:</strong><br />
+                <a href="mailto:info@avicennamedical.org">info@avicennamedical.org</a>
+              </p>
+            </div>
 
-    <button type="submit" class="btn" style="margin-top: 0.5rem;">
-      Send Message
-    </button>
-  </form>
+            <p style="margin-top: 0.6rem; font-size: 0.92rem; color: #4b5563;">
+              For general written inquiries, you may also use the short form below. This form is not for emergencies
+              and should not be used to request urgent medical advice.
+            </p>
+<section class="contact-page">
+           <div class="container" style="max-width: 700px; margin: 0 auto; padding: 2rem;">
+  <h2 style="margin-bottom: 1rem;">Contact Avicenna Medical Inc.</h2>
+
+ <form action="https://formsubmit.co/info@avicennamedical.org" method="POST">
+
+  <input type="hidden" name="_captcha" value="false">
+  <input type="hidden" name="_template" value="table">
+  <input type="hidden" name="_subject" value="New inquiry from Avicenna Medical website">
+  <input type="hidden" name="_autoresponse" value="Thank you for contacting Avicenna Medical Inc. Our team will review your message and respond as soon as possible.">
+
+  <div class="form-group">
+    <label style="font-weight:600;">Full Name</label>
+    <input type="text" name="name" class="form-control" placeholder="Enter your full name" required style="width: 100%; padding: 0.75rem; border: 1px solid #d0d0d0; border-radius: 8px;">
+  </div>
+
+  <div class="form-group" style="margin-top: 1rem;">
+    <label style="font-weight:600;">Email Address</label>
+    <input type="email" name="email" class="form-control" placeholder="Enter your email address" required style="width: 100%; padding: 0.75rem; border: 1px solid #d0d0d0; border-radius: 8px;">
+  </div>
+
+  <div class="form-group" style="margin-top: 1rem;">
+    <label style="font-weight:600;">Phone Number (optional)</label>
+    <input type="text" name="phone" class="form-control" placeholder="Enter phone number" style="width: 100%; padding: 0.75rem; border: 1px solid #d0d0d0; border-radius: 8px;">
+  </div>
+
+  <div class="form-group" style="margin-top: 1rem;">
+    <label style="font-weight:600;">Your Message</label>
+    <textarea name="message" rows="6" class="form-control" placeholder="Type your message here..." required style="width: 100%; padding: 1rem; border: 1px solid #d0d0d0; border-radius: 8px;"></textarea>
+  </div>
+
+  <button type="submit" style="
+    width: 100%;
+    background: #0369a1;
+    color: #fff;
+    padding: 1rem;
+    border-radius: 10px;
+    border: none;
+    margin-top: 1.5rem;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+  ">
+    Submit
+  </button>
+
+</form> 
+</div> 
 </section>
+          </article>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="af-footer">
+    <div class="af-container">
+      <p>&copy; 2025 Avicenna Medical Inc., Headquarter Office, Baghdad, Iraq. All rights reserved.</p>
+      <p class="af-footer-meta">
+        Avicenna Medical Inc. proudly launching Al Farabi Gastroenterology &amp; Endoscopy Centre.
+      </p>
+    </div>
+  </footer>
+</body>
+</html>
