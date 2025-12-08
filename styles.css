@@ -754,7 +754,12 @@ body.home-page {
   font-size: 0.9rem;
   font-weight: 700;
 }
-
+/* New horizontal logo image */
+.af-logo-image img {
+  height: 40px;     /* adjust to your liking */
+  width: auto;
+  object-fit: contain;
+}
 .af-brand-text {
   display: flex;
   flex-direction: column;
