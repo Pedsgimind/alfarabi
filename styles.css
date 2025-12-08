@@ -743,8 +743,8 @@ body.home-page {
 }
 /* FINAL LOGO STYLE */
 .af-logo-full {
-  height: 40px;      /* adjust to 32px or 36px if needed */
-  width: auto;
+  height: 60px;      /* adjust to 32px or 36px if needed */
+  width: 60px;
   object-fit: contain;
   display: block;
 }
