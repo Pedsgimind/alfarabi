@@ -749,8 +749,8 @@ body.home-page {
   object-fit: contain;
   display: block;
 }
-  width: 10px;
-  height: 10px;
+  width: 1px;
+  height: 1px;
   border-radius: 999px;
   background: radial-gradient(circle at 30% 20%, #38bdf8, #0f766e);
   display: flex;
