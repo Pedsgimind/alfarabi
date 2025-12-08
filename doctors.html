@@ -3,103 +3,231 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Doctors | Al Farabi Gastroenterology &amp; Endoscopy Centre</title>
+  <title>Our Doctors | Al Farabi Gastroenterology &amp; Endoscopy Centre</title>
   <link rel="stylesheet" href="styles.css" />
 
+  <!-- Page-specific styling for Doctors page -->
   <style>
-    .doctors-main {
-      background: #020617;
+    .af-main {
+      background: #f5f7fb;
     }
 
     .doctors-hero {
-      padding: 3rem 0 2rem;
-      background: radial-gradient(circle at top left, #1e293b 0, #020617 55%, #020617 100%);
-      color: #e5e7eb;
+      padding: 3rem 0 1.5rem;
+    }
+
+    .doctors-hero-inner {
+      background: #ffffff;
+      border-radius: 18px;
+      padding: 2.5rem 2.5rem 2rem;
+      box-shadow: 0 18px 40px rgba(15, 23, 42, 0.07);
     }
 
     .doctors-hero h1 {
       font-size: 2.1rem;
-      margin-bottom: 0.6rem;
+      margin-bottom: 0.75rem;
     }
 
     .doctors-hero p {
-      max-width: 46rem;
-      color: #cbd5f5;
-      line-height: 1.7;
-      font-size: 0.97rem;
+      max-width: 760px;
+      color: #4b5563;
+      line-height: 1.6;
+      margin-bottom: 1.8rem;
     }
 
-    .doctors-grid {
+    .doctor-filter {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 0.8rem;
+    }
+
+    .doctor-filter label {
+      font-weight: 600;
+      font-size: 0.95rem;
+      color: #111827;
+    }
+
+    .doctor-filter select {
+      flex: 1 1 260px;
+      padding: 0.7rem 0.9rem;
+      border-radius: 999px;
+      border: 1px solid #cbd5e1;
+      background: #ffffff;
+      font-size: 0.96rem;
+      outline: none;
+      transition: border-color 0.15s ease, box-shadow 0.15s ease;
+    }
+
+    .doctor-filter select:focus {
+      border-color: #2563eb;
+      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.18);
+    }
+
+    .doctors-grid-section {
       padding: 0 0 3.5rem;
     }
 
-    .doctors-grid-inner {
+    .doctors-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 1.5rem;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 1.5rem 1.8rem;
+    }
+
+    @media (max-width: 900px) {
+      .doctors-hero-inner {
+        padding: 2rem 1.5rem 1.75rem;
+      }
+      .doctors-grid {
+        grid-template-columns: minmax(0, 1fr);
+      }
     }
 
     .doctor-card {
-      background: #020617;
+      background: #ffffff;
       border-radius: 18px;
-      box-shadow: 0 18px 40px rgba(15, 23, 42, 0.9);
-      border: 1px solid rgba(148, 163, 184, 0.5);
+      padding: 1.6rem 1.8rem;
+      box-shadow: 0 10px 25px rgba(15, 23, 42, 0.07);
+      border: 1px solid #e2e8f0;
+      position: relative;
       overflow: hidden;
-      color: #e5e7eb;
+      transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+    }
+
+    .doctor-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at top left, rgba(56, 189, 248, 0.12), transparent 55%);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.25s ease;
+    }
+
+    .doctor-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 16px 38px rgba(15, 23, 42, 0.13);
+      border-color: #bfdbfe;
+    }
+
+    .doctor-card:hover::before {
+      opacity: 1;
+    }
+
+    .doctor-card-header {
       display: flex;
-      flex-direction: column;
-    }
-
-    .doctor-header {
-      padding: 1.4rem 1.6rem 0.5rem;
-    }
-
-    .doctor-name {
-      font-size: 1.1rem;
-      font-weight: 600;
-      margin: 0 0 0.2rem;
-      color: #f9fafb;
-    }
-
-    .doctor-title {
-      font-size: 0.9rem;
-      color: #9ca3af;
+      align-items: center;
+      gap: 0.7rem;
       margin-bottom: 0.4rem;
     }
 
-    .doctor-body {
-      padding: 0 1.6rem 1.4rem;
-      font-size: 0.93rem;
+    .doctor-avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: 999px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.35rem;
+      background: #eff6ff;
+      color: #1d4ed8;
+      flex-shrink: 0;
+    }
+
+    .doctor-name {
+      font-size: 1.2rem;
+      font-weight: 700;
+      margin: 0;
+    }
+
+    .doctor-specialty {
+      font-size: 0.96rem;
+      font-weight: 600;
+      color: #0369a1;
+      margin: 0.2rem 0 0.65rem;
+    }
+
+    .doctor-description {
+      font-size: 0.95rem;
+      color: #374151;
       line-height: 1.6;
+      margin-bottom: 0.75rem;
     }
 
-    .doctor-body ul {
+    .doctor-services {
+      font-size: 0.93rem;
+      color: #374151;
+      margin: 0 0 0.75rem 1.1rem;
+      padding: 0;
+      list-style-type: disc;
+    }
+
+    .doctor-services li {
+      margin-bottom: 0.22rem;
+    }
+
+    .doctor-contact {
+      border-top: 1px solid #e5e7eb;
+      padding-top: 0.55rem;
       margin-top: 0.4rem;
-      list-style: disc;
-      margin-left: 1.1rem;
+      font-size: 0.92rem;
+      color: #111827;
     }
 
-    .doctor-tag {
-      font-size: 0.78rem;
-      text-transform: uppercase;
-      letter-spacing: 0.12em;
-      color: #a5b4fc;
+    .doctor-contact a {
+      color: #0369a1;
+      text-decoration: none;
+    }
+
+    .doctor-contact a:hover {
+      text-decoration: underline;
+    }
+
+    .doctors-note {
+      margin-top: 2rem;
+      font-size: 0.94rem;
+      color: #4b5563;
+    }
+
+    @media (max-width: 640px) {
+      .doctors-hero {
+        padding-top: 2.25rem;
+      }
+      .doctors-hero-inner {
+        border-radius: 0;
+        box-shadow: none;
+        padding-inline: 1.25rem;
+      }
+      .doctors-grid-section {
+        padding-bottom: 2.5rem;
+      }
+      .doctor-card {
+        border-radius: 16px;
+      }
     }
   </style>
 </head>
 
-<body>
-  <!-- HEADER -->
+<body class="af-page">
+
+  <!-- ====== HEADER (updated to match dark premium header) ====== -->
   <header class="af-header">
     <div class="af-container af-header-inner">
+
+      <!-- BRAND -->
       <div class="af-brand">
-        <img src="images/avicenna-logo-horizontal.png" alt="Avicenna Medical Inc." class="af-logo-full" />
+        <img
+          src="images/avicenna-logo-horizontal.png"
+          alt="Avicenna Medical Inc."
+          class="af-logo-full"
+        />
         <div class="af-brand-text">
           <span class="af-brand-line1">Avicenna Medical Inc.</span>
           <span class="af-brand-line2">Al Farabi Gastroenterology &amp; Endoscopy Centre</span>
         </div>
       </div>
 
+      <!-- NAVIGATION -->
       <nav class="af-nav">
         <a href="index.html">Home</a>
         <a href="about.html">About</a>
@@ -111,88 +239,250 @@
         <a href="booking.html" class="af-nav-cta">Book your appointment online</a>
       </nav>
 
+      <!-- LANGUAGE SWITCHER -->
       <ul class="af-lang-switch">
-        <li><a href="/index.html">EN</a></li>
-        <li><a href="/ar/index.html">عربي</a></li>
-        <li><a href="/ku/index.html">کوردی</a></li>
+        <li><a href="index.html">EN</a></li>
+        <li><a href="ar/index.html">عربي</a></li>
+        <li><a href="ku/index.html">کوردی</a></li>
       </ul>
     </div>
   </header>
 
-  <main class="doctors-main">
-    <!-- HERO -->
+  <main class="af-main">
+    <!-- ====== DOCTORS HERO ====== -->
     <section class="af-section doctors-hero">
       <div class="af-container">
-        <h1>Our Doctors</h1>
-        <p>
-          Al Farabi Centre brings together adult and pediatric gastroenterologists, hepatologists,
-          general pediatricians, internal medicine physicians, surgeons and dermatologists,
-          with shared commitment to safe, evidence-based care.
-        </p>
+        <div class="doctors-hero-inner">
+          <h1>Our Doctors</h1>
+          <p>
+            Al Farabi Gastroenterology &amp; Endoscopy Centre hosts a growing team of specialists.
+            Select a doctor below to quickly jump to their profile, or scroll to read about each consultant,
+            the services they provide, and how to contact the clinic.
+          </p>
+
+          <div class="doctor-filter">
+            <label for="doctorSelect">Choose a doctor:</label>
+            <select id="doctorSelect">
+              <option value="">-- Select a doctor --</option>
+              <option value="dr-mohammad-hussein">Dr. Mohammad Hussein – Pediatric Gastroenterology</option>
+              <option value="dr-a-khazraji">Dr. A. Khazraji – Adult Gastroenterology</option>
+              <option value="dr-nadine-ahmed">Dr. Nadine Ahmed – General Pediatrics</option>
+              <option value="dr-sardar-saman">Dr. Sardar Saman – Internal Medicine</option>
+              <option value="dr-wasd-ali">Dr. Wasd Ali – Dermatology</option>
+              <option value="dr-sarmed-qaysim">Dr. Sarmed Qaysim – General Surgery</option>
+            </select>
+          </div>
+        </div>
       </div>
     </section>
 
-    <!-- DOCTORS GRID -->
-    <section class="af-section doctors-grid">
+    <!-- ====== DOCTORS GRID ====== -->
+    <section class="af-section doctors-grid-section">
       <div class="af-container">
-        <div class="doctors-grid-inner">
-          <!-- Example cards – edit names/titles as needed -->
-          <article class="doctor-card">
-            <div class="doctor-header">
-              <span class="doctor-tag">Pediatric GI</span>
-              <h2 class="doctor-name">Dr. Mohammad Hussein, MD, FRCPC</h2>
-              <div class="doctor-title">
-                Consultant Pediatric Gastroenterologist, Hepatologist &amp; Nutrition Specialist
+        <div class="doctors-grid">
+          <!-- Dr. Mohammad Hussein -->
+          <article id="dr-mohammad-hussein" class="doctor-card">
+            <div class="doctor-card-header">
+              <div class="doctor-avatar">👨‍⚕️</div>
+              <div>
+                <h2 class="doctor-name">Dr. Mohammad Hussein</h2>
+                <p class="doctor-specialty">Pediatric Gastroenterology, Hepatology &amp; Nutrition</p>
               </div>
             </div>
-            <div class="doctor-body">
-              <p>
-                Canadian-trained pediatrician and pediatric gastroenterologist providing comprehensive
-                digestive, liver and nutrition care for infants, children and adolescents.
-              </p>
-              <ul>
-                <li>Diagnostic and therapeutic pediatric upper endoscopy and colonoscopy.</li>
-                <li>Evaluation of chronic abdominal pain, IBD, celiac disease and GI bleeding.</li>
-                <li>Management of feeding difficulties, malnutrition and obesity.</li>
-              </ul>
+            <p class="doctor-description">
+              Dr. Hussein provides comprehensive evaluation and management of infants, children,
+              and adolescents with digestive, liver, feeding, and nutrition disorders.
+            </p>
+            <ul class="doctor-services">
+              <li>Celiac disease and other malabsorption disorders.</li>
+              <li>Inflammatory bowel disease (Crohn’s disease and ulcerative colitis).</li>
+              <li>Chronic abdominal pain, constipation, reflux, and functional bowel disorders.</li>
+              <li>Feeding difficulties, growth concerns, and complex nutrition issues.</li>
+              <li>Diagnostic and therapeutic endoscopy (upper endoscopy, colonoscopy, polypectomy, foreign body removal).</li>
+            </ul>
+            <div class="doctor-contact">
+              <strong>Contact:</strong><br />
+              Email:
+              <a href="mailto:info@avicennamedical.org">info@avicennamedical.org</a><br />
+              WhatsApp:
+              <a href="https://wa.me/9647721738755" target="_blank">+964 772-173-8755</a>
             </div>
           </article>
 
-          <article class="doctor-card">
-            <div class="doctor-header">
-              <span class="doctor-tag">Adult GI</span>
-              <h2 class="doctor-name">Dr. A. Khazraji</h2>
-              <div class="doctor-title">
-                Consultant Adult Gastroenterologist &amp; Endoscopist
+          <!-- Dr. A. Khazraji -->
+          <article id="dr-a-khazraji" class="doctor-card">
+            <div class="doctor-card-header">
+              <div class="doctor-avatar">🩺</div>
+              <div>
+                <h2 class="doctor-name">Dr. A. Khazraji</h2>
+                <p class="doctor-specialty">Adult Gastroenterology &amp; Endoscopy</p>
               </div>
             </div>
-            <div class="doctor-body">
-              <p>
-                Adult gastroenterologist providing diagnostic and therapeutic endoscopy for a wide range
-                of upper and lower GI disorders.
-              </p>
-              <ul>
-                <li>Evaluation of reflux, ulcers, anemia and GI bleeding.</li>
-                <li>Screening and surveillance colonoscopy for colorectal cancer.</li>
-                <li>Management of chronic liver disease and portal hypertension.</li>
-              </ul>
+            <p class="doctor-description">
+              Dr. Khazraji provides care for adults with gastrointestinal and liver disorders.
+            </p>
+            <ul class="doctor-services">
+              <li>Assessment and management of acid reflux, peptic ulcer disease, and dyspepsia.</li>
+              <li>Evaluation of gastrointestinal bleeding, anemia, and chronic abdominal pain.</li>
+              <li>Screening and surveillance colonoscopy for polyps and colorectal cancer.</li>
+              <li>Diagnosis and management of liver disease, including fatty liver and viral hepatitis.</li>
+              <li>Diagnostic and therapeutic endoscopy (upper endoscopy and colonoscopy).</li>
+            </ul>
+            <div class="doctor-contact">
+              <strong>Contact:</strong><br />
+              Email:
+              <a href="mailto:info@avicennamedical.org">info@avicennamedical.org</a><br />
+              WhatsApp:
+              <a href="https://wa.me/9647721738755" target="_blank">+964 772-173-8755</a>
             </div>
           </article>
 
-          <!-- Add more doctor cards here as your team expands -->
+          <!-- Dr. Nadine Ahmed -->
+          <article id="dr-nadine-ahmed" class="doctor-card">
+            <div class="doctor-card-header">
+              <div class="doctor-avatar">👶</div>
+              <div>
+                <h2 class="doctor-name">Dr. Nadine Ahmed</h2>
+                <p class="doctor-specialty">General Pediatrics</p>
+              </div>
+            </div>
+            <p class="doctor-description">
+              Dr. Ahmed provides full-scope general pediatric care for infants, children, and adolescents.
+            </p>
+            <ul class="doctor-services">
+              <li>Well-child visits, growth and development monitoring, and vaccinations.</li>
+              <li>Assessment and management of common childhood illnesses and infections.</li>
+              <li>Chronic disease follow-up (such as asthma and allergies).</li>
+              <li>School, behaviour, and learning-related concerns.</li>
+              <li>Coordination of care with subspecialty services when needed.</li>
+            </ul>
+            <div class="doctor-contact">
+              <strong>Contact:</strong><br />
+              Email:
+              <a href="mailto:info@avicennamedical.org">info@avicennamedical.org</a><br />
+              WhatsApp:
+              <a href="https://wa.me/9647721738755" target="_blank">+964 772-173-8755</a>
+            </div>
+          </article>
+
+          <!-- Dr. Sardar Saman -->
+          <article id="dr-sardar-saman" class="doctor-card">
+            <div class="doctor-card-header">
+              <div class="doctor-avatar">🧑‍⚕️</div>
+              <div>
+                <h2 class="doctor-name">Dr. Sardar Saman</h2>
+                <p class="doctor-specialty">Internal Medicine</p>
+              </div>
+            </div>
+            <p class="doctor-description">
+              Dr. Saman provides adult internal medicine care with a focus on chronic disease management and
+              coordination with subspecialists.
+            </p>
+            <ul class="doctor-services">
+              <li>Evaluation and management of hypertension, diabetes, and lipid disorders.</li>
+              <li>Assessment of complex multi-system complaints and undiagnosed conditions.</li>
+              <li>Pre-operative medical assessment and optimization.</li>
+              <li>Coordination of care with gastroenterology and other subspecialties.</li>
+            </ul>
+            <div class="doctor-contact">
+              <strong>Contact:</strong><br />
+              Email:
+              <a href="mailto:info@avicennamedical.org">info@avicennamedical.org</a><br />
+              WhatsApp:
+              <a href="https://wa.me/9647721738755" target="_blank">+964 772-173-8755</a>
+            </div>
+          </article>
+
+          <!-- Dr. Wasd Ali -->
+          <article id="dr-wasd-ali" class="doctor-card">
+            <div class="doctor-card-header">
+              <div class="doctor-avatar">🌿</div>
+              <div>
+                <h2 class="doctor-name">Dr. Wasd Ali</h2>
+                <p class="doctor-specialty">Dermatology</p>
+              </div>
+            </div>
+            <p class="doctor-description">
+              Dr. Ali provides diagnosis and treatment of skin, hair, and nail disorders for adults and children.
+            </p>
+            <ul class="doctor-services">
+              <li>Acne, eczema, psoriasis, and other inflammatory skin conditions.</li>
+              <li>Evaluation of moles, pigmented lesions, and skin cancer screening.</li>
+              <li>Management of hair loss and scalp disorders.</li>
+              <li>Minor dermatologic procedures and lesion removal.</li>
+            </ul>
+            <div class="doctor-contact">
+              <strong>Contact:</strong><br />
+              Email:
+              <a href="mailto:info@avicennamedical.org">info@avicennamedical.org</a><br />
+              WhatsApp:
+              <a href="https://wa.me/9647721738755" target="_blank">+964 772-173-8755</a>
+            </div>
+          </article>
+
+          <!-- Dr. Sarmed Qaysim -->
+          <article id="dr-sarmed-qaysim" class="doctor-card">
+            <div class="doctor-card-header">
+              <div class="doctor-avatar">🩻</div>
+              <div>
+                <h2 class="doctor-name">Dr. Sarmed Qaysim</h2>
+                <p class="doctor-specialty">General Surgery</p>
+              </div>
+            </div>
+            <p class="doctor-description">
+              Dr. Qaysim provides surgical assessment and management for common general surgical conditions.
+            </p>
+            <ul class="doctor-services">
+              <li>Gallbladder, hernia, and abdominal wall surgery.</li>
+              <li>Management of acute surgical emergencies.</li>
+              <li>Pre-operative evaluation and post-operative follow-up.</li>
+              <li>Coordinated care with gastroenterology and other specialties.</li>
+            </ul>
+            <div class="doctor-contact">
+              <strong>Contact:</strong><br />
+              Email:
+              <a href="mailto:info@avicennamedical.org">info@avicennamedical.org</a><br />
+              WhatsApp:
+              <a href="https://wa.me/9647721738755" target="_blank">+964 772-173-8755</a>
+            </div>
+          </article>
         </div>
+
+        <p class="doctors-note">
+          As the Al Farabi Center service expands, additional consultants and detailed profiles will be added.
+          For the most up-to-date information on available doctors and clinic times, please contact the center directly.
+        </p>
       </div>
     </section>
   </main>
 
-  <!-- FOOTER -->
+  <!-- ====== FOOTER (same as index) ====== -->
   <footer class="af-footer">
     <div class="af-container">
-      <p>&copy; 2025 Avicenna Medical Inc., Headquarter Office, Baghdad, Iraq. All rights reserved.</p>
+      <p>
+        &copy; 2025 Avicenna Medical Inc., Headquarter Office, Baghdad, Iraq. All rights reserved.
+      </p>
       <p class="af-footer-meta">
         Avicenna Medical Inc. proudly launching Al Farabi Gastroenterology &amp; Endoscopy Centre.
       </p>
     </div>
   </footer>
+
+  <!-- Scroll to doctor profile when selected from dropdown -->
+  <script>
+    (function () {
+      var select = document.getElementById('doctorSelect');
+      if (!select) return;
+
+      select.addEventListener('change', function () {
+        var targetId = this.value;
+        if (!targetId) return;
+        var el = document.getElementById(targetId);
+        if (el) {
+          el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
+    })();
+  </script>
 </body>
 </html>
