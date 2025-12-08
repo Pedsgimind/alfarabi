@@ -789,7 +789,23 @@ body.home-page {
   padding-bottom: 2px;
   border-bottom: 2px solid transparent;
 }
+/* Call-to-action button in the top navigation */
+.af-nav .af-nav-cta {
+  margin-left: 0.75rem;
+  padding: 0.45rem 0.9rem;
+  border-radius: 999px;
+  background: #2563eb;        /* blue button */
+  color: #ffffff;
+  font-weight: 600;
+  border: 1px solid #1d4ed8;
+  text-decoration: none;
+  white-space: nowrap;
+}
 
+.af-nav .af-nav-cta:hover {
+  background: #1d4ed8;
+  border-color: #1e40af;
+}
 .af-nav a:hover {
   color: #ffffff;
 }
