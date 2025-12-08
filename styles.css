@@ -755,7 +755,7 @@ body.home-page {
   font-weight: 700;
 }
 .af-logo-image img {
-  height: 40px;     /* smaller and cleaner for header */
+  height: 50px;
   width: auto;
   object-fit: contain;
   display: block;
