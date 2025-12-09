@@ -4,7 +4,9 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>مركز الفارابي لأمراض الجهاز الهضمي والمناظير | مؤسسة ابن سينا الطبية</title>
-  <link rel="stylesheet" href="styles.css" />
+
+  <!-- same CSS as English, but from one level up -->
+  <link rel="stylesheet" href="../styles.css" />
 </head>
 
 <body class="home-page" dir="rtl">
@@ -15,8 +17,9 @@
 
       <!-- BRAND AREA -->
       <div class="af-brand">
+        <!-- same logo file as English, but relative path from /ar/ -->
         <img
-          src="images/avicenna-logo-horizontal.png"
+          src="../images/avicenna-logo-horizontal.png"
           alt="مؤسسة ابن سينا الطبية"
           class="af-logo-full"
         />
@@ -28,6 +31,7 @@
 
       <!-- NAVIGATION -->
       <nav class="af-nav">
+        <!-- keep same order as English -->
         <a href="index.html" class="active">الرئيسية</a>
         <a href="about.html">من نحن</a>
         <a href="services.html">الخدمات</a>
@@ -40,9 +44,9 @@
 
       <!-- LANGUAGE SWITCHER -->
       <ul class="af-lang-switch">
-        <li><a href="/index.html">EN</a></li>
-        <li><a href="/ar/index.html">عربي</a></li>
-        <li><a href="/ku/index.html">کوردی</a></li>
+        <li><a href="../index.html">EN</a></li>
+        <li><a href="index.html">عربي</a></li>
+        <li><a href="../ku/index.html">کوردی</a></li>
       </ul>
 
     </div>
@@ -63,14 +67,14 @@
             </h1>
 
             <p class="af-hero-lead">
-              مركز متعدد التخصصات يقدّم خدمات الجهاز الهضمي والكبد للبالغين والأطفال،
+              مركز متعدد التخصصات يقدّم خدمات أمراض الجهاز الهضمي والكبد للبالغين والأطفال،
               وطب الباطنية، وطب الأطفال العام، والجراحة العامة، والأمراض الجلدية،
               مع توفير وحدات مناظير وتشخيص وعلاج داخل الموقع – تحت سقف واحد.
             </p>
 
             <ul class="af-hero-points">
               <li>مناظير تشخيصية وعلاجية في الموقع، بما في ذلك الإجراءات الطارئة.</li>
-              <li>تكامل خدمات الجهاز الهضمي والكبد والتغذية والسمنة للبالغين والأطفال.</li>
+              <li>تكامل خدمات أمراض الجهاز الهضمي والكبد والتغذية والسمنة للبالغين والأطفال.</li>
               <li>تعاون وثيق مع دائرة صحة ديالى والشركاء في المستشفيات.</li>
             </ul>
 
@@ -91,10 +95,10 @@
             </div>
           </div>
 
-          <!-- Image + Stats -->
+          <!-- HERO IMAGE + STATS (same structure as English) -->
           <div class="af-hero-image-card">
             <div class="af-hero-image-frame">
-              <img src="images/alfarabi-entrance-1.jpg" alt="مدخل مركز الفارابي" />
+              <img src="../images/alfarabi-entrance-1.jpg" alt="مدخل مركز الفارابي" />
             </div>
 
             <div class="af-hero-stats">
@@ -124,8 +128,8 @@
         <header class="af-section-header">
           <h2>لماذا يختار المرضى مركز الفارابي؟</h2>
           <p>
-            يجمع المركز بين الخبرة العالية في أمراض الجهاز الهضمي والكبد والتغذية والمناظير
-            للبالغين والأطفال، مع رعاية متكاملة تتمحور حول المريض والأسرة.
+            يجمع المركز بين الخبرة التخصصية في أمراض الجهاز الهضمي والكبد والتغذية والمناظير
+            للبالغين والأطفال، مع رعاية منسقة تتمحور حول المريض والأسرة.
           </p>
         </header>
 
@@ -134,28 +138,31 @@
           <article class="af-feature-card">
             <h3>استشاريون وخبراء مناظير</h3>
             <p>
-              أطباء استشاريون معتمدون دولياً يقدمون رعاية متقدمة لأمراض الجهاز الهضمي والكبد.
+              أطباء استشاريون معتمدون دولياً يقدّمون رعاية متقدمة لأمراض الجهاز الهضمي والكبد.
             </p>
           </article>
 
           <article class="af-feature-card">
-            <h3>وحدة مناظير متكاملة</h3>
+            <h3>وحدة مناظير متكاملة في الموقع</h3>
             <p>
-              تنظير علوي وتنظير قولون واستئصال الزوائد اللحمية وربط الدوالي وإجراءات طارئة – تُجرى بأمان داخل المركز.
+              تنظير علوي، وتنظير قولون، واستئصال الزوائد اللحمية، وربط الدوالي،
+              وإجراءات طارئة تُجرى بأمان داخل المركز.
             </p>
           </article>
 
           <article class="af-feature-card">
             <h3>فريق متعدد التخصصات</h3>
             <p>
-              طب باطني، طب أطفال، جراحة، أمراض جلدية، صيدلة، مختبر – جميعها تحت سقف واحد.
+              طب باطني، وطب أطفال، وجراحة، وأمراض جلدية، وصيدلة، ومختبر –
+              جميعها متوفرة تحت سقف واحد.
             </p>
           </article>
 
           <article class="af-feature-card">
             <h3>متابعة متمحورة حول الأسرة</h3>
             <p>
-              خطط علاجية واضحة، وتثقيف صحي، ومتابعة دقيقة تركز على صحة ورفاهية المريض على المدى الطويل.
+              خطط علاجية واضحة، وتثقيف صحي، ومواعيد متابعة دقيقة تركز على الصحة
+              والرفاهية على المدى الطويل.
             </p>
           </article>
 
