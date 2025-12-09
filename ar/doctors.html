@@ -1,365 +1,493 @@
-<!-- DOCTORS PAGE START -->
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>أطباؤنا | مركز الفارابي لأمراض الجهاز الهضمي والمناظير</title>
 
-<style>
-  /* نفس تنسيق صفحة الأطباء – بدون تغيير */
-  .doctors-page {
-    padding: 3rem 1.5rem 4rem;
-    background: #f5f7fb;
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  }
+  <!-- نفس ملف التنسيق العام مع مسار نسبي من مجلد /ar -->
+  <link rel="stylesheet" href="../styles.css" />
 
-  .doctors-layout {
-    max-width: 1100px;
-    margin: 0 auto;
-  }
-
-  .doctors-header h1 {
-    font-size: 2.4rem;
-    margin-bottom: 0.5rem;
-  }
-
-  .doctors-header p {
-    max-width: 720px;
-    color: #555;
-    line-height: 1.6;
-  }
-
-  .doctor-filter {
-    margin-top: 1.5rem;
-    margin-bottom: 2rem;
-  }
-
-  .doctor-filter label {
-    font-weight: 600;
-    margin-right: 0.5rem;
-  }
-
-  .doctor-filter select {
-    padding: 0.6rem 0.75rem;
-    border-radius: 999px;
-    border: 1px solid #cbd5e1;
-    min-width: 260px;
-    font-size: 0.95rem;
-    background: #fff;
-  }
-
-  .doctors-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 1.75rem;
-  }
-
-  .doctor-card {
-    background: #ffffff;
-    border-radius: 18px;
-    padding: 1.6rem 1.8rem;
-    box-shadow: 0 10px 25px rgba(15, 23, 42, 0.08);
-    border: 1px solid #e2e8f0;
-    transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
-    position: relative;
-    overflow: hidden;
-  }
-
-  .doctor-card::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background: radial-gradient(circle at top left, rgba(56, 189, 248, 0.12), transparent 55%);
-    opacity: 0;
-    transition: opacity 0.25s ease;
-    pointer-events: none;
-  }
-
-  .doctor-card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 16px 35px rgba(15, 23, 42, 0.14);
-    border-color: #bfdbfe;
-  }
-
-  .doctor-card:hover::before {
-    opacity: 1;
-  }
-
-  .doctor-name {
-    font-size: 1.2rem;
-    font-weight: 700;
-    margin-bottom: 0.25rem;
-    display: flex;
-    align-items: center;
-    gap: 0.45rem;
-  }
-
-  .doctor-name span.emoji {
-    font-size: 1.2rem;
-  }
-
-  .doctor-specialty {
-    font-size: 0.98rem;
-    font-weight: 600;
-    color: #0369a1;
-    margin-bottom: 0.75rem;
-  }
-
-  .doctor-description {
-    font-size: 0.95rem;
-    color: #374151;
-    line-height: 1.6;
-    margin-bottom: 0.75rem;
-  }
-
-  .doctor-services {
-    padding-left: 1.1rem;
-    margin: 0 0 0.9rem 0;
-    font-size: 0.93rem;
-    color: #374151;
-  }
-
-  .doctor-services li {
-    margin-bottom: 0.25rem;
-  }
-
-  .doctor-contact {
-    font-size: 0.92rem;
-    color: #111827;
-    margin-top: 0.5rem;
-    border-top: 1px solid #e5e7eb;
-    padding-top: 0.6rem;
-  }
-
-  .doctor-contact a {
-    color: #0369a1;
-    text-decoration: none;
-  }
-
-  .doctor-contact a:hover {
-    text-decoration: underline;
-  }
-
-  @media (max-width: 640px) {
-    .doctors-page {
-      padding: 2.25rem 1rem 3rem;
+  <!-- تنسيق خاص بصفحة الأطباء -->
+  <style>
+    .af-main {
+      background: #f5f7fb;
     }
-    .doctors-header h1 {
-      font-size: 1.9rem;
+
+    .doctors-hero {
+      padding: 3rem 0 1.5rem;
     }
-  }
-</style>
 
-<section class="doctors-page">
-  <div class="doctors-layout">
-    <header class="doctors-header">
-      <h1>أطباؤنا</h1>
-      <p>
-        يضم مركز الفارابي لأمراض الجهاز الهضمي والمناظير فريقًا متناميًا من الأطباء
-        الاستشاريين. يمكنك اختيار اسم الطبيب أدناه للانتقال مباشرة إلى ملفه، أو
-        التمرير لأسفل للاطلاع على نبذة عن كل استشاري، والخدمات التي يقدّمها وطريقة
-        التواصل مع العيادة.
-      </p>
+    .doctors-hero-inner {
+      background: #ffffff;
+      border-radius: 18px;
+      padding: 2.5rem 2.5rem 2rem;
+      box-shadow: 0 18px 40px rgba(15, 23, 42, 0.07);
+    }
 
-      <div class="doctor-filter">
-        <label for="doctorSelect">اختر الطبيب:</label>
-        <select id="doctorSelect">
-          <option value="">-- اختر طبيبًا --</option>
-          <option value="dr-mohammad-hussein">د. محمد حسين – أمراض الجهاز الهضمي للأطفال</option>
-          <option value="dr-a-khazraji">د. أ. الخزراجي – أمراض الجهاز الهضمي للكبار</option>
-          <option value="dr-nadine-ahmed">د. نادين أحمد – طب الأطفال العام</option>
-          <option value="dr-sardar-saman">د. سردار سامان – الطب الباطني</option>
-          <option value="dr-wasd-ali">د. وسد علي – الأمراض الجلدية</option>
-          <option value="dr-sarmed-qaysim">د. سرمد قيسم – الجراحة العامة</option>
-        </select>
-      </div>
-    </header>
+    .doctors-hero h1 {
+      font-size: 2.1rem;
+      margin-bottom: 0.75rem;
+    }
 
-    <div class="doctors-grid">
-      <!-- Dr. Mohammad Hussein -->
-      <article id="dr-mohammad-hussein" class="doctor-card">
-        <h2 class="doctor-name">
-          <span class="emoji">🧒🏻</span>
-          <span>د. محمد حسين</span>
-        </h2>
-        <div class="doctor-specialty">
-          أمراض الجهاز الهضمي والكبد والتغذية للأطفال
-        </div>
-        <p class="doctor-description">
-          يقدّم الدكتور محمد حسين تقييماً وعلاجاً شاملاً للرضع والأطفال واليافعين الذين
-          يعانون من اضطرابات الجهاز الهضمي والكبد ومشاكل التغذية والنمو.
-        </p>
-        <ul class="doctor-services">
-          <li>الداء البطني واضطرابات سوء الامتصاص الأخرى</li>
-          <li>أمراض الأمعاء الالتهابية (داء كرون والتهاب القولون التقرحي)</li>
-          <li>آلام البطن المزمنة، الإمساك، الارتجاع واضطرابات الأمعاء الوظيفية</li>
-          <li>صعوبات التغذية، مشاكل النمو والقضايا التغذوية المعقدة</li>
-          <li>المناظير التشخيصية والعلاجية (منظار علوي، منظار القولون، استئصال الزوائد، إزالة الأجسام الغريبة)</li>
-        </ul>
-        <div class="doctor-contact">
-          <strong>التواصل:</strong><br>
-          البريد الإلكتروني:
-          <a href="mailto:info@avicennamedical.org">info@avicennamedical.org</a><br>
-          واتساب:
-          <a href="https://wa.me/9647721738755">+964 772-173-8755</a>
-        </div>
-      </article>
+    .doctors-hero p {
+      max-width: 760px;
+      color: #4b5563;
+      line-height: 1.6;
+      margin-bottom: 1.8rem;
+    }
 
-      <!-- Dr. A. Khazraji -->
-      <article id="dr-a-khazraji" class="doctor-card">
-        <h2 class="doctor-name">
-          <span class="emoji">🩺</span>
-          <span>د. أ. الخزراجي</span>
-        </h2>
-        <div class="doctor-specialty">
-          أمراض الجهاز الهضمي للكبار والمناظير
-        </div>
-        <p class="doctor-description">
-          يقدّم الدكتور الخزراجي الرعاية للبالغين المصابين بأمراض الجهاز الهضمي والكبد.
-        </p>
-        <ul class="doctor-services">
-          <li>تقييم وعلاج الارتجاع الحمضي، قرحة المعدة والاثني عشر وعسر الهضم</li>
-          <li>تقييم نزيف الجهاز الهضمي، فقر الدم وآلام البطن المزمنة</li>
-          <li>تنظير وفحص القولون للكشف والمتابعة عن الزوائد والسرطان</li>
-          <li>تشخيص وعلاج أمراض الكبد بما في ذلك الكبد الدهني والتهاب الكبد الفيروسي</li>
-          <li>المناظير التشخيصية والعلاجية (المنظار العلوي ومنظار القولون)</li>
-        </ul>
-        <div class="doctor-contact">
-          <strong>التواصل:</strong><br>
-          البريد الإلكتروني:
-          <a href="mailto:info@avicennamedical.org">info@avicennamedical.org</a><br>
-          واتساب:
-          <a href="https://wa.me/9647721738755">+964 772-173-8755</a>
-        </div>
-      </article>
+    .doctor-filter {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 0.8rem;
+    }
 
-      <!-- Dr. Nadine Ahmed -->
-      <article id="dr-nadine-ahmed" class="doctor-card">
-        <h2 class="doctor-name">
-          <span class="emoji">👶🏼</span>
-          <span>د. نادين أحمد</span>
-        </h2>
-        <div class="doctor-specialty">
-          طب الأطفال العام
-        </div>
-        <p class="doctor-description">
-          توفّر الدكتورة نادين أحمد رعاية أطفال شاملة للرضع والأطفال واليافعين.
-        </p>
-        <ul class="doctor-services">
-          <li>زيارات الطفل السليم، متابعة النمو والتطور، والتطعيمات</li>
-          <li>تقييم وعلاج الأمراض والالتهابات الشائعة في مرحلة الطفولة</li>
-          <li>متابعة الأمراض المزمنة مثل الربو والحساسية</li>
-          <li>التعامل مع مشاكل المدرسة والسلوك والتعلم</li>
-          <li>الرعاية الوقائية والإرشاد الأسري</li>
-        </ul>
-        <div class="doctor-contact">
-          <strong>التواصل:</strong><br>
-          البريد الإلكتروني:
-          <a href="mailto:info@avicennamedical.org">info@avicennamedical.org</a><br>
-          واتساب:
-          <a href="https://wa.me/9647721738755">+964 772-173-8755</a>
-        </div>
-      </article>
+    .doctor-filter label {
+      font-weight: 600;
+      font-size: 0.95rem;
+      color: #111827;
+    }
 
-      <!-- Dr. Sardar Saman -->
-      <article id="dr-sardar-saman" class="doctor-card">
-        <h2 class="doctor-name">
-          <span class="emoji">🫀</span>
-          <span>د. سردار سامان</span>
-        </h2>
-        <div class="doctor-specialty">
-          الطب الباطني
-        </div>
-        <p class="doctor-description">
-          يركّز الدكتور سردار سامان على الطب الباطني للكبار وتدبير الأمراض المزمنة.
-        </p>
-        <ul class="doctor-services">
-          <li>تشخيص ومتابعة داء السكري، ارتفاع ضغط الدم وأمراض القلب</li>
-          <li>تقييم شامل للحالات المعقدة ومتعددة الأجهزة</li>
-          <li>الفحوصات الوقائية وتعديل عوامل الخطورة</li>
-          <li>تنسيق الرعاية مع التخصصات الفرعية عند الحاجة</li>
-        </ul>
-        <div class="doctor-contact">
-          <strong>التواصل:</strong><br>
-          البريد الإلكتروني:
-          <a href="mailto:info@avicennamedical.org">info@avicennamedical.org</a><br>
-          واتساب:
-          <a href="https://wa.me/9647721738755">+964 772-173-8755</a>
-        </div>
-      </article>
+    .doctor-filter select {
+      flex: 1 1 260px;
+      padding: 0.7rem 0.9rem;
+      border-radius: 999px;
+      border: 1px solid #cbd5e1;
+      background: #ffffff;
+      font-size: 0.96rem;
+      outline: none;
+      transition: border-color 0.15s ease, box-shadow 0.15s ease;
+    }
 
-      <!-- Dr. Wasd Ali -->
-      <article id="dr-wasd-ali" class="doctor-card">
-        <h2 class="doctor-name">
-          <span class="emoji">🌤️</span>
-          <span>د. وسد علي</span>
-        </h2>
-        <div class="doctor-specialty">
-          الأمراض الجلدية
-        </div>
-        <p class="doctor-description">
-          تقوم الدكتورة وسد علي بتقييم وعلاج طيف واسع من أمراض الجلد والشعر والأظافر.
-        </p>
-        <ul class="doctor-services">
-          <li>الإكزيما، الصدفية، حب الشباب والطفوح المزمنة</li>
-          <li>الالتهابات الجلدية وأمراض الحساسية الجلدية</li>
-          <li>فحص ومتابعة الشامات والآفات الجلدية</li>
-          <li>النصائح المتعلقة بالعناية بالبشرة، الوقاية من الشمس والوقاية الجلدية</li>
-        </ul>
-        <div class="doctor-contact">
-          <strong>التواصل:</strong><br>
-          البريد الإلكتروني:
-          <a href="mailto:info@avicennamedical.org">info@avicennamedical.org</a><br>
-          واتساب:
-          <a href="https://wa.me/9647721738755">+964 772-173-8755</a>
-        </div>
-      </article>
+    .doctor-filter select:focus {
+      border-color: #2563eb;
+      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.18);
+    }
 
-      <!-- Dr. Sarmed Qaysim -->
-      <article id="dr-sarmed-qaysim" class="doctor-card">
-        <h2 class="doctor-name">
-          <span class="emoji">🧵</span>
-          <span>د. سرمد قيسم</span>
-        </h2>
-        <div class="doctor-specialty">
-          الجراحة العامة
-        </div>
-        <p class="doctor-description">
-          يقدّم الدكتور سرمد قيسم التقييم والعلاج الجراحي للحالات العامة الشائعة.
-        </p>
-        <ul class="doctor-services">
-          <li>جراحة المرارة والفتوق وجدار البطن</li>
-          <li>تدبير الحالات الجراحية الحادة</li>
-          <li>التقييم قبل الجراحة والمتابعة بعد الجراحة</li>
-          <li>الرعاية الجراحية المنسقة مع فريق الجهاز الهضمي والتخصصات الأخرى</li>
-        </ul>
-        <div class="doctor-contact">
-          <strong>التواصل:</strong><br>
-          البريد الإلكتروني:
-          <a href="mailto:info@avicennamedical.org">info@avicennamedical.org</a><br>
-          واتساب:
-          <a href="https://wa.me/9647721738755">+964 772-173-8755</a>
-        </div>
-      </article>
-    </div>
+    .doctors-grid-section {
+      padding: 0 0 3.5rem;
+    }
 
-    <p style="margin-top: 2rem; font-size: 0.95rem; color:#4b5563;">
-      مع توسّع خدمات مركز الفارابي، سيتم إضافة استشاريين جدد وملفات تعريفية مفصلة.
-      للحصول على أحدث المعلومات حول الأطباء المتوفّرين وأوقات العيادات، يُرجى الاتصال
-      بالمركز مباشرة.
-    </p>
-  </div>
-</section>
+    .doctors-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 1.5rem 1.8rem;
+    }
 
-<script>
-  // الانتقال إلى ملف الطبيب عند اختياره من القائمة
-  (function () {
-    var select = document.getElementById('doctorSelect');
-    if (!select) return;
-    select.addEventListener('change', function () {
-      var targetId = this.value;
-      if (!targetId) return;
-      var el = document.getElementById(targetId);
-      if (el) {
-        el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    @media (max-width: 900px) {
+      .doctors-hero-inner {
+        padding: 2rem 1.5rem 1.75rem;
       }
-    });
-  })();
-</script>
+      .doctors-grid {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
 
-<!-- DOCTORS PAGE END -->
+    .doctor-card {
+      background: #ffffff;
+      border-radius: 18px;
+      padding: 1.6rem 1.8rem;
+      box-shadow: 0 10px 25px rgba(15, 23, 42, 0.07);
+      border: 1px solid #e2e8f0;
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+    }
+
+    .doctor-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at top left, rgba(56, 189, 248, 0.12), transparent 55%);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.25s ease;
+    }
+
+    .doctor-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 16px 38px rgba(15, 23, 42, 0.13);
+      border-color: #bfdbfe;
+    }
+
+    .doctor-card:hover::before {
+      opacity: 1;
+    }
+
+    .doctor-card-header {
+      display: flex;
+      align-items: center;
+      gap: 0.7rem;
+      margin-bottom: 0.4rem;
+    }
+
+    .doctor-avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: 999px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.35rem;
+      background: #eff6ff;
+      color: #1d4ed8;
+      flex-shrink: 0;
+    }
+
+    .doctor-name {
+      font-size: 1.2rem;
+      font-weight: 700;
+      margin: 0;
+    }
+
+    .doctor-specialty {
+      font-size: 0.96rem;
+      font-weight: 600;
+      color: #0369a1;
+      margin: 0.2rem 0 0.65rem;
+    }
+
+    .doctor-description {
+      font-size: 0.95rem;
+      color: #374151;
+      line-height: 1.6;
+      margin-bottom: 0.75rem;
+    }
+
+    .doctor-services {
+      font-size: 0.93rem;
+      color: #374151;
+      margin: 0 0 0.75rem 1.1rem;
+      padding: 0;
+      list-style-type: disc;
+    }
+
+    .doctor-services li {
+      margin-bottom: 0.22rem;
+    }
+
+    .doctor-contact {
+      border-top: 1px solid #e5e7eb;
+      padding-top: 0.55rem;
+      margin-top: 0.4rem;
+      font-size: 0.92rem;
+      color: #111827;
+    }
+
+    .doctor-contact a {
+      color: #0369a1;
+      text-decoration: none;
+    }
+
+    .doctor-contact a:hover {
+      text-decoration: underline;
+    }
+
+    .doctors-note {
+      margin-top: 2rem;
+      font-size: 0.94rem;
+      color: #4b5563;
+    }
+
+    @media (max-width: 640px) {
+      .doctors-hero {
+        padding-top: 2.25rem;
+      }
+      .doctors-hero-inner {
+        border-radius: 0;
+        box-shadow: none;
+        padding-inline: 1.25rem;
+      }
+      .doctors-grid-section {
+        padding-bottom: 2.5rem;
+      }
+      .doctor-card {
+        border-radius: 16px;
+      }
+    }
+  </style>
+</head>
+
+<body class="af-page" dir="rtl">
+
+  <!-- ====== الهيدر ====== -->
+  <header class="af-header">
+    <div class="af-container af-header-inner">
+
+      <!-- الشعار -->
+      <div class="af-brand">
+        <img
+          src="../images/avicenna-logo-horizontal.png"
+          alt="مؤسسة ابن سينا الطبيه"
+          class="af-logo-full"
+        />
+        <div class="af-brand-text">
+          <span class="af-brand-line1">مؤسسة ابن سينا الطبيه</span>
+          <span class="af-brand-line2">مركز الفارابي لأمراض الجهاز الهضمي والمناظير</span>
+        </div>
+      </div>
+
+      <!-- القائمة الرئيسية -->
+      <nav class="af-nav">
+        <a href="index.html">الرئيسية</a>
+        <a href="about.html">من نحن</a>
+        <a href="services.html">الخدمات</a>
+        <a href="doctors.html" class="active">الأطباء</a>
+        <a href="conditions.html">الحالات المرضية</a>
+        <a href="education.html">التثقيف الصحي</a>
+        <a href="contact.html">اتصل بنا</a>
+        <a href="booking.html" class="af-nav-cta">احجز موعدك عبر الإنترنت</a>
+      </nav>
+
+      <!-- مبدّل اللغة -->
+      <ul class="af-lang-switch">
+        <li><a href="../doctors.html">EN</a></li>
+        <li><a href="doctors.html">عربي</a></li>
+        <li><a href="../ku/doctors.html">کوردی</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <main class="af-main">
+    <!-- ====== قسم مقدمة الأطباء ====== -->
+    <section class="af-section doctors-hero">
+      <div class="af-container">
+        <div class="doctors-hero-inner">
+          <h1>أطباؤنا</h1>
+          <p>
+            يضم مركز الفارابي لأمراض الجهاز الهضمي والمناظير فريقاً متنامياً من الاستشاريين
+            والمتخصصين. يمكنك اختيار الطبيب من القائمة أدناه للانتقال مباشرة إلى ملفه، أو تصفح
+            الصفحة لقراءة نبذة عن كل طبيب، والخدمات التي يقدّمها، وكيفية التواصل مع العيادة.
+          </p>
+
+          <div class="doctor-filter">
+            <label for="doctorSelect">اختر الطبيب:</label>
+            <select id="doctorSelect">
+              <option value="">-- اختر الطبيب --</option>
+              <option value="dr-mohammad-hussein">د. محمد حسين – أمراض الجهاز الهضمي للأطفال</option>
+              <option value="dr-a-khazraji">د. أ. خزعجي – أمراض الجهاز الهضمي للبالغين</option>
+              <option value="dr-nadine-ahmed">د. نادين أحمد – طب الأطفال العام</option>
+              <option value="dr-sardar-saman">د. سردار سامان – الباطنية</option>
+              <option value="dr-wasd-ali">د. وسد علي – الأمراض الجلدية</option>
+              <option value="dr-sarmed-qaysim">د. سرمد قيسم – الجراحة العامة</option>
+            </select>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ====== شبكة بطاقات الأطباء ====== -->
+    <section class="af-section doctors-grid-section">
+      <div class="af-container">
+        <div class="doctors-grid">
+          <!-- د. محمد حسين -->
+          <article id="dr-mohammad-hussein" class="doctor-card">
+            <div class="doctor-card-header">
+              <div class="doctor-avatar">👨‍⚕️</div>
+              <div>
+                <h2 class="doctor-name">د. محمد حسين</h2>
+                <p class="doctor-specialty">استشاري أمراض الجهاز الهضمي والكبد والتغذية لدى الأطفال</p>
+              </div>
+            </div>
+            <p class="doctor-description">
+              يقدّم د. محمد حسين تقييماً وعلاجاً شاملاً للرضع والأطفال والمراهقين الذين يعانون من
+              اضطرابات الجهاز الهضمي والكبد، ومشكلات التغذية، وسوء النمو، والاضطرابات المعقدة في
+              التغذية والدعم الغذائي.
+            </p>
+            <ul class="doctor-services">
+              <li>الداء البطني (السيلياك) واضطرابات سوء الامتصاص الأخرى.</li>
+              <li>أمراض الأمعاء الالتهابية (داء كرون والتهاب القولون التقرّحي).</li>
+              <li>ألم البطن المزمن، الإمساك، الارتجاع المعدي المريئي، واضطرابات الأمعاء الوظيفية.</li>
+              <li>صعوبات التغذية والبلع، ضعف النمو، والمشكلات المعقدة في التغذية والتغذية الأنبوبية.</li>
+              <li>المناظير التشخيصية والعلاجية (تنظير علوي، تنظير قولون، استئصال الزوائد اللحمية، إزالة الأجسام الغريبة).</li>
+            </ul>
+            <div class="doctor-contact">
+              <strong>التواصل:</strong><br />
+              البريد الإلكتروني:
+              <a href="mailto:info@avicennamedical.org">info@avicennamedical.org</a><br />
+              واتساب:
+              <a href="https://wa.me/9647721738755" target="_blank">+964 772-173-8755</a>
+            </div>
+          </article>
+
+          <!-- د. أ. خزعجي -->
+          <article id="dr-a-khazraji" class="doctor-card">
+            <div class="doctor-card-header">
+              <div class="doctor-avatar">🩺</div>
+              <div>
+                <h2 class="doctor-name">د. أ. خزعجي</h2>
+                <p class="doctor-specialty">استشاري أمراض الجهاز الهضمي والمناظير للبالغين</p>
+              </div>
+            </div>
+            <p class="doctor-description">
+              يقدّم د. خزعجي الرعاية التشخيصية والعلاجية للبالغين الذين يعانون من أمراض الجهاز الهضمي
+              والكبد.
+            </p>
+            <ul class="doctor-services">
+              <li>تقييم وعلاج الارتجاع المعدي المريئي، وقرحة المعدة والاثني عشر، وعسر الهضم.</li>
+              <li>تقييم النزيف الهضمي، وفقر الدم، وألم البطن المزمن.</li>
+              <li>تنظير القولون الفحصي والدوري لاكتشاف الزوائد اللحمية وسرطان القولون والمستقيم.</li>
+              <li>تشخيص وعلاج أمراض الكبد، بما في ذلك الكبد الدهني والتهاب الكبد الفيروسي.</li>
+              <li>مناظير تشخيصية وعلاجية (تنظير علوي وتنظير قولون) للبالغين.</li>
+            </ul>
+            <div class="doctor-contact">
+              <strong>التواصل:</strong><br />
+              البريد الإلكتروني:
+              <a href="mailto:info@avicennamedical.org">info@avicennical.org</a><br />
+              واتساب:
+              <a href="https://wa.me/9647721738755" target="_blank">+964 772-173-8755</a>
+            </div>
+          </article>
+
+          <!-- د. نادين أحمد -->
+          <article id="dr-nadine-ahmed" class="doctor-card">
+            <div class="doctor-card-header">
+              <div class="doctor-avatar">👶</div>
+              <div>
+                <h2 class="doctor-name">د. نادين أحمد</h2>
+                <p class="doctor-specialty">استشارية طب الأطفال العام</p>
+              </div>
+            </div>
+            <p class="doctor-description">
+              تقدّم د. نادين رعاية شاملة للرضع والأطفال والمراهقين في مجال طب الأطفال العام، مع تركيز
+              على المتابعة المستمرة للنمو والصحة العامة.
+            </p>
+            <ul class="doctor-services">
+              <li>عيادات الطفل السليم، متابعة النمو والتطوّر، وإعطاء اللقاحات.</li>
+              <li>تقييم وعلاج الأمراض والالتهابات الشائعة في مرحلة الطفولة.</li>
+              <li>متابعة الأمراض المزمنة مثل الربو والحساسية.</li>
+              <li>متابعة مشكلات المدرسة، والسلوك، وصعوبات التعلّم.</li>
+              <li>تنسيق الإحالات والرعاية مع التخصصات الدقيقة عند الحاجة.</li>
+            </ul>
+            <div class="doctor-contact">
+              <strong>التواصل:</strong><br />
+              البريد الإلكتروني:
+              <a href="mailto:info@avicennamedical.org">info@avicennamedical.org</a><br />
+              واتساب:
+              <a href="https://wa.me/9647721738755" target="_blank">+964 772-173-8755</a>
+            </div>
+          </article>
+
+          <!-- د. سردار سامان -->
+          <article id="dr-sardar-saman" class="doctor-card">
+            <div class="doctor-card-header">
+              <div class="doctor-avatar">🧑‍⚕️</div>
+              <div>
+                <h2 class="doctor-name">د. سردار سامان</h2>
+                <p class="doctor-specialty">استشاري الباطنية</p>
+              </div>
+            </div>
+            <p class="doctor-description">
+              يقدّم د. سامان رعاية الباطنية للبالغين مع التركيز على متابعة الأمراض المزمنة والتنسيق مع
+              التخصصات الأخرى.
+            </p>
+            <ul class="doctor-services">
+              <li>تقييم وعلاج ارتفاع ضغط الدم، والسكري، واضطرابات الدهون في الدم.</li>
+              <li>تقييم الحالات المعقدة متعدّدة الأجهزة والحالات غير المشخّصة.</li>
+              <li>التقييم والتحضير ما قبل العمليات الجراحية.</li>
+              <li>تنسيق الرعاية مع أطباء الجهاز الهضمي والتخصصات الأخرى.</li>
+            </ul>
+            <div class="doctor-contact">
+              <strong>التواصل:</strong><br />
+              البريد الإلكتروني:
+              <a href="mailto:info@avicennamedical.org">info@avicennamedical.org</a><br />
+              واتساب:
+              <a href="https://wa.me/9647721738755" target="_blank">+964 772-173-8755</a>
+            </div>
+          </article>
+
+          <!-- د. وسد علي -->
+          <article id="dr-wasd-ali" class="doctor-card">
+            <div class="doctor-card-header">
+              <div class="doctor-avatar">🌿</div>
+              <div>
+                <h2 class="doctor-name">د. وسد علي</h2>
+                <p class="doctor-specialty">استشاري الأمراض الجلدية</p>
+              </div>
+            </div>
+            <p class="doctor-description">
+              يقدّم د. علي تشخيص وعلاج أمراض الجلد والشعر والأظافر لدى البالغين والأطفال.
+            </p>
+            <ul class="doctor-services">
+              <li>علاج حب الشباب، والأكزيما، والصدفية، والأمراض الجلدية الالتهابية الأخرى.</li>
+              <li>تقييم الشامات والبقع المصطبغة والفحص المبكّر لسرطان الجلد.</li>
+              <li>علاج تساقط الشعر واضطرابات فروة الرأس.</li>
+              <li>إجراءات جلدية بسيطة واستئصال بعض الآفات الجلدية.</li>
+            </ul>
+            <div class="doctor-contact">
+              <strong>التواصل:</strong><br />
+              البريد الإلكتروني:
+              <a href="mailto:info@avicennamedical.org">info@avicennamedical.org</a><br />
+              واتساب:
+              <a href="https://wa.me/9647721738755" target="_blank">+964 772-173-8755</a>
+            </div>
+          </article>
+
+          <!-- د. سرمد قيسم -->
+          <article id="dr-sarmed-qaysim" class="doctor-card">
+            <div class="doctor-card-header">
+              <div class="doctor-avatar">🩻</div>
+              <div>
+                <h2 class="doctor-name">د. سرمد قيسم</h2>
+                <p class="doctor-specialty">استشاري الجراحة العامة</p>
+              </div>
+            </div>
+            <p class="doctor-description">
+              يقدّم د. قيسم التقييم الجراحي وعلاج العديد من الحالات الشائعة في الجراحة العامة.
+            </p>
+            <ul class="doctor-services">
+              <li>جراحات المرارة والفتق وجدار البطن.</li>
+              <li>التعامل مع الحالات الجراحية الطارئة الشائعة.</li>
+              <li>التقييم قبل العمليات والمتابعة بعد الجراحة.</li>
+              <li>التنسيق المشترك مع أطباء الجهاز الهضمي والتخصصات الأخرى.</li>
+            </ul>
+            <div class="doctor-contact">
+              <strong>التواصل:</strong><br />
+              البريد الإلكتروني:
+              <a href="mailto:info@avicennamedical.org">info@avicennamedical.org</a><br />
+              واتساب:
+              <a href="https://wa.me/9647721738755" target="_blank">+964 772-173-8755</a>
+            </div>
+          </article>
+        </div>
+
+        <p class="doctors-note">
+          مع توسّع خدمات مركز الفارابي، سيتم إضافة استشاريين آخرين وتحديث الملفات التعريفية بشكل مستمر.
+          للحصول على أحدث المعلومات حول الأطباء المتوفرين ومواعيد العيادات، يُرجى التواصل مباشرة مع المركز.
+        </p>
+      </div>
+    </section>
+  </main>
+
+  <!-- ====== الفوتر ====== -->
+  <footer class="af-footer">
+    <div class="af-container">
+      <p>
+        &copy; 2025 مؤسسة ابن سينا الطبيه، المقر الرئيسي بغداد، العراق. جميع الحقوق محفوظة.
+      </p>
+      <p class="af-footer-meta">
+        مؤسسة ابن سينا الطبيه تفخر بإطلاق مركز الفارابي لأمراض الجهاز الهضمي والمناظير.
+      </p>
+    </div>
+  </footer>
+
+  <!-- سكربت التنقّل إلى بطاقة الطبيب المختار -->
+  <script>
+    (function () {
+      var select = document.getElementById('doctorSelect');
+      if (!select) return;
+
+      select.addEventListener('change', function () {
+        var targetId = this.value;
+        if (!targetId) return;
+        var el = document.getElementById(targetId);
+        if (el) {
+          el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
+    })();
+  </script>
+</body>
+</html>
