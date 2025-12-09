@@ -1,157 +1,215 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="ar">
 <head>
-  <meta charset="UTF-8">
-  <title>الاتصال والموقع | مركز الفارابي</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>التواصل والإحالات | مركز الفارابي لأمراض الجهاز الهضمي والمناظير</title>
+
+  <!-- استخدم نفس ملف التنسيق العام من مجلد /ar -->
+  <link rel="stylesheet" href="../styles.css" />
+
+  <style>
+    .contact-main {
+      background: #020617;
+    }
+
+    .contact-hero {
+      padding: 3rem 0 2rem;
+      background: radial-gradient(circle at top left, #1e293b 0, #020617 55%, #020617 100%);
+      color: #e5e7eb;
+    }
+
+    .contact-hero h1 {
+      font-size: 2.1rem;
+      margin-bottom: 0.6rem;
+    }
+
+    .contact-hero p {
+      max-width: 46rem;
+      color: #cbd5f5;
+      line-height: 1.7;
+      font-size: 0.95rem;
+    }
+
+    .contact-grid {
+      padding: 0 0 3.5rem;
+    }
+
+    .contact-grid-inner {
+      display: grid;
+      grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+      gap: 1.5rem;
+    }
+
+    .contact-card {
+      background: #020617;
+      border-radius: 18px;
+      padding: 1.7rem 1.6rem;
+      box-shadow: 0 18px 40px rgba(15, 23, 42, 0.9);
+      border: 1px solid rgba(148, 163, 184, 0.5);
+      color: #e5e7eb;
+    }
+
+    .contact-card h2 {
+      font-size: 1.1rem;
+      margin-bottom: 0.6rem;
+      color: #f9fafb;
+    }
+
+    .contact-card p,
+    .contact-card li {
+      font-size: 0.93rem;
+      line-height: 1.7;
+    }
+
+    .contact-card ul {
+      list-style: none;
+      padding-left: 0;
+      margin: 0.2rem 0 0;
+    }
+
+    .contact-card li strong {
+      color: #facc15;
+    }
+
+    .contact-whatsapp {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      margin-top: 0.8rem;
+      padding: 0.7rem 1.2rem;
+      border-radius: 999px;
+      background: #22c55e;
+      color: #022c22;
+      font-weight: 600;
+      font-size: 0.95rem;
+      text-decoration: none;
+    }
+
+    .contact-whatsapp span {
+      font-size: 1.1rem;
+    }
+
+    .contact-map {
+      background: #020617;
+      border-radius: 18px;
+      padding: 0;
+      box-shadow: 0 18px 40px rgba(15, 23, 42, 0.9);
+      border: 1px solid rgba(148, 163, 184, 0.5);
+      overflow: hidden;
+    }
+
+    .contact-map iframe {
+      width: 100%;
+      height: 100%;
+      min-height: 260px;
+      border: 0;
+    }
+
+    @media (max-width: 900px) {
+      .contact-grid-inner {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+  </style>
 </head>
-<body>
-<header>
-  <div class="header-inner">
-    <div class="logo-area">
-      <h1>مركز الفارابي لأمراض الجهاز الهضمي والمناظير</h1>
-      <p>عيادة متعددة التخصصات لأمراض الجهاز الهضمي وطب الأطفال – دائرة صحة ديالى، العراق</p>
-    </div>
-    <nav>
-      <ul>
-        <li><a href="index.html">الرئيسية</a></li>
-        <li><a href="about.html">من نحن</a></li>
-        <li><a href="services.html">الخدمات</a></li>
-        <li><a href="doctors.html">الأطباء</a></li>
-        <li><a href="conditions.html">الأمراض</a></li>
-        <li><a href="education.html">التثقيف الصحي</a></li>
-        <li><a href="contact.html" class="active">اتصل بنا</a></li>
-      </ul>
-    </nav>
-  </div>
-</header>
 
-<section class="section">
-  <div class="container">
-    <h1>الاتصال والموقع</h1>
-
-    <p class="lead">
-      للحجوزات والاستفسارات غير الطارئة في
-      <strong>فرع مركز الفارابي لأمراض الجهاز الهضمي والمناظير في ديالى – العراق</strong>
-      يرجى التواصل مع المركز عبر:
-    </p>
-
-    <div class="contact-block">
-      <!-- LEFT COLUMN: CONTACT DETAILS -->
-      <div class="contact-details">
-        <h2>طرق التواصل معنا</h2>
-
-        <ol>
-          <li>
-            <strong>هاتف:</strong>
-            <a href="tel:+9647721738755">772-173-8755</a>
-            (من خارج العراق: ‎+964 772-173-8755)
-          </li>
-          <li>
-            <strong>البريد الإلكتروني:</strong>
-            <a href="mailto:appointment@avicennamedical.org">
-              appointment@avicennamedical.org
-            </a>
-          </li>
-          <li>
-            <strong>الحضور شخصيًا / واتساب:</strong>
-            يمكن التواصل هاتفياً أو الحضور شخصياً خلال أوقات الدوام،
-            كما يمكن استخدام واتساب للاستفسارات غير الطارئة المتعلقة بالمواعيد.
-          </li>
-        </ol>
-
-        <h2>أوقات عمل العيادة</h2>
-        <ul class="checklist">
-          <li>
-            <strong>الجلدية، طبيب الأسرة، الجراحة العامة وأمراض الجهاز الهضمي للأطفال:</strong>
-            من الأحد إلى الخميس، 09:00 – 15:00
-          </li>
-          <li>
-            <strong>المختبر والصيدلية:</strong>
-            من الأحد إلى الخميس، 08:00 – 21:00
-          </li>
-          <li>
-            <strong>الاختصاصات الأخرى (الجهاز الهضمي للكبار، الباطنية، وغيرها):</strong>
-            غالبًا 16:00 – 21:00، من الأحد إلى الخميس
-          </li>
-        </ul>
-
-        <p>
-          قد تتغير أيام وساعات العمل؛ يُفضّل تأكيد المواعيد عن طريق الهاتف أو البريد
-          الإلكتروني أو واتساب عند الحجز.
-        </p>
-
-        <h2>حالات الطوارئ</h2>
-        <p>
-          في أي حالة طارئة، يرجى <strong>عدم الاتصال بالعيادة</strong>، والتوجه مباشرة
-          إلى أقرب قسم طوارئ في المستشفى.
-        </p>
-
-        <h2>معلومات التواصل مع المكتب الرئيسي</h2>
-
-        <p>
-          <strong>📍 الموقع:</strong> المنصور، بغداد، العراق.
-        </p>
-
-        <p>
-          <strong>✉️ الاستفسارات الإدارية والوثائق:</strong><br>
-          <a href="mailto:documents@avicennamedical.org">Documents@avicennamedical.org</a>
-        </p>
-
-        <p>
-          <strong>✉️ الشكاوى والاستفسارات المتعلقة بالجودة:</strong><br>
-          <a href="mailto:complaints@avicennamedical.org">Complaints@avicennamedical.org</a>
-        </p>
-
-        <p>
-          <strong>📍 شركة أفيسينا الطبية، المكتب الرئيسي، بغداد، العراق</strong><br>
-          ✉️ البريد الإلكتروني:
-          <a href="mailto:info@avicennamedical.org">info@avicennamedical.org</a>
-        </p>
-      </div>
-
-      <!-- RIGHT COLUMN: MAP & ADDRESS -->
-      <div>
-        <h2>الخريطة وطريقة الوصول</h2>
-
-        <p>
-          <strong>عنوان العيادة:</strong><br>
-          قرب بعقوبة الجديدة،<br>
-          PJWC+7FJ بعقوبة – العراق،<br>
-          بعقوبة، محافظة ديالى، العراق
-        </p>
-        <div class="map-placeholder">
-          <iframe
-            src="https://www.google.com/maps?q=33.7457132,44.6211256&z=17&output=embed"
-            width="100%"
-            height="260"
-            style="border:0;"
-            allowfullscreen=""
-            loading="lazy"
-            referrerpolicy="no-referrer-when-downgrade">
-          </iframe>
+<body dir="rtl">
+  <!-- الهيدر -->
+  <header class="af-header">
+    <div class="af-container af-header-inner">
+      <div class="af-brand">
+        <img
+          src="../images/avicenna-logo-horizontal.png"
+          alt="مؤسسة ابن سينا الطبيه"
+          class="af-logo-full"
+        />
+        <div class="af-brand-text">
+          <span class="af-brand-line1">مؤسسة ابن سينا الطبيه</span>
+          <span class="af-brand-line2">مركز الفارابي لأمراض الجهاز الهضمي والمناظير</span>
         </div>
       </div>
+
+      <nav class="af-nav">
+        <a href="index.html">الرئيسية</a>
+        <a href="about.html">من نحن</a>
+        <a href="services.html">الخدمات</a>
+        <a href="doctors.html">الأطباء</a>
+        <a href="conditions.html">الحالات المرضية</a>
+        <a href="education.html">التثقيف الصحي</a>
+        <a href="contact.html" class="active">التواصل والإحالات</a>
+        <a href="booking.html" class="af-nav-cta">احجز موعدك عبر الإنترنت</a>
+      </nav>
+
+      <ul class="af-lang-switch">
+        <li><a href="../contact.html">EN</a></li>
+        <li><a href="contact.html">عربي</a></li>
+        <li><a href="../ku/contact.html">کوردی</a></li>
+      </ul>
     </div>
-  </div>
-</section>
+  </header>
 
-<footer>
-  <div class="container">
-    <div>© <span id="year"></span> شركة أفيسينا الطبية، المكتب الرئيسي، بغداد، العراق. جميع الحقوق محفوظة.</div>
-    <div>في حالات الطوارئ، يُرجى استخدام خدمات الطوارئ المحلية أو التوجه إلى أقرب مستشفى.</div>
-  </div>
-  <script>
-    document.getElementById("year").textContent = new Date().getFullYear();
-  </script>
-</footer>
+  <main class="contact-main">
+    <!-- قسم المقدمة -->
+    <section class="af-section contact-hero">
+      <div class="af-container">
+        <h1>التواصل والإحالات</h1>
+        <p>
+          يمكن للمرضى وعائلاتهم، وكذلك الأطباء المحوِّلين، التواصل مع مركز الفارابي من خلال البيانات
+          الموضحة أدناه. تتوفر خدمة واتساب للتنسيق حول المواعيد والأسئلة الإدارية القصيرة والبسيطة.
+        </p>
+      </div>
+    </section>
 
-<div class="floating-whatsapp">
-  <a href="https://wa.me/9647721738755" target="_blank">
-    <span>💬</span> واتساب
-  </a>
-</div>
+    <!-- شبكة معلومات التواصل -->
+    <section class="af-section contact-grid">
+      <div class="af-container">
+        <div class="contact-grid-inner">
+          <article class="contact-card">
+            <h2>مركز الفارابي لأمراض الجهاز الهضمي والمناظير – بيانات عيادة المركز</h2>
+            <p><strong>موقع العيادة:</strong> بعقوبة، محافظة ديالى، العراق.</p>
+            <p><strong>هاتف / واتساب (العيادة):</strong> +964 772-173-8755</p>
+            <p><strong>البريد الإلكتروني (العيادة):</strong> info@avicennamedical.org</p>
 
+            <h2 style="margin-top: 1.3rem;">مؤسسة ابن سينا الطبيه – المكتب الرئيسي</h2>
+            <ul>
+              <li><strong>مكتب الإدارة الرئيسي:</strong> المنصور، بغداد، العراق.</li>
+              <li><strong>الاستفسارات الإدارية والوثائق:</strong> Documents@avicennamedical.org</li>
+              <li><strong>الشكاوى واستفسارات الجودة:</strong> Complaints@avicennamedical.org</li>
+            </ul>
+
+            <a
+              class="contact-whatsapp"
+              href="https://wa.me/9647721738755"
+              target="_blank"
+              rel="noopener"
+            >
+              <span>💬</span> تواصل مع العيادة عبر واتساب
+            </a>
+          </article>
+
+          <aside class="contact-map">
+            <!-- يمكن استبدال الرابط أدناه برابط تضمين خرائط Google الخاص بك إن رغبت -->
+            <iframe
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3415.290186324833!2d44.6220156!3d33.7469625!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x15564b021bdd9cb1%3A0xd95ded5aa86ea94d!2sBaqubah%2C%20Diyala%20Governorate%2C%20Iraq!5e0!3m2!1sen!2siq!4v1700000000000"
+              loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade"
+            ></iframe>
+          </aside>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- الفوتر -->
+  <footer class="af-footer">
+    <div class="af-container">
+      <p>&copy; 2025 مؤسسة ابن سينا الطبيه، المقر الرئيسي بغداد، العراق. جميع الحقوق محفوظة.</p>
+      <p class="af-footer-meta">
+        مؤسسة ابن سينا الطبيه تفخر بإطلاق مركز الفارابي لأمراض الجهاز الهضمي والمناظير.
+      </p>
+    </div>
+  </footer>
 </body>
 </html>
+```0
