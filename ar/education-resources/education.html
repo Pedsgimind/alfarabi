@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>التثقيف الصحي | مركز الفارابي لأمراض الجهاز الهضمي والمناظير</title>
+  <link rel="stylesheet" href="../styles.css" />
+
+  <style>
+    .af-main {
+      background: #f5f7fb;
+    }
+
+    .edu-hero {
+      padding: 3rem 0 1.8rem;
+    }
+
+    .edu-hero-inner {
+      background: #ffffff;
+      border-radius: 18px;
+      padding: 2.5rem 2.5rem 2rem;
+      box-shadow: 0 18px 40px rgba(15, 23, 42, 0.08);
+    }
+
+    .edu-hero h1 {
+      font-size: 2.1rem;
+      margin-bottom: 0.7rem;
+    }
+
+    .edu-hero p {
+      max-width: 780px;
+      color: #4b5563;
+      line-height: 1.7;
+    }
+
+    .edu-section {
+      padding: 0 0 3.5rem;
+    }
+
+    .edu-groups {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 2rem 2.5rem;
+    }
+
+    .edu-group {
+      background: #ffffff;
+      border-radius: 16px;
+      padding: 1.8rem 1.7rem 1.5rem;
+      box-shadow: 0 14px 32px rgba(15, 23, 42, 0.06);
+      border: 1px solid #e5e7eb;
+    }
+
+    .edu-group h2 {
+      font-size: 1.25rem;
+      margin-bottom: 0.4rem;
+      display: flex;
+      align-items: center;
+      gap: 0.45rem;
+    }
+
+    .edu-group-icon {
+      font-size: 1.25rem;
+    }
+
+    .edu-group p {
+      font-size: 0.95rem;
+      color: #374151;
+      line-height: 1.6;
+      margin-bottom: 0.7rem;
+    }
+
+    .edu-list {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    .edu-list li {
+      margin-bottom: 0.3rem;
+    }
+
+    .edu-list a {
+      font-size: 0.92rem;
+      color: #1d4ed8;
+      text-decoration: none;
+    }
+
+    .edu-list a:hover {
+      text-decoration: underline;
+    }
+
+    .edu-note {
+      margin-top: 2rem;
+      font-size: 0.94rem;
+      color: #4b5563;
+    }
+
+    @media (max-width: 900px) {
+      .edu-groups {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    @media (max-width: 640px) {
+      .edu-hero {
+        padding-top: 2.3rem;
+      }
+      .edu-hero-inner {
+        padding-inline: 1.5rem;
+        border-radius: 0;
+        box-shadow: none;
+      }
+      .edu-section {
+        padding-bottom: 2.5rem;
+      }
+    }
+  </style>
+</head>
+
+<body class="af-page" dir="rtl">
+  <!-- HEADER -->
+  <header class="af-header">
+    <div class="af-container af-header-inner">
+
+      <!-- BRAND -->
+      <div class="af-brand">
+        <img
+          src="../images/avicenna-logo-horizontal.png"
+          alt="مؤسسة ابن سينا الطبيه"
+          class="af-logo-full"
+        />
+        <div class="af-brand-text">
+          <span class="af-brand-line1">مؤسسة ابن سينا الطبيه</span>
+          <span class="af-brand-line2">مركز الفارابي لأمراض الجهاز الهضمي والمناظير</span>
+        </div>
+      </div>
+
+      <!-- NAVIGATION -->
+      <nav class="af-nav">
+        <a href="index.html">الرئيسية</a>
+        <a href="about.html">من نحن</a>
+        <a href="services.html">الخدمات</a>
+        <a href="doctors.html">الأطباء</a>
+        <a href="conditions.html">الحالات المرضية</a>
+        <a href="education.html" class="active">التثقيف الصحي</a>
+        <a href="contact.html">التواصل</a>
+        <a href="booking.html" class="af-nav-cta">احجز موعدك عبر الإنترنت</a>
+      </nav>
+
+      <!-- LANGUAGE SWITCH -->
+      <ul class="af-lang-switch">
+        <li><a href="../education.html">EN</a></li>
+        <li><a href="education.html">عربي</a></li>
+        <li><a href="../ku/education.html">کوردی</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <main class="af-main">
+    <!-- HERO -->
+    <section class="af-section edu-hero">
+      <div class="af-container">
+        <div class="edu-hero-inner">
+          <h1>التثقيف الصحي للمرضى والعائلات</h1>
+          <p>
+            هذه الصفحة هي مكتبة شاملة للمعلومات الصحية المبسطة والموجهة للبالغين والأطفال
+            وعائلاتهم. يمكنكم تصفّح المواضيع حسب التخصص وفتح مواد تثقيفية واضحة وسهلة الفهم
+            حول أمراض الجهاز الهضمي والكبد والجلد والجراحة والطب العام.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- EDUCATION GROUPS -->
+    <section class="af-section edu-section">
+      <div class="af-container">
+        <div class="edu-groups">
+
+          <!-- 1 — Pediatric GI -->
+          <section class="edu-group" id="peds-gi-edu">
+            <h2><span class="edu-group-icon">👶</span>أمراض الجهاز الهضمي للأطفال والكبد والتغذية</h2>
+            <p>اختر موضوعاً لفتح مادة مبسطة مُخصصة لأهل الطفل.</p>
+            <ul class="edu-list">
+              <li><a href="education-resources/peds-reflux.html">الارتجاع والحموضة عند الأطفال</a></li>
+              <li><a href="education-resources/peds-ger.html">ارتجاع المعدة البسيط عند الرضع</a></li>
+              <li><a href="education-resources/peds-gerd.html">ارتجاع المعدة المرضي (GERD)</a></li>
+              <li><a href="education-resources/peds-eoe.html">التهاب المريء eosinophilic</a></li>
+              <li><a href="education-resources/peds-dysphagia.html">صعوبة البلع عند الأطفال</a></li>
+              <li><a href="education-resources/peds-achalasia.html">تعذر ارتخاء المريء</a></li>
+              <li><a href="education-resources/peds-esophageal-strictures.html">تضيّق المريء</a></li>
+
+              <li><a href="education-resources/peds-functional-dyspepsia.html">عسر الهضم الوظيفي</a></li>
+              <li><a href="education-resources/peds-gastritis.html">التهاب المعدة</a></li>
+              <li><a href="education-resources/peds-hpylori.html">جرثومة المعدة</a></li>
+              <li><a href="education-resources/peds-peptic-ulcer.html">قرحة المعدة عند الأطفال</a></li>
+              <li><a href="education-resources/peds-vomiting.html">التقيؤ المزمن أو المتكرر</a></li>
+              <li><a href="education-resources/peds-cyclic-vomiting.html">متلازمة القيء الدوري</a></li>
+
+              <li><a href="education-resources/peds-celiac-disease.html">الداء البطني (السيلياك)</a></li>
+              <li><a href="education-resources/peds-chronic-diarrhea.html">الإسهال المزمن وسوء الامتصاص</a></li>
+              <li><a href="education-resources/peds-short-bowel.html">متلازمة الأمعاء القصيرة</a></li>
+              <li><a href="education-resources/peds-lactose-intolerance.html">عدم تحمل اللاكتوز</a></li>
+              <li><a href="education-resources/peds-food-protein-allergy.html">حساسية بروتين الغذاء</a></li>
+              <li><a href="education-resources/peds-intestinal-infections.html">التهابات الأمعاء</a></li>
+
+              <li><a href="education-resources/peds-constipation.html">الإمساك عند الأطفال</a></li>
+              <li><a href="education-resources/peds-encopresis.html">التبرز اللاإرادي (سلس البراز)</a></li>
+              <li><a href="education-resources/peds-ibs.html">القولون العصبي عند الأطفال</a></li>
+              <li><a href="education-resources/peds-abdominal-pain.html">ألم البطن المزمن</a></li>
+              <li><a href="education-resources/peds-rectal-bleeding.html">النزيف الشرجي</a></li>
+              <li><a href="education-resources/peds-polyps.html">السلائل القولونية</a></li>
+
+              <li><a href="education-resources/peds-ibd.html">التهاب الأمعاء المزمن (IBD)</a></li>
+              <li><a href="education-resources/peds-crohns.html">داء كرون عند الأطفال</a></li>
+              <li><a href="education-resources/peds-ulcerative-colitis.html">التهاب القولون التقرحي</a></li>
+
+              <li><a href="education-resources/peds-liver-tests.html">اضطراب إنزيمات الكبد</a></li>
+              <li><a href="education-resources/peds-jaundice.html">اليرقان عند الرضع والأطفال</a></li>
+              <li><a href="education-resources/peds-fatty-liver.html">الكبد الدهني عند الأطفال</a></li>
+              <li><a href="education-resources/peds-autoimmune-hepatitis.html">التهاب الكبد المناعي</a></li>
+              <li><a href="education-resources/peds-cholestasis.html">الركودة الصفراوية</a></li>
+              <li><a href="education-resources/peds-biliary-atresia.html">رتق القنوات الصفراوية</a></li>
+
+              <li><a href="education-resources/peds-pancreatitis.html">التهاب البنكرياس الحاد</a></li>
+              <li><a href="education-resources/peds-chronic-pancreatitis.html">التهاب البنكرياس المزمن</a></li>
+
+              <li><a href="education-resources/peds-failure-to-thrive.html">سوء النمو وعدم زيادة الوزن</a></li>
+              <li><a href="education-resources/peds-obesity.html">السمنة لدى الأطفال</a></li>
+              <li><a href="education-resources/peds-feeding-difficulty.html">مشاكل التغذية</a></li>
+              <li><a href="education-resources/peds-enteral-nutrition.html">التغذية الأنبوبية</a></li>
+              <li><a href="education-resources/peds-tpn.html">التغذية الوريدية (TPN)</a></li>
+
+              <li><a href="education-resources/peds-gastric-emptying.html">بطء تفريغ المعدة</a></li>
+              <li><a href="education-resources/peds-intestinal-motility.html">اضطرابات حركة الأمعاء</a></li>
+              <li><a href="education-resources/peds-hirschsprung.html">مرض هيرشسبرونغ</a></li>
+            </ul>
+          </section>
+
+          <!-- 2 — Adult GI -->
+          <section class="edu-group" id="adult-gi-edu">
+            <h2><span class="edu-group-icon">🧑‍⚕️</span>أمراض الجهاز الهضمي والكبد للبالغين</h2>
+            <p>معلومات مبسطة للبالغين حول أمراض الجهاز الهضمي والكبد.</p>
+            <ul class="edu-list">
+              <li><a href="education-resources/adult-gerd.html">الارتجاع المريئي والحموضة</a></li>
+              <li><a href="education-resources/adult-lpr.html">ارتجاع الحنجرة</a></li>
+              <li><a href="education-resources/adult-barrett-esophagus.html">مريء باريت</a></li>
+              <li><a href="education-resources/adult-esophagitis.html">التهاب المريء</a></li>
+              <li><a href="education-resources/adult-dysphagia.html">صعوبة البلع</a></li>
+              <li><a href="education-resources/adult-esophageal-strictures.html">تضيّق المريء</a></li>
+              <li><a href="education-resources/adult-achalasia.html">تعذر ارتخاء المريء</a></li>
+              <li><a href="education-resources/adult-esophageal-varices.html">دوالي المريء</a></li>
+
+              <li><a href="education-resources/adult-dyspepsia.html">عسر الهضم</a></li>
+              <li><a href="education-resources/adult-peptic-ulcer.html">قرحة المعدة</a></li>
+              <li><a href="education-resources/adult-hpylori.html">جرثومة المعدة</a></li>
+              <li><a href="education-resources/adult-gastritis.html">التهاب المعدة</a></li>
+              <li><a href="education-resources/adult-gastric-emptying.html">بطء تفريغ المعدة</a></li>
+
+              <li><a href="education-resources/adult-celiac.html">الداء البطني (السيلياك)</a></li>
+              <li><a href="education-resources/adult-lactose-intolerance.html">عدم تحمل اللاكتوز</a></li>
+              <li><a href="education-resources/adult-small-bowel-overgrowth.html">زيادة بكتيريا الأمعاء الدقيقة</a></li>
+              <li><a href="education-resources/adult-chronic-diarrhea.html">الإسهال المزمن</a></li>
+
+              <li><a href="education-resources/adult-ibs.html">القولون العصبي</a></li>
+              <li><a href="education-resources/adult-constipation.html">الإمساك المزمن</a></li>
+              <li><a href="education-resources/adult-diverticulosis.html">الرتوج القولونية</a></li>
+              <li><a href="education-resources/adult-diverticulitis.html">التهاب الرتوج</a></li>
+              <li><a href="education-resources/adult-rectal-bleeding.html">النزيف الشرجي</a></li>
+              <li><a href="education-resources/adult-hemorrhoids.html">البواسير</a></li>
+              <li><a href="education-resources/adult-anal-fissure.html">الشق الشرجي</a></li>
+              <li><a href="education-resources/adult-anal-fistula.html">الناسور الشرجي</a></li>
+              <li><a href="education-resources/adult-colon-polyps.html">سلائل القولون</a></li>
+              <li><a href="education-resources/adult-colon-cancer-screening.html">فحص سرطان القولون بالمنظار</a></li>
+
+              <li><a href="education-resources/adult-ibd.html">التهاب الأمعاء المزمن</a></li>
+              <li><a href="education-resources/adult-crohns.html">داء كرون</a></li>
+              <li><a href="education-resources/adult-ulcerative-colitis.html">التهاب القولون التقرحي</a></li>
+
+              <li><a href="education-resources/adult-liver-tests.html">اضطراب إنزيمات الكبد</a></li>
+              <li><a href="education-resources/adult-fatty-liver.html">الكبد الدهني</a></li>
+              <li><a href="education-resources/adult-alcoholic-liver-disease.html">التهاب الكبد الكحولي</a></li>
+              <li><a href="education-resources/adult-viral-hepatitis.html">التهاب الكبد الفيروسي</a></li>
+              <li><a href="education-resources/adult-autoimmune-hepatitis.html">التهاب الكبد المناعي</a></li>
+              <li><a href="education-resources/adult-cholestatic-liver-disease.html">أمراض الركودة الصفراوية</a></li>
+              <li><a href="education-resources/adult-cirrhosis.html">تشمّع الكبد</a></li>
+              <li><a href="education-resources/adult-portal-hypertension.html">ارتفاع ضغط الوريد البابي</a></li>
+              <li><a href="education-resources/adult-ascites.html">الاستسقاء البطني</a></li>
+              <li><a href="education-resources/adult-hepatic-encephalopathy.html">الغيبوبة الكبدية</a></li>
+
+              <li><a href="education-resources/adult-gallstones.html">حصى المرارة</a></li>
+              <li><a href="education-resources/adult-cholecystitis.html">التهاب المرارة الحاد</a></li>
+              <li><a href="education-resources/adult-cholangitis.html">التهاب القنوات الصفراوية</a></li>
+              <li><a href="education-resources/adult-bile-duct-stones.html">حصى القناة الصفراوية</a></li>
+
+              <li><a href="education-resources/adult-pancreatitis.html">التهاب البنكرياس الحاد</a></li>
+              <li><a href="education-resources/adult-chronic-pancreatitis.html">التهاب البنكرياس المزمن</a></li>
+              <li><a href="education-resources/adult-pancreatic-insufficiency.html">قصور البنكرياس الخارجي</a></li>
+
+              <li><a href="education-resources/adult-endoscopy.html">تنظير المعدة العلوي</a></li>
+              <li><a href="education-resources/adult-colonoscopy.html">تنظير القولون</a></li>
+              <li><a href="education-resources/adult-ercp.html">ERCP (تنظير القنوات الصفراوية)</a></li>
+            </ul>
+          </section>
+
+          <!-- 3 — General Pediatrics -->
+          <section class="edu-group" id="general-peds-edu">
+            <h2><span class="edu-group-icon">🧸</span>طب الأطفال العام</h2>
+            <p>مواضيع شائعة تخص صحة الأطفال.</p>
+            <ul class="edu-list">
+              <li><a href="education-resources/peds-fever.html">الحمّى عند الأطفال</a></li>
+              <li><a href="education-resources/peds-common-cold.html">نزلات البرد والإنفلونزا</a></li>
+              <li><a href="education-resources/peds-ear-infections.html">التهاب الأذن الوسطى</a></li>
+              <li><a href="education-resources/peds-strep-throat.html">التهاب الحلق واللوزتين</a></li>
+              <li><a href="education-resources/peds-cough-wheeze.html">السعال والصفير</a></li>
+              <li><a href="education-resources/peds-asthma.html">الربو</a></li>
+              <li><a href="education-resources/peds-pneumonia.html">الالتهاب الرئوي</a></li>
+              <li><a href="education-resources/peds-vaccines.html">اللقاحات والتطعيمات</a></li>
+              <li><a href="education-resources/peds-growth.html">مراقبة الوزن والطول</a></li>
+              <li><a href="education-resources/peds-anemia.html">فقر الدم</a></li>
+              <li><a href="education-resources/peds-headache.html">الصداع عند الأطفال</a></li>
+              <li><a href="education-resources/peds-migraine.html">الصداع النصفي</a></li>
+              <li><a href="education-resources/peds-urine-infection.html">التهابات البول</a></li>
+              <li><a href="education-resources/peds-enuresis.html">التبول اللاإرادي</a></li>
+              <li><a href="education-resources/peds-skin-rashes.html">الطفح الجلدي الشائع</a></li>
+              <li><a href="education-resources/peds-allergies.html">الحساسية</a></li>
+              <li><a href="education-resources/peds-eczema.html">الأكزيما</a></li>
+              <li><a href="education-resources/peds-sleep.html">النوم الصحي</a></li>
+              <li><a href="education-resources/peds-behavior.html">مشاكل السلوك والانتباه</a></li>
+              <li><a href="education-resources/peds-school-health.html">الصحة المدرسية</a></li>
+              <li><a href="education-resources/peds-accident-prevention.html">الوقاية من الحوادث</a></li>
+            </ul>
+          </section>
+
+          <!-- 4 — Dermatology -->
+          <section class="edu-group" id="derm-edu">
+            <h2><span class="edu-group-icon">🌿</span>الأمراض الجلدية</h2>
+            <p>أمراض الجلد والشعر والأظافر لدى الأطفال والبالغين.</p>
+            <ul class="edu-list">
+              <li><a href="education-resources/derm-eczema.html">الأكزيما</a></li>
+              <li><a href="education-resources/derm-contact-dermatitis.html">التهاب الجلد التماسي</a></li>
+              <li><a href="education-resources/derm-seborrheic-dermatitis.html">التهاب الجلد الدهني</a></li>
+              <li><a href="education-resources/derm-acne.html">حب الشباب</a></li>
+              <li><a href="education-resources/derm-rosacea.html">الوردية</a></li>
+              <li><a href="education-resources/derm-psoriasis.html">الصدفية</a></li>
+              <li><a href="education-resources/derm-urticaria.html">الشرى (الأرتيكاريا)</a></li>
+              <li><a href="education-resources/derm-vitiligo.html">البهاق</a></li>
+              <li><a href="education-resources/derm-fungal-infections.html">الفطريات الجلدية</a></li>
+              <li><a href="education-resources/derm-nail-infections.html">التهابات الأظافر</a></li>
+              <li><a href="education-resources/derm-hair-loss.html">تساقط الشعر</a></li>
+              <li><a href="education-resources/derm-moles.html">الشامات وآفات الجلد</a></li>
+              <li><a href="education-resources/derm-skin-cancer-screening.html">فحص سرطان الجلد</a></li>
+            </ul>
+          </section>
+
+          <!-- 5 — Surgery -->
+          <section class="edu-group" id="surgery-edu">
+            <h2><span class="edu-group-icon">🔪</span>الجراحة العامة وجراحة الجهاز الهضمي</h2>
+            <p>معلومات مبسطة حول المشاكل الجراحية الشائعة.</p>
+            <ul class="edu-list">
+              <li><a href="education-resources/surg-appendicitis.html">التهاب الزائدة الدودية</a></li>
+              <li><a href="education-resources/surg-hernia.html">الفتوق بأنواعها</a></li>
+              <li><a href="education-resources/surg-gallbladder-surgery.html">استئصال المرارة</a></li>
+              <li><a href="education-resources/surg-gallstones.html">حصى المرارة – منظور جراحي</a></li>
+              <li><a href="education-resources/surg-anorectal.html">البواسير والشق والناسور الشرجي</a></li>
+              <li><a href="education-resources/surg-bowel-obstruction.html">انسداد الأمعاء</a></li>
+              <li><a href="education-resources/surg-diverticulitis.html">الجراحة لالتهاب الرتوج</a></li>
+              <li><a href="education-resources/surg-colon-cancer.html">جراحة سرطان القولون</a></li>
+              <li><a href="education-resources/surg-rectal-cancer.html">جراحة سرطان المستقيم</a></li>
+              <li><a href="education-resources/surg-thyroid.html">جراحة الغدة الدرقية</a></li>
+              <li><a href="education-resources/surg-hernia-repair-laparoscopic.html">إصلاح الفتق بالمنظار</a></li>
+              <li><a href="education-resources/surg-preop-postop.html">ما قبل وبعد العمليات الجراحية</a></li>
+            </ul>
+          </section>
+
+          <!-- 6 — Internal Medicine -->
+          <section class="edu-group" id="im-edu">
+            <h2><span class="edu-group-icon">❤️</span>الطب الباطني والأمراض المزمنة</h2>
+            <p>مواضيع صحية عامة للبالغين مرتبطة بأمراض الهضم والكبد.</p>
+            <ul class="edu-list">
+              <li><a href="education-resources/im-hypertension.html">ارتفاع ضغط الدم</a></li>
+              <li><a href="education-resources/im-diabetes.html">داء السكري النوع الثاني</a></li>
+              <li><a href="education-resources/im-prediabetes.html">مقدمات السكري</a></li>
+              <li><a href="education-resources/im-cholesterol.html">ارتفاع الكوليسترول</a></li>
+              <li><a href="education-resources/im-metabolic-syndrome.html">المتلازمة الأيضية</a></li>
+              <li><a href="education-resources/im-obesity.html">السمنة وإدارتها</a></li>
+              <li><a href="education-resources/im-anemia.html">فقر الدم</a></li>
+              <li><a href="education-resources/im-ckd.html">القصور الكلوي المزمن</a></li>
+              <li><a href="education-resources/im-heart-failure.html">فشل القلب</a></li>
+              <li><a href="education-resources/im-coronary-disease.html">أمراض الشرايين التاجية</a></li>
+              <li><a href="education-resources/im-smoking-cessation.html">الإقلاع عن التدخين</a></li>
+              <li><a href="education-resources/im-alcohol-use.html">الكحول والصحة</a></li>
+              <li><a href="education-resources/im-bone-health.html">صحة العظام وهشاشتها</a></li>
+            </ul>
+          </section>
+
+          <!-- 7 — General Practice -->
+          <section class="edu-group" id="gp-edu">
+            <h2><span class="edu-group-icon">🏥</span>طب الأسرة والممارسة العامة</h2>
+            <p>مواضيع رعاية صحية عامة لجميع الأعمار.</p>
+            <ul class="edu-list">
+              <li><a href="education-resources/gp-annual-checkup.html">الفحص السنوي العام</a></li>
+              <li><a href="education-resources/gp-blood-tests.html">فهم التحاليل المخبرية الشائعة</a></li>
+              <li><a href="education-resources/gp-blood-pressure-monitoring.html">القياس المنزلي لضغط الدم</a></li>
+              <li><a href="education-resources/gp-healthy-eating.html">أساسيات التغذية الصحية</a></li>
+              <li><a href="education-resources/gp-physical-activity.html">النشاط البدني والرياضة</a></li>
+              <li><a href="education-resources/gp-mental-health.html">القلق والاكتئاب – نظرة مبسطة</a></li>
+              <li><a href="education-resources/gp-medication-safety.html">سلامة الأدوية والالتزام بها</a></li>
+              <li><a href="education-resources/gp-pain-management.html">إدارة الألم المزمن</a></li>
+              <li><a href="education-resources/gp-womens-health.html">صحة المرأة</a></li>
+              <li><a href="education-resources/gp-mens-health.html">صحة الرجل</a></li>
+              <li><a href="education-resources/gp-older-adults.html">صحة كبار السن</a></li>
+              <li><a href="education-resources/gp-travel-health.html">الصحة أثناء السفر</a></li>
+            </ul>
+          </section>
+
+        </div>
+
+        <p class="edu-note">
+          تهدف هذه المواد إلى التوعية فقط ولا تعتبر بديلاً عن الاستشارة الطبية المباشرة.
+          في حال وجود أعراض مقلقة أو حالة إسعافية، يرجى مراجعة الطبيب أو أقرب مركز صحي.
+        </p>
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="af-footer">
+    <div class="af-container">
+      <p>&copy; 2025 مؤسسة ابن سينا الطبيه، المقر الرئيسي بغداد، العراق. جميع الحقوق محفوظة.</p>
+      <p class="af-footer-meta">
+        مؤسسة ابن سينا الطبيه تفخر بإطلاق مركز الفارابي لأمراض الجهاز الهضمي والمناظير.
+      </p>
+    </div>
+  </footer>
+</body>
+</html>
