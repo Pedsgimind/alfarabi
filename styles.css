@@ -582,11 +582,6 @@ a {
   min-width:max-content;
 }
 
-.af-logo-full{
-  height:34px;
-  width:auto;
-}
-
 /* nav row: keep in ONE line on desktop */
 .af-nav{
   display:flex;
@@ -841,9 +836,11 @@ a {
   .af-header .af-logo-full{ height: 56px !important; }
   .af-header .af-nav a{ padding: 7px 9px !important; font-size: 0.92rem !important; }
   .af-header .af-nav a.af-nav-cta{ padding: 8px 10px !important; }
+}
 
-/* ===== LOGO SIZE OVERRIDE ===== */
-.af-logo-full{
-  height: 70px !important;   /* increase this number */
+/* ===== FINAL LOGO SIZE (EDIT THIS NUMBER) ===== */
+.af-header .af-brand img.af-logo-full{
+  height: 110px !important;   /* <-- change this to 80, 90, 120, etc. */
   width: auto !important;
+  max-height: none !important;
 }
