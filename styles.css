@@ -841,4 +841,9 @@ a {
   .af-header .af-logo-full{ height: 56px !important; }
   .af-header .af-nav a{ padding: 7px 9px !important; font-size: 0.92rem !important; }
   .af-header .af-nav a.af-nav-cta{ padding: 8px 10px !important; }
+
+/* ===== LOGO SIZE OVERRIDE ===== */
+.af-logo-full{
+  height: 70px !important;   /* increase this number */
+  width: auto !important;
 }
