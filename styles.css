@@ -21,10 +21,10 @@ a{ text-decoration:none; color:inherit; }
 
 /* =======================================================
    HEADER (ONE HORIZONTAL BAR) — LOGO ONLY
-   Goals:
-   - Remove “Avicenna Medical Inc.” text (hide brand text)
-   - Keep EVERYTHING on ONE row: logo | nav | CTA | language
-   - Tight + consistent across pages (force with !important)
+   Updated:
+   - Force logo = 110px (max allowed)
+   - Force logo as far LEFT as possible (remove container centering/padding)
+   - Keep everything else same
    ======================================================= */
 
 .af-header{
@@ -36,7 +36,7 @@ a{ text-decoration:none; color:inherit; }
   border-bottom: 1px solid rgba(148,163,184,0.3);
 }
 
-/* Force one-line header layout */
+/* Force header to use FULL viewport width and push content to edges */
 .af-header .af-container.af-header-inner,
 .af-header .af-header-inner{
   display:flex !important;
@@ -44,8 +44,14 @@ a{ text-decoration:none; color:inherit; }
   align-items:center !important;
   justify-content: space-between !important;
   gap: 14px !important;
-  padding: 10px 0 !important;
+
+  /* key: let it go edge-to-edge */
+  max-width: none !important;
   width: 100% !important;
+  margin: 0 !important;
+
+  /* key: small safe padding only (edit if you want tighter) */
+  padding: 8px 10px !important;
 }
 
 /* ---------- BRAND (LOGO ONLY) ---------- */
@@ -55,12 +61,17 @@ a{ text-decoration:none; color:inherit; }
   gap: 0 !important;
   flex: 0 0 auto !important;
   min-width: max-content !important;
+
+  /* key: force it to the far left */
+  margin: 0 !important;
+  padding: 0 !important;
 }
 
-/* LOGO SIZE (edit only this number) */
+/* LOGO SIZE — FORCE 110px (max allowed) */
 .af-header .af-logo-full{
-  height: 110px !important;     /* <— change to 56 / 70 / 80 if you want */
+  height: 110px !important;
   width: auto !important;
+  max-height: 110px !important;
   display:block !important;
   object-fit: contain !important;
 }
@@ -77,10 +88,10 @@ a{ text-decoration:none; color:inherit; }
   display:flex !important;
   align-items:center !important;
   gap: 10px !important;
-  flex: 1 1 auto !important;         /* allow nav to take middle space */
-  justify-content: center !important; /* keeps nav nicely centered */
-  flex-wrap: nowrap !important;       /* force 1 line */
-  white-space: nowrap !important;     /* force 1 line */
+  flex: 1 1 auto !important;
+  justify-content: center !important;
+  flex-wrap: nowrap !important;
+  white-space: nowrap !important;
   margin-left: 0 !important;
 }
 
@@ -151,7 +162,7 @@ a{ text-decoration:none; color:inherit; }
 /* ---------- RESPONSIVE HEADER TIGHTENING ---------- */
 /* Keep one bar as long as possible by tightening spacing */
 @media (max-width: 1100px){
-  .af-header .af-logo-full{ height: 56px !important; }
+  /* keep logo large as requested, only tighten pills */
   .af-header .af-nav a{ padding: 7px 10px !important; font-size: 0.92rem !important; }
   .af-header .af-nav a.af-nav-cta{ padding: 8px 11px !important; }
   .af-header .af-lang-switch li a{ padding: 6px 9px !important; font-size: 0.86rem !important; }
