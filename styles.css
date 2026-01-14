@@ -649,3 +649,99 @@ a {
   .af-nav a{ padding:7px 10px; font-size:.95rem; }
   .af-lang-switch a{ padding:6px 10px; font-size:.95rem; }
 }
+/* ===== HEADER FIX: bigger logo, left aligned, remove line2, keep nav inside screen ===== */
+
+.af-header,
+.af-header *{
+  box-sizing: border-box;
+}
+
+/* Make header content use full width + proper padding so nothing goes خارج الشاشة */
+.af-header-inner{
+  width: 100%;
+  max-width: 1400px;      /* fits normal PC screens */
+  margin: 0 auto;         /* keep everything inside viewport */
+  padding: 12px 18px;     /* left/right padding */
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+/* Push brand fully to the left (no centering) */
+.af-brand{
+  margin: 0;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-align: left;
+}
+
+/* Bigger logo */
+.af-logo-full{
+  height: 54px;           /* increase size */
+  width: auto;
+  max-width: 260px;       /* prevents huge horizontal logo from pushing nav out */
+}
+
+/* Remove the second line completely */
+.af-brand-line2{
+  display: none !important;
+}
+
+/* Keep only "Avicenna Medical Inc." */
+.af-brand-text{
+  display: flex;
+  align-items: center;
+}
+.af-brand-line1{
+  display: block;
+  font-weight: 700;
+}
+
+/* Keep nav + lang inside the same row */
+.af-nav{
+  margin-left: auto;      /* pushes nav to the right */
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: nowrap;
+  white-space: nowrap;
+}
+
+/* Tighten pills so they fit on screen */
+.af-nav a{
+  padding: 7px 10px;
+  font-size: 0.95rem;
+  border-radius: 999px;
+}
+
+/* CTA button: slightly tighter too */
+.af-nav a.af-nav-cta{
+  padding: 8px 12px;
+  font-size: 0.95rem;
+}
+
+/* Language switcher: keep it compact */
+.af-lang-switch{
+  margin: 0;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  white-space: nowrap;
+}
+.af-lang-switch a{
+  padding: 6px 9px;
+  font-size: 0.9rem;
+  border-radius: 999px;
+}
+
+/* If screen gets narrower, hide brand text (logo stays) to prevent overflow */
+@media (max-width: 1200px){
+  .af-brand-text{ display:none; }
+  .af-logo-full{ height: 50px; }
+  .af-nav a{ padding: 7px 9px; font-size: 0.92rem; }
+  .af-nav a.af-nav-cta{ padding: 8px 10px; }
+  .af-lang-switch a{ padding: 6px 8px; font-size: 0.88rem; }
+}
