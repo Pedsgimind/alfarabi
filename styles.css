@@ -845,3 +845,42 @@ a {
   width: auto !important;
   max-height: none !important;
 }
+
+/* NAVBAR UNDER LOGO OVERRIDE */
+.af-header .af-container.af-header-inner,
+.af-header .af-header-inner {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: stretch !important;
+  gap: 12px;
+}
+
+/* Keep brand block intact */
+.af-header .af-brand {
+  width: 100%;
+}
+
+/* Make navbar sit on its own line under brand */
+.af-header .af-nav {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+/* Put language switcher on its own line (optional) */
+.af-header .af-lang-switch {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+/* Small screens: center language switcher */
+@media (max-width: 720px) {
+  .af-header .af-lang-switch {
+    justify-content: center;
+  }
+}
