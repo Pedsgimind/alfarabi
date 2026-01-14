@@ -2,7 +2,9 @@
    GLOBAL RESET & BASE
    ======================================================= */
 
-* { box-sizing: border-box; }
+* {
+  box-sizing: border-box;
+}
 
 body {
   margin: 0;
@@ -23,11 +25,7 @@ a {
 }
 
 /* =======================================================
-   HEADER (DARK PREMIUM) - CLEAN + CONSISTENT
-   Goals:
-   - Logo only (hide brand text)
-   - Navbar UNDER the logo (2nd line)
-   - Language switch on the same nav line (right side)
+   HEADER (DARK PREMIUM)
    ======================================================= */
 
 .af-header {
@@ -39,74 +37,79 @@ a {
   border-bottom: 1px solid rgba(148, 163, 184, 0.3);
 }
 
-/* Make the header inner stack (logo row then nav row) */
-.af-header .af-container.af-header-inner,
-.af-header .af-header-inner {
+.af-header-inner {
   display: flex;
-  flex-direction: column;         /* KEY: 2 rows */
-  align-items: stretch;
-  gap: 12px;
+  align-items: center;
+  gap: 2rem;
   padding: 0.9rem 0;
 }
 
-/* ---------- BRAND (LOGO ONLY) ---------- */
+/* ---------- LOGO + BRAND TEXT ---------- */
 
 .af-brand {
   display: flex;
   align-items: center;
-  gap: 0;                         /* no text, so no gap needed */
+  gap: 1rem;
   flex-shrink: 0;
 }
 
-/* KEEP LOGO SIZE HERE (change only this number when you want) */
 .af-logo-full {
-  height: 80px;                   /* <-- adjust: 70 / 80 / 90 */
+  height: 70px;
   width: auto;
   display: block;
   object-fit: contain;
 }
 
-/* Hide all brand text completely (Avicenna + line2) */
-.af-brand-text,
-.af-brand-line1,
-.af-brand-line2 {
-  display: none !important;
+/* ---------- LARGE BRANDED TEXT ---------- */
+
+.af-brand-text {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.2;
 }
 
-/* ---------- NAV ROW (NAV LEFT + LANG RIGHT) ---------- */
-/* We make a “row” behavior using flex: nav grows, language stays right */
+.af-brand-line1 {
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: #f8fafc;
+}
+
+.af-brand-line2 {
+  font-size: 1.9rem;
+  font-weight: 700;
+  color: #38bdf8;
+}
+
+/* ---------- NAVIGATION ---------- */
+
 .af-nav {
-  width: 100%;
   display: flex;
   align-items: center;
-  gap: 12px;
-  flex-wrap: wrap;                /* wraps nicely if needed */
+  gap: 1.4rem;
+  margin-left: auto;
+  flex-wrap: wrap;
 }
 
-/* Make nav links sit as pills and wrap cleanly */
 .af-nav a {
   font-size: 0.95rem;
   color: #cbd5f5;
-  padding: 8px 14px;
-  border-radius: 999px;
-  line-height: 1;
-  border: 1px solid transparent;
+  padding-bottom: 2px;
+  border-bottom: 2px solid transparent;
 }
 
 .af-nav a:hover {
-  background: rgba(255,255,255,0.10);
   color: #ffffff;
 }
 
 .af-nav a.active {
   color: #38bdf8;
-  border-color: rgba(56, 189, 248, 0.6);
-  background: rgba(56, 189, 248, 0.08);
+  border-color: #38bdf8;
 }
 
-/* CTA button */
-.af-nav a.af-nav-cta {
-  padding: 10px 16px;
+/* ---------- CTA BUTTON IN NAV ---------- */
+
+.af-nav-cta {
+  padding: 0.45rem 0.9rem;
   border-radius: 999px;
   background: #2563eb;
   color: #ffffff !important;
@@ -115,33 +118,30 @@ a {
   white-space: nowrap;
 }
 
-.af-nav a.af-nav-cta:hover {
+.af-nav-cta:hover {
   background: #1d4ed8;
   border-color: #1e40af;
 }
 
-/* ---------- LANGUAGE SWITCH (RIGHT SIDE OF NAV ROW) ---------- */
+/* ---------- LANGUAGE SWITCH ---------- */
+
 .af-lang-switch {
-  margin: 0 0 0 auto;             /* KEY: pushes to the right */
-  padding: 0;
-  list-style: none;
   display: flex;
-  align-items: center;
-  gap: 8px;
-  white-space: nowrap;
+  gap: 0.4rem;
+  list-style: none;
+  margin-left: 1rem;
 }
 
 .af-lang-switch li a {
-  padding: 7px 12px;
+  padding: 3px 9px;
   border-radius: 999px;
   border: 1px solid rgba(148, 163, 184, 0.6);
-  font-size: 0.9rem;
+  font-size: 0.78rem;
   color: #e5e7eb;
 }
 
 .af-lang-switch li a:hover {
   border-color: #38bdf8;
-  background: rgba(56, 189, 248, 0.08);
   color: #38bdf8;
 }
 
@@ -362,15 +362,488 @@ a {
    ======================================================= */
 
 @media (max-width: 960px) {
-  .af-hero-grid { grid-template-columns: 1fr; }
-
-  /* Nav wraps nicely on medium screens */
-  .af-nav a { padding: 7px 10px; font-size: 0.92rem; }
-  .af-lang-switch li a { padding: 6px 10px; font-size: 0.9rem; }
+  .af-header-inner {
+    flex-wrap: wrap;
+  }
+  .af-brand-text {
+    text-align: left;
+  }
+  .af-nav {
+    margin-left: 0;
+  }
+  .af-hero-grid {
+    grid-template-columns: 1fr;
+  }
 }
 
 @media (max-width: 720px) {
-  /* Keep nav visible; it will wrap. If you WANT a hamburger later, we can add it. */
-  .af-logo-full { height: 70px; }
-  .af-lang-switch { width: 100%; justify-content: center; margin-left: 0; }
+  .af-nav {
+    display: none;
+  }
+}
+
+/* ===== NAVBAR (Pedsgimind-style) ===== */
+.site-header{
+  background:#0b2a4a;
+  padding:14px 22px;
+}
+
+.site-nav{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:16px;
+}
+
+.site-brand{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  color:#fff;
+  text-decoration:none;
+  min-width:max-content;
+}
+
+.site-brand img{ height:34px; width:auto; }
+
+.nav-links{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  flex-wrap:nowrap;      /* KEY: prevents 2-line wrapping */
+  white-space:nowrap;    /* KEY */
+}
+
+.nav-links a{
+  color:#fff;
+  text-decoration:none;
+  padding:8px 14px;
+  border-radius:999px;
+  line-height:1;
+}
+
+.nav-links a:hover{
+  background:rgba(255,255,255,.10);
+}
+
+.nav-links a.active{
+  background:rgba(255,255,255,.15);
+  border:1px solid rgba(255,255,255,.25);
+}
+
+/* language button look */
+.nav-links a.lang{
+  border:1px solid rgba(255,255,255,.35);
+}
+
+/* Make it fit better on mid screens */
+@media (max-width: 1100px){
+  .site-brand span{ display:none; }  /* hides brand text to keep 1 row */
+  .nav-links a{ padding:7px 10px; font-size:.95rem; }
+}
+
+/* ===== PEDSGIMIND NAVBAR OVERRIDES ===== */
+/* This block is designed to work with your current header markup in index.html
+   (site-header + brand area + nav links + language switcher). */
+
+/* Header background (keep your existing theme color if you prefer) */
+.site-header{
+  background:#0b2a4a;
+}
+
+/* Common “container” patterns used in static templates */
+.site-header .container,
+.site-header .nav-container,
+.site-header .navbar,
+.site-header .header-inner{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:16px;
+}
+
+/* Brand block (logo + text) */
+.site-header .nav-brand,
+.site-header .brand,
+.site-header .logo-area{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  min-width:max-content;
+}
+
+.site-header img{
+  height:34px;
+  width:auto;
+}
+
+/* Main navigation row: force one line on desktop */
+.site-header nav,
+.site-header .nav,
+.site-header .nav-links,
+.site-header .nav-menu{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  flex-wrap:nowrap;     /* KEY: prevents wrapping into two rows */
+  white-space:nowrap;   /* KEY */
+}
+
+/* Link “pill” style */
+.site-header a{
+  text-decoration:none;
+}
+
+.site-header nav a,
+.site-header .nav a,
+.site-header .nav-links a,
+.site-header .nav-menu a{
+  color:#fff;
+  padding:8px 14px;
+  border-radius:999px;
+  line-height:1;
+}
+
+/* Hover */
+.site-header nav a:hover,
+.site-header .nav a:hover,
+.site-header .nav-links a:hover,
+.site-header .nav-menu a:hover{
+  background:rgba(255,255,255,.10);
+}
+
+/* Active (works if you already use .active on Home, etc.) */
+.site-header nav a.active,
+.site-header .nav a.active,
+.site-header .nav-links a.active,
+.site-header .nav-menu a.active{
+  background:rgba(255,255,255,.15);
+  border:1px solid rgba(255,255,255,.25);
+}
+
+/* Make CTA button still look like a button (your “Book your appointment online”) */
+.site-header .btn,
+.site-header .nav-cta,
+.site-header .cta,
+.site-header a.button,
+.site-header a.btn{
+  padding:10px 16px;
+  border-radius:999px;
+}
+
+/* Language switcher: keep it inline and pill-like */
+.site-header .lang-switch,
+.site-header .language-switcher,
+.site-header .lang,
+.site-header .lang-dropdown{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  white-space:nowrap;
+}
+
+/* Tighten on medium screens so it stays one row */
+@media (max-width: 1100px){
+  /* Hide long brand text line if you have it (your “line2” class exists in index.html) */
+  .site-header .nav-brand-line2,
+  .site-header .brand-line2,
+  .site-header .subtitle{
+    display:none !important;
+  }
+
+  .site-header nav a,
+  .site-header .nav a,
+  .site-header .nav-links a,
+  .site-header .nav-menu a{
+    padding:7px 10px;
+    font-size:.95rem;
+  }
+}
+
+/* ===== AF NAVBAR OVERRIDES (PEDSGIMIND-STYLE) ===== */
+
+.af-header{
+  background:#0b2a4a;
+}
+
+/* header layout */
+.af-header-inner{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:16px;
+}
+
+/* brand (logo + text) */
+.af-brand{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  min-width:max-content;
+}
+
+.af-logo-full{
+  height:34px;
+  width:auto;
+}
+
+/* nav row: keep in ONE line on desktop */
+.af-nav{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  flex-wrap:nowrap;      /* KEY */
+  white-space:nowrap;    /* KEY */
+}
+
+/* nav links = pill look */
+.af-nav a{
+  color:#fff;
+  text-decoration:none;
+  padding:8px 14px;
+  border-radius:999px;
+  line-height:1;
+}
+
+.af-nav a:hover{
+  background:rgba(255,255,255,.10);
+}
+
+.af-nav a.active{
+  background:rgba(255,255,255,.15);
+  border:1px solid rgba(255,255,255,.25);
+}
+
+/* CTA button stays a pill */
+.af-nav a.af-nav-cta{
+  padding:10px 16px;
+  border-radius:999px;
+}
+
+/* language switch: inline pills */
+.af-lang-switch{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  list-style:none;
+  margin:0;
+  padding:0;
+  white-space:nowrap;
+}
+
+.af-lang-switch a{
+  color:#fff;
+  text-decoration:none;
+  padding:7px 12px;
+  border-radius:999px;
+  border:1px solid rgba(255,255,255,.30);
+}
+
+.af-lang-switch a:hover{
+  background:rgba(255,255,255,.10);
+}
+
+/* tighten on medium screens so it still looks like one row */
+@media (max-width: 1100px){
+  .af-brand-line2{ display:none; } /* hides the long second line */
+  .af-nav a{ padding:7px 10px; font-size:.95rem; }
+  .af-lang-switch a{ padding:6px 10px; font-size:.95rem; }
+}
+/* ===== HEADER FIX: bigger logo, left aligned, remove line2, keep nav inside screen ===== */
+
+.af-header,
+.af-header *{
+  box-sizing: border-box;
+}
+
+/* Make header content use full width + proper padding so nothing goes خارج الشاشة */
+.af-header-inner{
+  width: 100%;
+  max-width: 1400px;      /* fits normal PC screens */
+  margin: 0 auto;         /* keep everything inside viewport */
+  padding: 12px 18px;     /* left/right padding */
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+/* Push brand fully to the left (no centering) */
+.af-brand{
+  margin: 0;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-align: left;
+}
+
+/* Bigger logo */
+.af-logo-full{
+  height: 54px;           /* increase size */
+  width: auto;
+  max-width: 260px;       /* prevents huge horizontal logo from pushing nav out */
+}
+
+/* Remove the second line completely */
+.af-brand-line2{
+  display: none !important;
+}
+
+/* Keep only "Avicenna Medical Inc." */
+.af-brand-text{
+  display: flex;
+  align-items: center;
+}
+.af-brand-line1{
+  display: block;
+  font-weight: 700;
+}
+
+/* Keep nav + lang inside the same row */
+.af-nav{
+  margin-left: auto;      /* pushes nav to the right */
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: nowrap;
+  white-space: nowrap;
+}
+
+/* Tighten pills so they fit on screen */
+.af-nav a{
+  padding: 7px 10px;
+  font-size: 0.95rem;
+  border-radius: 999px;
+}
+
+/* CTA button: slightly tighter too */
+.af-nav a.af-nav-cta{
+  padding: 8px 12px;
+  font-size: 0.95rem;
+}
+
+/* Language switcher: keep it compact */
+.af-lang-switch{
+  margin: 0;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  white-space: nowrap;
+}
+.af-lang-switch a{
+  padding: 6px 9px;
+  font-size: 0.9rem;
+  border-radius: 999px;
+}
+
+/* If screen gets narrower, hide brand text (logo stays) to prevent overflow */
+@media (max-width: 1200px){
+  .af-brand-text{ display:none; }
+  .af-logo-full{ height: 50px; }
+  .af-nav a{ padding: 7px 9px; font-size: 0.92rem; }
+  .af-nav a.af-nav-cta{ padding: 8px 10px; }
+  .af-lang-switch a{ padding: 6px 8px; font-size: 0.88rem; }
+}
+/* ===== AF HEADER FORCE OVERRIDES (LOGO LEFT + BIG, REMOVE LINE2, NAV INSIDE) ===== */
+
+.af-header .af-header-inner{
+  display:flex !important;
+  align-items:center !important;
+  justify-content:flex-start !important;
+  gap:14px !important;
+  width:100% !important;
+}
+
+/* Keep header content inside normal PC screen */
+.af-header .af-container.af-header-inner{
+  max-width: 1400px !important;
+  margin: 0 auto !important;
+  padding: 12px 18px !important;
+}
+
+/* Brand goes fully LEFT */
+.af-header .af-brand{
+  display:flex !important;
+  align-items:center !important;
+  justify-content:flex-start !important;
+  gap:14px !important;
+  margin:0 !important;
+  padding:0 !important;
+  flex: 0 0 auto !important;
+  text-align:left !important;
+}
+
+/* BIGGER LOGO */
+.af-header .af-logo-full{
+  height: 64px !important;
+  width: auto !important;
+  max-width: 280px !important; /* prevents pushing nav off screen */
+}
+
+/* REMOVE the second line completely */
+.af-header .af-brand-line2{
+  display:none !important;
+}
+
+/* Ensure Avicenna Medical Inc. stays left (not centered) */
+.af-header .af-brand-text{
+  display:flex !important;
+  align-items:center !important;
+  text-align:left !important;
+}
+.af-header .af-brand-line1{
+  display:block !important;
+  text-align:left !important;
+}
+
+/* NAV sticks to the right and stays inside */
+.af-header .af-nav{
+  margin-left: auto !important;
+  display:flex !important;
+  align-items:center !important;
+  gap:10px !important;
+  flex-wrap: nowrap !important;
+  white-space: nowrap !important;
+}
+
+/* Tighten nav pills slightly so they fit */
+.af-header .af-nav a{
+  padding: 7px 10px !important;
+  font-size: 0.95rem !important;
+  border-radius: 999px !important;
+}
+
+/* CTA (Book) pill sizing */
+.af-header .af-nav a.af-nav-cta{
+  padding: 9px 12px !important;
+}
+
+/* Language pills aligned and compact */
+.af-header .af-lang-switch{
+  margin: 0 0 0 10px !important;
+  padding: 0 !important;
+  list-style:none !important;
+  display:flex !important;
+  align-items:center !important;
+  gap:6px !important;
+  white-space: nowrap !important;
+}
+.af-header .af-lang-switch a{
+  padding: 6px 9px !important;
+  font-size: 0.9rem !important;
+  border-radius:999px !important;
+}
+
+/* On smaller screens hide the Avicenna text to keep everything inside */
+@media (max-width: 1200px){
+  .af-header .af-brand-text{ display:none !important; }
+  .af-header .af-logo-full{ height: 56px !important; }
+  .af-header .af-nav a{ padding: 7px 9px !important; font-size: 0.92rem !important; }
+  .af-header .af-nav a.af-nav-cta{ padding: 8px 10px !important; }
+
+/* ===== LOGO SIZE OVERRIDE ===== */
+.af-logo-full{
+  height: 70px !important;   /* increase this number */
+  width: auto !important;
 }
