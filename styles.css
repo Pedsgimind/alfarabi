@@ -745,3 +745,100 @@ a {
   .af-nav a.af-nav-cta{ padding: 8px 10px; }
   .af-lang-switch a{ padding: 6px 8px; font-size: 0.88rem; }
 }
+/* ===== AF HEADER FORCE OVERRIDES (LOGO LEFT + BIG, REMOVE LINE2, NAV INSIDE) ===== */
+
+.af-header .af-header-inner{
+  display:flex !important;
+  align-items:center !important;
+  justify-content:flex-start !important;
+  gap:14px !important;
+  width:100% !important;
+}
+
+/* Keep header content inside normal PC screen */
+.af-header .af-container.af-header-inner{
+  max-width: 1400px !important;
+  margin: 0 auto !important;
+  padding: 12px 18px !important;
+}
+
+/* Brand goes fully LEFT */
+.af-header .af-brand{
+  display:flex !important;
+  align-items:center !important;
+  justify-content:flex-start !important;
+  gap:14px !important;
+  margin:0 !important;
+  padding:0 !important;
+  flex: 0 0 auto !important;
+  text-align:left !important;
+}
+
+/* BIGGER LOGO */
+.af-header .af-logo-full{
+  height: 64px !important;
+  width: auto !important;
+  max-width: 280px !important; /* prevents pushing nav off screen */
+}
+
+/* REMOVE the second line completely */
+.af-header .af-brand-line2{
+  display:none !important;
+}
+
+/* Ensure Avicenna Medical Inc. stays left (not centered) */
+.af-header .af-brand-text{
+  display:flex !important;
+  align-items:center !important;
+  text-align:left !important;
+}
+.af-header .af-brand-line1{
+  display:block !important;
+  text-align:left !important;
+}
+
+/* NAV sticks to the right and stays inside */
+.af-header .af-nav{
+  margin-left: auto !important;
+  display:flex !important;
+  align-items:center !important;
+  gap:10px !important;
+  flex-wrap: nowrap !important;
+  white-space: nowrap !important;
+}
+
+/* Tighten nav pills slightly so they fit */
+.af-header .af-nav a{
+  padding: 7px 10px !important;
+  font-size: 0.95rem !important;
+  border-radius: 999px !important;
+}
+
+/* CTA (Book) pill sizing */
+.af-header .af-nav a.af-nav-cta{
+  padding: 9px 12px !important;
+}
+
+/* Language pills aligned and compact */
+.af-header .af-lang-switch{
+  margin: 0 0 0 10px !important;
+  padding: 0 !important;
+  list-style:none !important;
+  display:flex !important;
+  align-items:center !important;
+  gap:6px !important;
+  white-space: nowrap !important;
+}
+.af-header .af-lang-switch a{
+  padding: 6px 9px !important;
+  font-size: 0.9rem !important;
+  border-radius:999px !important;
+}
+
+/* On smaller screens hide the Avicenna text to keep everything inside */
+@media (max-width: 1200px){
+  .af-header .af-brand-text{ display:none !important; }
+  .af-header .af-logo-full{ height: 56px !important; }
+  .af-header .af-nav a{ padding: 7px 9px !important; font-size: 0.92rem !important; }
+  .af-header .af-nav a.af-nav-cta{ padding: 8px 10px !important; }
+}
