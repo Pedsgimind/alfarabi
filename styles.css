@@ -381,3 +381,181 @@ a {
     display: none;
   }
 }
+
+/* ===== NAVBAR (Pedsgimind-style) ===== */
+.site-header{
+  background:#0b2a4a;
+  padding:14px 22px;
+}
+
+.site-nav{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:16px;
+}
+
+.site-brand{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  color:#fff;
+  text-decoration:none;
+  min-width:max-content;
+}
+
+.site-brand img{ height:34px; width:auto; }
+
+.nav-links{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  flex-wrap:nowrap;      /* KEY: prevents 2-line wrapping */
+  white-space:nowrap;    /* KEY */
+}
+
+.nav-links a{
+  color:#fff;
+  text-decoration:none;
+  padding:8px 14px;
+  border-radius:999px;
+  line-height:1;
+}
+
+.nav-links a:hover{
+  background:rgba(255,255,255,.10);
+}
+
+.nav-links a.active{
+  background:rgba(255,255,255,.15);
+  border:1px solid rgba(255,255,255,.25);
+}
+
+/* language button look */
+.nav-links a.lang{
+  border:1px solid rgba(255,255,255,.35);
+}
+
+/* Make it fit better on mid screens */
+@media (max-width: 1100px){
+  .site-brand span{ display:none; }  /* hides brand text to keep 1 row */
+  .nav-links a{ padding:7px 10px; font-size:.95rem; }
+}
+
+/* ===== PEDSGIMIND NAVBAR OVERRIDES ===== */
+/* This block is designed to work with your current header markup in index.html
+   (site-header + brand area + nav links + language switcher). */
+
+/* Header background (keep your existing theme color if you prefer) */
+.site-header{
+  background:#0b2a4a;
+}
+
+/* Common “container” patterns used in static templates */
+.site-header .container,
+.site-header .nav-container,
+.site-header .navbar,
+.site-header .header-inner{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:16px;
+}
+
+/* Brand block (logo + text) */
+.site-header .nav-brand,
+.site-header .brand,
+.site-header .logo-area{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  min-width:max-content;
+}
+
+.site-header img{
+  height:34px;
+  width:auto;
+}
+
+/* Main navigation row: force one line on desktop */
+.site-header nav,
+.site-header .nav,
+.site-header .nav-links,
+.site-header .nav-menu{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  flex-wrap:nowrap;     /* KEY: prevents wrapping into two rows */
+  white-space:nowrap;   /* KEY */
+}
+
+/* Link “pill” style */
+.site-header a{
+  text-decoration:none;
+}
+
+.site-header nav a,
+.site-header .nav a,
+.site-header .nav-links a,
+.site-header .nav-menu a{
+  color:#fff;
+  padding:8px 14px;
+  border-radius:999px;
+  line-height:1;
+}
+
+/* Hover */
+.site-header nav a:hover,
+.site-header .nav a:hover,
+.site-header .nav-links a:hover,
+.site-header .nav-menu a:hover{
+  background:rgba(255,255,255,.10);
+}
+
+/* Active (works if you already use .active on Home, etc.) */
+.site-header nav a.active,
+.site-header .nav a.active,
+.site-header .nav-links a.active,
+.site-header .nav-menu a.active{
+  background:rgba(255,255,255,.15);
+  border:1px solid rgba(255,255,255,.25);
+}
+
+/* Make CTA button still look like a button (your “Book your appointment online”) */
+.site-header .btn,
+.site-header .nav-cta,
+.site-header .cta,
+.site-header a.button,
+.site-header a.btn{
+  padding:10px 16px;
+  border-radius:999px;
+}
+
+/* Language switcher: keep it inline and pill-like */
+.site-header .lang-switch,
+.site-header .language-switcher,
+.site-header .lang,
+.site-header .lang-dropdown{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  white-space:nowrap;
+}
+
+/* Tighten on medium screens so it stays one row */
+@media (max-width: 1100px){
+  /* Hide long brand text line if you have it (your “line2” class exists in index.html) */
+  .site-header .nav-brand-line2,
+  .site-header .brand-line2,
+  .site-header .subtitle{
+    display:none !important;
+  }
+
+  .site-header nav a,
+  .site-header .nav a,
+  .site-header .nav-links a,
+  .site-header .nav-menu a{
+    padding:7px 10px;
+    font-size:.95rem;
+  }
+}
