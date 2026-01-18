@@ -882,7 +882,109 @@ ${makeClinicalNoteText(patient, v)}
           listEl.appendChild(div);
         });
     }
+// ====== PDF HELPERS (jsPDF) ======
+function sanitizeFilename(s) {
+  return (s || "")
+    .toString()
+    .trim()
+    .replace(/\s+/g, "_")
+    .replace(/[\/\\:*?"<>|]+/g, "")   // remove illegal filename chars
+    .replace(/_+/g, "_");
+}
 
+function buildSelectedVisitSummaryText() {
+  if (!lastSelectedVisit) return "";
+
+  const v = lastSelectedVisit;
+  const p = getPatientById(v.patientId);
+
+  const lines = [];
+  lines.push("AL FARABI PEDIATRIC GI – VISIT SUMMARY");
+  lines.push("");
+
+  // Patient
+  lines.push("PATIENT");
+  lines.push(`Name: ${p?.nameEn || ""}`);
+  lines.push(`Patient ID: ${p?.id || ""}`);
+  lines.push(`DOB: ${p?.dob || "N/A"}    Sex: ${p?.sex || ""}    City: ${p?.city || ""}`);
+  if (p?.phone) lines.push(`Phone: ${p.phone}`);
+  lines.push("");
+
+  // Visit
+  lines.push("VISIT");
+  lines.push(`Date: ${v.date || ""}`);
+  lines.push(`Type: ${v.type || ""}`);
+  lines.push(`Chief complaint: ${v.cc || ""}`);
+  lines.push("");
+
+  if (v.hpi) { lines.push("HPI"); lines.push(v.hpi); lines.push(""); }
+  if (v.pmh) { lines.push("PAST HISTORY / MEDS / ALLERGIES"); lines.push(v.pmh); lines.push(""); }
+  if (v.vitals) { lines.push("VITALS"); lines.push(v.vitals); lines.push(""); }
+  if (v.exam || v.otherExam) {
+    lines.push("EXAM");
+    if (v.exam) lines.push(v.exam);
+    if (v.otherExam) lines.push("Other: " + v.otherExam);
+    lines.push("");
+  }
+  if (v.impression) { lines.push("IMPRESSION / DIAGNOSIS"); lines.push(v.impression); lines.push(""); }
+  if (v.planInvestigations) { lines.push("PLAN – INVESTIGATIONS"); lines.push(v.planInvestigations); lines.push(""); }
+  if (v.planMeds) { lines.push("PLAN – MEDICATIONS"); lines.push(v.planMeds); lines.push(""); }
+  if (v.planCounsel) { lines.push("PLAN – DIET / COUNSELING / FOLLOW-UP"); lines.push(v.planCounsel); lines.push(""); }
+  if (v.followInterval || v.nextDate) {
+    lines.push(`FOLLOW-UP: ${v.followInterval || "PRN"}    Next date: ${v.nextDate || ""}`);
+    lines.push("");
+  }
+
+  // Orders for this visit
+  const vOrders = orders.filter((o) => o.visitId === v.id);
+  if (vOrders.length) {
+    lines.push("ORDERS (LABS / IMAGING / SCOPES)");
+    vOrders.forEach((o) => {
+      lines.push(`- ${o.type}: ${o.name || ""}`);
+      lines.push(`  Ordered: ${o.orderedDate || ""} | Status: ${o.status || ""}`);
+      if (o.resultDate || o.resultText) {
+        lines.push(`  Result: ${o.resultDate || ""}${o.resultText ? " – " + o.resultText : ""}`);
+      }
+    });
+    lines.push("");
+  }
+
+  return lines.join("\n");
+}
+
+function downloadPdfFromText(text, filename) {
+  if (!text.trim()) {
+    alert("No visit selected. Click Details on a visit first.");
+    return;
+  }
+
+  const { jsPDF } = window.jspdf;
+  const doc = new jsPDF({ unit: "pt", format: "a4" });
+
+  const margin = 40;
+  const pageWidth = doc.internal.pageSize.getWidth();
+  const pageHeight = doc.internal.pageSize.getHeight();
+  const usableWidth = pageWidth - margin * 2;
+
+  doc.setFont("helvetica", "normal");
+  doc.setFontSize(11);
+
+  const lines = doc.splitTextToSize(text, usableWidth);
+
+  let y = margin;
+  const lineHeight = 14;
+
+  for (let i = 0; i < lines.length; i++) {
+    if (y + lineHeight > pageHeight - margin) {
+      doc.addPage();
+      y = margin;
+    }
+    doc.text(lines[i], margin, y);
+    y += lineHeight;
+  }
+
+  doc.save(filename);
+}
     // ====== EXPORT PATIENT HISTORY ======
     function buildPatientHistoryText(patientId) {
       const p = getPatientById(patientId);
