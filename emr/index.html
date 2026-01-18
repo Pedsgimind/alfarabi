@@ -958,6 +958,22 @@ ${makeClinicalNoteText(patient, v)}
         });
     }
 // ====== PDF HELPERS (jsPDF) ======
+    async function loadImageAsDataURL(url) {
+  try {
+    const res = await fetch(url, { cache: "force-cache" });
+    if (!res.ok) throw new Error("HTTP " + res.status);
+    const blob = await res.blob();
+    return await new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onload = () => resolve(reader.result);
+      reader.onerror = reject;
+      reader.readAsDataURL(blob);
+    });
+  } catch (e) {
+    console.warn("Could not load image for PDF:", url, e);
+    return null;
+  }
+}
 function sanitizeFilename(s) {
   return (s || "")
     .toString()
