@@ -1565,7 +1565,7 @@ ${makeClinicalNoteText(patient, v)}
     document.addEventListener("DOMContentLoaded", () => {
 // ===== EMERGENCY BYPASS (TEMP) =====
       // Set to true to bypass lock screen and enter EMR immediately.
-      const BYPASS_LOCK = true;
+      const BYPASS_LOCK = false;
       if (BYPASS_LOCK) {
         unlockApp();
         return;
