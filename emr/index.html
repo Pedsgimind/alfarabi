@@ -1354,6 +1354,7 @@ function downloadPdfFromText(text, filename) {
       });
 // Save selected visit as PDF (forced filename)
 document.getElementById("btnPdfSelectedVisit").addEventListener("click", () => {
+console.log("PDF button clicked");  
   if (!lastSelectedVisit) {
     alert("Select a visit first (click 'Details' on the visit).");
     return;
