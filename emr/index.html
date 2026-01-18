@@ -901,15 +901,19 @@ function buildSelectedVisitSummaryText() {
   const lines = [];
   lines.push("AL FARABI PEDIATRIC GI – VISIT SUMMARY");
   lines.push("");
-
-  // Patient
+// Patient
   lines.push("PATIENT");
-  lines.push(`Name: ${p?.nameEn || ""}`);
-  lines.push(`Patient ID: ${p?.id || ""}`);
-  lines.push(`DOB: ${p?.dob || "N/A"}    Sex: ${p?.sex || ""}    City: ${p?.city || ""}`);
-  if (p?.phone) lines.push(`Phone: ${p.phone}`);
+  lines.push("Name: " + ((p && p.nameEn) ? p.nameEn : ""));
+  lines.push("Patient ID: " + ((p && p.id) ? p.id : ""));
+  lines.push(
+    "DOB: " + ((p && p.dob) ? p.dob : "N/A") +
+    "    Sex: " + ((p && p.sex) ? p.sex : "") +
+    "    City: " + ((p && p.city) ? p.city : "")
+  );
+  if (p && p.phone) lines.push("Phone: " + p.phone);
   lines.push("");
-
+  
+ 
   // Visit
   lines.push("VISIT");
   lines.push(`Date: ${v.date || ""}`);
