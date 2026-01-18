@@ -1155,4 +1155,290 @@ ${makeClinicalNoteText(patient, v)}
         .getElementById("patientModal")
         .addEventListener("show.bs.modal", () => {
           const editIndex
-          
+          = document.getElementById("patEditIndex");
+          if (editIndex.value) {
+            document.getElementById("patientModalTitle").textContent =
+              "Edit Patient";
+          } else {
+            document.getElementById("patientModalTitle").textContent =
+              "New Patient";
+            document.getElementById("patientForm").reset();
+          }
+        });
+
+      // edit patient button
+      document.getElementById("btnEditPatient").addEventListener("click", () => {
+        const patient = getPatientById(selectedPatientId);
+        if (!patient) return;
+        document.getElementById("patId").value = patient.id || "";
+        document.getElementById("patNameEn").value = patient.nameEn || "";
+        document.getElementById("patNameAr").value = patient.nameAr || "";
+        document.getElementById("patNameKu").value = patient.nameKu || "";
+        document.getElementById("patDob").value = patient.dob || "";
+        document.getElementById("patSex").value = patient.sex || "";
+        document.getElementById("patPhone").value = patient.phone || "";
+        document.getElementById("patCity").value = patient.city || "";
+        document.getElementById("patReferral").value = patient.referral || "";
+        document.getElementById("patCaregiver").value = patient.caregiver || "";
+        document.getElementById("patCaregiverRel").value =
+          patient.caregiverRel || "";
+        document.getElementById("patNotes").value = patient.notes || "";
+        document.getElementById("patEditIndex").value = patients.findIndex(
+          (p) => p.id === selectedPatientId
+        );
+        const modal = new bootstrap.Modal(
+          document.getElementById("patientModal")
+        );
+        modal.show();
+      });
+
+      // export patient history (TEXT modal)
+      document
+        .getElementById("btnExportPatient")
+        .addEventListener("click", () => {
+          if (!selectedPatientId) {
+            alert("Select a patient first.");
+            return;
+          }
+          const text = buildPatientHistoryText(selectedPatientId);
+          document.getElementById("patientExportText").value = text;
+          const modal = new bootstrap.Modal(
+            document.getElementById("patientExportModal")
+          );
+          modal.show();
+        });
+
+      document
+        .getElementById("btnCopyPatientExport")
+        .addEventListener("click", () => {
+          const txt = document.getElementById("patientExportText").value;
+          if (!txt) return;
+          navigator.clipboard
+            .writeText(txt)
+            .then(() => alert("History copied to clipboard."))
+            .catch(() =>
+              alert("Unable to copy automatically. Select and copy manually.")
+            );
+        });
+
+      // PRINT / SAVE PDF (PATIENT)
+      document
+        .getElementById("btnPrintPatientPdf")
+        .addEventListener("click", () => {
+          if (!selectedPatientId) {
+            alert("Select a patient first.");
+            return;
+          }
+          const patient = getPatientById(selectedPatientId);
+          const filename = buildPdfFilename(patient, "Patient_Record");
+          const html = buildPatientPrintHtml(selectedPatientId);
+          printHtmlWithFilename(filename, html);
+        });
+
+      // PRINT / SAVE PDF (VISIT)
+      document
+        .getElementById("btnPrintVisitPdf")
+        .addEventListener("click", () => {
+          if (!lastSelectedVisit) {
+            alert("Select a visit first (click Details).");
+            return;
+          }
+          const patient = getPatientById(lastSelectedVisit.patientId);
+          const suffix = `Visit_${lastSelectedVisit.date || ""}`;
+          const filename = buildPdfFilename(patient, suffix);
+          const html = buildVisitPrintHtml(lastSelectedVisit);
+          printHtmlWithFilename(filename, html);
+        });
+
+      // patient form submit
+      document
+        .getElementById("patientForm")
+        .addEventListener("submit", (e) => {
+          e.preventDefault();
+          const id = document.getElementById("patId").value.trim();
+          const nameEn = document.getElementById("patNameEn").value.trim();
+          if (!id || !nameEn) return;
+
+          const patientData = {
+            id,
+            nameEn,
+            nameAr: document.getElementById("patNameAr").value.trim(),
+            nameKu: document.getElementById("patNameKu").value.trim(),
+            dob: document.getElementById("patDob").value,
+            sex: document.getElementById("patSex").value,
+            phone: document.getElementById("patPhone").value.trim(),
+            city: document.getElementById("patCity").value.trim(),
+            referral: document.getElementById("patReferral").value.trim(),
+            caregiver: document.getElementById("patCaregiver").value.trim(),
+            caregiverRel: document
+              .getElementById("patCaregiverRel")
+              .value.trim(),
+            notes: document.getElementById("patNotes").value.trim(),
+          };
+
+          const editIndex = document.getElementById("patEditIndex").value;
+          if (editIndex !== "") {
+            patients[parseInt(editIndex, 10)] = patientData;
+          } else {
+            patients.push(patientData);
+          }
+          saveData();
+          document.getElementById("patEditIndex").value = "";
+          renderPatients(document.getElementById("patientSearch").value);
+          selectedPatientId = id;
+          showPatientDetail();
+          bootstrap.Modal.getInstance(
+            document.getElementById("patientModal")
+          ).hide();
+        });
+
+      // visit form submit
+      document
+        .getElementById("visitForm")
+        .addEventListener("submit", (e) => {
+          e.preventDefault();
+          if (!selectedPatientId) return;
+
+          const v = {
+            id:
+              "V-" +
+              Date.now().toString(36) +
+              "-" +
+              Math.random().toString(36).slice(2, 6),
+            patientId: selectedPatientId,
+            date: document.getElementById("visitDate").value,
+            type: document.getElementById("visitType").value,
+            cc: document.getElementById("visitCC").value.trim(),
+            hpi: document.getElementById("visitHPI").value.trim(),
+            pmh: document.getElementById("visitPMH").value.trim(),
+            vitals: document.getElementById("visitVitals").value.trim(),
+            exam: document.getElementById("visitExam").value.trim(),
+            otherExam: document.getElementById("visitOtherExam").value.trim(),
+            impression: document.getElementById("visitImpression").value.trim(),
+            planInvestigations: document
+              .getElementById("visitPlanInvestigations")
+              .value.trim(),
+            planMeds: document
+              .getElementById("visitPlanMeds")
+              .value.trim(),
+            planCounsel: document
+              .getElementById("visitPlanCounsel")
+              .value.trim(),
+            followInterval:
+              document.getElementById("visitFollowInterval").value,
+            nextDate: document.getElementById("visitNextDate").value,
+          };
+
+          visits.push(v);
+          saveData();
+          document.getElementById("visitForm").reset();
+          renderVisitsForPatient();
+          showVisitPrompt(v);
+        });
+
+      // order form submit
+      document
+        .getElementById("orderForm")
+        .addEventListener("submit", (e) => {
+          e.preventDefault();
+          if (!selectedPatientId || !currentVisitIdForOrders) {
+            alert(
+              "Please select a visit (click Details) before adding an order."
+            );
+            return;
+          }
+          const o = {
+            id:
+              "O-" +
+              Date.now().toString(36) +
+              "-" +
+              Math.random().toString(36).slice(2, 6),
+            patientId: selectedPatientId,
+            visitId: currentVisitIdForOrders,
+            type: document.getElementById("orderType").value,
+            name: document.getElementById("orderName").value.trim(),
+            orderedDate: document.getElementById("orderDate").value,
+            status: document.getElementById("orderStatus").value,
+            resultDate: document.getElementById("orderResultDate").value,
+            resultText: document
+              .getElementById("orderResultText")
+              .value.trim(),
+          };
+          orders.push(o);
+          saveData();
+          document.getElementById("orderForm").reset();
+          renderOrdersForVisit();
+        });
+
+      // export backup
+      document.getElementById("btnExport").addEventListener("click", () => {
+        const data = {
+          patients,
+          visits,
+          orders,
+          exportedAt: new Date().toISOString(),
+        };
+        const blob = new Blob([JSON.stringify(data, null, 2)], {
+          type: "application/json",
+        });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = "al_farabi_emr_backup.json";
+        a.click();
+        URL.revokeObjectURL(url);
+      });
+
+      // import backup
+      document
+        .getElementById("importFile")
+        .addEventListener("change", (e) => {
+          const file = e.target.files[0];
+          if (!file) return;
+          const reader = new FileReader();
+          reader.onload = (ev) => {
+            try {
+              const obj = JSON.parse(ev.target.result);
+              if (obj.patients && obj.visits) {
+                patients = obj.patients;
+                visits = obj.visits;
+                orders = obj.orders || [];
+                saveData();
+                renderPatients();
+                selectedPatientId = null;
+                document
+                  .getElementById("patientDetail")
+                  .classList.add("d-none");
+                document
+                  .getElementById("noPatientSelected")
+                  .classList.remove("d-none");
+                alert("Backup restored successfully.");
+              } else {
+                alert("Invalid backup file.");
+              }
+            } catch {
+              alert("Error reading backup file.");
+            }
+          };
+          reader.readAsText(file);
+          e.target.value = "";
+        });
+
+      // copy ChatGPT prompt
+      document.getElementById("btnCopyPrompt").addEventListener("click", () => {
+        const txt = document.getElementById("chatgptPrompt").value;
+        if (!txt) return;
+        navigator.clipboard
+          .writeText(txt)
+          .then(() =>
+            alert(
+              "Prompt copied. Paste into ChatGPT to generate EN/AR/KU summaries."
+            )
+          )
+          .catch(() =>
+            alert("Unable to copy. Select the text manually and copy.")
+          );
+      });
+
+      // AI summary buttons (unchanged)
+    }
