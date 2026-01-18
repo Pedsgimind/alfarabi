@@ -957,6 +957,11 @@ function buildSelectedVisitSummaryText() {
 }
 
 function downloadPdfFromText(text, filename) {
+  // jsPDF loaded?
+  if (!window.jspdf || !window.jspdf.jsPDF) {
+    alert("PDF library (jsPDF) did not load. Check internet connection and browser console.");
+    return;
+  }
   if (!text.trim()) {
     alert("No visit selected. Click Details on a visit first.");
     return;
