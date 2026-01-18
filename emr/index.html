@@ -51,64 +51,6 @@
       max-width: 360px;
       width: 100%;
     }
-    /* =========================
-       PRINT / PDF STYLES
-       ========================= */
-    @media print {
-      /* Hide everything by default */
-      body * {
-        visibility: hidden !important;
-      }
-
-      /* Show only printArea */
-      #printArea, #printArea * {
-        visibility: visible !important;
-      }
-
-      /* Make printArea fill page */
-      #printArea {
-        position: fixed;
-        left: 0;
-        top: 0;
-        width: 100%;
-        padding: 18px;
-        background: white !important;
-        color: black !important;
-      }
-
-      /* Remove UI-only elements if they accidentally appear */
-      button, nav, .sidebar, .modal, .lock-screen {
-        display: none !important;
-      }
-
-      /* Better printed text */
-      h1, h2, h3, h4, h5, h6 {
-        page-break-after: avoid;
-      }
-      .print-block {
-        page-break-inside: avoid;
-        margin-bottom: 12px;
-      }
-      .print-small {
-        font-size: 12px;
-        color: #333;
-      }
-      .print-title {
-        font-size: 18px;
-        font-weight: 700;
-        margin-bottom: 6px;
-      }
-      .print-subtitle {
-        font-size: 13px;
-        margin-bottom: 10px;
-      }
-      pre {
-        white-space: pre-wrap;
-        word-wrap: break-word;
-        font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-        font-size: 12px;
-      }
-    }
   </style>
 </head>
 <body>
@@ -151,6 +93,7 @@
       </div>
     </div>
   </div>
+
   <!-- MAIN APP -->
   <div id="appMain" class="d-none">
     <nav class="navbar navbar-light bg-white border-bottom mb-2">
@@ -203,27 +146,18 @@
                 <div class="small-label" id="detailId"></div>
                 <div class="small text-muted" id="detailDemographics"></div>
               </div>
-              <div class="d-flex gap-2 flex-wrap justify-content-end">
+              <div class="d-flex gap-2">
                 <button
                   class="btn btn-outline-secondary btn-sm"
                   id="btnEditPatient"
                 >
                   Edit Patient
                 </button>
-
                 <button
                   class="btn btn-outline-primary btn-sm"
                   id="btnExportPatient"
                 >
                   Export history
-                </button>
-
-                <button class="btn btn-outline-success btn-sm" id="btnPrintPatientPdf">
-                  Print / Save PDF (Patient)
-                </button>
-
-                <button class="btn btn-outline-success btn-sm" id="btnPrintVisitPdf" title="Print the currently selected visit (click Details first)">
-                  Print / Save PDF (Visit)
                 </button>
               </div>
             </div>
@@ -682,20 +616,13 @@
     </div>
   </div>
 
-  <!-- PRINT AREA (hidden, used for Print/PDF) -->
-  <div id="printArea" class="d-none"></div>
-
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
   <script>
     // ====== CONFIG ======
     // Replace this with your Cloudflare Worker URL when ready, e.g.:
     // const AI_SUMMARY_ENDPOINT = "https://your-worker-name.your-subdomain.workers.dev/summary";
     const AI_SUMMARY_ENDPOINT = ""; // empty = disabled, will show error
-// ====== AUTH MODE (PREP FOR BACKEND AUTH) ======
-// "local"  = current PIN-based auth (default)
-// "backend" = future server-based auth (disabled for now)
-const AUTH_MODE = "local";
-    
+
     // ====== DATA STRUCTURES ======
     let patients = [];
     let visits = [];
@@ -707,9 +634,8 @@ const AUTH_MODE = "local";
     const LS_PATIENTS_KEY = "af_emr_patients";
     const LS_VISITS_KEY = "af_emr_visits";
     const LS_ORDERS_KEY = "af_emr_orders";
-// ====== AUTH STORAGE KEYS ======
-const PIN_KEY = "af_emr_pin";
-const AUTH_TOKEN_KEY = "af_emr_token";  // future backend JWT/session token
+    const PIN_KEY = "af_emr_pin";
+
     function loadData() {
       try {
         const p = localStorage.getItem(LS_PATIENTS_KEY);
@@ -730,107 +656,6 @@ const AUTH_TOKEN_KEY = "af_emr_token";  // future backend JWT/session token
       localStorage.setItem(LS_PATIENTS_KEY, JSON.stringify(patients));
       localStorage.setItem(LS_VISITS_KEY, JSON.stringify(visits));
       localStorage.setItem(LS_ORDERS_KEY, JSON.stringify(orders));
-    }
-
-    // ====== PRINT / SAVE PDF HELPERS ======
-    function safeFilenamePart(s) {
-      return (s || "")
-        .toString()
-        .trim()
-        .replace(/\s+/g, "_")
-        .replace(/[^A-Za-z0-9_-]/g, "");
-    }
-
-    function buildPdfFilename(patient, suffix) {
-      const name = safeFilenamePart(patient?.nameEn || "Patient");
-      const dob = safeFilenamePart(patient?.dob || "DOB");
-      const today = new Date().toISOString().slice(0, 10);
-      const extra = safeFilenamePart(suffix || "");
-      return `${name}_${dob}${extra ? "_" + extra : ""}_${today}.pdf`;
-    }
-
-    function setPrintAreaHtml(html) {
-      const pa = document.getElementById("printArea");
-      pa.innerHTML = html;
-      pa.classList.remove("d-none");
-    }
-
-    function clearPrintArea() {
-      const pa = document.getElementById("printArea");
-      pa.innerHTML = "";
-      pa.classList.add("d-none");
-    }
-
-    function printHtmlWithFilename(filename, html) {
-      const oldTitle = document.title;
-      document.title = filename; // default PDF filename in many browsers
-      setPrintAreaHtml(html);
-
-      setTimeout(() => {
-        window.print();
-        setTimeout(() => {
-          clearPrintArea();
-          document.title = oldTitle;
-        }, 500);
-      }, 50);
-    }
-
-    function buildPatientPrintHtml(patientId) {
-      const p = getPatientById(patientId);
-      if (!p) return "";
-
-      const text = buildPatientHistoryText(patientId);
-      const safeText = text.replace(/</g, "&lt;").replace(/>/g, "&gt;");
-
-      return `
-        <div class="print-block">
-          <div class="print-title">Al Farabi Pediatric GI – Patient Record</div>
-          <div class="print-subtitle">
-            <strong>Patient:</strong> ${p.nameEn || ""} &nbsp; | &nbsp;
-            <strong>DOB:</strong> ${p.dob || "N/A"} &nbsp; | &nbsp;
-            <strong>ID:</strong> ${p.id || ""} &nbsp; | &nbsp;
-            <strong>Phone:</strong> ${p.phone || ""}
-          </div>
-          <div class="print-small">Generated: ${new Date().toLocaleString()}</div>
-          <hr />
-          <pre>${safeText}</pre>
-        </div>
-      `;
-    }
-
-    function buildVisitPrintHtml(visitObj) {
-      const p = getPatientById(visitObj?.patientId);
-      if (!p || !visitObj) return "";
-
-      const note = makeClinicalNoteText(p, visitObj);
-      const vOrders = orders.filter(o => o.visitId === visitObj.id);
-
-      let ordersText = "";
-      if (vOrders.length) {
-        ordersText += "\nORDERS FOR THIS VISIT:\n";
-        vOrders.forEach(o => {
-          ordersText += `- ${o.type}: ${o.name || ""} | Ordered: ${o.orderedDate || ""} | Status: ${o.status || ""}`;
-          if (o.resultDate || o.resultText) ordersText += ` | Result: ${o.resultDate || ""} ${o.resultText || ""}`;
-          ordersText += "\n";
-        });
-      }
-
-      const combined = `${note}\n${ordersText}`.trim();
-      const safeCombined = combined.replace(/</g, "&lt;").replace(/>/g, "&gt;");
-
-      return `
-        <div class="print-block">
-          <div class="print-title">Al Farabi Pediatric GI – Visit Note</div>
-          <div class="print-subtitle">
-            <strong>Patient:</strong> ${p.nameEn || ""} &nbsp; | &nbsp;
-            <strong>DOB:</strong> ${p.dob || "N/A"} &nbsp; | &nbsp;
-            <strong>Visit date:</strong> ${visitObj.date || ""}
-          </div>
-          <div class="print-small">Generated: ${new Date().toLocaleString()}</div>
-          <hr />
-          <pre>${safeCombined}</pre>
-        </div>
-      `;
     }
 
     // ====== PATIENTS ======
@@ -1115,6 +940,7 @@ ${makeClinicalNoteText(patient, v)}
               }`
             );
 
+          // orders for this visit
           const vOrders = orders.filter((o) => o.visitId === v.id);
           if (vOrders.length) {
             lines.push("Orders for this visit:");
@@ -1157,9 +983,8 @@ ${makeClinicalNoteText(patient, v)}
       document
         .getElementById("patientModal")
         .addEventListener("show.bs.modal", () => {
-          const editIndex
-          = document.getElementById("patEditIndex");
-          if (editIndex.value) {
+          const editIndexInput = document.getElementById("patEditIndex");
+          if (editIndexInput.value) {
             document.getElementById("patientModalTitle").textContent =
               "Edit Patient";
           } else {
@@ -1195,7 +1020,7 @@ ${makeClinicalNoteText(patient, v)}
         modal.show();
       });
 
-      // export patient history (TEXT modal)
+      // export patient history
       document
         .getElementById("btnExportPatient")
         .addEventListener("click", () => {
@@ -1216,41 +1041,16 @@ ${makeClinicalNoteText(patient, v)}
         .addEventListener("click", () => {
           const txt = document.getElementById("patientExportText").value;
           if (!txt) return;
-          navigator.clipboard
-            .writeText(txt)
-            .then(() => alert("History copied to clipboard."))
-            .catch(() =>
-              alert("Unable to copy automatically. Select and copy manually.")
-            );
-        });
-
-      // PRINT / SAVE PDF (PATIENT)
-      document
-        .getElementById("btnPrintPatientPdf")
-        .addEventListener("click", () => {
-          if (!selectedPatientId) {
-            alert("Select a patient first.");
-            return;
+          if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard
+              .writeText(txt)
+              .then(() => alert("History copied to clipboard."))
+              .catch(() =>
+                alert("Unable to copy automatically. Select and copy manually.")
+              );
+          } else {
+            alert("Select the text manually and copy.");
           }
-          const patient = getPatientById(selectedPatientId);
-          const filename = buildPdfFilename(patient, "Patient_Record");
-          const html = buildPatientPrintHtml(selectedPatientId);
-          printHtmlWithFilename(filename, html);
-        });
-
-      // PRINT / SAVE PDF (VISIT)
-      document
-        .getElementById("btnPrintVisitPdf")
-        .addEventListener("click", () => {
-          if (!lastSelectedVisit) {
-            alert("Select a visit first (click Details).");
-            return;
-          }
-          const patient = getPatientById(lastSelectedVisit.patientId);
-          const suffix = `Visit_${lastSelectedVisit.date || ""}`;
-          const filename = buildPdfFilename(patient, suffix);
-          const html = buildVisitPrintHtml(lastSelectedVisit);
-          printHtmlWithFilename(filename, html);
         });
 
       // patient form submit
@@ -1327,8 +1127,7 @@ ${makeClinicalNoteText(patient, v)}
             planCounsel: document
               .getElementById("visitPlanCounsel")
               .value.trim(),
-            followInterval:
-              document.getElementById("visitFollowInterval").value,
+            followInterval: document.getElementById("visitFollowInterval").value,
             nextDate: document.getElementById("visitNextDate").value,
           };
 
@@ -1336,7 +1135,7 @@ ${makeClinicalNoteText(patient, v)}
           saveData();
           document.getElementById("visitForm").reset();
           renderVisitsForPatient();
-          showVisitPrompt(v);
+          showVisitPrompt(v); // prepare prompt + orders panel
         });
 
       // order form submit
@@ -1345,9 +1144,7 @@ ${makeClinicalNoteText(patient, v)}
         .addEventListener("submit", (e) => {
           e.preventDefault();
           if (!selectedPatientId || !currentVisitIdForOrders) {
-            alert(
-              "Please select a visit (click Details) before adding an order."
-            );
+            alert("Please select a visit (click Details) before adding an order.");
             return;
           }
           const o = {
@@ -1409,17 +1206,13 @@ ${makeClinicalNoteText(patient, v)}
                 saveData();
                 renderPatients();
                 selectedPatientId = null;
-                document
-                  .getElementById("patientDetail")
-                  .classList.add("d-none");
-                document
-                  .getElementById("noPatientSelected")
-                  .classList.remove("d-none");
+                document.getElementById("patientDetail").classList.add("d-none");
+                document.getElementById("noPatientSelected").classList.remove("d-none");
                 alert("Backup restored successfully.");
               } else {
                 alert("Invalid backup file.");
               }
-            } catch {
+            } catch (err) {
               alert("Error reading backup file.");
             }
           };
@@ -1427,25 +1220,27 @@ ${makeClinicalNoteText(patient, v)}
           e.target.value = "";
         });
 
-      // copy ChatGPT prompt
+      // copy manual ChatGPT prompt
       document.getElementById("btnCopyPrompt").addEventListener("click", () => {
         const txt = document.getElementById("chatgptPrompt").value;
         if (!txt) return;
-        navigator.clipboard
-          .writeText(txt)
-          .then(() =>
-            alert(
-              "Prompt copied. Paste into ChatGPT to generate EN/AR/KU summaries."
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard
+            .writeText(txt)
+            .then(() =>
+              alert(
+                "Prompt copied. Paste into ChatGPT to generate EN/AR/KU summaries."
+              )
             )
-          )
-          .catch(() =>
-            alert("Unable to copy. Select the text manually and copy.")
-          );
+            .catch(() =>
+              alert("Unable to copy. Select the text manually and copy.")
+            );
+        } else {
+          alert("Select the text manually and copy.");
+        }
       });
 
-      // AI summary buttons (unchanged)
-    }
-// AI SUMMARY BUTTON
+      // AI SUMMARY BUTTON
       document
         .getElementById("btnGenerateAiSummary")
         .addEventListener("click", async () => {
@@ -1470,7 +1265,9 @@ ${makeClinicalNoteText(patient, v)}
               headers: { "Content-Type": "application/json" },
               body: JSON.stringify({ note }),
             });
-            if (!res.ok) throw new Error("HTTP " + res.status);
+            if (!res.ok) {
+              throw new Error("HTTP " + res.status);
+            }
             const data = await res.json();
             document.getElementById("aiSummaryEn").value =
               data.english || data.en || "";
@@ -1486,47 +1283,37 @@ ${makeClinicalNoteText(patient, v)}
           }
         });
 
+      // copy AI summaries
       function copyTextById(id, label) {
         const txt = document.getElementById(id).value;
         if (!txt) return;
-        navigator.clipboard
-          .writeText(txt)
-          .then(() => alert(label + " copied."))
-          .catch(() =>
-            alert("Unable to copy automatically. Select and copy manually.")
-          );
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard
+            .writeText(txt)
+            .then(() => alert(label + " copied."))
+            .catch(() =>
+              alert("Unable to copy automatically. Select and copy manually.")
+            );
+        } else {
+          alert("Select the text manually and copy.");
+        }
       }
-
       document
         .getElementById("btnCopyAiEn")
-        .addEventListener("click", () =>
-          copyTextById("aiSummaryEn", "English summary")
-        );
+        .addEventListener("click", () => copyTextById("aiSummaryEn", "English summary"));
       document
         .getElementById("btnCopyAiAr")
-        .addEventListener("click", () =>
-          copyTextById("aiSummaryAr", "Arabic summary")
-        );
+        .addEventListener("click", () => copyTextById("aiSummaryAr", "Arabic summary"));
       document
         .getElementById("btnCopyAiKu")
-        .addEventListener("click", () =>
-          copyTextById("aiSummaryKu", "Kurdish summary")
-        );
+        .addEventListener("click", () => copyTextById("aiSummaryKu", "Kurdish summary"));
     }
 
     // ====== PIN LOCK LOGIC ======
     let existingPin = null;
 
     function configureLockScreen() {
-  if (AUTH_MODE === "backend") {
-    const token = localStorage.getItem(AUTH_TOKEN_KEY);
-    if (token) {
-      unlockApp();
-      return;
-    }
-  }
       existingPin = localStorage.getItem(PIN_KEY);
-      // If PIN exists, do NOT show setup again
       const hasPin = !!existingPin;
       const title = document.getElementById("lockTitle");
       const subtitle = document.getElementById("lockSubtitle");
@@ -1554,19 +1341,10 @@ ${makeClinicalNoteText(patient, v)}
     function unlockApp() {
       document.getElementById("lockScreen").classList.add("d-none");
       document.getElementById("appMain").classList.remove("d-none");
-    
-  localStorage.setItem(AUTH_TOKEN_KEY, "local-session-ok");
       initEmrApp();
     }
 
     document.addEventListener("DOMContentLoaded", () => {
-// ===== EMERGENCY BYPASS (TEMP) =====
-      // Set to true to bypass lock screen and enter EMR immediately.
-      const BYPASS_LOCK = false;
-      if (BYPASS_LOCK) {
-        unlockApp();
-        return;
-      }
       configureLockScreen();
 
       document.getElementById("lockBtn").addEventListener("click", () => {
@@ -1578,11 +1356,7 @@ ${makeClinicalNoteText(patient, v)}
           const pinConfirm = document
             .getElementById("lockPinConfirm")
             .value.trim();
-          if (
-            pinInput.length < 4 ||
-            pinInput.length > 8 ||
-            !/^\d+$/.test(pinInput)
-          ) {
+          if (pinInput.length < 4 || pinInput.length > 8 || !/^\d+$/.test(pinInput)) {
             errorEl.textContent =
               "Please choose a 4–8 digit numeric PIN.";
             return;
