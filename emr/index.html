@@ -1099,7 +1099,20 @@ async function downloadPdfFromText(text, filename, patientObj, visitObj) {
     // light header background
     doc.setFillColor(248, 249, 250);
     doc.rect(0, 0, pageWidth, headerH, "F");
+// ===== WATERMARK (behind content) =====
+    doc.saveGraphicsState();
+    doc.setTextColor(210, 210, 210);      // light gray
+    doc.setFont("helvetica", "bold");
+    doc.setFontSize(48);
+    doc.setGState(new doc.GState({ opacity: 0.12 })); // subtle transparency
 
+    // diagonal watermark across page
+    doc.text("AVICENNA MEDICAL INC.", pageWidth / 2, pageHeight / 2, {
+      align: "center",
+      angle: 35
+    });
+
+    doc.restoreGraphicsState();
     // Logo
     if (logoData) {
       // x, y, w, h
