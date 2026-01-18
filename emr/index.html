@@ -1354,10 +1354,9 @@ document.getElementById("btnPdfSelectedVisit").addEventListener("click", () => {
     return;
   }
   const p = getPatientById(lastSelectedVisit.patientId);
-  const name = sanitizeFilename(p?.nameEn || "Patient");
-  const dob = sanitizeFilename(p?.dob || "DOB-unknown");
-  const vdate = sanitizeFilename(lastSelectedVisit?.date || "VisitDate-unknown");
-
+  const name = sanitizeFilename((p && p.nameEn) ? p.nameEn : "Patient");
+  const dob  = sanitizeFilename((p && p.dob) ? p.dob : "DOB-unknown");
+  const vdate = sanitizeFilename((lastSelectedVisit && lastSelectedVisit.date) ? lastSelectedVisit.date : "VisitDate-unknown");
   const filename = `${name}__DOB-${dob}__Visit-${vdate}.pdf`;
   const text = buildSelectedVisitSummaryText();
   downloadPdfFromText(text, filename);
