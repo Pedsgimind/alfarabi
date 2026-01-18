@@ -1527,9 +1527,6 @@ ${makeClinicalNoteText(patient, v)}
   }
       existingPin = localStorage.getItem(PIN_KEY);
       // If PIN exists, do NOT show setup again
-  if (existingPin && existingPin.length >= 4) {
-    // normal unlock flow will handle verification
-  }
       const hasPin = !!existingPin;
       const title = document.getElementById("lockTitle");
       const subtitle = document.getElementById("lockSubtitle");
