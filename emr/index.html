@@ -1540,19 +1540,22 @@ async function downloadPdfFromText(text, filename, patientObj, visitObj) {
         }
       });
 // Save selected visit as PDF (forced filename)
-document.getElementById("btnPdfSelectedVisit").addEventListener("click", () => {
-console.log("PDF button clicked");  
+document.getElementById("btnPdfSelectedVisit").addEventListener("click", async () => {
   if (!lastSelectedVisit) {
     alert("Select a visit first (click 'Details' on the visit).");
     return;
   }
+
   const p = getPatientById(lastSelectedVisit.patientId);
+
   const name = sanitizeFilename((p && p.nameEn) ? p.nameEn : "Patient");
   const dob  = sanitizeFilename((p && p.dob) ? p.dob : "DOB-unknown");
   const vdate = sanitizeFilename((lastSelectedVisit && lastSelectedVisit.date) ? lastSelectedVisit.date : "VisitDate-unknown");
+
   const filename = `${name}__DOB-${dob}__Visit-${vdate}.pdf`;
   const text = buildSelectedVisitSummaryText();
-  downloadPdfFromText(text, filename);
+
+  await downloadPdfFromText(text, filename, p, lastSelectedVisit);
 });
       // AI SUMMARY BUTTON
       document
