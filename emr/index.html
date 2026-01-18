@@ -97,20 +97,30 @@
   <!-- MAIN APP -->
   <div id="appMain" class="d-none">
     <nav class="navbar navbar-light bg-white border-bottom mb-2">
-      <div class="container-fluid">
-        <span class="navbar-brand mb-0 h5">
-          Al Farabi Pediatric GI – Mini EMR / Registry
-        </span>
-        <div class="d-flex gap-2">
-          <button class="btn btn-outline-secondary btn-sm" id="btnExport">
-            Backup (Export JSON)
-          </button>
-          <label class="btn btn-outline-secondary btn-sm mb-0">
-            Restore
-            <input type="file" id="importFile" hidden />
-          </label>
-        </div>
-      </div>
+   <div class="container-fluid">
+  <div class="d-flex align-items-center gap-2">
+    <!-- Avicenna logo (repo: /images/avicenna-logo-horizontal.png) -->
+    <img
+      src="../images/avicenna-logo-horizontal.png"
+      alt="Avicenna Medical Inc."
+      class="brand-logo"
+    />
+    <div class="lh-sm">
+      <div class="fw-semibold">Al Farabi Pediatric GI – Mini EMR / Registry</div>
+      <div class="small text-muted">Avicenna Medical Inc. · Al Farabi Gastroenterology &amp; Endoscopy Centre</div>
+    </div>
+  </div>
+
+  <div class="d-flex gap-2">
+    <button class="btn btn-outline-secondary btn-sm" id="btnExport">
+      Backup (Export JSON)
+    </button>
+    <label class="btn btn-outline-secondary btn-sm mb-0">
+      Restore
+      <input type="file" id="importFile" hidden />
+    </label>
+  </div>
+</div>
     </nav>
 
     <div class="container-fluid">
