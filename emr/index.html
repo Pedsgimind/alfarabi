@@ -693,7 +693,11 @@
     // Replace this with your Cloudflare Worker URL when ready, e.g.:
     // const AI_SUMMARY_ENDPOINT = "https://your-worker-name.your-subdomain.workers.dev/summary";
     const AI_SUMMARY_ENDPOINT = ""; // empty = disabled, will show error
-
+// ====== AUTH MODE (PREP FOR BACKEND AUTH) ======
+// "local"  = current PIN-based auth (default)
+// "backend" = future server-based auth (disabled for now)
+const AUTH_MODE = "local";
+    
     // ====== DATA STRUCTURES ======
     let patients = [];
     let visits = [];
@@ -705,7 +709,9 @@
     const LS_PATIENTS_KEY = "af_emr_patients";
     const LS_VISITS_KEY = "af_emr_visits";
     const LS_ORDERS_KEY = "af_emr_orders";
-    const PIN_KEY = "af_emr_pin";
+    // ====== AUTH STORAGE KEYS ======
+const PIN_KEY = "af_emr_pin_v1";        // local PIN auth
+const AUTH_TOKEN_KEY = "af_emr_token";  // future backend JWT/session token
 
     function loadData() {
       try {
@@ -1515,7 +1521,18 @@ ${makeClinicalNoteText(patient, v)}
     let existingPin = null;
 
     function configureLockScreen() {
+  if (AUTH_MODE === "backend") {
+    const token = localStorage.getItem(AUTH_TOKEN_KEY);
+    if (token) {
+      unlockApp();
+      return;
+    }
+  }
       existingPin = localStorage.getItem(PIN_KEY);
+      // If PIN exists, do NOT show setup again
+  if (existingPin && existingPin.length >= 4) {
+    // normal unlock flow will handle verification
+  }
       const hasPin = !!existingPin;
       const title = document.getElementById("lockTitle");
       const subtitle = document.getElementById("lockSubtitle");
@@ -1543,6 +1560,8 @@ ${makeClinicalNoteText(patient, v)}
     function unlockApp() {
       document.getElementById("lockScreen").classList.add("d-none");
       document.getElementById("appMain").classList.remove("d-none");
+    
+  localStorage.setItem(AUTH_TOKEN_KEY, "local-session-ok");
       initEmrApp();
     }
 
