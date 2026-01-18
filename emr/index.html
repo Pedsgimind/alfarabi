@@ -51,6 +51,65 @@
       max-width: 360px;
       width: 100%;
     }
+
+    /* =========================
+       PRINT / PDF STYLES
+       ========================= */
+    @media print {
+      /* Hide everything by default */
+      body * {
+        visibility: hidden !important;
+      }
+
+      /* Show only printArea */
+      #printArea, #printArea * {
+        visibility: visible !important;
+      }
+
+      /* Make printArea fill page */
+      #printArea {
+        position: fixed;
+        left: 0;
+        top: 0;
+        width: 100%;
+        padding: 18px;
+        background: white !important;
+        color: black !important;
+      }
+
+      /* Remove UI-only elements if they accidentally appear */
+      button, nav, .sidebar, .modal, .lock-screen {
+        display: none !important;
+      }
+
+      /* Better printed text */
+      h1, h2, h3, h4, h5, h6 {
+        page-break-after: avoid;
+      }
+      .print-block {
+        page-break-inside: avoid;
+        margin-bottom: 12px;
+      }
+      .print-small {
+        font-size: 12px;
+        color: #333;
+      }
+      .print-title {
+        font-size: 18px;
+        font-weight: 700;
+        margin-bottom: 6px;
+      }
+      .print-subtitle {
+        font-size: 13px;
+        margin-bottom: 10px;
+      }
+      pre {
+        white-space: pre-wrap;
+        word-wrap: break-word;
+        font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+        font-size: 12px;
+      }
+    }
   </style>
 </head>
 <body>
@@ -146,18 +205,27 @@
                 <div class="small-label" id="detailId"></div>
                 <div class="small text-muted" id="detailDemographics"></div>
               </div>
-              <div class="d-flex gap-2">
+              <div class="d-flex gap-2 flex-wrap justify-content-end">
                 <button
                   class="btn btn-outline-secondary btn-sm"
                   id="btnEditPatient"
                 >
                   Edit Patient
                 </button>
+
                 <button
                   class="btn btn-outline-primary btn-sm"
                   id="btnExportPatient"
                 >
                   Export history
+                </button>
+
+                <button class="btn btn-outline-success btn-sm" id="btnPrintPatientPdf">
+                  Print / Save PDF (Patient)
+                </button>
+
+                <button class="btn btn-outline-success btn-sm" id="btnPrintVisitPdf" title="Print the currently selected visit (click Details first)">
+                  Print / Save PDF (Visit)
                 </button>
               </div>
             </div>
@@ -616,6 +684,9 @@
     </div>
   </div>
 
+  <!-- PRINT AREA (hidden, used for Print/PDF) -->
+  <div id="printArea" class="d-none"></div>
+
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
   <script>
     // ====== CONFIG ======
@@ -656,6 +727,107 @@
       localStorage.setItem(LS_PATIENTS_KEY, JSON.stringify(patients));
       localStorage.setItem(LS_VISITS_KEY, JSON.stringify(visits));
       localStorage.setItem(LS_ORDERS_KEY, JSON.stringify(orders));
+    }
+
+    // ====== PRINT / SAVE PDF HELPERS ======
+    function safeFilenamePart(s) {
+      return (s || "")
+        .toString()
+        .trim()
+        .replace(/\s+/g, "_")
+        .replace(/[^A-Za-z0-9_-]/g, "");
+    }
+
+    function buildPdfFilename(patient, suffix) {
+      const name = safeFilenamePart(patient?.nameEn || "Patient");
+      const dob = safeFilenamePart(patient?.dob || "DOB");
+      const today = new Date().toISOString().slice(0, 10);
+      const extra = safeFilenamePart(suffix || "");
+      return `${name}_${dob}${extra ? "_" + extra : ""}_${today}.pdf`;
+    }
+
+    function setPrintAreaHtml(html) {
+      const pa = document.getElementById("printArea");
+      pa.innerHTML = html;
+      pa.classList.remove("d-none");
+    }
+
+    function clearPrintArea() {
+      const pa = document.getElementById("printArea");
+      pa.innerHTML = "";
+      pa.classList.add("d-none");
+    }
+
+    function printHtmlWithFilename(filename, html) {
+      const oldTitle = document.title;
+      document.title = filename; // default PDF filename in many browsers
+      setPrintAreaHtml(html);
+
+      setTimeout(() => {
+        window.print();
+        setTimeout(() => {
+          clearPrintArea();
+          document.title = oldTitle;
+        }, 500);
+      }, 50);
+    }
+
+    function buildPatientPrintHtml(patientId) {
+      const p = getPatientById(patientId);
+      if (!p) return "";
+
+      const text = buildPatientHistoryText(patientId);
+      const safeText = text.replace(/</g, "&lt;").replace(/>/g, "&gt;");
+
+      return `
+        <div class="print-block">
+          <div class="print-title">Al Farabi Pediatric GI – Patient Record</div>
+          <div class="print-subtitle">
+            <strong>Patient:</strong> ${p.nameEn || ""} &nbsp; | &nbsp;
+            <strong>DOB:</strong> ${p.dob || "N/A"} &nbsp; | &nbsp;
+            <strong>ID:</strong> ${p.id || ""} &nbsp; | &nbsp;
+            <strong>Phone:</strong> ${p.phone || ""}
+          </div>
+          <div class="print-small">Generated: ${new Date().toLocaleString()}</div>
+          <hr />
+          <pre>${safeText}</pre>
+        </div>
+      `;
+    }
+
+    function buildVisitPrintHtml(visitObj) {
+      const p = getPatientById(visitObj?.patientId);
+      if (!p || !visitObj) return "";
+
+      const note = makeClinicalNoteText(p, visitObj);
+      const vOrders = orders.filter(o => o.visitId === visitObj.id);
+
+      let ordersText = "";
+      if (vOrders.length) {
+        ordersText += "\nORDERS FOR THIS VISIT:\n";
+        vOrders.forEach(o => {
+          ordersText += `- ${o.type}: ${o.name || ""} | Ordered: ${o.orderedDate || ""} | Status: ${o.status || ""}`;
+          if (o.resultDate || o.resultText) ordersText += ` | Result: ${o.resultDate || ""} ${o.resultText || ""}`;
+          ordersText += "\n";
+        });
+      }
+
+      const combined = `${note}\n${ordersText}`.trim();
+      const safeCombined = combined.replace(/</g, "&lt;").replace(/>/g, "&gt;");
+
+      return `
+        <div class="print-block">
+          <div class="print-title">Al Farabi Pediatric GI – Visit Note</div>
+          <div class="print-subtitle">
+            <strong>Patient:</strong> ${p.nameEn || ""} &nbsp; | &nbsp;
+            <strong>DOB:</strong> ${p.dob || "N/A"} &nbsp; | &nbsp;
+            <strong>Visit date:</strong> ${visitObj.date || ""}
+          </div>
+          <div class="print-small">Generated: ${new Date().toLocaleString()}</div>
+          <hr />
+          <pre>${safeCombined}</pre>
+        </div>
+      `;
     }
 
     // ====== PATIENTS ======
@@ -940,7 +1112,6 @@ ${makeClinicalNoteText(patient, v)}
               }`
             );
 
-          // orders for this visit
           const vOrders = orders.filter((o) => o.visitId === v.id);
           if (vOrders.length) {
             lines.push("Orders for this visit:");
@@ -983,400 +1154,5 @@ ${makeClinicalNoteText(patient, v)}
       document
         .getElementById("patientModal")
         .addEventListener("show.bs.modal", () => {
-          const editIndexInput = document.getElementById("patEditIndex");
-          if (editIndexInput.value) {
-            document.getElementById("patientModalTitle").textContent =
-              "Edit Patient";
-          } else {
-            document.getElementById("patientModalTitle").textContent =
-              "New Patient";
-            document.getElementById("patientForm").reset();
-          }
-        });
-
-      // edit patient button
-      document.getElementById("btnEditPatient").addEventListener("click", () => {
-        const patient = getPatientById(selectedPatientId);
-        if (!patient) return;
-        document.getElementById("patId").value = patient.id || "";
-        document.getElementById("patNameEn").value = patient.nameEn || "";
-        document.getElementById("patNameAr").value = patient.nameAr || "";
-        document.getElementById("patNameKu").value = patient.nameKu || "";
-        document.getElementById("patDob").value = patient.dob || "";
-        document.getElementById("patSex").value = patient.sex || "";
-        document.getElementById("patPhone").value = patient.phone || "";
-        document.getElementById("patCity").value = patient.city || "";
-        document.getElementById("patReferral").value = patient.referral || "";
-        document.getElementById("patCaregiver").value = patient.caregiver || "";
-        document.getElementById("patCaregiverRel").value =
-          patient.caregiverRel || "";
-        document.getElementById("patNotes").value = patient.notes || "";
-        document.getElementById("patEditIndex").value = patients.findIndex(
-          (p) => p.id === selectedPatientId
-        );
-        const modal = new bootstrap.Modal(
-          document.getElementById("patientModal")
-        );
-        modal.show();
-      });
-
-      // export patient history
-      document
-        .getElementById("btnExportPatient")
-        .addEventListener("click", () => {
-          if (!selectedPatientId) {
-            alert("Select a patient first.");
-            return;
-          }
-          const text = buildPatientHistoryText(selectedPatientId);
-          document.getElementById("patientExportText").value = text;
-          const modal = new bootstrap.Modal(
-            document.getElementById("patientExportModal")
-          );
-          modal.show();
-        });
-
-      document
-        .getElementById("btnCopyPatientExport")
-        .addEventListener("click", () => {
-          const txt = document.getElementById("patientExportText").value;
-          if (!txt) return;
-          if (navigator.clipboard && navigator.clipboard.writeText) {
-            navigator.clipboard
-              .writeText(txt)
-              .then(() => alert("History copied to clipboard."))
-              .catch(() =>
-                alert("Unable to copy automatically. Select and copy manually.")
-              );
-          } else {
-            alert("Select the text manually and copy.");
-          }
-        });
-
-      // patient form submit
-      document
-        .getElementById("patientForm")
-        .addEventListener("submit", (e) => {
-          e.preventDefault();
-          const id = document.getElementById("patId").value.trim();
-          const nameEn = document.getElementById("patNameEn").value.trim();
-          if (!id || !nameEn) return;
-
-          const patientData = {
-            id,
-            nameEn,
-            nameAr: document.getElementById("patNameAr").value.trim(),
-            nameKu: document.getElementById("patNameKu").value.trim(),
-            dob: document.getElementById("patDob").value,
-            sex: document.getElementById("patSex").value,
-            phone: document.getElementById("patPhone").value.trim(),
-            city: document.getElementById("patCity").value.trim(),
-            referral: document.getElementById("patReferral").value.trim(),
-            caregiver: document.getElementById("patCaregiver").value.trim(),
-            caregiverRel: document
-              .getElementById("patCaregiverRel")
-              .value.trim(),
-            notes: document.getElementById("patNotes").value.trim(),
-          };
-
-          const editIndex = document.getElementById("patEditIndex").value;
-          if (editIndex !== "") {
-            patients[parseInt(editIndex, 10)] = patientData;
-          } else {
-            patients.push(patientData);
-          }
-          saveData();
-          document.getElementById("patEditIndex").value = "";
-          renderPatients(document.getElementById("patientSearch").value);
-          selectedPatientId = id;
-          showPatientDetail();
-          bootstrap.Modal.getInstance(
-            document.getElementById("patientModal")
-          ).hide();
-        });
-
-      // visit form submit
-      document
-        .getElementById("visitForm")
-        .addEventListener("submit", (e) => {
-          e.preventDefault();
-          if (!selectedPatientId) return;
-
-          const v = {
-            id:
-              "V-" +
-              Date.now().toString(36) +
-              "-" +
-              Math.random().toString(36).slice(2, 6),
-            patientId: selectedPatientId,
-            date: document.getElementById("visitDate").value,
-            type: document.getElementById("visitType").value,
-            cc: document.getElementById("visitCC").value.trim(),
-            hpi: document.getElementById("visitHPI").value.trim(),
-            pmh: document.getElementById("visitPMH").value.trim(),
-            vitals: document.getElementById("visitVitals").value.trim(),
-            exam: document.getElementById("visitExam").value.trim(),
-            otherExam: document.getElementById("visitOtherExam").value.trim(),
-            impression: document.getElementById("visitImpression").value.trim(),
-            planInvestigations: document
-              .getElementById("visitPlanInvestigations")
-              .value.trim(),
-            planMeds: document
-              .getElementById("visitPlanMeds")
-              .value.trim(),
-            planCounsel: document
-              .getElementById("visitPlanCounsel")
-              .value.trim(),
-            followInterval: document.getElementById("visitFollowInterval").value,
-            nextDate: document.getElementById("visitNextDate").value,
-          };
-
-          visits.push(v);
-          saveData();
-          document.getElementById("visitForm").reset();
-          renderVisitsForPatient();
-          showVisitPrompt(v); // prepare prompt + orders panel
-        });
-
-      // order form submit
-      document
-        .getElementById("orderForm")
-        .addEventListener("submit", (e) => {
-          e.preventDefault();
-          if (!selectedPatientId || !currentVisitIdForOrders) {
-            alert("Please select a visit (click Details) before adding an order.");
-            return;
-          }
-          const o = {
-            id:
-              "O-" +
-              Date.now().toString(36) +
-              "-" +
-              Math.random().toString(36).slice(2, 6),
-            patientId: selectedPatientId,
-            visitId: currentVisitIdForOrders,
-            type: document.getElementById("orderType").value,
-            name: document.getElementById("orderName").value.trim(),
-            orderedDate: document.getElementById("orderDate").value,
-            status: document.getElementById("orderStatus").value,
-            resultDate: document.getElementById("orderResultDate").value,
-            resultText: document
-              .getElementById("orderResultText")
-              .value.trim(),
-          };
-          orders.push(o);
-          saveData();
-          document.getElementById("orderForm").reset();
-          renderOrdersForVisit();
-        });
-
-      // export backup
-      document.getElementById("btnExport").addEventListener("click", () => {
-        const data = {
-          patients,
-          visits,
-          orders,
-          exportedAt: new Date().toISOString(),
-        };
-        const blob = new Blob([JSON.stringify(data, null, 2)], {
-          type: "application/json",
-        });
-        const url = URL.createObjectURL(blob);
-        const a = document.createElement("a");
-        a.href = url;
-        a.download = "al_farabi_emr_backup.json";
-        a.click();
-        URL.revokeObjectURL(url);
-      });
-
-      // import backup
-      document
-        .getElementById("importFile")
-        .addEventListener("change", (e) => {
-          const file = e.target.files[0];
-          if (!file) return;
-          const reader = new FileReader();
-          reader.onload = (ev) => {
-            try {
-              const obj = JSON.parse(ev.target.result);
-              if (obj.patients && obj.visits) {
-                patients = obj.patients;
-                visits = obj.visits;
-                orders = obj.orders || [];
-                saveData();
-                renderPatients();
-                selectedPatientId = null;
-                document.getElementById("patientDetail").classList.add("d-none");
-                document.getElementById("noPatientSelected").classList.remove("d-none");
-                alert("Backup restored successfully.");
-              } else {
-                alert("Invalid backup file.");
-              }
-            } catch (err) {
-              alert("Error reading backup file.");
-            }
-          };
-          reader.readAsText(file);
-          e.target.value = "";
-        });
-
-      // copy manual ChatGPT prompt
-      document.getElementById("btnCopyPrompt").addEventListener("click", () => {
-        const txt = document.getElementById("chatgptPrompt").value;
-        if (!txt) return;
-        if (navigator.clipboard && navigator.clipboard.writeText) {
-          navigator.clipboard
-            .writeText(txt)
-            .then(() =>
-              alert(
-                "Prompt copied. Paste into ChatGPT to generate EN/AR/KU summaries."
-              )
-            )
-            .catch(() =>
-              alert("Unable to copy. Select the text manually and copy.")
-            );
-        } else {
-          alert("Select the text manually and copy.");
-        }
-      });
-
-      // AI SUMMARY BUTTON
-      document
-        .getElementById("btnGenerateAiSummary")
-        .addEventListener("click", async () => {
-          const errorEl = document.getElementById("aiError");
-          errorEl.textContent = "";
-          if (!AI_SUMMARY_ENDPOINT) {
-            errorEl.textContent =
-              "AI endpoint not configured yet. Set AI_SUMMARY_ENDPOINT in the HTML after you deploy the Cloudflare Worker.";
-            return;
-          }
-          if (!lastSelectedVisit) {
-            errorEl.textContent =
-              "Select a visit first (click 'Details' on the visit).";
-            return;
-          }
-          const patient = getPatientById(lastSelectedVisit.patientId);
-          const note = makeClinicalNoteText(patient, lastSelectedVisit);
-          try {
-            errorEl.textContent = "Contacting AI backend...";
-            const res = await fetch(AI_SUMMARY_ENDPOINT, {
-              method: "POST",
-              headers: { "Content-Type": "application/json" },
-              body: JSON.stringify({ note }),
-            });
-            if (!res.ok) {
-              throw new Error("HTTP " + res.status);
-            }
-            const data = await res.json();
-            document.getElementById("aiSummaryEn").value =
-              data.english || data.en || "";
-            document.getElementById("aiSummaryAr").value =
-              data.arabic || data.ar || "";
-            document.getElementById("aiSummaryKu").value =
-              data.kurdish || data.ku || "";
-            errorEl.textContent = "";
-          } catch (err) {
-            console.error(err);
-            errorEl.textContent =
-              "Error calling AI backend. Check your Worker URL and console log.";
-          }
-        });
-
-      // copy AI summaries
-      function copyTextById(id, label) {
-        const txt = document.getElementById(id).value;
-        if (!txt) return;
-        if (navigator.clipboard && navigator.clipboard.writeText) {
-          navigator.clipboard
-            .writeText(txt)
-            .then(() => alert(label + " copied."))
-            .catch(() =>
-              alert("Unable to copy automatically. Select and copy manually.")
-            );
-        } else {
-          alert("Select the text manually and copy.");
-        }
-      }
-      document
-        .getElementById("btnCopyAiEn")
-        .addEventListener("click", () => copyTextById("aiSummaryEn", "English summary"));
-      document
-        .getElementById("btnCopyAiAr")
-        .addEventListener("click", () => copyTextById("aiSummaryAr", "Arabic summary"));
-      document
-        .getElementById("btnCopyAiKu")
-        .addEventListener("click", () => copyTextById("aiSummaryKu", "Kurdish summary"));
-    }
-
-    // ====== PIN LOCK LOGIC ======
-    let existingPin = null;
-
-    function configureLockScreen() {
-      existingPin = localStorage.getItem(PIN_KEY);
-      const hasPin = !!existingPin;
-      const title = document.getElementById("lockTitle");
-      const subtitle = document.getElementById("lockSubtitle");
-      const label = document.getElementById("lockLabel");
-      const confirmGroup = document.getElementById("lockConfirmGroup");
-      const btn = document.getElementById("lockBtn");
-
-      if (hasPin) {
-        title.textContent = "Enter PIN to unlock EMR";
-        subtitle.textContent =
-          "This helps protect access on this device. Use your private PIN.";
-        label.textContent = "PIN";
-        confirmGroup.classList.add("d-none");
-        btn.textContent = "Unlock";
-      } else {
-        title.textContent = "Set up a PIN for this EMR";
-        subtitle.textContent =
-          "Choose a 4–8 digit PIN to protect access on this device.";
-        label.textContent = "New PIN";
-        confirmGroup.classList.remove("d-none");
-        btn.textContent = "Set PIN & unlock";
-      }
-    }
-
-    function unlockApp() {
-      document.getElementById("lockScreen").classList.add("d-none");
-      document.getElementById("appMain").classList.remove("d-none");
-      initEmrApp();
-    }
-
-    document.addEventListener("DOMContentLoaded", () => {
-      configureLockScreen();
-
-      document.getElementById("lockBtn").addEventListener("click", () => {
-        const pinInput = document.getElementById("lockPinInput").value.trim();
-        const errorEl = document.getElementById("lockError");
-        errorEl.textContent = "";
-
-        if (!existingPin) {
-          const pinConfirm = document
-            .getElementById("lockPinConfirm")
-            .value.trim();
-          if (pinInput.length < 4 || pinInput.length > 8 || !/^\d+$/.test(pinInput)) {
-            errorEl.textContent =
-              "Please choose a 4–8 digit numeric PIN.";
-            return;
-          }
-          if (pinInput !== pinConfirm) {
-            errorEl.textContent = "PIN and confirmation do not match.";
-            return;
-          }
-          localStorage.setItem(PIN_KEY, pinInput);
-          existingPin = pinInput;
-          unlockApp();
-        } else {
-          if (pinInput === existingPin) {
-            unlockApp();
-          } else {
-            errorEl.textContent = "Incorrect PIN. Try again.";
-          }
-        }
-      });
-    });
-  </script>
-</body>
-</html>
+          const editIndex
+          
