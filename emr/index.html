@@ -1343,7 +1343,21 @@ function downloadPdfFromText(text, filename) {
           alert("Select the text manually and copy.");
         }
       });
+// Save selected visit as PDF (forced filename)
+document.getElementById("btnPdfSelectedVisit").addEventListener("click", () => {
+  if (!lastSelectedVisit) {
+    alert("Select a visit first (click 'Details' on the visit).");
+    return;
+  }
+  const p = getPatientById(lastSelectedVisit.patientId);
+  const name = sanitizeFilename(p?.nameEn || "Patient");
+  const dob = sanitizeFilename(p?.dob || "DOB-unknown");
+  const vdate = sanitizeFilename(lastSelectedVisit?.date || "VisitDate-unknown");
 
+  const filename = `${name}__DOB-${dob}__Visit-${vdate}.pdf`;
+  const text = buildSelectedVisitSummaryText();
+  downloadPdfFromText(text, filename);
+});
       // AI SUMMARY BUTTON
       document
         .getElementById("btnGenerateAiSummary")
