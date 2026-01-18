@@ -707,7 +707,9 @@ const AUTH_MODE = "local";
     const LS_PATIENTS_KEY = "af_emr_patients";
     const LS_VISITS_KEY = "af_emr_visits";
     const LS_ORDERS_KEY = "af_emr_orders";
-
+// ====== AUTH STORAGE KEYS ======
+const PIN_KEY = "af_emr_pin";
+const AUTH_TOKEN_KEY = "af_emr_token";  // future backend JWT/session token
     function loadData() {
       try {
         const p = localStorage.getItem(LS_PATIENTS_KEY);
