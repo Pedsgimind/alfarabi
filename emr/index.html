@@ -1442,3 +1442,147 @@ ${makeClinicalNoteText(patient, v)}
 
       // AI summary buttons (unchanged)
     }
+// AI SUMMARY BUTTON
+      document
+        .getElementById("btnGenerateAiSummary")
+        .addEventListener("click", async () => {
+          const errorEl = document.getElementById("aiError");
+          errorEl.textContent = "";
+          if (!AI_SUMMARY_ENDPOINT) {
+            errorEl.textContent =
+              "AI endpoint not configured yet. Set AI_SUMMARY_ENDPOINT in the HTML after you deploy the Cloudflare Worker.";
+            return;
+          }
+          if (!lastSelectedVisit) {
+            errorEl.textContent =
+              "Select a visit first (click 'Details' on the visit).";
+            return;
+          }
+          const patient = getPatientById(lastSelectedVisit.patientId);
+          const note = makeClinicalNoteText(patient, lastSelectedVisit);
+          try {
+            errorEl.textContent = "Contacting AI backend...";
+            const res = await fetch(AI_SUMMARY_ENDPOINT, {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({ note }),
+            });
+            if (!res.ok) throw new Error("HTTP " + res.status);
+            const data = await res.json();
+            document.getElementById("aiSummaryEn").value =
+              data.english || data.en || "";
+            document.getElementById("aiSummaryAr").value =
+              data.arabic || data.ar || "";
+            document.getElementById("aiSummaryKu").value =
+              data.kurdish || data.ku || "";
+            errorEl.textContent = "";
+          } catch (err) {
+            console.error(err);
+            errorEl.textContent =
+              "Error calling AI backend. Check your Worker URL and console log.";
+          }
+        });
+
+      function copyTextById(id, label) {
+        const txt = document.getElementById(id).value;
+        if (!txt) return;
+        navigator.clipboard
+          .writeText(txt)
+          .then(() => alert(label + " copied."))
+          .catch(() =>
+            alert("Unable to copy automatically. Select and copy manually.")
+          );
+      }
+
+      document
+        .getElementById("btnCopyAiEn")
+        .addEventListener("click", () =>
+          copyTextById("aiSummaryEn", "English summary")
+        );
+      document
+        .getElementById("btnCopyAiAr")
+        .addEventListener("click", () =>
+          copyTextById("aiSummaryAr", "Arabic summary")
+        );
+      document
+        .getElementById("btnCopyAiKu")
+        .addEventListener("click", () =>
+          copyTextById("aiSummaryKu", "Kurdish summary")
+        );
+    }
+
+    // ====== PIN LOCK LOGIC ======
+    let existingPin = null;
+
+    function configureLockScreen() {
+      existingPin = localStorage.getItem(PIN_KEY);
+      const hasPin = !!existingPin;
+      const title = document.getElementById("lockTitle");
+      const subtitle = document.getElementById("lockSubtitle");
+      const label = document.getElementById("lockLabel");
+      const confirmGroup = document.getElementById("lockConfirmGroup");
+      const btn = document.getElementById("lockBtn");
+
+      if (hasPin) {
+        title.textContent = "Enter PIN to unlock EMR";
+        subtitle.textContent =
+          "This helps protect access on this device. Use your private PIN.";
+        label.textContent = "PIN";
+        confirmGroup.classList.add("d-none");
+        btn.textContent = "Unlock";
+      } else {
+        title.textContent = "Set up a PIN for this EMR";
+        subtitle.textContent =
+          "Choose a 4–8 digit PIN to protect access on this device.";
+        label.textContent = "New PIN";
+        confirmGroup.classList.remove("d-none");
+        btn.textContent = "Set PIN & unlock";
+      }
+    }
+
+    function unlockApp() {
+      document.getElementById("lockScreen").classList.add("d-none");
+      document.getElementById("appMain").classList.remove("d-none");
+      initEmrApp();
+    }
+
+    document.addEventListener("DOMContentLoaded", () => {
+      configureLockScreen();
+
+      document.getElementById("lockBtn").addEventListener("click", () => {
+        const pinInput = document.getElementById("lockPinInput").value.trim();
+        const errorEl = document.getElementById("lockError");
+        errorEl.textContent = "";
+
+        if (!existingPin) {
+          const pinConfirm = document
+            .getElementById("lockPinConfirm")
+            .value.trim();
+          if (
+            pinInput.length < 4 ||
+            pinInput.length > 8 ||
+            !/^\d+$/.test(pinInput)
+          ) {
+            errorEl.textContent =
+              "Please choose a 4–8 digit numeric PIN.";
+            return;
+          }
+          if (pinInput !== pinConfirm) {
+            errorEl.textContent = "PIN and confirmation do not match.";
+            return;
+          }
+          localStorage.setItem(PIN_KEY, pinInput);
+          existingPin = pinInput;
+          unlockApp();
+        } else {
+          if (pinInput === existingPin) {
+            unlockApp();
+          } else {
+            errorEl.textContent = "Incorrect PIN. Try again.";
+          }
+        }
+      });
+    });
+  </script>
+</body>
+</html>
