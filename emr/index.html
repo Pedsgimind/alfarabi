@@ -710,7 +710,18 @@ const AUTH_MODE = "local";
     const LS_VISITS_KEY = "af_emr_visits";
     const LS_ORDERS_KEY = "af_emr_orders";
     // ====== AUTH STORAGE KEYS ======
-const PIN_KEY = "af_emr_pin";
+const PIN_KEY =
+  // ---- PIN KEY MIGRATION (keeps old PIN working) ----
+const OLD_PIN_KEY = "af_emr_pin";
+(function migrateOldPinOnce() {
+  try {
+    const oldPin = localStorage.getItem(OLD_PIN_KEY);
+    const newPin = localStorage.getItem(PIN_KEY);
+    if (oldPin && !newPin) {
+      localStorage.setItem(PIN_KEY, oldPin);
+    }
+  } catch (e) {}
+})();
 const AUTH_TOKEN_KEY = "af_emr_token";  // future backend JWT/session token
 
     function loadData() {
