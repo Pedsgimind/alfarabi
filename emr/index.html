@@ -152,18 +152,6 @@
       </div>
     </div>
   </div>
-<script>
-  // EMERGENCY BYPASS (runs even if main JS fails)
-  (function () {
-    const BYPASS_LOCK = true;
-    if (!BYPASS_LOCK) return;
-
-    var lock = document.getElementById("lockScreen");
-    var app = document.getElementById("appMain");
-    if (lock) lock.classList.add("d-none");
-    if (app) app.classList.remove("d-none");
-  })();
-</script>
   <!-- MAIN APP -->
   <div id="appMain" class="d-none">
     <nav class="navbar navbar-light bg-white border-bottom mb-2">
