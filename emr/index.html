@@ -1047,13 +1047,14 @@ function buildSelectedVisitSummaryText() {
   return lines.join("\n");
 }
 
-function downloadPdfFromText(text, filename) {
+async function downloadPdfFromText(text, filename, patientObj, visitObj) {
   // jsPDF loaded?
   if (!window.jspdf || !window.jspdf.jsPDF) {
-    alert("PDF library (jsPDF) did not load. Check internet connection and browser console.");
+    alert("PDF library (jsPDF) did not load. Check internet connection.");
     return;
   }
-  if (!text.trim()) {
+
+  if (!text || !text.trim()) {
     alert("No visit selected. Click Details on a visit first.");
     return;
   }
@@ -1061,26 +1062,121 @@ function downloadPdfFromText(text, filename) {
   const { jsPDF } = window.jspdf;
   const doc = new jsPDF({ unit: "pt", format: "a4" });
 
-  const margin = 40;
   const pageWidth = doc.internal.pageSize.getWidth();
   const pageHeight = doc.internal.pageSize.getHeight();
-  const usableWidth = pageWidth - margin * 2;
 
+  const marginLeft = 40;
+  const marginRight = 40;
+  const usableWidth = pageWidth - marginLeft - marginRight;
+
+  // Header/Footer sizing
+  const headerH = 90;
+  const footerH = 55;
+  const contentTop = marginLeft + headerH;
+  const contentBottom = pageHeight - footerH;
+
+  // Image URLs (IMPORTANT: from /emr/ to /images/ use ../images/)
+  const logoUrl = "../images/avicenna-logo-horizontal.png";
+  const emblemUrl = "../images/avicenna-emblem.png";
+
+  // Load images as dataURLs
+  const logoData = await loadImageAsDataURL(logoUrl);
+  const emblemData = await loadImageAsDataURL(emblemUrl);
+
+  function drawHeader(pageNum) {
+    // light header background
+    doc.setFillColor(248, 249, 250);
+    doc.rect(0, 0, pageWidth, headerH, "F");
+
+    // Logo
+    if (logoData) {
+      // x, y, w, h
+      doc.addImage(logoData, "PNG", marginLeft, 18, 160, 32);
+    }
+
+    // Title block
+    doc.setTextColor(20, 20, 20);
+    doc.setFont("helvetica", "bold");
+    doc.setFontSize(13);
+    doc.text("Al Farabi Pediatric GI – Visit Summary", marginLeft, 65);
+
+    doc.setFont("helvetica", "normal");
+    doc.setFontSize(10);
+    doc.setTextColor(90, 90, 90);
+    doc.text("Avicenna Medical Inc. · Al Farabi Gastroenterology & Endoscopy Centre", marginLeft, 80);
+
+    // Right side (visit)
+    const vDate = (visitObj && visitObj.date) ? visitObj.date : "";
+    doc.setFont("helvetica", "bold");
+    doc.setFontSize(10);
+    doc.setTextColor(30, 30, 30);
+    doc.text("Date: " + vDate, pageWidth - marginRight - 150, 35);
+
+    // separator line
+    doc.setDrawColor(220, 220, 220);
+    doc.line(marginLeft, headerH, pageWidth - marginRight, headerH);
+  }
+
+  function drawFooter(pageNum, pageCount) {
+    // separator line
+    doc.setDrawColor(220, 220, 220);
+    doc.line(marginLeft, pageHeight - footerH, pageWidth - marginRight, pageHeight - footerH);
+
+    // Emblem
+    if (emblemData) {
+      doc.addImage(emblemData, "PNG", marginLeft, pageHeight - footerH + 12, 24, 24);
+    }
+
+    doc.setFont("helvetica", "normal");
+    doc.setFontSize(9);
+    doc.setTextColor(90, 90, 90);
+
+    doc.text(
+      "Clinic: Baqubah, Diyala, Iraq · WhatsApp/Phone: +964 772-173-8755 · info@avicennamedical.org",
+      marginLeft + 32,
+      pageHeight - footerH + 26
+    );
+
+    doc.text(
+      "Consultant: Dr. Mohammad Hussein, MD, FRCPC (Canada) · avicennamedical.org",
+      marginLeft + 32,
+      pageHeight - footerH + 40
+    );
+
+    doc.setTextColor(120, 120, 120);
+    doc.text("Page " + pageNum + " of " + pageCount, pageWidth - marginRight - 70, pageHeight - footerH + 40);
+  }
+
+  // Prepare content lines
   doc.setFont("helvetica", "normal");
   doc.setFontSize(11);
+  doc.setTextColor(20, 20, 20);
 
   const lines = doc.splitTextToSize(text, usableWidth);
-
-  let y = margin;
   const lineHeight = 14;
 
+  let y = contentTop;
+  let pageNum = 1;
+
+  // First page header
+  drawHeader(pageNum);
+
   for (let i = 0; i < lines.length; i++) {
-    if (y + lineHeight > pageHeight - margin) {
+    if (y + lineHeight > contentBottom) {
       doc.addPage();
-      y = margin;
+      pageNum++;
+      drawHeader(pageNum);
+      y = contentTop;
     }
-    doc.text(lines[i], margin, y);
+    doc.text(lines[i], marginLeft, y);
     y += lineHeight;
+  }
+
+  // Footer needs total page count
+  const pageCount = doc.getNumberOfPages();
+  for (let p = 1; p <= pageCount; p++) {
+    doc.setPage(p);
+    drawFooter(p, pageCount);
   }
 
   doc.save(filename);
