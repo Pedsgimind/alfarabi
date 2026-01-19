@@ -760,6 +760,21 @@
     // const AI_SUMMARY_ENDPOINT = "https://your-worker-name.your-subdomain.workers.dev/summary";
     const AI_SUMMARY_ENDPOINT = ""; // empty = disabled, will show error
 
+    function legacyCombinedHistory(v) {
+  // Old field fallback: v.pmh = "Past history / meds / allergies"
+  return (v && v.pmh) ? v.pmh : "";
+}
+
+function hasAnyNewHistoryFields(v) {
+  return !!(
+    (v.pastMedical && v.pastMedical.trim()) ||
+    (v.medications && v.medications.trim()) ||
+    (v.allergies && v.allergies.trim()) ||
+    (v.immunizations && v.immunizations.trim()) ||
+    (v.familyHistory && v.familyHistory.trim()) ||
+    (v.socialHistory && v.socialHistory.trim())
+  );
+}
     // ====== DATA STRUCTURES ======
     let patients = [];
     let visits = [];
