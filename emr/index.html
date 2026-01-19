@@ -375,7 +375,48 @@
                 </form>
               </div>
             </div>
+<div class="row g-2 mt-1">
+  <div class="col-md-4">
+    <label class="form-label">Educational resources provided?</label>
+    <select class="form-select form-select-sm" id="visitEduProvided">
+      <option value="">No</option>
+      <option value="Yes">Yes</option>
+    </select>
+  </div>
 
+  <div class="col-md-4">
+    <label class="form-label">Education language</label>
+    <select class="form-select form-select-sm" id="visitEduLanguage">
+      <option value="">—</option>
+      <option value="English">English</option>
+      <option value="Arabic">Arabic</option>
+      <option value="Kurdish">Kurdish</option>
+      <option value="Bilingual (EN+AR)">Bilingual (EN+AR)</option>
+      <option value="Bilingual (EN+KU)">Bilingual (EN+KU)</option>
+      <option value="Trilingual (EN+AR+KU)">Trilingual (EN+AR+KU)</option>
+    </select>
+  </div>
+
+  <div class="col-md-4">
+    <label class="form-label">Resource type</label>
+    <select class="form-select form-select-sm" id="visitEduType">
+      <option value="">—</option>
+      <option value="Handout">Handout</option>
+      <option value="Website link">Website link</option>
+      <option value="Clinic instruction">Clinic instruction</option>
+      <option value="Video">Video</option>
+      <option value="Other">Other</option>
+    </select>
+  </div>
+</div>
+
+<div class="row g-2 mt-1">
+  <div class="col-12">
+    <label class="form-label">Education details (title/link/notes)</label>
+    <textarea class="form-control form-control-sm" rows="2" id="visitEduDetails"
+      placeholder="e.g., Constipation handout (Arabic), Diet fiber sheet (English), link: https://..."></textarea>
+  </div>
+</div>
             <!-- Visit list + ChatGPT + Orders + AI -->
             <div class="row g-3">
               <div class="col-md-7">
