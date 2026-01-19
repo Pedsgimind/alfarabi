@@ -1389,7 +1389,24 @@ if (logoData) {
             }`
           );
           if (v.hpi) lines.push(`HPI: ${v.hpi}`);
-          if (v.pmh) lines.push(`Past history / Meds / Allergies: ${v.pmh}`);
+          const legacy = legacyCombinedHistory(v);
+if (hasAnyNewHistoryFields(v)) {
+  if (v.pastMedical) lines.push(`Past medical history: ${v.pastMedical}`);
+  if (v.medications) lines.push(`Medications: ${v.medications}`);
+  if (v.allergies) lines.push(`Allergies: ${v.allergies}`);
+  if (v.familyHistory) lines.push(`Family history: ${v.familyHistory}`);
+  if (v.socialHistory) lines.push(`Social history: ${v.socialHistory}`);
+  if (v.immunizations) lines.push(`Immunizations: ${v.immunizations}`);
+} else if (legacy) {
+  lines.push(`Past history / Meds / Allergies: ${legacy}`);
+}
+
+if ((v.eduProvided && v.eduProvided === "Yes") || (v.eduDetails && v.eduDetails.trim())) {
+  lines.push(`Education provided: ${v.eduProvided || "No"}`);
+  if (v.eduLanguage) lines.push(`Education language: ${v.eduLanguage}`);
+  if (v.eduType) lines.push(`Education type: ${v.eduType}`);
+  if (v.eduDetails) lines.push(`Education details: ${v.eduDetails}`);
+}
           if (v.vitals) lines.push(`Vitals: ${v.vitals}`);
           if (v.exam || v.otherExam)
             lines.push(
