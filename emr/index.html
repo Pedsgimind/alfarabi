@@ -1109,7 +1109,38 @@ function buildSelectedVisitSummaryText() {
   lines.push("");
 
   if (v.hpi) { lines.push("HPI"); lines.push(v.hpi); lines.push(""); }
-  if (v.pmh) { lines.push("PAST HISTORY / MEDS / ALLERGIES"); lines.push(v.pmh); lines.push(""); }
+  // History blocks (new fields preferred, legacy fallback if old visit)
+const legacy = legacyCombinedHistory(v);
+
+if (v.pastMedical || (!hasAnyNewHistoryFields(v) && legacy)) {
+  lines.push("PAST MEDICAL HISTORY");
+  lines.push((v.pastMedical && v.pastMedical.trim()) ? v.pastMedical : legacy);
+  lines.push("");
+}
+if (v.medications || (!hasAnyNewHistoryFields(v) && legacy)) {
+  lines.push("MEDICATIONS");
+  lines.push((v.medications && v.medications.trim()) ? v.medications : legacy);
+  lines.push("");
+}
+if (v.allergies || (!hasAnyNewHistoryFields(v) && legacy)) {
+  lines.push("ALLERGIES");
+  lines.push((v.allergies && v.allergies.trim()) ? v.allergies : legacy);
+  lines.push("");
+}
+
+if (v.familyHistory) { lines.push("FAMILY HISTORY"); lines.push(v.familyHistory); lines.push(""); }
+if (v.socialHistory) { lines.push("SOCIAL HISTORY"); lines.push(v.socialHistory); lines.push(""); }
+if (v.immunizations) { lines.push("IMMUNIZATION HISTORY"); lines.push(v.immunizations); lines.push(""); }
+
+// Education
+if ((v.eduProvided && v.eduProvided === "Yes") || (v.eduDetails && v.eduDetails.trim())) {
+  lines.push("EDUCATION / RESOURCES");
+  lines.push(`Provided: ${v.eduProvided || "No"}`);
+  if (v.eduLanguage) lines.push(`Language: ${v.eduLanguage}`);
+  if (v.eduType) lines.push(`Type: ${v.eduType}`);
+  if (v.eduDetails) lines.push(`Details: ${v.eduDetails}`);
+  lines.push("");
+}
   if (v.vitals) { lines.push("VITALS"); lines.push(v.vitals); lines.push(""); }
   if (v.exam || v.otherExam) {
     lines.push("EXAM");
