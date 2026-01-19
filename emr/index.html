@@ -1143,6 +1143,10 @@ async function downloadPdfFromText(text, filename, patientObj, visitObj) {
   }
 
   function drawFooter(pageNum, pageCount) {
+    // Footer background (light turquoise)
+    doc.setFillColor(224, 247, 250);
+    doc.rect(0, pageHeight - footerH, pageWidth, footerH, "F");
+    
     // separator line
     doc.setDrawColor(220, 220, 220);
     doc.line(marginLeft, pageHeight - footerH, pageWidth - marginRight, pageHeight - footerH);
