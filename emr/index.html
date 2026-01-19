@@ -1107,7 +1107,14 @@ async function downloadPdfFromText(text, filename, patientObj, visitObj) {
     doc.setGState(new doc.GState({ opacity: 0.12 })); // subtle transparency
 
     // diagonal watermark across page
-    doc.text("AVICENNA MEDICAL INC.", pageWidth / 2, pageHeight / 2, {
+    // Watermark #1 (upper-middle)
+    doc.text("AVICENNA MEDICAL INC.", pageWidth / 2, pageHeight * 0.40, {
+      align: "center",
+      angle: 35
+    });
+
+    // Watermark #2 (lower-middle)
+    doc.text("AVICENNA MEDICAL INC.", pageWidth / 2, pageHeight * 0.70, {
       align: "center",
       angle: 35
     });
