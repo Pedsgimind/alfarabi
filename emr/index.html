@@ -1129,7 +1129,13 @@ doc.text("AVICENNA MEDICAL INC.", pageWidth / 2, pageHeight * 0.80, {
     // Logo
     if (logoData) {
       // x, y, w, h
-      doc.addImage(logoData, "PNG", marginLeft, 16, 190, 38);
+      // Logo (keep aspect ratio, not squished)
+if (logoData) {
+  const props = doc.getImageProperties(logoData);
+  const logoW = 190; // desired width
+  const logoH = (props.height * logoW) / props.width; // preserve ratio
+  doc.addImage(logoData, props.fileType || "PNG", marginLeft, 6, logoW, logoH);
+}
     }
 
     // Title block
