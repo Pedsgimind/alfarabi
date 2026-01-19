@@ -939,8 +939,29 @@ CLINICAL NOTE:
 HPI:
 ${v.hpi}
 
-Past history / meds / allergies:
-${v.pmh}
+PAST MEDICAL HISTORY:
+${(v.pastMedical || "").trim() || (!hasAnyNewHistoryFields(v) ? legacyCombinedHistory(v) : "")}
+
+MEDICATIONS:
+${(v.medications || "").trim() || (!hasAnyNewHistoryFields(v) ? legacyCombinedHistory(v) : "")}
+
+ALLERGIES:
+${(v.allergies || "").trim() || (!hasAnyNewHistoryFields(v) ? legacyCombinedHistory(v) : "")}
+
+FAMILY HISTORY:
+${(v.familyHistory || "").trim()}
+
+SOCIAL HISTORY:
+${(v.socialHistory || "").trim()}
+
+IMMUNIZATION HISTORY:
+${(v.immunizations || "").trim()}
+
+EDUCATION RESOURCES PROVIDED:
+${v.eduProvided || "No"}
+Language: ${v.eduLanguage || ""}
+Type: ${v.eduType || ""}
+Details: ${(v.eduDetails || "").trim()}
 
 Vitals:
 ${v.vitals}
