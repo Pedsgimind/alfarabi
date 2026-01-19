@@ -1107,18 +1107,24 @@ async function downloadPdfFromText(text, filename, patientObj, visitObj) {
     doc.setGState(new doc.GState({ opacity: 0.12 })); // subtle transparency
 
     // diagonal watermark across page
-    // Watermark #1 (upper-middle)
-    doc.text("AVICENNA MEDICAL INC.", pageWidth / 2, pageHeight * 0.40, {
-      align: "center",
-      angle: 35
-    });
+    
+// Watermark #1 (upper)
+doc.text("AVICENNA MEDICAL INC.", pageWidth / 2, pageHeight * 0.30, {
+  align: "center",
+  angle: 35
+});
 
-    // Watermark #2 (lower-middle)
-    doc.text("AVICENNA MEDICAL INC.", pageWidth / 2, pageHeight * 0.70, {
-      align: "center",
-      angle: 35
-    });
+// Watermark #2 (center)
+doc.text("AVICENNA MEDICAL INC.", pageWidth / 2, pageHeight * 0.55, {
+  align: "center",
+  angle: 35
+});
 
+// Watermark #3 (lower)
+doc.text("AVICENNA MEDICAL INC.", pageWidth / 2, pageHeight * 0.80, {
+  align: "center",
+  angle: 35
+});
     doc.restoreGraphicsState();
     // Logo
     if (logoData) {
