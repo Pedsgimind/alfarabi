@@ -1108,11 +1108,6 @@ async function downloadPdfFromText(text, filename, patientObj, visitObj) {
 
     // diagonal watermark across page
     
-// Watermark #1 (upper)
-doc.text("AVICENNA MEDICAL INC.", pageWidth / 2, pageHeight * 0.30, {
-  align: "center",
-  angle: 35
-});
 
 // Watermark #2 (center)
 doc.text("AVICENNA MEDICAL INC.", pageWidth / 2, pageHeight * 0.55, {
@@ -1142,7 +1137,7 @@ if (logoData) {
     doc.setTextColor(20, 20, 20);
     doc.setFont("helvetica", "bold");
     doc.setFontSize(13);
-    doc.text("Al Farabi Pediatric GI – Visit Summary", marginLeft, 60);
+    doc.text("Al Farabi Pediatric GI – Visit Summary", marginLeft, 74);
 
     doc.setFont("helvetica", "normal");
     doc.setFontSize(10);
