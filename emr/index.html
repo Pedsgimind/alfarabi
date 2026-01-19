@@ -1129,7 +1129,7 @@ if (logoData) {
   const props = doc.getImageProperties(logoData);
   const logoW = 190; // desired width
   const logoH = (props.height * logoW) / props.width; // preserve ratio
-  doc.addImage(logoData, props.fileType || "PNG", marginLeft, 6, logoW, logoH);
+  doc.addImage(logoData, props.fileType || "PNG", marginLeft, -2,  logoW, logoH);
 }
     }
 
