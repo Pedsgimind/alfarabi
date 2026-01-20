@@ -793,7 +793,33 @@ function hasAnyNewHistoryFields(v) {
     const LS_VISITS_KEY = "af_emr_visits";
     const LS_ORDERS_KEY = "af_emr_orders";
     const PIN_KEY = "af_emr_pin";
+function resetEmrDataHard() {
+  // Extra safety: ask user to type RESET
+  const confirm1 = confirm(
+    "⚠️ RESET EMR will permanently delete ALL patients, visits, and orders stored locally on THIS device.\n\nDo you want to continue?"
+  );
+  if (!confirm1) return;
 
+  const typed = prompt('Type RESET to confirm deletion:');
+  if (typed !== "RESET") {
+    alert("Reset cancelled. You must type RESET exactly.");
+    return;
+  }
+
+  // Clear ONLY this app's keys
+  localStorage.removeItem(LS_PATIENTS_KEY);
+  localStorage.removeItem(LS_VISITS_KEY);
+  localStorage.removeItem(LS_ORDERS_KEY);
+
+  // Also clear PIN (recommended)
+  localStorage.removeItem(PIN_KEY);
+
+  // Optional: clear any other keys you may add later:
+  // localStorage.removeItem("af_emr_settings");
+
+  alert("✅ EMR data cleared. The page will now reload.");
+  location.reload();
+}
     function loadData() {
       try {
         const p = localStorage.getItem(LS_PATIENTS_KEY);
