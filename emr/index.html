@@ -1557,7 +1557,12 @@ async function exportAllPatientsAsPdfZip() {
       // Uses your existing full exporter (demographics + visits + orders)
       const text = buildPatientHistoryText(p.id);
 
-      const pdfBlob = makePdfBlobFromText_simple(text);
+      const pdfBlob = await makeBrandedPdfBlobFromText(text, p);
+if (patients.length > 30) {
+  alert("Too many patients for branded ZIP export. Export in batches ≤ 30.");
+  return;
+}
+
 
       const filename = safePdfFilenameFromPatient(p);
       folder.file(filename, pdfBlob);
