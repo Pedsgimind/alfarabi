@@ -1560,7 +1560,8 @@ function makePdfBlobFromText_simple(text) {
   return doc.output("blob");
 }
 
-async function exportAllPatientsAsPdfZip() {
+async function exportAllPatientsAsPdfZip(startIndex = 1, batchSize = 25) {
+
   if (!window.JSZip) {
     alert("JSZip library not loaded.");
     return;
@@ -1573,6 +1574,19 @@ async function exportAllPatientsAsPdfZip() {
     alert("No patients to export.");
     return;
   }
+// Sort same way as your UI list (optional but recommended)
+const sortedPatients = patients.slice().sort((a, b) => (a.nameEn || "").localeCompare(b.nameEn || ""));
+
+// Convert to 0-based
+const start0 = Math.max(0, (parseInt(startIndex, 10) || 1) - 1);
+const size = Math.max(1, parseInt(batchSize, 10) || 25);
+
+const batch = sortedPatients.slice(start0, start0 + size);
+
+if (!batch.length) {
+  alert("Nothing to export for this start number. Increase/decrease the start value.");
+  return;
+}
 
   const confirm1 = confirm(
     `This will generate ${patients.length} PDFs and package them into a ZIP.\n\nOn tablets, this can take a minute.\n\nContinue?`
@@ -2247,6 +2261,7 @@ document.getElementById("btnPdfSelectedVisit").addEventListener("click", async (
   </script>
 </body>
 </html>
+
 
 
 
