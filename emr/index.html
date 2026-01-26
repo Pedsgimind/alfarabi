@@ -1112,7 +1112,23 @@ function buildSelectedVisitSummaryText() {
   const lines = [];
   lines.push("AL FARABI PEDIATRIC GI – VISIT SUMMARY");
   lines.push("");
-// Patient
+// ====== PDF BRANDING CACHE (load once) ======
+const PDF_BRANDING = {
+  logoUrl: new URL("../images/avicenna-logo-horizontal.png", window.location.href).href,
+  emblemUrl: new URL("../images/avicenna-emblem.png", window.location.href).href,
+  logoData: null,
+  emblemData: null,
+  loaded: false
+};
+
+async function ensurePdfBrandingLoaded() {
+  if (PDF_BRANDING.loaded) return;
+  PDF_BRANDING.logoData = await loadImageAsDataURL(PDF_BRANDING.logoUrl);
+  PDF_BRANDING.emblemData = await loadImageAsDataURL(PDF_BRANDING.emblemUrl);
+  PDF_BRANDING.loaded = true;
+}
+
+  // Patient
   lines.push("PATIENT");
   lines.push("Name: " + ((p && p.nameEn) ? p.nameEn : ""));
   lines.push("Patient ID: " + ((p && p.id) ? p.id : ""));
@@ -2049,4 +2065,5 @@ document.getElementById("btnPdfSelectedVisit").addEventListener("click", async (
   </script>
 </body>
 </html>
+
 
