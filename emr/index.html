@@ -1519,8 +1519,10 @@ function safePdfFilenameFromPatient(p) {
   return `${name}__${id}.pdf`;
 }
 
-// Lightweight PDF generator (text-only) to avoid tablet crashes
-function makePdfBlobFromText_simple(text) {
+const pdfBlob = await makePdfBlobFromText_branded(text, {
+  patientName: p.nameEn || "",
+  patientId: p.id || ""
+});
   if (!window.jspdf || !window.jspdf.jsPDF) {
     throw new Error("jsPDF not loaded");
   }
@@ -2112,6 +2114,7 @@ document.getElementById("btnPdfSelectedVisit").addEventListener("click", async (
   </script>
 </body>
 </html>
+
 
 
 
