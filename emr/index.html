@@ -1828,8 +1828,11 @@ async function makePdfBlobFromText_branded(text, meta) {
 
 // Export ALL patients as PDF ZIP
 document.getElementById("btnExportAllPatientsZip").addEventListener("click", () => {
-  exportAllPatientsAsPdfZip();
+  const batchSize = document.getElementById("exportBatchSize").value;
+  const startIndex = document.getElementById("exportStartIndex").value;
+  exportAllPatientsAsPdfZip(startIndex, batchSize);
 });
+
 
 
       // patient modal show
@@ -2264,6 +2267,7 @@ document.getElementById("btnPdfSelectedVisit").addEventListener("click", async (
   </script>
 </body>
 </html>
+
 
 
 
