@@ -1589,7 +1589,8 @@ if (!batch.length) {
 }
 
   const confirm1 = confirm(
-    `This will generate ${patients.length} PDFs and package them into a ZIP.\n\nOn tablets, this can take a minute.\n\nContinue?`
+   `This will generate ${batch.length} PDFs (patients ${start0 + 1} to ${start0 + batch.length}) ...
+
   );
   if (!confirm1) return;
 
@@ -2261,6 +2262,7 @@ document.getElementById("btnPdfSelectedVisit").addEventListener("click", async (
   </script>
 </body>
 </html>
+
 
 
 
