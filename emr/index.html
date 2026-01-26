@@ -1606,8 +1606,9 @@ if (!batch.length) {
 
   try {await ensurePdfBrandingLoaded();
 
-    for (let i = 0; i < patients.length; i++) {
-      const p = patients[i];
+   for (let i = 0; i < batch.length; i++) {
+  const p = batch[i];
+
 // Branded PDF generator (returns a Blob) — used for ALL-PATIENTS ZIP
 async function makePdfBlobFromText_branded(text, meta) {
   if (!window.jspdf || !window.jspdf.jsPDF) {
@@ -2262,6 +2263,7 @@ document.getElementById("btnPdfSelectedVisit").addEventListener("click", async (
   </script>
 </body>
 </html>
+
 
 
 
