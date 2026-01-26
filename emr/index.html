@@ -144,9 +144,29 @@
       <input type="file" id="importFile" hidden />
     </label>
 
-<button class="btn btn-outline-primary btn-sm" id="btnExportAllPatientsZip">
-  Export all patients (PDF ZIP)
-</button>
+<div class="d-flex align-items-center gap-2">
+  <select class="form-select form-select-sm" id="exportBatchSize" style="width: 95px;">
+    <option value="10">10</option>
+    <option value="25" selected>25</option>
+    <option value="50">50</option>
+    <option value="100">100</option>
+  </select>
+
+  <input
+    type="number"
+    class="form-control form-control-sm"
+    id="exportStartIndex"
+    style="width: 95px;"
+    min="1"
+    value="1"
+    title="Start patient # (1 = first patient)"
+  />
+
+  <button class="btn btn-outline-primary btn-sm" id="btnExportAllPatientsZip">
+    Export batch (PDF ZIP)
+  </button>
+</div>
+
 
     <!-- RESET EMR button -->
     <button class="btn btn-outline-danger btn-sm" id="btnResetEmr" title="Deletes ALL local EMR data on this device">
@@ -2227,6 +2247,7 @@ document.getElementById("btnPdfSelectedVisit").addEventListener("click", async (
   </script>
 </body>
 </html>
+
 
 
 
