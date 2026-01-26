@@ -1572,6 +1572,163 @@ async function exportAllPatientsAsPdfZip() {
   try {
     for (let i = 0; i < patients.length; i++) {
       const p = patients[i];
+// Branded PDF generator (returns a Blob) — used for ALL-PATIENTS ZIP
+async function makePdfBlobFromText_branded(text, meta) {
+  if (!window.jspdf || !window.jspdf.jsPDF) {
+    throw new Error("jsPDF not loaded");
+  }
+
+  await ensurePdfBrandingLoaded();
+
+  const { jsPDF } = window.jspdf;
+  const doc = new jsPDF({ unit: "pt", format: "a4" });
+
+  const pageWidth = doc.internal.pageSize.getWidth();
+  const pageHeight = doc.internal.pageSize.getHeight();
+
+  const marginLeft = 40;
+  const marginRight = 40;
+  const marginTop = 40;
+  const marginBottom = 20;
+
+  const headerH = 95;
+  const footerH = 55;
+
+  const usableWidth = pageWidth - marginLeft - marginRight;
+  const contentTop = marginTop + headerH;
+  const contentBottom = pageHeight - footerH - marginBottom;
+
+  const logoData = PDF_BRANDING.logoData;
+  const emblemData = PDF_BRANDING.emblemData;
+
+  function drawHeader(pageNum, headerTitle, rightTopLine, rightSecondLine) {
+    // header background
+    doc.setFillColor(224, 248, 250);
+    doc.rect(0, 0, pageWidth, headerH + marginTop, "F");
+
+    // Logo (left)
+    if (logoData) {
+      try {
+        const props = doc.getImageProperties(logoData);
+        const logoW = 170;
+        const logoH = (props.height * logoW) / props.width;
+        doc.addImage(logoData, props.fileType || "PNG", marginLeft, 18, logoW, logoH);
+      } catch (e) {
+        // ignore logo failure
+      }
+    }
+
+    // Title
+    doc.setFont("helvetica", "bold");
+    doc.setFontSize(12);
+    doc.setTextColor(20, 20, 20);
+    doc.text(headerTitle || "Al Farabi Pediatric GI – Patient Export", marginLeft, 70);
+
+    doc.setFont("helvetica", "normal");
+    doc.setFontSize(9.5);
+    doc.setTextColor(90, 90, 90);
+    doc.text(
+      "Avicenna Medical Inc. · Al Farabi Gastroenterology & Endoscopy Centre",
+      marginLeft,
+      84
+    );
+
+    // Right side meta
+    doc.setFont("helvetica", "bold");
+    doc.setFontSize(9.5);
+    doc.setTextColor(30, 30, 30);
+
+    const rx = pageWidth - marginRight - 220;
+    if (rightTopLine) doc.text(rightTopLine, rx, 30);
+    doc.setFont("helvetica", "normal");
+    doc.setTextColor(70, 70, 70);
+    if (rightSecondLine) doc.text(rightSecondLine, rx, 44);
+
+    // separator line
+    doc.setDrawColor(220, 220, 220);
+    doc.line(marginLeft, headerH + marginTop, pageWidth - marginRight, headerH + marginTop);
+  }
+
+  function drawFooter(pageNum, pageCount) {
+    doc.setFillColor(224, 247, 250);
+    doc.rect(0, pageHeight - footerH, pageWidth, footerH, "F");
+
+    doc.setDrawColor(220, 220, 220);
+    doc.line(marginLeft, pageHeight - footerH, pageWidth - marginRight, pageHeight - footerH);
+
+    if (emblemData) {
+      try {
+        doc.addImage(emblemData, "PNG", marginLeft, pageHeight - footerH + 14, 22, 22);
+      } catch (e) {
+        // ignore emblem failure
+      }
+    }
+
+    doc.setFont("helvetica", "normal");
+    doc.setFontSize(9);
+    doc.setTextColor(90, 90, 90);
+
+    const footerLine1 =
+      "Avicenna Medical Inc. · Al Farabi Gastroenterology & Endoscopy Centre · Diyala Branch, Iraq";
+    const footerLine2 =
+      "WhatsApp/Phone: +964 772-173-8755 · info@avicennamedical.org · avicennamedical.org";
+
+    // wrap footer lines safely
+    const l1 = doc.splitTextToSize(footerLine1, pageWidth - marginLeft - marginRight - 40);
+    const l2 = doc.splitTextToSize(footerLine2, pageWidth - marginLeft - marginRight - 40);
+
+    doc.text(l1, marginLeft + 30, pageHeight - footerH + 26);
+    doc.text(l2, marginLeft + 30, pageHeight - footerH + 40);
+
+    doc.setTextColor(120, 120, 120);
+    doc.text(
+      `Page ${pageNum} of ${pageCount}`,
+      pageWidth - marginRight - 80,
+      pageHeight - footerH + 40
+    );
+  }
+
+  // Header meta for patient history
+  const exportDate = new Date().toISOString().slice(0, 10);
+  const patientName = (meta && meta.patientName) ? meta.patientName : "";
+  const patientId = (meta && meta.patientId) ? meta.patientId : "";
+
+  const headerTitle = "Al Farabi Pediatric GI – Patient History Export";
+  const rightTopLine = patientId ? `Patient ID: ${patientId}` : `Export: ${exportDate}`;
+  const rightSecondLine = patientName ? patientName : `Export date: ${exportDate}`;
+
+  // Body text
+  doc.setFont("helvetica", "normal");
+  doc.setFontSize(11);
+  doc.setTextColor(20, 20, 20);
+
+  const lines = doc.splitTextToSize(text, usableWidth);
+  const lineHeight = 14;
+
+  let y = contentTop;
+  let pageNum = 1;
+
+  drawHeader(pageNum, headerTitle, rightTopLine, rightSecondLine);
+
+  for (let i = 0; i < lines.length; i++) {
+    if (y + lineHeight > contentBottom) {
+      doc.addPage();
+      pageNum++;
+      drawHeader(pageNum, headerTitle, rightTopLine, rightSecondLine);
+      y = contentTop;
+    }
+    doc.text(lines[i], marginLeft, y);
+    y += lineHeight;
+  }
+
+  const pageCount = doc.getNumberOfPages();
+  for (let p = 1; p <= pageCount; p++) {
+    doc.setPage(p);
+    drawFooter(p, pageCount);
+  }
+
+  return doc.output("blob");
+}
 
       // Uses your existing full exporter (demographics + visits + orders)
       const text = buildPatientHistoryText(p.id);
@@ -2065,5 +2222,6 @@ document.getElementById("btnPdfSelectedVisit").addEventListener("click", async (
   </script>
 </body>
 </html>
+
 
 
