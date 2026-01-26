@@ -1795,7 +1795,7 @@ async function makePdfBlobFromText_branded(text, meta) {
     const zipBlob = await zip.generateAsync({ type: "blob" });
 
     const stamp = new Date().toISOString().slice(0, 10);
-    saveAs(zipBlob, `AlFarabi_AllPatients_PDFs_${stamp}.zip`);
+    saveAs(zipBlob, `AlFarabi_PDFs_${stamp}_patients_${start0 + 1}_to_${start0 + batch.length}.zip`);
 
     alert("✅ ZIP downloaded.");
   } catch (e) {
@@ -2264,6 +2264,7 @@ document.getElementById("btnPdfSelectedVisit").addEventListener("click", async (
   </script>
 </body>
 </html>
+
 
 
 
