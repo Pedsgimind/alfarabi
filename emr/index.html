@@ -1908,13 +1908,18 @@ async function makePdfBlobFromText_branded(text, meta) {
         });
 
 // Export ALL patients as PDF ZIP
-document.getElementById("btnExportAllPatientsZip").addEventListener("click", () => {
-  const batchSize = document.getElementById("exportBatchSize").value;
-  const startIndex = document.getElementById("exportStartIndex").value;
-  exportAllPatientsAsPdfZip(startIndex, batchSize);
-});
+const exportBtn = document.getElementById("btnExportAllPatientsZip");
+if (exportBtn) {
+  exportBtn.addEventListener("click", () => {
+    const sizeEl = document.getElementById("exportBatchSize");
+    const startEl = document.getElementById("exportStartIndex");
 
+    const batchSize = sizeEl ? sizeEl.value : 25;
+    const startIndex = startEl ? startEl.value : 1;
 
+    exportAllPatientsAsPdfZip(startIndex, batchSize);
+  });
+}
 
       // patient modal show
       document
@@ -2348,6 +2353,7 @@ document.getElementById("btnPdfSelectedVisit").addEventListener("click", async (
   </script>
 </body>
 </html>
+
 
 
 
