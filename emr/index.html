@@ -1733,7 +1733,11 @@ async function makePdfBlobFromText_branded(text, meta) {
       // Uses your existing full exporter (demographics + visits + orders)
       const text = buildPatientHistoryText(p.id);
 
-      const pdfBlob = makePdfBlobFromText_simple(text);
+     const pdfBlob = await makePdfBlobFromText_branded(text, {
+  patientName: p.nameEn || "",
+  patientId: p.id || ""
+});
+
 
       const filename = safePdfFilenameFromPatient(p);
       folder.file(filename, pdfBlob);
@@ -2222,6 +2226,7 @@ document.getElementById("btnPdfSelectedVisit").addEventListener("click", async (
   </script>
 </body>
 </html>
+
 
 
 
