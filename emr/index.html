@@ -1780,7 +1780,8 @@ async function makePdfBlobFromText_branded(text, meta) {
       folder.file(filename, pdfBlob);
 
       if (btn) {
-        const pct = Math.round(((i + 1) / patients.length) * 100);
+       const pct = Math.round(((i + 1) / batch.length) * 100);
+
         btn.textContent = `Working... ${pct}%`;
       }
 
@@ -2263,6 +2264,7 @@ document.getElementById("btnPdfSelectedVisit").addEventListener("click", async (
   </script>
 </body>
 </html>
+
 
 
 
