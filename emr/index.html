@@ -1569,7 +1569,8 @@ async function exportAllPatientsAsPdfZip() {
     btn.textContent = "Working... 0%";
   }
 
-  try {
+  try {await ensurePdfBrandingLoaded();
+
     for (let i = 0; i < patients.length; i++) {
       const p = patients[i];
 // Branded PDF generator (returns a Blob) — used for ALL-PATIENTS ZIP
@@ -2226,6 +2227,7 @@ document.getElementById("btnPdfSelectedVisit").addEventListener("click", async (
   </script>
 </body>
 </html>
+
 
 
 
