@@ -1,17 +1,83 @@
 /* =======================================================
+   AVICENNA THEME — BURGUNDY & CHAMPAGNE (FULL STYLESHEET)
+   Palette:
+   Primary #6B0F1A | Primary-alt #9F1239
+   Secondary #4B5563 | Accent (gold) #EAB308
+   BG #FFFBF7 | Headings #111827 | Body #374151
+   ======================================================= */
+
+/* ---------- DESIGN TOKENS ---------- */
+:root{
+  /* brand */
+  --clr-primary: #6B0F1A;
+  --clr-primary-600: #7F1220;
+  --clr-primary-alt: #9F1239;
+  --clr-accent: #EAB308;
+
+  /* neutrals */
+  --clr-bg: #FFFBF7;          /* page background (champagne) */
+  --clr-surface: #FFFFFF;      /* cards, panels */
+  --clr-surface-2: #FFF7EC;    /* subtle alt surface */
+  --clr-border: #E5E7EB;
+
+  /* text */
+  --clr-text-heading: #111827;
+  --clr-text-body: #374151;
+  --clr-text-muted: #6B7280;
+
+  /* dark surfaces (header/footer/hero) */
+  --clr-header-bg: rgba(107,15,26,0.98);  /* burgundy with blur */
+  --clr-footer-bg: #2A0A0E;               /* near-black burgundy */
+  --clr-on-dark: #FFF7E6;                 /* champagne on dark */
+  --clr-on-dark-muted: #E8DCC2;
+
+  /* links & states */
+  --clr-link: #9F1239;
+  --clr-link-hover: #6B0F1A;
+  --clr-success: #16A34A;
+  --clr-warning: #D97706;
+  --clr-error:   #DC2626;
+  --clr-info:    #2563EB;
+
+  /* effects */
+  --ring: 0 0 0 3px rgba(234,179,8,0.35);
+  --sh-card: 0 10px 22px rgba(17, 24, 39, 0.08);
+  --sh-hero: 0 24px 55px rgba(43, 10, 14, 0.55);
+}
+
+/* =======================================================
    GLOBAL RESET & BASE
    ======================================================= */
 
-* { box-sizing: border-box; }
+*{ box-sizing: border-box; }
+
+html, body{ height: 100%; }
 
 body{
   margin:0;
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  background-color:#020617;
-  color:#e5e7eb;
+  line-height: 1.6;
+  background-color: var(--clr-bg);
+  color: var(--clr-text-body);
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-a{ text-decoration:none; color:inherit; }
+img{ max-width: 100%; height: auto; display:block; }
+
+a{
+  text-decoration: none;
+  color: inherit;
+}
+
+a:focus-visible,
+button:focus-visible,
+[role="button"]:focus-visible{
+  outline: none;
+  box-shadow: var(--ring);
+  border-radius: 10px;
+}
 
 .af-container{
   max-width:1120px;
@@ -21,22 +87,18 @@ a{ text-decoration:none; color:inherit; }
 
 /* =======================================================
    HEADER (ONE HORIZONTAL BAR) — LOGO ONLY
-   Updated:
-   - Force logo = 110px (max allowed)
-   - Force logo as far LEFT as possible (remove container centering/padding)
-   - Keep everything else same
    ======================================================= */
 
 .af-header{
   position: sticky;
   top: 0;
   z-index: 40;
-  background: rgba(15,23,42,0.98);
+  background: var(--clr-header-bg);
   backdrop-filter: blur(10px);
-  border-bottom: 1px solid rgba(148,163,184,0.3);
+  border-bottom: 1px solid rgba(234,179,8,0.35); /* gold line */
 }
 
-/* Force header to use FULL viewport width and push content to edges */
+/* Force header to full width, edge-to-edge */
 .af-header .af-container.af-header-inner,
 .af-header .af-header-inner{
   display:flex !important;
@@ -44,30 +106,24 @@ a{ text-decoration:none; color:inherit; }
   align-items:center !important;
   justify-content: space-between !important;
   gap: 14px !important;
-
-  /* key: let it go edge-to-edge */
   max-width: none !important;
   width: 100% !important;
   margin: 0 !important;
-
-  /* key: small safe padding only (edit if you want tighter) */
   padding: 8px 10px !important;
 }
 
-/* ---------- BRAND (LOGO ONLY) ---------- */
+/* BRAND (LOGO ONLY) */
 .af-header .af-brand{
   display:flex !important;
   align-items:center !important;
   gap: 0 !important;
   flex: 0 0 auto !important;
   min-width: max-content !important;
-
-  /* key: force it to the far left */
   margin: 0 !important;
   padding: 0 !important;
 }
 
-/* LOGO SIZE — FORCE 110px (max allowed) */
+/* LOGO SIZE — FORCE 110px */
 .af-header .af-logo-full{
   height: 110px !important;
   width: auto !important;
@@ -76,14 +132,12 @@ a{ text-decoration:none; color:inherit; }
   object-fit: contain !important;
 }
 
-/* Hide all brand text */
+/* Hide brand text */
 .af-header .af-brand-text,
 .af-header .af-brand-line1,
-.af-header .af-brand-line2{
-  display:none !important;
-}
+.af-header .af-brand-line2{ display:none !important; }
 
-/* ---------- NAVIGATION (SINGLE ROW) ---------- */
+/* NAVIGATION */
 .af-header .af-nav{
   display:flex !important;
   align-items:center !important;
@@ -95,10 +149,9 @@ a{ text-decoration:none; color:inherit; }
   margin-left: 0 !important;
 }
 
-/* Nav pill style */
 .af-header .af-nav a{
   font-size: 0.95rem !important;
-  color:#cbd5f5 !important;
+  color: var(--clr-on-dark-muted) !important;
   padding: 8px 12px !important;
   border-radius: 999px !important;
   line-height: 1 !important;
@@ -106,33 +159,33 @@ a{ text-decoration:none; color:inherit; }
 }
 
 .af-header .af-nav a:hover{
-  background: rgba(255,255,255,0.10) !important;
-  color:#ffffff !important;
+  background: rgba(234,179,8,0.10) !important;  /* gold wash */
+  color: var(--clr-on-dark) !important;
+  border-color: rgba(234,179,8,0.35) !important;
 }
 
 .af-header .af-nav a.active{
-  color:#38bdf8 !important;
-  background: rgba(56,189,248,0.10) !important;
-  border-color: rgba(56,189,248,0.45) !important;
+  color: var(--clr-on-dark) !important;
+  background: rgba(159,18,57,0.18) !important;     /* primary-alt tint */
+  border-color: rgba(159,18,57,0.45) !important;
 }
 
-/* CTA button stays tight */
+/* CTA button */
 .af-header .af-nav a.af-nav-cta{
   padding: 9px 14px !important;
   border-radius: 999px !important;
-  background:#2563eb !important;
-  color:#ffffff !important;
+  background: linear-gradient(135deg, #FACC15, var(--clr-accent)) !important;
+  color:#111827 !important;
   font-weight: 700 !important;
-  border:1px solid #1d4ed8 !important;
+  border:1px solid #D4B106 !important;
   white-space: nowrap !important;
 }
-
 .af-header .af-nav a.af-nav-cta:hover{
-  background:#1d4ed8 !important;
-  border-color:#1e40af !important;
+  background: linear-gradient(135deg, #FFE380, #F5C20A) !important;
+  border-color:#C9A408 !important;
 }
 
-/* ---------- LANGUAGE SWITCH (RIGHT SIDE) ---------- */
+/* LANGUAGE SWITCH */
 .af-header .af-lang-switch{
   display:flex !important;
   align-items:center !important;
@@ -141,34 +194,30 @@ a{ text-decoration:none; color:inherit; }
   margin: 0 !important;
   padding: 0 !important;
   flex: 0 0 auto !important;
-  min-width: max-content !important;
+  min-width: max-content !Important;
   white-space: nowrap !important;
 }
 
 .af-header .af-lang-switch li a{
   padding: 7px 10px !important;
   border-radius: 999px !important;
-  border: 1px solid rgba(148,163,184,0.60) !important;
+  border: 1px solid rgba(234,179,8,0.40) !important;
   font-size: 0.88rem !important;
-  color:#e5e7eb !important;
+  color: var(--clr-on-dark) !important;
 }
 
 .af-header .af-lang-switch li a:hover{
-  border-color:#38bdf8 !important;
-  color:#38bdf8 !important;
-  background: rgba(56,189,248,0.10) !important;
+  border-color: rgba(234,179,8,0.75) !important;
+  color: var(--clr-on-dark) !important;
+  background: rgba(234,179,8,0.12) !important;
 }
 
-/* ---------- RESPONSIVE HEADER TIGHTENING ---------- */
-/* Keep one bar as long as possible by tightening spacing */
+/* RESPONSIVE HEADER TIGHTENING */
 @media (max-width: 1100px){
-  /* keep logo large as requested, only tighten pills */
   .af-header .af-nav a{ padding: 7px 10px !important; font-size: 0.92rem !important; }
   .af-header .af-nav a.af-nav-cta{ padding: 8px 11px !important; }
   .af-header .af-lang-switch li a{ padding: 6px 9px !important; font-size: 0.86rem !important; }
 }
-
-/* On very small screens, allow wrapping (otherwise it will overflow) */
 @media (max-width: 860px){
   .af-header .af-container.af-header-inner,
   .af-header .af-header-inner{
@@ -187,7 +236,11 @@ a{ text-decoration:none; color:inherit; }
    ======================================================= */
 
 .af-hero{
-  background: radial-gradient(circle at top left, #1e293b 0, #020617 45%, #020617 100%);
+  /* burgundy vignette */
+  background:
+    radial-gradient(1200px 600px at 0% 0%, rgba(159,18,57,0.35) 0%, rgba(107,15,26,0.85) 45%, rgba(42,10,14,1) 100%),
+    var(--clr-footer-bg);
+  color: var(--clr-on-dark);
   padding: 3.5rem 0 3.75rem;
 }
 
@@ -202,7 +255,7 @@ a{ text-decoration:none; color:inherit; }
   text-transform: uppercase;
   letter-spacing: 0.18em;
   font-size: 0.75rem;
-  color: #38bdf8;
+  color: var(--clr-accent);
   margin-bottom: 0.6rem;
 }
 
@@ -210,12 +263,13 @@ a{ text-decoration:none; color:inherit; }
   font-size: 2.4rem;
   line-height: 1.2;
   margin: 0 0 0.9rem;
+  color: var(--clr-on-dark);
 }
 
 .af-hero-lead{
   font-size: 1rem;
   line-height: 1.7;
-  color: #cbd5f5;
+  color: var(--clr-on-dark-muted);
   max-width: 36rem;
 }
 
@@ -224,20 +278,19 @@ a{ text-decoration:none; color:inherit; }
   list-style:none;
   padding:0;
 }
-
 .af-hero-points li{
   font-size: 0.95rem;
   margin-bottom: 0.5rem;
   position:relative;
   padding-left: 1.5rem;
+  color: var(--clr-on-dark);
 }
-
 .af-hero-points li::before{
   content:"✓";
   position:absolute;
   left:0;
   top:0;
-  color:#22c55e;
+  color: #22c55e;
 }
 
 .af-hero-buttons{
@@ -255,78 +308,81 @@ a{ text-decoration:none; color:inherit; }
   display:inline-flex;
   align-items:center;
   justify-content:center;
+  transition: all .15s ease;
 }
 
+/* Primary = gold */
 .af-btn-primary{
-  background: linear-gradient(135deg, #fbbf24, #f97316);
+  background: linear-gradient(135deg, #FACC15, var(--clr-accent));
   color:#111827;
+  border: 1px solid #D4B106;
 }
-
 .af-btn-primary:hover{
-  background: linear-gradient(135deg, #facc15, #fb923c);
+  background: linear-gradient(135deg, #FFE380, #F5C20A);
+  transform: translateY(-1px);
 }
 
+/* Ghost on dark */
 .af-btn-ghost{
-  border: 1px solid rgba(148,163,184,0.7);
-  color:#e5e7eb;
+  border: 1px solid rgba(234,179,8,0.55);
+  color: var(--clr-on-dark);
+  background: transparent;
 }
-
 .af-btn-ghost:hover{
-  background: rgba(148,163,184,0.18);
+  background: rgba(234,179,8,0.12);
 }
 
+/* Meta strip below buttons */
 .af-meta-strip{
   margin-top: 1.3rem;
   display:flex;
   flex-wrap:wrap;
   gap: 0.8rem;
   font-size: 0.85rem;
-  color:#9ca3af;
+  color: var(--clr-on-dark-muted);
 }
 
+/* Right image card */
 .af-hero-image-card{
-  background: rgba(15,23,42,0.9);
+  background: rgba(42,10,14,0.92);
   border-radius: 24px;
   padding: 1rem 1rem 1.3rem;
-  box-shadow: 0 24px 55px rgba(15,23,42,0.8);
-  border: 1px solid rgba(148,163,184,0.5);
+  box-shadow: var(--sh-hero);
+  border: 1px solid rgba(234,179,8,0.40);
 }
-
 .af-hero-image-frame{
   border-radius: 20px;
   overflow:hidden;
 }
-
 .af-hero-image-card img{
   width:100%;
   display:block;
 }
 
 /* =======================================================
-   SECTIONS
+   SECTIONS (LIGHT)
    ======================================================= */
 
 .af-section{
-  background:#f9fafb;
-  color:#0f172a;
+  background: var(--clr-bg);
+  color: var(--clr-text-body);
   padding: 3rem 0;
 }
 
-.af-section-alt{ background:#ffffff; }
+.af-section-alt{ background: var(--clr-surface); }
 
 .af-section-header{
   max-width:640px;
   margin-bottom: 1.8rem;
 }
-
 .af-section-header h2{
   font-size: 1.7rem;
   margin-bottom: 0.5rem;
+  color: var(--clr-text-heading);
 }
-
 .af-section-header p{
   font-size: 0.98rem;
-  color:#4b5563;
+  color: var(--clr-text-muted);
 }
 
 .af-feature-grid,
@@ -338,28 +394,36 @@ a{ text-decoration:none; color:inherit; }
 
 .af-feature-card,
 .af-service-item{
-  background:#ffffff;
+  background: var(--clr-surface);
   border-radius: 18px;
   padding: 1.4rem 1.6rem;
-  border: 1px solid rgba(226,232,240,0.9);
-  box-shadow: 0 10px 22px rgba(15,23,42,0.08);
+  border: 1px solid var(--clr-border);
+  box-shadow: var(--sh-card);
 }
-
 .af-feature-card h3,
 .af-service-item h3{
   font-size: 1.1rem;
   margin-bottom: 0.5rem;
-  color:#111827;
+  color: var(--clr-text-heading);
 }
+
+/* Generic link treatment in light sections */
+.af-section a{
+  color: var(--clr-link);
+  text-decoration: underline;
+}
+.af-section a:hover{ color: var(--clr-link-hover); }
 
 /* =======================================================
    CTA STRIP
    ======================================================= */
 
 .af-cta-strip{
-  background: linear-gradient(135deg, #0f766e, #2563eb);
-  color:#e5e7eb;
+  background: linear-gradient(135deg, var(--clr-primary), var(--clr-primary-alt));
+  color: var(--clr-on-dark);
   padding: 2.6rem 0;
+  border-top: 1px solid rgba(234,179,8,0.30);
+  border-bottom: 1px solid rgba(234,179,8,0.30);
 }
 
 .af-cta-inner{
@@ -374,17 +438,35 @@ a{ text-decoration:none; color:inherit; }
    ======================================================= */
 
 .af-footer{
-  background:#020617;
-  color:#9ca3af;
+  background: var(--clr-footer-bg);
+  color: var(--clr-on-dark-muted);
   padding: 1.6rem 0 2rem;
   text-align:center;
   font-size: 0.85rem;
+  border-top: 1px solid rgba(234,179,8,0.25);
 }
+.af-footer a{
+  color: var(--clr-on-dark);
+  text-decoration: underline;
+}
+.af-footer a:hover{ color: var(--clr-accent); }
 
 .af-footer-meta{
-  color:#6b7280;
+  color: rgba(255,247,230,0.75);
   margin-top: 0.2rem;
 }
+
+/* =======================================================
+   UTILITIES (OPTIONAL)
+   ======================================================= */
+
+.text-center{ text-align:center; }
+.mt-0{ margin-top:0; }
+.mt-2{ margin-top:0.5rem; }
+.mt-4{ margin-top:1rem; }
+.mb-0{ margin-bottom:0; }
+.mb-2{ margin-bottom:0.5rem; }
+.mb-4{ margin-bottom:1rem; }
 
 /* =======================================================
    RESPONSIVE
