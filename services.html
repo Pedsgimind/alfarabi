@@ -4,99 +4,75 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Services | Al Farabi Gastroenterology &amp; Endoscopy Centre</title>
-
-  <link rel="stylesheet" href="/alfarabi/styles.css?v=20260127-1" />
+  <link rel="stylesheet" href="styles.css" />
 
   <style>
-    .services-main { background: transparent; }
-
-    .services-hero{
-      padding: 3rem 0 2.5rem;
-      background:
-        radial-gradient(1200px 600px at 0% 0%, rgba(159,18,57,0.18) 0%, rgba(107,15,26,0.90) 55%, rgba(42,10,14,1) 100%),
-        var(--clr-footer-bg);
-      color: var(--clr-on-dark);
-      border-bottom: 1px solid rgba(234,179,8,0.20);
+    .services-main {
+      background: #020617;
     }
 
-    .services-hero h1{
+    .services-hero {
+      padding: 3rem 0 2.5rem;
+      background: radial-gradient(circle at top left, #1e293b 0, #020617 55%, #020617 100%);
+      color: #e5e7eb;
+    }
+
+    .services-hero h1 {
       font-size: 2.2rem;
       margin-bottom: 0.7rem;
-      color: var(--clr-on-dark);
     }
 
-    .services-hero p{
+    .services-hero p {
       max-width: 48rem;
-      color: var(--clr-on-dark-muted);
+      color: #cbd5f5;
       line-height: 1.7;
       font-size: 0.98rem;
     }
 
-    .services-grid{ padding: 0 0 3.5rem; }
+    .services-grid {
+      padding: 0 0 3.5rem;
+    }
 
-    .services-grid-inner{
-      display:grid;
+    .services-grid-inner {
+      display: grid;
       grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
       gap: 1.5rem;
     }
 
-    .service-card{
-      background: var(--clr-surface);
+    .service-card {
+      background: #020617;
       border-radius: 18px;
       padding: 1.7rem 1.6rem 1.5rem;
-      box-shadow: var(--sh-card);
-      border: 1px solid var(--clr-border);
-      color: var(--clr-text-body);
-      position: relative;
-      overflow: hidden;
-      transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+      box-shadow: 0 18px 40px rgba(15, 23, 42, 0.9);
+      border: 1px solid rgba(148, 163, 184, 0.5);
+      color: #e5e7eb;
     }
 
-    .service-card::before{
-      content:"";
-      position:absolute;
-      inset:0;
-      background: radial-gradient(circle at top left, rgba(159,18,57,0.12), transparent 55%);
-      opacity:0;
-      pointer-events:none;
-      transition: opacity .25s ease;
-    }
-
-    .service-card:hover{
-      transform: translateY(-3px);
-      box-shadow: 0 18px 40px rgba(17,24,39,0.12);
-      border-color: rgba(234,179,8,0.45);
-    }
-
-    .service-card:hover::before{ opacity:1; }
-
-    .service-card h2{
+    .service-card h2 {
       font-size: 1.15rem;
       margin-bottom: 0.5rem;
-      color: var(--clr-text-heading);
+      color: #f9fafb;
     }
 
     .service-card p,
-    .service-card ul{
+    .service-card ul {
       font-size: 0.95rem;
       line-height: 1.7;
-      color: var(--clr-text-body);
     }
 
-    .service-card ul{
+    .service-card ul {
       list-style: disc;
       margin-left: 1.1rem;
       margin-top: 0.4rem;
     }
 
-    .service-tag{
-      display:inline-block;
+    .service-tag {
+      display: inline-block;
       font-size: 0.78rem;
       text-transform: uppercase;
       letter-spacing: 0.12em;
-      color: var(--clr-primary-alt);
-      font-weight: 900;
-      margin-bottom: 0.25rem;
+      color: #a5b4fc;
+      margin-bottom: 0.2rem;
     }
   </style>
 </head>
@@ -125,9 +101,9 @@
       </nav>
 
       <ul class="af-lang-switch">
-        <li><a href="/alfarabi/index.html">EN</a></li>
-        <li><a href="/alfarabi/ar/index.html">عربي</a></li>
-        <li><a href="/alfarabi/ku/index.html">کوردی</a></li>
+        <li><a href="/index.html">EN</a></li>
+        <li><a href="/ar/index.html">عربي</a></li>
+        <li><a href="/ku/index.html">کوردی</a></li>
       </ul>
     </div>
   </header>
@@ -145,7 +121,7 @@
       </div>
     </section>
 
-    <!-- GRID -->
+    <!-- SERVICES GRID -->
     <section class="af-section services-grid">
       <div class="af-container">
         <div class="services-grid-inner">
