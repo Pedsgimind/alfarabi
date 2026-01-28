@@ -4,109 +4,115 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Contact &amp; Referrals | Al Farabi Gastroenterology &amp; Endoscopy Centre</title>
-  <link rel="stylesheet" href="styles.css?v=20260114" />
+
+  <link rel="stylesheet" href="/alfarabi/styles.css?v=20260127-1" />
 
   <style>
-    .contact-main {
-      background: #020617;
-    }
+    .contact-main{ background: transparent; }
 
-    .contact-hero {
+    .contact-hero{
       padding: 3rem 0 2rem;
-      background: radial-gradient(circle at top left, #1e293b 0, #020617 55%, #020617 100%);
-      color: #e5e7eb;
+      background:
+        radial-gradient(1200px 600px at 0% 0%, rgba(159,18,57,0.18) 0%, rgba(107,15,26,0.90) 55%, rgba(42,10,14,1) 100%),
+        var(--clr-footer-bg);
+      color: var(--clr-on-dark);
+      border-bottom: 1px solid rgba(234,179,8,0.20);
     }
 
-    .contact-hero h1 {
+    .contact-hero h1{
       font-size: 2.1rem;
       margin-bottom: 0.6rem;
+      color: var(--clr-on-dark);
     }
 
-    .contact-hero p {
+    .contact-hero p{
       max-width: 46rem;
-      color: #cbd5f5;
+      color: var(--clr-on-dark-muted);
       line-height: 1.7;
       font-size: 0.95rem;
     }
 
-    .contact-grid {
-      padding: 0 0 3.5rem;
-    }
+    .contact-grid{ padding: 0 0 3.5rem; }
 
-    .contact-grid-inner {
-      display: grid;
+    .contact-grid-inner{
+      display:grid;
       grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
       gap: 1.5rem;
+      align-items: start;
     }
 
-    .contact-card {
-      background: #020617;
+    .contact-card{
+      background: var(--clr-surface);
       border-radius: 18px;
       padding: 1.7rem 1.6rem;
-      box-shadow: 0 18px 40px rgba(15, 23, 42, 0.9);
-      border: 1px solid rgba(148, 163, 184, 0.5);
-      color: #e5e7eb;
+      box-shadow: var(--sh-card);
+      border: 1px solid var(--clr-border);
+      color: var(--clr-text-body);
     }
 
-    .contact-card h2 {
+    .contact-card h2{
       font-size: 1.1rem;
       margin-bottom: 0.6rem;
-      color: #f9fafb;
+      color: var(--clr-text-heading);
     }
 
     .contact-card p,
-    .contact-card li {
+    .contact-card li{
       font-size: 0.93rem;
       line-height: 1.7;
+      color: var(--clr-text-body);
     }
 
-    .contact-card ul {
+    .contact-card ul{
       list-style: none;
       padding-left: 0;
       margin: 0.2rem 0 0;
     }
 
-    .contact-card li strong {
-      color: #facc15;
+    .contact-card strong{
+      color: var(--clr-primary-alt);
+      font-weight: 800;
     }
 
-    .contact-whatsapp {
-      display: inline-flex;
-      align-items: center;
+    .contact-whatsapp{
+      display:inline-flex;
+      align-items:center;
       gap: 0.4rem;
-      margin-top: 0.8rem;
+      margin-top: 0.9rem;
       padding: 0.7rem 1.2rem;
       border-radius: 999px;
       background: #22c55e;
       color: #022c22;
-      font-weight: 600;
+      font-weight: 800;
       font-size: 0.95rem;
+      text-decoration: none;
+      border: 1px solid rgba(34,197,94,0.6);
     }
 
-    .contact-whatsapp span {
-      font-size: 1.1rem;
-    }
+    .contact-whatsapp span{ font-size: 1.1rem; }
 
-    .contact-map {
-      background: #020617;
+    .contact-map{
+      background: var(--clr-surface);
       border-radius: 18px;
       padding: 0;
-      box-shadow: 0 18px 40px rgba(15, 23, 42, 0.9);
-      border: 1px solid rgba(148, 163, 184, 0.5);
+      box-shadow: var(--sh-card);
+      border: 1px solid var(--clr-border);
       overflow: hidden;
     }
 
-    .contact-map iframe {
-      width: 100%;
-      height: 100%;
-      min-height: 260px;
-      border: 0;
+    .contact-map iframe{
+      width:100%;
+      height:100%;
+      min-height: 320px;
+      border:0;
+      display:block;
     }
 
-    @media (max-width: 900px) {
-      .contact-grid-inner {
-        grid-template-columns: minmax(0, 1fr);
-      }
+    .mt-13{ margin-top: 1.3rem; }
+
+    @media (max-width: 900px){
+      .contact-grid-inner{ grid-template-columns: minmax(0, 1fr); }
+      .contact-map iframe{ min-height: 280px; }
     }
   </style>
 </head>
@@ -135,9 +141,9 @@
       </nav>
 
       <ul class="af-lang-switch">
-        <li><a href="/index.html">EN</a></li>
-        <li><a href="/ar/index.html">عربي</a></li>
-        <li><a href="/ku/index.html">کوردی</a></li>
+        <li><a href="/alfarabi/index.html">EN</a></li>
+        <li><a href="/alfarabi/ar/index.html">عربي</a></li>
+        <li><a href="/alfarabi/ku/index.html">کوردی</a></li>
       </ul>
     </div>
   </header>
@@ -164,7 +170,7 @@
             <p><strong>WhatsApp / Phone (clinic):</strong> +964 772-173-8755</p>
             <p><strong>Email (clinic):</strong> info@avicennamedical.org</p>
 
-            <h2 style="margin-top: 1.3rem;">Avicenna Medical Inc. – Headquarter office</h2>
+            <h2 class="mt-13">Avicenna Medical Inc. – Headquarter office</h2>
             <ul>
               <li><strong>Main office contact:</strong> Almansor, Baghdad, Iraq.</li>
               <li><strong>Administrative &amp; documents:</strong> Documents@avicennamedical.org</li>
@@ -182,11 +188,11 @@
           </article>
 
           <aside class="contact-map">
-            <!-- Replace src with your exact Google Maps embed link -->
             <iframe
               src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3415.290186324833!2d44.6220156!3d33.7469625!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x15564b021bdd9cb1%3A0xd95ded5aa86ea94d!2sBaqubah%2C%20Diyala%20Governorate%2C%20Iraq!5e0!3m2!1sen!2siq!4v1700000000000"
               loading="lazy"
               referrerpolicy="no-referrer-when-downgrade"
+              title="Map - Al Farabi location"
             ></iframe>
           </aside>
         </div>
