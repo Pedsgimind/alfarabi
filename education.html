@@ -4,105 +4,116 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Education | Al Farabi Gastroenterology &amp; Endoscopy Centre</title>
-
-  <link rel="stylesheet" href="/alfarabi/styles.css?v=20260127-1" />
+  <link rel="stylesheet" href="styles.css" />
 
   <style>
-    .af-main{ background: transparent; }
+    .af-main {
+      background: #f5f7fb;
+    }
 
-    .edu-hero{ padding: 3rem 0 1.8rem; }
+    .edu-hero {
+      padding: 3rem 0 1.8rem;
+    }
 
-    .edu-hero-inner{
-      background: var(--clr-surface);
+    .edu-hero-inner {
+      background: #ffffff;
       border-radius: 18px;
       padding: 2.5rem 2.5rem 2rem;
-      box-shadow: var(--sh-card);
-      border: 1px solid var(--clr-border);
+      box-shadow: 0 18px 40px rgba(15, 23, 42, 0.08);
     }
 
-    .edu-hero h1{
+    .edu-hero h1 {
       font-size: 2.1rem;
       margin-bottom: 0.7rem;
-      color: var(--clr-text-heading);
     }
 
-    .edu-hero p{
+    .edu-hero p {
       max-width: 780px;
-      color: var(--clr-text-body);
+      color: #4b5563;
       line-height: 1.7;
     }
 
-    .edu-section{ padding: 0 0 3.5rem; }
+    .edu-section {
+      padding: 0 0 3.5rem;
+    }
 
-    .edu-groups{
-      display:grid;
+    .edu-groups {
+      display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
       gap: 2rem 2.5rem;
     }
 
-    .edu-group{
-      background: var(--clr-surface);
+    .edu-group {
+      background: #ffffff;
       border-radius: 16px;
       padding: 1.8rem 1.7rem 1.5rem;
-      box-shadow: var(--sh-card);
-      border: 1px solid var(--clr-border);
+      box-shadow: 0 14px 32px rgba(15, 23, 42, 0.06);
+      border: 1px solid #e5e7eb;
     }
 
-    .edu-group h2{
+    .edu-group h2 {
       font-size: 1.25rem;
       margin-bottom: 0.4rem;
-      display:flex;
-      align-items:center;
+      display: flex;
+      align-items: center;
       gap: 0.45rem;
-      color: var(--clr-text-heading);
     }
 
-    .edu-group-icon{ font-size: 1.25rem; }
+    .edu-group-icon {
+      font-size: 1.25rem;
+    }
 
-    .edu-group p{
+    .edu-group p {
       font-size: 0.95rem;
-      color: var(--clr-text-body);
+      color: #374151;
       line-height: 1.6;
       margin-bottom: 0.7rem;
     }
 
-    .edu-list{
+    .edu-list {
       list-style: none;
       margin: 0;
       padding: 0;
     }
 
-    .edu-list li{ margin-bottom: 0.3rem; }
-
-    .edu-list a{
-      font-size: 0.92rem;
-      color: var(--clr-primary-alt);
-      text-decoration: none;
-      font-weight: 700;
+    .edu-list li {
+      margin-bottom: 0.3rem;
     }
 
-    .edu-list a:hover{ text-decoration: underline; }
+    .edu-list a {
+      font-size: 0.92rem;
+      color: #1d4ed8;
+      text-decoration: none;
+    }
 
-    .edu-note{
+    .edu-list a:hover {
+      text-decoration: underline;
+    }
+
+    .edu-note {
       margin-top: 2rem;
       font-size: 0.94rem;
-      color: var(--clr-text-body);
+      color: #4b5563;
     }
 
-    @media (max-width: 900px){
-      .edu-groups{ grid-template-columns: minmax(0, 1fr); }
+    @media (max-width: 900px) {
+      .edu-groups {
+        grid-template-columns: minmax(0, 1fr);
+      }
     }
 
-    @media (max-width: 640px){
-      .edu-hero{ padding-top: 2.3rem; }
-      .edu-hero-inner{
+    @media (max-width: 640px) {
+      .edu-hero {
+        padding-top: 2.3rem;
+      }
+      .edu-hero-inner {
         padding-inline: 1.5rem;
         border-radius: 0;
         box-shadow: none;
-        border-left: none;
-        border-right: none;
       }
-      .edu-section{ padding-bottom: 2.5rem; }
+      .edu-section {
+        padding-bottom: 2.5rem;
+      }
     }
   </style>
 </head>
@@ -111,14 +122,21 @@
   <!-- HEADER -->
   <header class="af-header">
     <div class="af-container af-header-inner">
+
+      <!-- BRAND AREA (same as About & Home) -->
       <div class="af-brand">
-        <img src="images/avicenna-logo-horizontal.png" alt="Avicenna Medical Inc." class="af-logo-full" />
+        <img
+          src="images/avicenna-logo-horizontal.png"
+          alt="Avicenna Medical Inc."
+          class="af-logo-full"
+        />
         <div class="af-brand-text">
           <span class="af-brand-line1">Avicenna Medical Inc.</span>
           <span class="af-brand-line2">Al Farabi Gastroenterology &amp; Endoscopy Centre</span>
         </div>
       </div>
 
+      <!-- NAVIGATION -->
       <nav class="af-nav">
         <a href="index.html">Home</a>
         <a href="about.html">About</a>
@@ -130,10 +148,11 @@
         <a href="booking.html" class="af-nav-cta">Book your appointment online</a>
       </nav>
 
+      <!-- LANGUAGE SWITCHER -->
       <ul class="af-lang-switch">
-        <li><a href="/alfarabi/index.html">EN</a></li>
-        <li><a href="/alfarabi/ar/index.html">عربي</a></li>
-        <li><a href="/alfarabi/ku/index.html">کوردی</a></li>
+        <li><a href="index.html">EN</a></li>
+        <li><a href="ar/index.html">عربي</a></li>
+        <li><a href="ku/index.html">کوردی</a></li>
       </ul>
     </div>
   </header>
@@ -153,16 +172,17 @@
       </div>
     </section>
 
-    <!-- GROUPS -->
+    <!-- EDUCATION GROUPS -->
     <section class="af-section edu-section">
       <div class="af-container">
         <div class="edu-groups">
 
-          <!-- Pediatric GI -->
+          <!-- 1. Pediatric Gastroenterology -->
           <section class="edu-group" id="peds-gi-edu">
             <h2><span class="edu-group-icon">👶</span>Pediatric Gastroenterology, Hepatology &amp; Nutrition</h2>
             <p>Select a topic to open a parent-friendly resource about your child’s condition.</p>
             <ul class="edu-list">
+              <!-- Esophagus & Upper GI -->
               <li><a href="education-resources/peds-reflux.html">Reflux and heartburn in infants and children</a></li>
               <li><a href="education-resources/peds-ger.html">Gastroesophageal reflux (GER) in infants</a></li>
               <li><a href="education-resources/peds-gerd.html">Gastroesophageal reflux disease (GERD) in children</a></li>
@@ -170,51 +190,68 @@
               <li><a href="education-resources/peds-dysphagia.html">Swallowing difficulties (dysphagia)</a></li>
               <li><a href="education-resources/peds-achalasia.html">Achalasia and esophageal motility problems</a></li>
               <li><a href="education-resources/peds-esophageal-strictures.html">Esophageal narrowing and strictures</a></li>
+
+              <!-- Stomach & Duodenum -->
               <li><a href="education-resources/peds-functional-dyspepsia.html">Functional dyspepsia (stomach pain)</a></li>
               <li><a href="education-resources/peds-gastritis.html">Gastritis</a></li>
               <li><a href="education-resources/peds-hpylori.html">Helicobacter pylori infection</a></li>
               <li><a href="education-resources/peds-peptic-ulcer.html">Peptic ulcer disease in children</a></li>
               <li><a href="education-resources/peds-vomiting.html">Chronic or recurrent vomiting</a></li>
               <li><a href="education-resources/peds-cyclic-vomiting.html">Cyclic vomiting syndrome</a></li>
+
+              <!-- Small intestine, malabsorption & celiac -->
               <li><a href="education-resources/peds-celiac-disease.html">Celiac disease</a></li>
               <li><a href="education-resources/peds-chronic-diarrhea.html">Chronic diarrhea and malabsorption</a></li>
               <li><a href="education-resources/peds-short-bowel.html">Short bowel syndrome</a></li>
               <li><a href="education-resources/peds-lactose-intolerance.html">Lactose intolerance</a></li>
               <li><a href="education-resources/peds-food-protein-allergy.html">Food protein allergy (milk, soy, etc.)</a></li>
               <li><a href="education-resources/peds-intestinal-infections.html">Intestinal infections and gastroenteritis</a></li>
+
+              <!-- Colon & functional bowel -->
               <li><a href="education-resources/peds-constipation.html">Constipation in children</a></li>
               <li><a href="education-resources/peds-encopresis.html">Soiling and encopresis</a></li>
               <li><a href="education-resources/peds-ibs.html">Irritable bowel syndrome (IBS) in children</a></li>
               <li><a href="education-resources/peds-abdominal-pain.html">Chronic or recurrent abdominal pain</a></li>
               <li><a href="education-resources/peds-rectal-bleeding.html">Rectal bleeding in children</a></li>
               <li><a href="education-resources/peds-polyps.html">Colon polyps in children</a></li>
+
+              <!-- IBD -->
               <li><a href="education-resources/peds-ibd.html">Inflammatory bowel disease (Crohn’s &amp; ulcerative colitis)</a></li>
               <li><a href="education-resources/peds-crohns.html">Crohn’s disease in children</a></li>
               <li><a href="education-resources/peds-ulcerative-colitis.html">Ulcerative colitis in children</a></li>
+
+              <!-- Liver & biliary -->
               <li><a href="education-resources/peds-liver-tests.html">Abnormal liver tests in children</a></li>
               <li><a href="education-resources/peds-jaundice.html">Jaundice in infants and children</a></li>
               <li><a href="education-resources/peds-fatty-liver.html">Fatty liver disease in children</a></li>
               <li><a href="education-resources/peds-autoimmune-hepatitis.html">Autoimmune hepatitis in children</a></li>
               <li><a href="education-resources/peds-cholestasis.html">Cholestasis and pale stools</a></li>
               <li><a href="education-resources/peds-biliary-atresia.html">Biliary atresia</a></li>
+
+              <!-- Pancreas -->
               <li><a href="education-resources/peds-pancreatitis.html">Acute pancreatitis in children</a></li>
               <li><a href="education-resources/peds-chronic-pancreatitis.html">Chronic pancreatitis in children</a></li>
+
+              <!-- Nutrition & growth -->
               <li><a href="education-resources/peds-failure-to-thrive.html">Poor weight gain and “failure to thrive”</a></li>
               <li><a href="education-resources/peds-obesity.html">Childhood overweight and obesity</a></li>
               <li><a href="education-resources/peds-feeding-difficulty.html">Feeding difficulties and picky eating</a></li>
               <li><a href="education-resources/peds-enteral-nutrition.html">Tube feeding and enteral nutrition</a></li>
               <li><a href="education-resources/peds-tpn.html">Parenteral nutrition (TPN)</a></li>
+
+              <!-- Motility & others -->
               <li><a href="education-resources/peds-gastric-emptying.html">Delayed gastric emptying (gastroparesis)</a></li>
               <li><a href="education-resources/peds-intestinal-motility.html">Intestinal motility disorders</a></li>
               <li><a href="education-resources/peds-hirschsprung.html">Hirschsprung disease</a></li>
             </ul>
           </section>
 
-          <!-- Adult GI -->
+          <!-- 2. Adult Gastroenterology -->
           <section class="edu-group" id="adult-gi-edu">
             <h2><span class="edu-group-icon">🧑‍⚕️</span>Adult Gastroenterology &amp; Hepatology</h2>
             <p>Information for adults with digestive and liver conditions.</p>
             <ul class="edu-list">
+              <!-- Esophagus -->
               <li><a href="education-resources/adult-gerd.html">Acid reflux and GERD</a></li>
               <li><a href="education-resources/adult-lpr.html">Laryngopharyngeal reflux (LPR)</a></li>
               <li><a href="education-resources/adult-barrett-esophagus.html">Barrett’s esophagus</a></li>
@@ -223,15 +260,21 @@
               <li><a href="education-resources/adult-esophageal-strictures.html">Esophageal strictures</a></li>
               <li><a href="education-resources/adult-achalasia.html">Achalasia</a></li>
               <li><a href="education-resources/adult-esophageal-varices.html">Esophageal varices</a></li>
+
+              <!-- Stomach & duodenum -->
               <li><a href="education-resources/adult-dyspepsia.html">Indigestion and functional dyspepsia</a></li>
               <li><a href="education-resources/adult-peptic-ulcer.html">Peptic ulcer disease</a></li>
               <li><a href="education-resources/adult-hpylori.html">Helicobacter pylori infection</a></li>
               <li><a href="education-resources/adult-gastritis.html">Gastritis</a></li>
               <li><a href="education-resources/adult-gastric-emptying.html">Delayed gastric emptying (gastroparesis)</a></li>
+
+              <!-- Small intestine & malabsorption -->
               <li><a href="education-resources/adult-celiac.html">Celiac disease</a></li>
               <li><a href="education-resources/adult-lactose-intolerance.html">Lactose intolerance</a></li>
               <li><a href="education-resources/adult-small-bowel-overgrowth.html">Small intestinal bacterial overgrowth (SIBO)</a></li>
               <li><a href="education-resources/adult-chronic-diarrhea.html">Chronic diarrhea</a></li>
+
+              <!-- Colon & functional bowel -->
               <li><a href="education-resources/adult-ibs.html">Irritable bowel syndrome (IBS)</a></li>
               <li><a href="education-resources/adult-constipation.html">Chronic constipation</a></li>
               <li><a href="education-resources/adult-diverticulosis.html">Diverticulosis</a></li>
@@ -242,9 +285,13 @@
               <li><a href="education-resources/adult-anal-fistula.html">Anal fistula</a></li>
               <li><a href="education-resources/adult-colon-polyps.html">Colon polyps</a></li>
               <li><a href="education-resources/adult-colon-cancer-screening.html">Colonoscopy and colorectal cancer screening</a></li>
+
+              <!-- IBD -->
               <li><a href="education-resources/adult-ibd.html">Inflammatory bowel disease (IBD)</a></li>
               <li><a href="education-resources/adult-crohns.html">Crohn’s disease</a></li>
               <li><a href="education-resources/adult-ulcerative-colitis.html">Ulcerative colitis</a></li>
+
+              <!-- Liver -->
               <li><a href="education-resources/adult-liver-tests.html">Abnormal liver tests</a></li>
               <li><a href="education-resources/adult-fatty-liver.html">Fatty liver disease (NAFLD/NASH)</a></li>
               <li><a href="education-resources/adult-alcoholic-liver-disease.html">Alcohol-related liver disease</a></li>
@@ -255,22 +302,26 @@
               <li><a href="education-resources/adult-portal-hypertension.html">Portal hypertension</a></li>
               <li><a href="education-resources/adult-ascites.html">Ascites (fluid in the abdomen)</a></li>
               <li><a href="education-resources/adult-hepatic-encephalopathy.html">Hepatic encephalopathy</a></li>
+
+              <!-- Biliary & gallbladder -->
               <li><a href="education-resources/adult-gallstones.html">Gallstones and biliary colic</a></li>
               <li><a href="education-resources/adult-cholecystitis.html">Acute cholecystitis</a></li>
               <li><a href="education-resources/adult-cholangitis.html">Cholangitis</a></li>
               <li><a href="education-resources/adult-bile-duct-stones.html">Common bile duct stones</a></li>
+
+              <!-- Pancreas -->
               <li><a href="education-resources/adult-pancreatitis.html">Acute pancreatitis</a></li>
               <li><a href="education-resources/adult-chronic-pancreatitis.html">Chronic pancreatitis</a></li>
               <li><a href="education-resources/adult-pancreatic-insufficiency.html">Pancreatic exocrine insufficiency</a></li>
+
+              <!-- Procedures -->
               <li><a href="education-resources/adult-endoscopy.html">Upper endoscopy (EGD)</a></li>
               <li><a href="education-resources/adult-colonoscopy.html">Colonoscopy</a></li>
               <li><a href="education-resources/adult-ercp.html">Endoscopic retrograde cholangiopancreatography (ERCP)</a></li>
             </ul>
           </section>
 
-          <!-- The rest of your sections (General Pediatrics, Derm, Surgery, IM, GP) remain unchanged content-wise -->
-          <!-- Keep as-is below (only links/colors are themed via CSS). -->
-
+          <!-- 3. General Pediatrics -->
           <section class="edu-group" id="general-peds-edu">
             <h2><span class="edu-group-icon">🧸</span>General Pediatrics</h2>
             <p>Common childhood conditions and general health topics.</p>
@@ -299,6 +350,7 @@
             </ul>
           </section>
 
+          <!-- 4. Dermatology -->
           <section class="edu-group" id="derm-edu">
             <h2><span class="edu-group-icon">🌿</span>Dermatology</h2>
             <p>Skin, hair, and nail conditions for adults and children.</p>
@@ -319,6 +371,7 @@
             </ul>
           </section>
 
+          <!-- 5. Surgery -->
           <section class="edu-group" id="surgery-edu">
             <h2><span class="edu-group-icon">🔪</span>General &amp; Gastrointestinal Surgery</h2>
             <p>Information about common surgical problems and operations.</p>
@@ -338,6 +391,7 @@
             </ul>
           </section>
 
+          <!-- 6. Internal Medicine -->
           <section class="edu-group" id="im-edu">
             <h2><span class="edu-group-icon">❤️</span>Internal Medicine &amp; Chronic Conditions</h2>
             <p>General adult health topics often linked with digestive and liver health.</p>
@@ -358,6 +412,7 @@
             </ul>
           </section>
 
+          <!-- 7. General Practice / Family Medicine -->
           <section class="edu-group" id="gp-edu">
             <h2><span class="edu-group-icon">🏥</span>General Practice &amp; Family Medicine</h2>
             <p>Whole-person care topics for individuals and families across the lifespan.</p>
@@ -387,6 +442,7 @@
     </section>
   </main>
 
+  <!-- FOOTER -->
   <footer class="af-footer">
     <div class="af-container">
       <p>&copy; 2025 Avicenna Medical Inc., Headquarter Office, Baghdad, Iraq. All rights reserved.</p>
