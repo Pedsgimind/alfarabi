@@ -2110,70 +2110,8 @@ document.getElementById("btnPdfSelectedVisit").addEventListener("click", async (
       });
     });
   </script>
-
-<script>
-/* === MASTER JSON COMPATIBILITY LAYER (Non-Destructive Injection) === */
-
-async function loadMasterJSONCompatible() {
-    try {
-        const response = await fetch("Pediatric_GI_Master_COMPLETE.json");
-        const master = await response.json();
-
-        // Transform master JSON into patient-based structure
-        const patientMap = {};
-
-        master.forEach(period => {
-            if (!period.Encounters) return;
-
-            period.Encounters.forEach(enc => {
-                const template = enc["Comprehensive Pediatric GI Encounter Template"];
-                if (!template) return;
-
-                const info = template["1. Encounter Information"];
-                if (!info) return;
-
-                const name = info["Patient Name"] || "Unknown Patient";
-                const dob = info["DOB / Age"] || "";
-                const key = name + "__" + dob;
-
-                if (!patientMap[key]) {
-                    patientMap[key] = {
-                        name: name,
-                        dob: dob,
-                        visits: []
-                    };
-                }
-
-                patientMap[key].visits.push({
-                    encounterId: enc.EncounterID || "",
-                    date: info["Date / Time"] || "",
-                    visitType: info["Visit Type"] || "",
-                    full: template
-                });
-            });
-        });
-
-        // Expose globally (override existing datasets safely)
-        window.masterPatients = Object.values(patientMap);
-
-        if (typeof renderPatients === "function") {
-            renderPatients(window.masterPatients);
-        }
-
-        console.log("Master JSON loaded and transformed successfully.");
-    } catch (e) {
-        console.error("Failed loading Master JSON:", e);
-    }
-}
-
-document.addEventListener("DOMContentLoaded", function() {
-    loadMasterJSONCompatible();
-});
-</script>
-
 </body>
 </html>
-
 
 
 
